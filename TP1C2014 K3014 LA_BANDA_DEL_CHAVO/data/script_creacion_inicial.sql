@@ -130,7 +130,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion] (
 	[Descripcion] nvarchar(255)
 );
 
-CREATE TABLE [LA_BANDA_DEL_CHAVO].[Publicacion](
+CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
 	[ID_Publicacion] numeric(18, 0) UNIQUE,
 	[ID_Tipo_Publicacion] int NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
@@ -148,6 +148,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[Publicacion](
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra](
 	[ID_Compra] int IDENTITY (1,1),
 	[ID_Publicacion] int NOT NULL,
+	[ID_Usuario] int NOT NULL,
 	[Compra_Fecha] datetime NOT NULL,
 	[Compra_Cantidad] numeric(18, 0) NOT NULL
 );
