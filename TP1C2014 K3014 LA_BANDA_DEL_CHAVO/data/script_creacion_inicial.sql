@@ -73,7 +73,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta](
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Pregunta](
 	[ID_Pregunta] int IDENTITY (1,1),
-	[Codigo_Publicacion] numeric(18,2) NOT NULL
+	[ID_Publicacion] int NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Respuesta](
@@ -96,11 +96,11 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro] (
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion] (
 	[ID_Rubro_Publicacion] int IDENTITY (1,1),
 	[ID_Rubro] int NOT NULL,
-	[Codigo_Publicacion] int NOT NULL
+	[ID_Publicacion] int NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad](
-	[ID_Visibilidad] numeric(18, 0) UNIQUE NOT NULL,
+	[ID_Visibilidad] int UNIQUE NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
 	[Precio_Publicar] numeric(18, 2) NOT NULL,
 	[Porcentaje_Venta] numeric(18, 2) NOT NULL 
@@ -136,7 +136,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion] (
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
-	[ID_Publicacion] numeric(18, 0) UNIQUE NOT NULL,
+	[ID_Publicacion] int UNIQUE NOT NULL,
 	[ID_Tipo_Publicacion] int NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
 	[ID_Usuario] int NOT NULL,
@@ -203,6 +203,9 @@ ADD PRIMARY KEY ([ID_Respuesta]);
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Rol]
 ADD PRIMARY KEY ([ID_Rol]);
 
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro]
+ADD PRIMARY KEY ([ID_Rubro]);
+
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion]
 ADD PRIMARY KEY ([ID_Rubro_Publicacion]);
 
@@ -218,3 +221,98 @@ ADD PRIMARY KEY ([ID_Usuario_Rol]);
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad]
 ADD PRIMARY KEY ([ID_Visibilidad]);
 --FIN TERCER PASO--
+
+--INICIO CUARTO PASO--
+--CREO LAS FOREIGN KEYS--
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion]
+ADD FOREIGN KEY ([ID_Publicacion])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Publicacion](ID_Publicacion);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion]
+ADD FOREIGN KEY ([ID_Comprador])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Cliente]
+ADD FOREIGN KEY ([ID_Usuario])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra]
+ADD FOREIGN KEY ([ID_Publicacion])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Publicacion](ID_Publicacion);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra]
+ADD FOREIGN KEY ([ID_Usuario])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Empresa]
+ADD FOREIGN KEY ([ID_Usuario])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad_Rol]
+ADD FOREIGN KEY ([ID_Funcionalidad])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad](ID_Funcionalidad);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad_Rol]
+ADD FOREIGN KEY ([ID_Rol])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Rol](ID_Rol);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura]
+ADD FOREIGN KEY ([ID_Factura])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Factura](ID_Factura);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura]
+ADD FOREIGN KEY ([ID_Publicacion])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Publicacion](ID_Publicacion);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta]
+ADD FOREIGN KEY ([ID_Cliente])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Cliente](ID_Cliente);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta]
+ADD FOREIGN KEY ([ID_Publicacion])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Publicacion](ID_Publicacion);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Pregunta]
+ADD FOREIGN KEY ([ID_Publicacion])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Publicacion](ID_Publicacion);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion]
+ADD FOREIGN KEY ([ID_Tipo_Publicacion])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Tipo_Publicacion](ID_Tipo_Publicacion);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion]
+ADD FOREIGN KEY ([ID_Usuario])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion]
+ADD FOREIGN KEY ([ID_Comprador])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion]
+ADD FOREIGN KEY ([ID_Visibilidad])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Visibilidad](ID_Visibilidad);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion]
+ADD FOREIGN KEY ([ID_Estado_Publicacion])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Estado_Publicacion](ID_Estado_Publicacion);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Respuesta]
+ADD FOREIGN KEY ([ID_Pregunta])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Pregunta](ID_Pregunta);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion]
+ADD FOREIGN KEY ([ID_Rubro])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Rubro](ID_Rubro);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion]
+ADD FOREIGN KEY ([ID_Publicacion])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Publicacion](ID_Publicacion);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol]
+ADD FOREIGN KEY ([ID_Usuario])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol]
+ADD FOREIGN KEY ([ID_Rol])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Rol](ID_Rol);
+--FIN CUARTO PASO--
