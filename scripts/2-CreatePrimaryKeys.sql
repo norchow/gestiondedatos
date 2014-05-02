@@ -1,0 +1,56 @@
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion]
+ADD PRIMARY KEY ([Codigo_Calificacion]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Cliente]
+ADD PRIMARY KEY ([ID_Cliente]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra]
+ADD PRIMARY KEY ([ID_Compra]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Empresa]
+ADD PRIMARY KEY ([ID_Empresa]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Estado_Publicacion]
+ADD PRIMARY KEY ([ID_Estado_Publicacion]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Factura]
+ADD PRIMARY KEY ([ID_Factura]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad]
+ADD PRIMARY KEY ([ID_Funcionalidad]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad_Rol]
+ADD PRIMARY KEY ([ID_Funcionalidad_Rol]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura]
+ADD PRIMARY KEY ([ID_Item_Factura]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta]
+ADD PRIMARY KEY ([ID_Oferta]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Pregunta]
+ADD PRIMARY KEY ([ID_Pregunta]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion]
+ADD PRIMARY KEY ([ID_Publicacion]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Respuesta]
+ADD PRIMARY KEY ([ID_Respuesta]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Rol]
+ADD PRIMARY KEY ([ID_Rol]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion]
+ADD PRIMARY KEY ([ID_Rubro_Publicacion]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Tipo_Publicacion]
+ADD PRIMARY KEY ([ID_Tipo_Publicacion]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario]
+ADD PRIMARY KEY ([ID_Usuario]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol]
+ADD PRIMARY KEY ([ID_Usuario_Rol]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad]
+ADD PRIMARY KEY ([ID_Visibilidad]);
