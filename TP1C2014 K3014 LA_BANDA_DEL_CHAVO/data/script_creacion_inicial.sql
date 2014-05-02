@@ -1,6 +1,9 @@
 USE [GD1C2014];
 CREATE SCHEMA [LA_BANDA_DEL_CHAVO] AUTHORIZATION [gd];
 
+USE [GD1C2014];
+CREATE SCHEMA [LA_BANDA_DEL_CHAVO] AUTHORIZATION [gd];
+
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario](
 	[ID_Usuario] int IDENTITY (1,1),
 	[Username] nvarchar(255) NOT NULL,
@@ -52,7 +55,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Empresa](
 	[Fecha_Creacion] datetime NOT NULL,
 );
 
-CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_ROL](
+CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol](
 	[ID_Usuario_Rol] int IDENTITY (1,1),
 	[ID_Usuario] int NOT NULL,
 	[ID_Rol] int NOT NULL
@@ -79,7 +82,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Respuesta](
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Tipo_Publicacion](
-	[ID_Funcionalidad] int IDENTITY (1,1),
+	[ID_Tipo_Publicacion] int IDENTITY (1,1),
 	[Descripcion] nvarchar (255) NOT NULL
 );
 
@@ -88,10 +91,10 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro] (
 	[Descripcion] nvarchar(255) NOT NULL
 );
 
-CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion](
-[ID_Rubro_Publicacion] int IDENTITY (1,1),
-[ID_Rubro] int NOT NULL,
-[Codigo_Publicacion] int NOT NULL
+CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion] (
+	[ID_Rubro_Publicacion] int IDENTITY (1,1),
+	[ID_Rubro] int NOT NULL,
+	[Codigo_Publicacion] int NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad](
@@ -123,7 +126,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion] (
-	[Codigo_Calificacion] numeric(18,0) UNIQUE,
+	[Codigo_Calificacion] numeric(18,0) UNIQUE NOT NULL,
 	[ID_Publicacion] int NOT NULL,
 	[ID_Comprador] int NOT NULL,
 	[Cantidad_Estrellas] numeric(18, 0),
@@ -131,7 +134,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion] (
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
-	[ID_Publicacion] numeric(18, 0) UNIQUE,
+	[ID_Publicacion] numeric(18, 0) UNIQUE NOT NULL,
 	[ID_Tipo_Publicacion] int NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
 	[ID_Usuario] int NOT NULL,
