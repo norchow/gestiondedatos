@@ -1,3 +1,4 @@
+BEGIN TRANSACTION
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion]
 ADD PRIMARY KEY ([Codigo_Calificacion]);
 
@@ -57,3 +58,4 @@ ADD PRIMARY KEY ([ID_Usuario_Rol]);
 
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad]
 ADD PRIMARY KEY ([ID_Visibilidad]);
+COMMIT

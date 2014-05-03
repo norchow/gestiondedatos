@@ -1,3 +1,6 @@
+CREATE SCHEMA [LA_BANDA_DEL_CHAVO] AUTHORIZATION [gd];
+GO
+BEGIN TRANSACTION
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario](
 	[ID_Usuario] int IDENTITY (1,1),
 	[Username] nvarchar(255) NOT NULL,
@@ -33,6 +36,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Cliente](
 	[Direccion] nvarchar(255) NOT NULL,
 	[Codigo_Postal] nvarchar(255) NOT NULL,
 	[Fecha_nacimiento] datetime NOT NULL,
+	[Activo] bit NOT NULL DEFAULT(1)
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Empresa](
@@ -43,10 +47,11 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Empresa](
 	[Telefono] nvarchar(255),
 	[Direccion] nvarchar(255) NOT NULL,
 	[Codigo_Postal] nvarchar(255) NOT NULL,
-	[Ciudad] nvarchar(255) NOT NULL,
+	[Ciudad] nvarchar(255),
 	[CUIT] nvarchar(50) NOT NULL,
-	[Nombre_Contacto] numeric(18,0) NOT NULL,
+	[Nombre_Contacto] nvarchar(255),
 	[Fecha_Creacion] datetime NOT NULL,
+	[Activo] bit NOT NULL DEFAULT(1)
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol](
@@ -149,3 +154,15 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra](
 	[Compra_Fecha] datetime NOT NULL,
 	[Compra_Cantidad] numeric(18, 0) NOT NULL
 );
+
+ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Tipo_Documento] (
+	[ID_Tipo_Documento] int IDENTITY (1,1),
+	[Descripcion] nvarchar(50) NOT NULL
+);
+
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('DNI');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('CI');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('LC');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('LE');
+
+COMMIT
