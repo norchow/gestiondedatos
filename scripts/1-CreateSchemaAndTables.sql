@@ -10,8 +10,14 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario](
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rol](
 	[ID_Rol] int IDENTITY (1,1),
-	[Descripcion] nvarchar (255) NOT NULL
+	[Descripcion] nvarchar (255) NOT NULL,
+	[Activo] bit NOT NULL DEFAULT(1)
 );
+
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Rol (Descripcion) VALUES ('Cliente');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Rol (Descripcion) VALUES ('Empresa');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Rol (Descripcion) VALUES ('Administrativo');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Rol (Descripcion) VALUES ('Administrador general');
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad](
 	[ID_Funcionalidad] int IDENTITY (1,1),
@@ -36,6 +42,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Cliente](
 	[Direccion] nvarchar(255) NOT NULL,
 	[Codigo_Postal] nvarchar(255) NOT NULL,
 	[Fecha_nacimiento] datetime NOT NULL,
+	[CUIL] nvarchar(50),
 	[Activo] bit NOT NULL DEFAULT(1)
 );
 
@@ -97,7 +104,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion] (
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad](
-	[ID_Visibilidad] int UNIQUE NOT NULL,
+	[ID_Visibilidad] numeric(18,0) UNIQUE NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
 	[Precio_Publicar] numeric(18, 2) NOT NULL,
 	[Porcentaje_Venta] numeric(18, 2) NOT NULL 
@@ -133,7 +140,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion] (
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
-	[ID_Publicacion] int UNIQUE NOT NULL,
+	[ID_Publicacion] numeric(18,0) UNIQUE NOT NULL,
 	[ID_Tipo_Publicacion] int NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
 	[ID_Usuario] int NOT NULL,
@@ -164,5 +171,12 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('DNI');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('CI');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('LC');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('LE');
+
+CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Visibilidad] (
+	[ID_Usuario_Visibilidad] int IDENTITY (1,1),
+	[ID_Usuario] int NOT NULL,
+	[ID_Visibilidad] int NOT NULL,
+	[Cantidad_compras] int NOT NULL,
+);
 
 COMMIT

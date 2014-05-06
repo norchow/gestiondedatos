@@ -31,22 +31,45 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,Tipo_Docum
  COMMIT
  
  BEGIN TRANSACTION
- INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion (Descripcion)(
- SELECT DISTINCT Publicacion_Tipo FROM gd_esquema.Maestra);
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion (Descripcion)(
+	 SELECT DISTINCT Publicacion_Tipo FROM gd_esquema.Maestra);
+ COMMIT
+ 
+ BEGIN TRANSACTION
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion (Descripcion)(
+	 SELECT DISTINCT Publicacion_Estado FROM gd_esquema.Maestra);
+ COMMIT
+ 
+ BEGIN TRANSACTION
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Visibilidad(ID_Visibilidad, Descripcion, Precio_Publicar,Porcentaje_Venta)(
+	 SELECT DISTINCT [Publicacion_Visibilidad_Cod]
+      ,[Publicacion_Visibilidad_Desc]
+      ,[Publicacion_Visibilidad_Precio]
+      ,[Publicacion_Visibilidad_Porcentaje] FROM gd_esquema.Maestra);
+ COMMIT
+ 
+ BEGIN TRANSACTION
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Usuario(Username, Password,Pass_Temporal)(
+	 SELECT CUIT,'e4540a7c8404b1becfed2f0ca242bec6cfd6096a8d944555145aafe5eab77c69',1 FROM LA_BANDA_DEL_CHAVO.TL_Empresa);
+ COMMIT
+ 
+ BEGIN TRANSACTION
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Usuario(Username, Password,Pass_Temporal)(
+	 SELECT Nro_Documento,'e4540a7c8404b1becfed2f0ca242bec6cfd6096a8d944555145aafe5eab77c69',1 FROM LA_BANDA_DEL_CHAVO.TL_Cliente);
  COMMIT
  
 --BEGIN TRANSACTION
---INSERT INTO LA_BANDA_DEL_CHAVO.TL_Publicacion (Codigo_Publicacion,ID_Tipo_Publicacion,Descripcion,ID_Usuario,Nro_Documento,Mail,Telefono,Direccion,Codigo_Postal,Fecha_nacimiento)(
---  SELECT DISTINCT 0
---	  ,LEFT([Publ_Cli_Nombre],1)+LOWER(SUBSTRING([Publ_Cli_Nombre],2,LEN([Publ_Cli_Nombre])))
---	  ,[Publ_Cli_Apeliido]
---	  ,1
---	  ,[Publ_Cli_Dni]
---	  ,[Publ_Cli_Mail]
---	  ,NULL
---	  ,[Publ_Cli_Dom_Calle]+' '+CAST([Publ_Cli_Nro_Calle] AS VARCHAR)+' '+CAST([Publ_Cli_Piso] AS VARCHAR)+' '+[Publ_Cli_Depto] AS Direccion
---      ,[Publ_Cli_Cod_Postal]
---      ,[Publ_Cli_Fecha_Nac]
+--INSERT INTO LA_BANDA_DEL_CHAVO.TL_Publicacion (ID_Publicacion,ID_Tipo_Publicacion,Descripcion,ID_Usuario,Stock,Fecha_Vencimiento,Fecha_Inicio,Precio,ID_Visibilidad,ID_Estado_Publicacion)(
+--  SELECT DISTINCT [Publicacion_Cod]
+--	    ,(SELECT TP.ID_Tipo_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP WHERE TP.Descripcion=[Publicacion_Tipo])
+--      ,[Publicacion_Descripcion]
+--      ,(SELECT U.ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE U.Username = [Publ_Cli_Dni] OR U.Username = [Publ_Empresa_Cuit]) 
+--      ,[Publicacion_Stock]
+--      ,[Publicacion_Fecha_Venc]
+--      ,[Publicacion_Fecha]
+--      ,[Publicacion_Precio]
+--      ,[Publicacion_Visibilidad_Cod]
+--      ,(SELECT EP.ID_Estado_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP WHERE EP.Descripcion=[Publicacion_Estado])
 -- FROM gd_esquema.Maestra
---COMMIT
--- WHERE [Publ_Cli_Dni] IS NOT NULL); 
+-- WHERE [Publicacion_Cod] IS NOT NULL); 
+-- COMMIT
