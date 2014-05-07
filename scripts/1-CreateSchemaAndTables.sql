@@ -150,7 +150,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
 	[Precio] numeric(18, 2) NOT NULL,
 	[ID_Visibilidad] numeric(18,0) NOT NULL,
 	[ID_Estado_Publicacion] INT NOT NULL,
-	[Permitir_Preguntas] bit DEFAULT(0)
+	[Permitir_Preguntas] bit DEFAULT(1)
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra](
