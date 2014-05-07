@@ -133,7 +133,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion] (
 	[Codigo_Calificacion] numeric(18,0) UNIQUE NOT NULL,
-	[ID_Publicacion] int NOT NULL,
+	[ID_Publicacion] numeric(18,0) NOT NULL,
 	[ID_Comprador] int NOT NULL,
 	[Cantidad_Estrellas] numeric(18, 0),
 	[Descripcion] nvarchar(255)
