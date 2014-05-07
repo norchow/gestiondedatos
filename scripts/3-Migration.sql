@@ -58,18 +58,30 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,Tipo_Docum
 	 SELECT Nro_Documento,'e4540a7c8404b1becfed2f0ca242bec6cfd6096a8d944555145aafe5eab77c69',1 FROM LA_BANDA_DEL_CHAVO.TL_Cliente);
  COMMIT
  
---BEGIN TRANSACTION
---INSERT INTO LA_BANDA_DEL_CHAVO.TL_Publicacion (ID_Publicacion,ID_Tipo_Publicacion,Descripcion,ID_Usuario,Stock,Fecha_Vencimiento,Fecha_Inicio,Precio,ID_Visibilidad,ID_Estado_Publicacion)(
---  SELECT DISTINCT [Publicacion_Cod]
---	    ,(SELECT TP.ID_Tipo_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP WHERE TP.Descripcion=[Publicacion_Tipo])
---      ,[Publicacion_Descripcion]
---      ,(SELECT U.ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE U.Username = [Publ_Cli_Dni] OR U.Username = [Publ_Empresa_Cuit]) 
---      ,[Publicacion_Stock]
---      ,[Publicacion_Fecha_Venc]
---      ,[Publicacion_Fecha]
---      ,[Publicacion_Precio]
---      ,[Publicacion_Visibilidad_Cod]
---      ,(SELECT EP.ID_Estado_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP WHERE EP.Descripcion=[Publicacion_Estado])
--- FROM gd_esquema.Maestra
--- WHERE [Publicacion_Cod] IS NOT NULL); 
--- COMMIT
+BEGIN TRANSACTION
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Publicacion (ID_Publicacion,ID_Tipo_Publicacion,Descripcion,ID_Usuario,Stock,Fecha_Vencimiento,Fecha_Inicio,Precio,ID_Visibilidad,ID_Estado_Publicacion)(
+  SELECT DISTINCT [Publicacion_Cod]
+	  ,(SELECT TP.ID_Tipo_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP WHERE TP.Descripcion=[Publicacion_Tipo])
+      ,[Publicacion_Descripcion]
+      ,(SELECT U.ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE U.Username = CONVERT(nvarchar(255),[Publ_Cli_Dni]) OR U.Username = [Publ_Empresa_Cuit]) 
+      ,[Publicacion_Stock]
+      ,[Publicacion_Fecha_Venc]
+      ,[Publicacion_Fecha]
+      ,[Publicacion_Precio]
+      ,[Publicacion_Visibilidad_Cod]
+      ,(SELECT EP.ID_Estado_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP WHERE EP.Descripcion=[Publicacion_Estado])
+ FROM gd_esquema.Maestra
+ WHERE [Publicacion_Cod] IS NOT NULL); 
+ COMMIT
+
+BEGIN TRANSACTION
+	UPDATE LA_BANDA_DEL_CHAVO.TL_Empresa
+	SET ID_Usuario = (SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
+						WHERE CUIT = U.Username)
+COMMIT
+
+BEGIN TRANSACTION
+	UPDATE LA_BANDA_DEL_CHAVO.TL_Cliente
+	SET ID_Usuario = (SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
+						WHERE CONVERT(nvarchar(255),Nro_Documento) = U.Username)
+COMMIT

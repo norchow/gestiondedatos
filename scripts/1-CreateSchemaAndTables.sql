@@ -144,7 +144,6 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
 	[ID_Tipo_Publicacion] int NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
 	[ID_Usuario] int NOT NULL,
-	[ID_Comprador] int NOT NULL,
 	[Stock] numeric(18, 0) NOT NULL,
 	[Fecha_Vencimiento] datetime NOT NULL,
 	[Fecha_Inicio] datetime NOT NULL,
