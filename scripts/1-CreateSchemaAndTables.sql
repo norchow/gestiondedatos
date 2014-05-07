@@ -70,14 +70,14 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol](
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta](
 	[ID_Oferta] int IDENTITY (1,1),
 	[ID_Cliente] int NOT NULL,
-	[ID_Publicacion] int NOT NULL,
+	[ID_Publicacion] numeric(18,0) NOT NULL,
 	[Monto] numeric(18,2) NOT NULL,
 	[Fecha] datetime NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Pregunta](
 	[ID_Pregunta] int IDENTITY (1,1),
-	[ID_Publicacion] int NOT NULL
+	[ID_Publicacion] numeric(18,0) NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Respuesta](
@@ -100,7 +100,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro] (
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion] (
 	[ID_Rubro_Publicacion] int IDENTITY (1,1),
 	[ID_Rubro] int NOT NULL,
-	[ID_Publicacion] int NOT NULL
+	[ID_Publicacion] numeric(18,0) NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad](
@@ -126,7 +126,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Factura] (
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (
 	[ID_Item_Factura] int IDENTITY (1,1),
 	[ID_Factura] int NOT NULL,
-	[ID_Publicacion] int NOT NULL,
+	[ID_Publicacion] numeric(18,0) NOT NULL,
 	[Monto] numeric(18, 2) NOT NULL,
 	[Cantidad] numeric(18, 0) NOT NULL
 );
@@ -148,14 +148,14 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
 	[Fecha_Vencimiento] datetime NOT NULL,
 	[Fecha_Inicio] datetime NOT NULL,
 	[Precio] numeric(18, 2) NOT NULL,
-	[ID_Visibilidad] int NOT NULL,
+	[ID_Visibilidad] numeric(18,0) NOT NULL,
 	[ID_Estado_Publicacion] INT NOT NULL,
 	[Permitir_Preguntas] bit DEFAULT(0)
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra](
 	[ID_Compra] int IDENTITY (1,1),
-	[ID_Publicacion] int NOT NULL,
+	[ID_Publicacion] numeric(18,0) NOT NULL,
 	[ID_Usuario] int NOT NULL,
 	[Compra_Fecha] datetime NOT NULL,
 	[Compra_Cantidad] numeric(18, 0) NOT NULL
@@ -174,7 +174,7 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Tipo_Documento (Descripcion) VALUES ('LE');
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Visibilidad] (
 	[ID_Usuario_Visibilidad] int IDENTITY (1,1),
 	[ID_Usuario] int NOT NULL,
-	[ID_Visibilidad] int NOT NULL,
+	[ID_Visibilidad] numeric(18,0) NOT NULL,
 	[Cantidad_compras] int NOT NULL,
 );
 
