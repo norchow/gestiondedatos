@@ -17,7 +17,6 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rol](
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Rol (Descripcion) VALUES ('Cliente');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Rol (Descripcion) VALUES ('Empresa');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Rol (Descripcion) VALUES ('Administrativo');
-INSERT INTO LA_BANDA_DEL_CHAVO.TL_Rol (Descripcion) VALUES ('Administrador general');
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad](
 	[ID_Funcionalidad] int IDENTITY (1,1),
