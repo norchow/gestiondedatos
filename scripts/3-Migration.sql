@@ -85,3 +85,21 @@ BEGIN TRANSACTION
 	SET ID_Usuario = (SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
 						WHERE CONVERT(nvarchar(255),Nro_Documento) = U.Username)
 COMMIT
+
+BEGIN TRANSACTION 
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol] (ID_Usuario, ID_Rol) 
+	(
+		SELECT [ID_Usuario], [ID_Rol] 
+		FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente],[LA_BANDA_DEL_CHAVO].TL_Rol
+		WHERE ([Descripcion] = 'Cliente')
+	);
+COMMIT
+
+BEGIN TRANSACTION 
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol] (ID_Usuario, ID_Rol) 
+	(
+		SELECT [ID_Usuario], [ID_Rol] 
+		FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa],[LA_BANDA_DEL_CHAVO].TL_Rol
+		WHERE ([Descripcion] = 'Empresa')
+	);
+COMMIT
