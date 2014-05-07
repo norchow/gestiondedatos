@@ -24,6 +24,21 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad](
 	[Descripcion] nvarchar (255) NOT NULL
 );
 
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Rol');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Registro de Usuario');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Cliente (comprador/vendedor)');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Empresa (Vendedor)');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Rubro');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM visibilidad de publicacion');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Generar Publicacion');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Editar Publicacion');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Gestion de Preguntas');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Comprar/Ofertar');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Historial del cliente');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Calificar al Vendedor');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Facturar Publicaciones');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Listado Estadistico');
+
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad_Rol](
 	[ID_Funcionalidad_Rol] int IDENTITY (1,1),
 	[ID_Funcionalidad] int NOT NULL,
