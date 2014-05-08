@@ -123,3 +123,14 @@ BEGIN TRANSACTION
 		WHERE [Calificacion_Codigo] IS NOT NULL)
 COMMIT
 
+BEGIN TRANSACTION 
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Oferta] (ID_Cliente, ID_Publicacion, Monto, Fecha) (
+		SELECT 
+			(SELECT ID_Cliente FROM LA_BANDA_DEL_CHAVO.TL_Cliente C WHERE Cli_Dni = C.Nro_Documento),
+			[Publicacion_Cod],
+			[Oferta_Monto],
+			[Oferta_Fecha]
+		FROM gd_esquema.Maestra
+		WHERE [Publicacion_Tipo] = 'Subasta'
+		AND [Oferta_Monto] IS NOT NULL)
+COMMIT
