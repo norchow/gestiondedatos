@@ -146,3 +146,10 @@ BEGIN TRANSACTION
 		WHERE [Publicacion_Tipo] = 'Compra Inmediata'
 		AND [Compra_Cantidad] IS NOT NULL)
 COMMIT
+
+BEGIN TRANSACTION 
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Factura] (Numero, Fecha, Descripcion_Forma_Pago, Total) (
+	SELECT DISTINCT [Factura_Nro], [Factura_Fecha], [Forma_Pago_Desc], [Factura_Total]
+	FROM [gd_esquema].[Maestra]
+	WHERE [Factura_Fecha] IS NOT NULL)
+COMMIT
