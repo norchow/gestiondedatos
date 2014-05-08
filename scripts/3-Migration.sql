@@ -111,3 +111,15 @@ BEGIN TRANSACTION
 		GROUP BY ID_Usuario, ID_Visibilidad
 		)ORDER BY 1
 COMMIT
+
+BEGIN TRANSACTION
+	INSERT INTO LA_BANDA_DEL_CHAVO.TL_Calificacion (Codigo_Calificacion, ID_Publicacion, ID_Comprador, Cantidad_Estrellas, Descripcion) (
+		SELECT [Calificacion_Codigo],
+			   [Publicacion_Cod],
+			   (SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE CONVERT(nvarchar(255), Cli_Dni) = U.Username),
+		       [Calificacion_Cant_Estrellas],
+		       [Calificacion_Descripcion]
+		FROM gd_esquema.Maestra
+		WHERE [Calificacion_Codigo] IS NOT NULL)
+COMMIT
+
