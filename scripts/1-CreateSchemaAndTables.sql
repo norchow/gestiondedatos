@@ -207,7 +207,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra](
 	[ID_Compra] int IDENTITY (1,1),
 	[ID_Publicacion] numeric(18,0) NOT NULL,
-	[ID_Usuario] int NOT NULL,
+	[ID_Cliente] int NOT NULL,
 	[Compra_Fecha] datetime NOT NULL,
 	[Compra_Cantidad] numeric(18, 0) NOT NULL
 );

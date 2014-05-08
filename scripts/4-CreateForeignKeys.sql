@@ -16,8 +16,8 @@ ADD FOREIGN KEY ([ID_Publicacion])
 REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Publicacion](ID_Publicacion);
 
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra]
-ADD FOREIGN KEY ([ID_Usuario])
-REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
+ADD FOREIGN KEY ([ID_Cliente])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Cliente](ID_Cliente);
 
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Empresa]
 ADD FOREIGN KEY ([ID_Usuario])
@@ -94,4 +94,5 @@ REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Usuario](ID_Usuario);
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Visibilidad]
 ADD FOREIGN KEY ([ID_Visibilidad])
 REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Visibilidad](ID_Visibilidad);
+
 COMMIT
