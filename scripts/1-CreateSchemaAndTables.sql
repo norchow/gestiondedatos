@@ -25,15 +25,15 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad](
 
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Rol');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Registro de Usuario');
-INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Cliente (comprador/vendedor)');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Cliente (Comprador/Vendedor)');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Empresa (Vendedor)');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Rubro');
-INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM visibilidad de publicacion');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('ABM de Visibilidad de Publicacion');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Generar Publicacion');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Editar Publicacion');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Gestion de Preguntas');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Comprar/Ofertar');
-INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Historial del cliente');
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Historial del Cliente');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Calificar al Vendedor');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Facturar Publicaciones');
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad(Descripcion) VALUES ('Listado Estadistico');
@@ -43,6 +43,43 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad_Rol](
 	[ID_Funcionalidad] int NOT NULL,
 	[ID_Rol] int NOT NULL
 );
+
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad_Rol (ID_Rol, ID_Funcionalidad) (
+		(SELECT ID_Rol, ID_Funcionalidad 
+		FROM LA_BANDA_DEL_CHAVO.TL_Rol, LA_BANDA_DEL_CHAVO.TL_Funcionalidad
+		WHERE LA_BANDA_DEL_CHAVO.TL_Rol.Descripcion = 'Cliente'
+		AND (LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Generar Publicacion'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Editar Publicacion'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Gestion de Preguntas'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Comprar/Ofertar'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Historial del Cliente'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Calificar al Vendedor'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Facturar Publicaciones'))
+	);
+	
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad_Rol (ID_Rol, ID_Funcionalidad) (
+		(SELECT ID_Rol, ID_Funcionalidad 
+		FROM LA_BANDA_DEL_CHAVO.TL_Rol, LA_BANDA_DEL_CHAVO.TL_Funcionalidad
+		WHERE LA_BANDA_DEL_CHAVO.TL_Rol.Descripcion = 'Empresa'
+		AND (LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Generar Publicacion'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Editar Publicacion'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Gestion de Preguntas'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Historial del Cliente'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Facturar Publicaciones'))
+	);
+	
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Funcionalidad_Rol (ID_Rol, ID_Funcionalidad) (
+		(SELECT ID_Rol, ID_Funcionalidad 
+		FROM LA_BANDA_DEL_CHAVO.TL_Rol, LA_BANDA_DEL_CHAVO.TL_Funcionalidad
+		WHERE LA_BANDA_DEL_CHAVO.TL_Rol.Descripcion = 'Administrativo'
+		AND (LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'ABM de Rol'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Registro de Usuario'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'ABM de Cliente (Comprador/Vendedor)'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'ABM de Empresa (Vendedor)'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'ABM de Rubro'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'ABM de Visibilidad de Publicacion'
+		OR LA_BANDA_DEL_CHAVO.TL_Funcionalidad.Descripcion = 'Listado Estadistico'))
+	);
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Cliente](
 	[ID_Cliente] int IDENTITY (1,1),
