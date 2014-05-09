@@ -147,9 +147,30 @@ BEGIN TRANSACTION
 		AND [Compra_Cantidad] IS NOT NULL)
 COMMIT
 
+BEGIN TRANSACTION
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago] (Descripcion) (
+	SELECT DISTINCT [Forma_Pago_Desc]
+	FROM [gd_esquema].[Maestra]
+	WHERE [Forma_Pago_Desc] IS NOT NULL)
+COMMIT
+
 BEGIN TRANSACTION 
-INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Factura] (Numero, Fecha, Descripcion_Forma_Pago, Total) (
-	SELECT DISTINCT [Factura_Nro], [Factura_Fecha], [Forma_Pago_Desc], [Factura_Total]
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Factura] (Numero, Fecha, Total, ID_Forma_Pago) (
+	SELECT DISTINCT [Factura_Nro],
+	 [Factura_Fecha],
+	 [Factura_Total],
+	 (SELECT ID_Forma_Pago FROM LA_BANDA_DEL_CHAVO.TL_Forma_Pago FP WHERE FP.Descripcion=[Forma_Pago_Desc])
 	FROM [gd_esquema].[Maestra]
 	WHERE [Factura_Fecha] IS NOT NULL)
+COMMIT
+
+
+BEGIN TRANSACTION 
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (ID_Factura, ID_Publicacion,	Monto, Cantidad) (
+	SELECT DISTINCT (SELECT ID_Factura FROM LA_BANDA_DEL_CHAVO.TL_Factura WHERE Numero=[Factura_Nro]),
+	(SELECT ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Publicacion WHERE ID_Publicacion=[Publicacion_Cod]),
+	[Item_Factura_Monto],
+    [Item_Factura_Cantidad]
+	FROM [gd_esquema].[Maestra]
+	WHERE [Factura_Nro] IS NOT NULL)
 COMMIT

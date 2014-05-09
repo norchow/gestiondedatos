@@ -165,13 +165,12 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Estado_Publicacion](
 	[ID_Estado_Publicacion] int IDENTITY (1,1),
 	[Descripcion] nvarchar (255) NOT NULL,
 );
-
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Factura] (
 	[ID_Factura] int IDENTITY (1,1),
 	[Numero] numeric(18, 0) UNIQUE NOT NULL,
 	[Fecha] datetime NOT NULL,
-	[Descripcion_Forma_Pago] nvarchar(255) NOT NULL,
-	[Total] numeric(18, 2) NOT NULL
+	[Total] numeric(18, 2) NOT NULL,
+	[ID_Forma_Pago] int NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (
@@ -200,7 +199,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
 	[Fecha_Inicio] datetime NOT NULL,
 	[Precio] numeric(18, 2) NOT NULL,
 	[ID_Visibilidad] numeric(18,0) NOT NULL,
-	[ID_Estado_Publicacion] INT NOT NULL,
+	[ID_Estado_Publicacion] int NOT NULL,
 	[Permitir_Preguntas] bit DEFAULT(1)
 );
 
@@ -227,6 +226,22 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Visibilidad] (
 	[ID_Usuario] int NOT NULL,
 	[ID_Visibilidad] numeric(18,0) NOT NULL,
 	[Cantidad_compras] int NOT NULL,
+);
+
+CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago](
+	[ID_Forma_Pago] int IDENTITY (1,1),
+	[Descripcion] nvarchar(50) NOT NULL
+);
+
+CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Tarjeta_Credito](
+	[ID_Tarjeta_Credito] int IDENTITY (1,1),
+	[Tarjeta] nvarchar(50) NOT NULL,
+	[Nro_Tarjeta] nvarchar(50) NOT NULL,
+	[Vencimiento] datetime NOT NULL,
+	[Cod_Seguridad] smallint NOT NULL,
+	[Titular] nvarchar(255) NOT NULL,
+	[Dni_Titular] numeric(18,0) NOT NULL,
+	[ID_Factura] int NOT NULL
 );
 
 COMMIT

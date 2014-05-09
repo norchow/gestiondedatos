@@ -17,6 +17,9 @@ ADD PRIMARY KEY ([ID_Estado_Publicacion]);
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Factura]
 ADD PRIMARY KEY ([ID_Factura]);
 
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago]
+ADD PRIMARY KEY ([ID_Forma_Pago]);
+
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Funcionalidad]
 ADD PRIMARY KEY ([ID_Funcionalidad]);
 
@@ -47,6 +50,12 @@ ADD PRIMARY KEY ([ID_Rubro]);
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion]
 ADD PRIMARY KEY ([ID_Rubro_Publicacion]);
 
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Tarjeta_Credito]
+ADD PRIMARY KEY ([ID_Tarjeta_Credito]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Tipo_Documento]
+ADD PRIMARY KEY ([ID_Tipo_Documento]);
+
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Tipo_Publicacion]
 ADD PRIMARY KEY ([ID_Tipo_Publicacion]);
 
@@ -55,6 +64,9 @@ ADD PRIMARY KEY ([ID_Usuario]);
 
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol]
 ADD PRIMARY KEY ([ID_Usuario_Rol]);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Visibilidad]
+ADD PRIMARY KEY ([ID_Usuario],[ID_Visibilidad]);
 
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad]
 ADD PRIMARY KEY ([ID_Visibilidad]);

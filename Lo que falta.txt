@@ -1,4 +1,4 @@
-.Agregar el numero del grupo tanto a la carpeta del proyecto como al Readme.txtx
+.Agregar el numero del grupo tanto a la carpeta del proyecto como al Readme.txt
 .Todo el proyecto c#
 .Trigger en el after de un update de Rol para que si lo desactivó, elimine todos los usuarios_rol correspondientes
 .Trigger en before insert de un  cliente para normalizar los textos de nombre y apellido con la primera mayúscula y las demás minúsculas
