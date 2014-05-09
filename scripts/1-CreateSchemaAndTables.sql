@@ -5,6 +5,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario](
 	[ID_Usuario] int IDENTITY (1,1),
 	[Username] nvarchar(255) NOT NULL,
 	[Password] nvarchar (64) NOT NULL,
+	[Intentos_Fallidos] int DEFAULT 0,
 	[Pass_Temporal] bit DEFAULT 0,
 	[Activo] bit DEFAULT 1
 );
