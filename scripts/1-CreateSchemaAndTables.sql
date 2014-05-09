@@ -5,7 +5,8 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario](
 	[ID_Usuario] int IDENTITY (1,1),
 	[Username] nvarchar(255) NOT NULL,
 	[Password] nvarchar (64) NOT NULL,
-	[Pass_Temporal] bit DEFAULT 0
+	[Pass_Temporal] bit DEFAULT 0,
+	[Activo] bit DEFAULT 1
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rol](
@@ -93,8 +94,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Cliente](
 	[Direccion] nvarchar(255) NOT NULL,
 	[Codigo_Postal] nvarchar(255) NOT NULL,
 	[Fecha_nacimiento] datetime NOT NULL,
-	[CUIL] nvarchar(50),
-	[Activo] bit NOT NULL DEFAULT(1)
+	[CUIL] nvarchar(50)
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Empresa](
@@ -108,8 +108,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Empresa](
 	[Ciudad] nvarchar(255),
 	[CUIT] nvarchar(50) NOT NULL,
 	[Nombre_Contacto] nvarchar(255),
-	[Fecha_Creacion] datetime NOT NULL,
-	[Activo] bit NOT NULL DEFAULT(1)
+	[Fecha_Creacion] datetime NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol](
