@@ -174,3 +174,20 @@ INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (ID_Factura, ID_Publicacion,	
 	FROM [gd_esquema].[Maestra]
 	WHERE [Factura_Nro] IS NOT NULL)
 COMMIT
+
+BEGIN TRANSACTION 
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Rubro] (Descripcion) (
+	SELECT DISTINCT [Publicacion_Rubro_Descripcion]
+	FROM [gd_esquema].[Maestra]
+	WHERE [Publicacion_Rubro_Descripcion] IS NOT NULL)
+COMMIT
+
+BEGIN TRANSACTION 
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion] (ID_Rubro, ID_Publicacion) (
+	SELECT DISTINCT
+	(SELECT ID_Rubro FROM LA_BANDA_DEL_CHAVO.TL_Rubro R WHERE R.Descripcion = [Publicacion_Rubro_Descripcion]),
+	(SELECT ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P WHERE P.ID_Publicacion = [Publicacion_Cod])
+	FROM gd_esquema.Maestra
+	WHERE [Publicacion_Cod] IS NOT NULL)
+COMMIT
+
