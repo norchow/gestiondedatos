@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using FrbaCommerce.Login;
+using Configuration;
 
 namespace FrbaCommerce
 {
@@ -13,9 +15,11 @@ namespace FrbaCommerce
         [STAThread]
         static void Main()
         {
+            ConfigurationVariables.Iniciar();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FrmLogin());
         }
     }
 }

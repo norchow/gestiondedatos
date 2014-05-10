@@ -1,6 +1,6 @@
-﻿namespace FrbaCommerce
+﻿namespace FrbaCommerce.Home
 {
-    partial class Form1
+    partial class FrmHome
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.Text = "FrmHome";
         }
 
         #endregion
     }
 }
-
