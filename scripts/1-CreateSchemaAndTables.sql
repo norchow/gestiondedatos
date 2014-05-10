@@ -158,7 +158,8 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Visibilidad](
 	[ID_Visibilidad] numeric(18,0) UNIQUE NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
 	[Precio_Publicar] numeric(18, 2) NOT NULL,
-	[Porcentaje_Venta] numeric(18, 2) NOT NULL 
+	[Porcentaje_Venta] numeric(18, 2) NOT NULL,
+	[Duracion] numeric(18, 0) NOT NULL 
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Estado_Publicacion](

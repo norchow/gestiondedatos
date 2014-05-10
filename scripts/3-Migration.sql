@@ -41,11 +41,15 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,Tipo_Docum
  COMMIT
  
  BEGIN TRANSACTION
-	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Visibilidad(ID_Visibilidad, Descripcion, Precio_Publicar,Porcentaje_Venta)(
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Visibilidad(ID_Visibilidad, Descripcion, Precio_Publicar,Porcentaje_Venta, Duracion)(
 	 SELECT DISTINCT [Publicacion_Visibilidad_Cod]
       ,[Publicacion_Visibilidad_Desc]
       ,[Publicacion_Visibilidad_Precio]
-      ,[Publicacion_Visibilidad_Porcentaje] FROM gd_esquema.Maestra);
+      ,[Publicacion_Visibilidad_Porcentaje]
+      ,(SELECT DISTINCT DATEDIFF(day,Publicacion_Fecha,Publicacion_Fecha_Venc)
+		  FROM gd_esquema.Maestra
+		  WHERE Publicacion_Visibilidad_Cod = [Publicacion_Visibilidad_Cod])
+      FROM gd_esquema.Maestra);
  COMMIT
  
  BEGIN TRANSACTION

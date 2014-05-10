@@ -3,4 +3,3 @@
 .Trigger en el after de un update de Rol para que si lo desactivó, elimine todos los usuarios_rol correspondientes
 .Trigger en before insert de un  cliente para normalizar los textos de nombre y apellido con la primera mayúscula y las demás minúsculas
 .Trigger en before insert de una empresa para normalizar el texto de nombre_contacto con la primera mayúscula y las demás minúsculas
-.crear registros de funcionalidades
