@@ -41,7 +41,7 @@
             this.LblEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.LblEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblEntrar.ForeColor = System.Drawing.Color.White;
-            this.LblEntrar.Location = new System.Drawing.Point(95, 134);
+            this.LblEntrar.Location = new System.Drawing.Point(97, 134);
             this.LblEntrar.Name = "LblEntrar";
             this.LblEntrar.Size = new System.Drawing.Size(88, 32);
             this.LblEntrar.TabIndex = 0;
@@ -71,11 +71,11 @@
             this.LblNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.LblNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblNuevo.ForeColor = System.Drawing.Color.White;
-            this.LblNuevo.Location = new System.Drawing.Point(189, 134);
+            this.LblNuevo.Location = new System.Drawing.Point(191, 134);
             this.LblNuevo.Name = "LblNuevo";
-            this.LblNuevo.Size = new System.Drawing.Size(88, 32);
+            this.LblNuevo.Size = new System.Drawing.Size(95, 32);
             this.LblNuevo.TabIndex = 3;
-            this.LblNuevo.Text = "SOY NUEVO";
+            this.LblNuevo.Text = "REGISTRARME";
             this.LblNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -108,7 +108,9 @@
             this.Controls.Add(this.TxtContrasena);
             this.Controls.Add(this.TxtUsuario);
             this.Controls.Add(this.LblEntrar);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(388, 224);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(388, 224);
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

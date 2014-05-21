@@ -22,16 +22,16 @@ namespace FrbaCommerce.Login
 
         private void LblEntrar_Click(object sender, EventArgs e)
         {
-            var rol = (Rol)CboRoles.SelectedItem;
+            var selectedRole = (Rol)CboRoles.SelectedItem;
 
-            if (rol != null)
+            if (selectedRole != null)
             {
-                var confirm = MessageBox.Show(string.Format("Se procederá a logear con el siguiente rol: {0}. Esta seguro?", rol.Descripcion), "Atención", MessageBoxButtons.YesNo);
-                if (confirm == DialogResult.Yes)
+                var dialogAnswer = MessageBox.Show(string.Format("Se procederá a logear con el siguiente rol: {0}. Esta seguro?", selectedRole.Descripcion), "Atención", MessageBoxButtons.YesNo);
+                if (dialogAnswer == DialogResult.Yes)
                 {
                     Hide();
 
-                    SessionManager.CurrentRol = rol;
+                    SessionManager.CurrentRol = selectedRole;
 
                     var home = new FrmHome();
                     home.ShowDialog();

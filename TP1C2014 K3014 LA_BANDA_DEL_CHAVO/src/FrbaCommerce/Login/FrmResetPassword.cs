@@ -29,10 +29,8 @@ namespace FrbaCommerce.Login
             {
                 var hashedPassword = SHA256Helper.Encode(TxtContrasena.Text);
 
-                var persitance = new UsuarioPersistance();
-                persitance.ChangePassword(SessionManager.CurrentUser, hashedPassword);
-
-                SessionManager.CurrentUser = persitance.GetUserByUsername(SessionManager.CurrentUser.Username);
+                UsuarioPersistance.ChangePassword(SessionManager.CurrentUser, hashedPassword);
+                SessionManager.CurrentUser = UsuarioPersistance.GetUserByUsername(SessionManager.CurrentUser.Username);
                 
                 Close();
             }

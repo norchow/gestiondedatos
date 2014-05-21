@@ -8,16 +8,9 @@ namespace Logic
 {
     public class UsuarioLogic
     {
-        private readonly UsuarioPersistance _persistance;
-
-        public UsuarioLogic()
-        {
-            _persistance = new UsuarioPersistance();
-        }
-
         public Usuario Login(string userName, string password)
         {
-            var usuario = _persistance.GetUserByUsername(userName);
+            var usuario = UsuarioPersistance.GetUserByUsername(userName);
 
             if (usuario == null)
                 throw new Exception("El nombre de usuario ingresado no existe.");
@@ -29,7 +22,7 @@ namespace Logic
             {
                 usuario.LoginFails += 1;
                 usuario.Activo = usuario.LoginFails < 3;
-                _persistance.Update(usuario);
+                UsuarioPersistance.Update(usuario);
 
                 throw new Exception("La contraseña ingresada no es valida.");
             }
@@ -38,7 +31,7 @@ namespace Logic
                 throw new Exception("No cuenta con un rol habilitado, por lo que no puede ingresar al sistema.");
 
             usuario.LoginFails = 0;
-            _persistance.Update(usuario);
+            UsuarioPersistance.Update(usuario);
 
             return usuario;
         }

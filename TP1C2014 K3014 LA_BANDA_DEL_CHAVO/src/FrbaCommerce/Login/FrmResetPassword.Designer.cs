@@ -95,7 +95,9 @@
             this.Controls.Add(this.TxtContrasenaRepetida);
             this.Controls.Add(this.TxtContrasena);
             this.Controls.Add(this.LblAceptar);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(383, 240);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(383, 240);
             this.Name = "FrmResetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

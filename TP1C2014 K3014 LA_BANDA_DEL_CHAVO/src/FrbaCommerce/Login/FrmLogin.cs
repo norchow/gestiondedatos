@@ -14,21 +14,21 @@ namespace FrbaCommerce.Login
             InitializeComponent();
         }
 
-        private void DoLogin(string user, string pass)
+        private void DoLogin(string userName, string password)
         {
             try
             {
-                if (string.IsNullOrEmpty(user))
+                if (string.IsNullOrEmpty(userName))
                     throw new Exception("El usuario no puede ser vacío.");
 
-                if (string.IsNullOrEmpty(pass))
+                if (string.IsNullOrEmpty(password))
                     throw new Exception("La contraseña no puede ser vacía.");
 
-                var usuario = new UsuarioLogic().Login(user, pass);
+                var user = new UsuarioLogic().Login(userName, password);
 
-                if (usuario.RolesActivos != null)
+                if (user.RolesActivos != null)
                 {
-                    SessionManager.CurrentUser = usuario;
+                    SessionManager.CurrentUser = user;
                     while (SessionManager.CurrentUser.PassTemporal)
                     {
                         MessageBox.Show("Posee una contraseña temporal. Debera cambiarla a continuacion.", "Atención");
@@ -39,14 +39,14 @@ namespace FrbaCommerce.Login
                     
                     Hide();
 
-                    if (usuario.RolesActivos.Count > 1)
+                    if (user.RolesActivos.Count > 1)
                     {
                         var chooseRol = new FrmChooseRol();
                         chooseRol.ShowDialog();
                     }
                     else
                     {
-                        SessionManager.CurrentRol = usuario.RolesActivos.First();
+                        SessionManager.CurrentRol = user.RolesActivos.First();
 
                         var home = new FrmHome();
                         home.ShowDialog();

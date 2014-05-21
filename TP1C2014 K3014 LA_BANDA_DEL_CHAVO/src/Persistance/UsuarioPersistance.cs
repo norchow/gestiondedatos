@@ -3,22 +3,22 @@ using Persistance.Entities;
 
 namespace Persistance
 {
-    public class UsuarioPersistance
+    public static class UsuarioPersistance
     {
-        public Usuario GetUserByUsername(string userName)
+        public static Usuario GetUserByUsername(string userName)
         {
             var param = new List<SPParameter> { new SPParameter("Username", userName) };
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPGetUserByUsername, param);
 
-            var usuarios = sp.ExecuteReader<Usuario>();
+            var users = sp.ExecuteReader<Usuario>();
 
-            if (usuarios == null || usuarios.Count == 0)
+            if (users == null || users.Count == 0)
                 return null;
 
-            return usuarios[0];
+            return users[0];
         }
 
-        public void ChangePassword(Usuario user, string password)
+        public static void ChangePassword(Usuario user, string password)
         {
             var param = new List<SPParameter>
                 {
@@ -30,7 +30,7 @@ namespace Persistance
             sp.ExecuteNonQuery(null);
         }
 
-        public void Update(Usuario user)
+        public static void Update(Usuario user)
         {
             var param = new List<SPParameter>
                 {

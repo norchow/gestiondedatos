@@ -74,7 +74,9 @@
             this.Controls.Add(this.CboRoles);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.LblEntrar);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(388, 206);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(388, 206);
             this.Name = "FrmChooseRol";
             this.Text = "FrbaCommerce - Elegir rol";
