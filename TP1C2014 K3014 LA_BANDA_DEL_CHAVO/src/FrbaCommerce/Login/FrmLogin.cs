@@ -67,31 +67,5 @@ namespace FrbaCommerce.Login
         {
             DoLogin(TxtUsuario.Text, TxtContrasena.Text);
         }
-
-        private void FrmLogin_Load(object sender, EventArgs e)
-        {
-            TxtContrasena.Height = TxtUsuario.Height = 20;
-            
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TxtContrasena_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TxtUsuario_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

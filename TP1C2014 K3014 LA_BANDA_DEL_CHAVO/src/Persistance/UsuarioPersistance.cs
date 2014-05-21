@@ -18,16 +18,16 @@ namespace Persistance
             return usuarios[0];
         }
 
-        public void ChangePassword(Usuario usuario, string password)
+        public void ChangePassword(Usuario user, string password)
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("ID_User", usuario.ID),
+                    new SPParameter("ID_User", user.ID),
                     new SPParameter("Password", password)
                 };
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPUpdatePassword, param);
 
-            sp.ExecuteNonQuery();
+            sp.ExecuteNonQuery(null);
         }
 
         public void Update(Usuario user)
@@ -40,7 +40,7 @@ namespace Persistance
                 };
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPUpdateUser, param);
 
-            sp.ExecuteNonQuery();
+            sp.ExecuteNonQuery(null);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Persistance.Entities
 
         public List<Funcionalidad> Funcionalidades
         {
-            get { return _funcionalidades ?? (_funcionalidades = new FuncionalidadPersistance().GetByRol(this)); }
+            get { return _funcionalidades ?? (_funcionalidades = FuncionalidadPersistance.GetByRole(this)); }
             set { _funcionalidades = value; }
         }
 

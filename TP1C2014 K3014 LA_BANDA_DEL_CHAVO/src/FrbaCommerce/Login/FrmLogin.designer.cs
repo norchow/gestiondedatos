@@ -56,7 +56,6 @@
             this.TxtUsuario.Name = "TxtUsuario";
             this.TxtUsuario.Size = new System.Drawing.Size(296, 20);
             this.TxtUsuario.TabIndex = 1;
-            this.TxtUsuario.TextChanged += new System.EventHandler(this.TxtUsuario_TextChanged);
             // 
             // TxtContrasena
             // 
@@ -66,7 +65,6 @@
             this.TxtContrasena.PasswordChar = '*';
             this.TxtContrasena.Size = new System.Drawing.Size(296, 20);
             this.TxtContrasena.TabIndex = 2;
-            this.TxtContrasena.TextChanged += new System.EventHandler(this.TxtContrasena_TextChanged);
             // 
             // LblNuevo
             // 
@@ -88,7 +86,6 @@
             this.label2.Size = new System.Drawing.Size(81, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "CONTRASEÑA";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -98,7 +95,6 @@
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "USUARIO";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // FrmLogin
             // 

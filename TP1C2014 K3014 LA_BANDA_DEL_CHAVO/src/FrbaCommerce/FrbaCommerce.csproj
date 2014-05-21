@@ -60,11 +60,17 @@
     <Compile Include="Abm Empresa\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Rol\Form1.cs">
+    <Compile Include="ABM Rol\FrmABMRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM Rol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM Rol\FrmABMRol.Designer.cs">
+      <DependentUpon>FrmABMRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM Rol\FrmInsertUpdateRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM Rol\FrmInsertUpdateRol.Designer.cs">
+      <DependentUpon>FrmInsertUpdateRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rubro\Form1.cs">
       <SubType>Form</SubType>
@@ -152,6 +158,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ABM Rol\FrmABMRol.resx">
+      <DependentUpon>FrmABMRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Rol\FrmInsertUpdateRol.resx">
+      <DependentUpon>FrmInsertUpdateRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\FrmChooseRol.resx">
       <DependentUpon>FrmChooseRol.cs</DependentUpon>
     </EmbeddedResource>

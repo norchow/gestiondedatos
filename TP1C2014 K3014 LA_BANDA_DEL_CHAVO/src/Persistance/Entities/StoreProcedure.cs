@@ -77,7 +77,7 @@ namespace Persistance.Entities
             get { return Transaction != null; }
         }
 
-        public int ExecuteNonQuery()
+        public int ExecuteNonQuery(SqlTransaction transaction)
         {
             var conn = _dataBaseManager.Connection;
 
@@ -86,9 +86,10 @@ namespace Persistance.Entities
                 var cmd = new SqlCommand(Name, conn) { CommandType = CommandType.StoredProcedure };
 
                 foreach (var parameter in Parameters.Values)
-                {
-                    cmd.Parameters.Add(parameter.Parameter);
-                }
+                    cmd.Parameters.AddWithValue(parameter.Name, parameter.Value);
+
+                if (transaction != null)
+                    cmd.Transaction = transaction;
 
                 return cmd.ExecuteNonQuery();
             }
@@ -111,9 +112,7 @@ namespace Persistance.Entities
                 var cmd = new SqlCommand(Name, conn) {CommandType = CommandType.StoredProcedure};
 
                 foreach (var parameter in Parameters.Values)
-                {
-                    cmd.Parameters.Add(parameter.Parameter);
-                }
+                    cmd.Parameters.AddWithValue(parameter.Name, parameter.Value);
 
                 // Don't close the SqlDataReader
                 return cmd.ExecuteReader();
@@ -197,9 +196,7 @@ namespace Persistance.Entities
                 var cmd = new SqlCommand(Name, conn) { CommandType = CommandType.StoredProcedure };
 
                 foreach (var parameter in Parameters.Values)
-                {
-                    cmd.Parameters.Add(parameter.Parameter);
-                }
+                    cmd.Parameters.AddWithValue(parameter.Name, parameter.Value);
 
                 cmd.ExecuteNonQuery();
 
@@ -211,7 +208,7 @@ namespace Persistance.Entities
             }
         }
 
-        public Object ExecuteScalar()
+        public Object ExecuteScalar(SqlTransaction transaction)
         {
             var conn = _dataBaseManager.Connection;
 
@@ -220,9 +217,10 @@ namespace Persistance.Entities
                 var cmd = new SqlCommand(Name, conn) { CommandType = CommandType.StoredProcedure };
 
                 foreach (var parameter in Parameters.Values)
-                {
-                    cmd.Parameters.Add(parameter.Parameter);
-                }
+                    cmd.Parameters.AddWithValue(parameter.Name, parameter.Value);
+
+                if (transaction != null)
+                    cmd.Transaction = transaction;
 
                 return cmd.ExecuteScalar();
             }
@@ -230,6 +228,7 @@ namespace Persistance.Entities
             {
                 throw e;
             }
+            
         }
 
         /*
@@ -245,7 +244,6 @@ namespace Persistance.Entities
                 var cmd = new SqlCommand(query, conn) {CommandType = CommandType.Text};
 
                 cmd.ExecuteNonQuery();
-                // No se cierra el Reader
             }
             catch (Exception e)
             {

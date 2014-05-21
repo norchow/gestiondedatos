@@ -7,40 +7,48 @@ using Persistance.Entities;
 
 namespace Persistance
 {
-    public class FuncionalidadPersistance
+    public static class FuncionalidadPersistance
     {
-        public List<Funcionalidad> GetAll()
+        public static List<Funcionalidad> GetAll()
         {
             var sp = new StoreProcedure(DataBaseConst.Funcionalidad.SPGetAllFuncionalidad);
 
             return sp.ExecuteReader<Funcionalidad>();
         }
 
-        public List<Funcionalidad> GetByRol(Rol rol)
+        public static List<Funcionalidad> GetByRole(Rol role)
         {
-            var param = new List<SPParameter> {new SPParameter("ID_Rol", rol.ID)};
+            var param = new List<SPParameter> { new SPParameter("ID_Rol", role.ID) };
             var sp = new StoreProcedure(DataBaseConst.Funcionalidad.SPGetAllFuncionalidadByRol, param);
             
             return sp.ExecuteReader<Funcionalidad>();
         }
 
-        public void InsertByRol(Rol rol)
+        public static int InsertByRole(Rol role, SqlTransaction transaction)
         {
-            foreach (var func in rol.Funcionalidades)
+            var regsAffected = 0;
+
+            foreach (var feature in role.Funcionalidades)
             {
-                var param = new List<SPParameter> { new SPParameter("ID_Funcionalidad", func.ID), new SPParameter("ID_Rol", rol.ID) };
-                var sp = new StoreProcedure(DataBaseConst.Rol.SPInsertFuncionalidadXRol, param);
+                var param = new List<SPParameter> { new SPParameter("ID_Funcionalidad", feature.ID), new SPParameter("ID_Rol", role.ID) };
+                var sp = (transaction != null)
+                            ? new StoreProcedure(DataBaseConst.Rol.SPInsertFuncionalidadByRol, param, transaction)
+                            : new StoreProcedure(DataBaseConst.Rol.SPInsertFuncionalidadByRol, param);
                 
-                sp.ExecuteNonQuery();
+                regsAffected += sp.ExecuteNonQuery(transaction);
             }
+
+            return regsAffected;
         }
 
-        public void DeleteByRol(Rol rol)
+        public static int DeleteByRole(Rol role, SqlTransaction transaction)
         {
-            var param = new List<SPParameter> { new SPParameter("ID_Rol", rol.ID) };
-            var sp = new StoreProcedure(DataBaseConst.Rol.SPDeleteAllFuncionalidadXRol, param);
+            var param = new List<SPParameter> { new SPParameter("ID_Rol", role.ID) };
+            var sp = (transaction != null)
+                            ? new StoreProcedure(DataBaseConst.Rol.SPDeleteAllFuncionalidadByRol, param, transaction)
+                            : new StoreProcedure(DataBaseConst.Rol.SPDeleteAllFuncionalidadByRol, param);
 
-            sp.ExecuteNonQuery();
+            return sp.ExecuteNonQuery(transaction);
         }
     }
 }

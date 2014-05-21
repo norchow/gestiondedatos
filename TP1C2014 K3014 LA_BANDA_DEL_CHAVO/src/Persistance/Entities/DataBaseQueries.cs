@@ -17,10 +17,9 @@ namespace Persistance.Entities
             public static String SPGetAllRolByUser = "LA_BANDA_DEL_CHAVO.GetAllRolByUser";
             public static String SPGetAllRolByNameLike = "LA_BANDA_DEL_CHAVO.GetAllRolByNameLike";
             public static String SPInsertRol = "LA_BANDA_DEL_CHAVO.InsertRol";
-            public static String SPInsertFuncionalidadXRol = "LA_BANDA_DEL_CHAVO.InsertFuncionalidadXRol";
-            public static String SPDeleteFuncionalidadXRol = "LA_BANDA_DEL_CHAVO.DeleteFuncionalidadXRol";
+            public static String SPInsertFuncionalidadByRol = "LA_BANDA_DEL_CHAVO.InsertFuncionalidadByRol";
             public static String SPUpdateRolById = "LA_BANDA_DEL_CHAVO.UpdateRolById";
-            public static String SPDeleteAllFuncionalidadXRol = "LA_BANDA_DEL_CHAVO.DeleteAllFuncionalidadXRol";
+            public static String SPDeleteAllFuncionalidadByRol = "LA_BANDA_DEL_CHAVO.DeleteAllFuncionalidadByRol";
         }
 
         public static class Usuario

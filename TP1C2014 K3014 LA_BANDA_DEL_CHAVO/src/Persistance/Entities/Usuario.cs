@@ -18,7 +18,7 @@ namespace Persistance.Entities
 
         public List<Rol> Roles
         {
-            get { return _roles ?? (_roles = new RolPersistance().GetByUser(this)); }
+            get { return _roles ?? (_roles = RolPersistance.GetByUser(this)); }
             set { _roles = value; }
         }
 
@@ -27,7 +27,7 @@ namespace Persistance.Entities
             get 
             {
                 if (_roles == null)
-                    _roles = new RolPersistance().GetByUser(this);
+                    _roles = RolPersistance.GetByUser(this);
 
                 return _roles.FindAll(rol => rol.Activo); 
             }
