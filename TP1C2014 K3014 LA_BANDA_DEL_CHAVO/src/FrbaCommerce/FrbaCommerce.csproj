@@ -90,11 +90,11 @@
     <Compile Include="Abm Visibilidad\FrmABMVisibilidad.designer.cs">
       <DependentUpon>FrmABMVisibilidad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Calificar Vendedor\Form1.cs">
+    <Compile Include="Calificar Vendedor\FrmCalificarVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Calificar Vendedor\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Calificar Vendedor\FrmCalificarVendedor.Designer.cs">
+      <DependentUpon>FrmCalificarVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Comprar-Ofertar\Form1.cs">
       <SubType>Form</SubType>
@@ -176,6 +176,12 @@
     <EmbeddedResource Include="Abm Visibilidad\FrmABMVisibilidad.resx">
       <DependentUpon>FrmABMVisibilidad.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Calificar Vendedor\FrmCalificarVendedor.resx">
+      <DependentUpon>FrmCalificarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home\FrmHome.resx">
+      <DependentUpon>FrmHome.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\FrmChooseRol.resx">
       <DependentUpon>FrmChooseRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +199,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
@@ -236,6 +243,12 @@
       <Project>{8BB63B62-926C-489D-A25F-ADF51C8C0410}</Project>
       <Name>Tools</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Calificar Vendedor\WhiteStar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Calificar Vendedor\YellowStar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
