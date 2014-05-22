@@ -1,6 +1,6 @@
 ﻿namespace FrbaCommerce.ABM_Rol
 {
-    partial class FrmInsertUpdateRol
+    partial class FrmABMInsertUpdateRol
     {
         /// <summary>
         /// Required designer variable.
@@ -65,10 +65,11 @@
             // 
             // LblGrabar
             // 
-            this.LblGrabar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.LblGrabar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblGrabar.ForeColor = System.Drawing.Color.White;
-            this.LblGrabar.Location = new System.Drawing.Point(19, 395);
+            this.LblGrabar.Location = new System.Drawing.Point(23, 395);
             this.LblGrabar.Name = "LblGrabar";
             this.LblGrabar.Size = new System.Drawing.Size(140, 32);
             this.LblGrabar.TabIndex = 23;
@@ -78,10 +79,11 @@
             // 
             // LblCancelar
             // 
-            this.LblCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.LblCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblCancelar.ForeColor = System.Drawing.Color.White;
-            this.LblCancelar.Location = new System.Drawing.Point(179, 395);
+            this.LblCancelar.Location = new System.Drawing.Point(178, 395);
             this.LblCancelar.Name = "LblCancelar";
             this.LblCancelar.Size = new System.Drawing.Size(138, 32);
             this.LblCancelar.TabIndex = 24;
@@ -111,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(195)))), ((int)(((byte)(199)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(340, 442);
             this.Controls.Add(this.ChkActivo);
             this.Controls.Add(this.LstFuncionalidades);

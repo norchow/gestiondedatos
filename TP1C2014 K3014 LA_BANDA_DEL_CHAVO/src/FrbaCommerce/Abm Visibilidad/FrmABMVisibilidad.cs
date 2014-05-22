@@ -98,7 +98,7 @@ namespace FrbaCommerce.Abm_Visibilidad
             var insertUpdateVisibility = new FrmABMInsertUpdateVisibilidad(null);
             insertUpdateVisibility.ShowDialog();
 
-            if (insertUpdateVisibility.RealizoOperacion)
+            if (insertUpdateVisibility.CompleteAction)
                 RefreshSources(null);
         }
 
@@ -118,7 +118,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                     var insertUpdateVisibility = new FrmABMInsertUpdateVisibilidad(selectedVisibility);
                     insertUpdateVisibility.ShowDialog();
 
-                    if (insertUpdateVisibility.RealizoOperacion)
+                    if (insertUpdateVisibility.CompleteAction)
                         RefreshSources(null);
                 }
                 else

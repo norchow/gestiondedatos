@@ -12,13 +12,15 @@ using System.Data.SqlClient;
 
 namespace FrbaCommerce.ABM_Rol
 {
-    public partial class FrmInsertUpdateRol : Form
+    public partial class FrmABMInsertUpdateRol : Form
     {
         public bool insertMode { get; set; }
 
         public Rol CurrentRole { get; set; }
 
-        public FrmInsertUpdateRol(Rol role)
+        public bool CompleteAction = false;
+
+        public FrmABMInsertUpdateRol(Rol role)
         {
             InitializeComponent();
             insertMode = role == null;
@@ -78,6 +80,7 @@ namespace FrbaCommerce.ABM_Rol
                         if (dialogAnswer == DialogResult.Yes)
                         {
                             RolPersistance.InsertRolAndFeatures(role);
+                            CompleteAction = true;
                             Close();
                         }
                     }
@@ -108,6 +111,7 @@ namespace FrbaCommerce.ABM_Rol
                         if (dialogAnswer == DialogResult.Yes)
                         {
                             RolPersistance.UpdateRoleAndFeatures(CurrentRole);
+                            CompleteAction = true;
                             Close();
                         }
                     }

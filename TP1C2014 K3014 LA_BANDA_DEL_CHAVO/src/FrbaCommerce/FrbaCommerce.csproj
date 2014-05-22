@@ -66,11 +66,11 @@
     <Compile Include="ABM Rol\FrmABMRol.Designer.cs">
       <DependentUpon>FrmABMRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Rol\FrmInsertUpdateRol.cs">
+    <Compile Include="ABM Rol\FrmABMInsertUpdateRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM Rol\FrmInsertUpdateRol.Designer.cs">
-      <DependentUpon>FrmInsertUpdateRol.cs</DependentUpon>
+    <Compile Include="ABM Rol\FrmABMInsertUpdateRol.Designer.cs">
+      <DependentUpon>FrmABMInsertUpdateRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rubro\Form1.cs">
       <SubType>Form</SubType>
@@ -167,8 +167,8 @@
     <EmbeddedResource Include="ABM Rol\FrmABMRol.resx">
       <DependentUpon>FrmABMRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM Rol\FrmInsertUpdateRol.resx">
-      <DependentUpon>FrmInsertUpdateRol.cs</DependentUpon>
+    <EmbeddedResource Include="ABM Rol\FrmABMInsertUpdateRol.resx">
+      <DependentUpon>FrmABMInsertUpdateRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Visibilidad\FrmABMInsertUpdateVisibilidad.resx">
       <DependentUpon>FrmABMInsertUpdateVisibilidad.cs</DependentUpon>
