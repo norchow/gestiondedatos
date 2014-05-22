@@ -18,7 +18,7 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         public Visibilidad CurrentVisibility { get; set; }
 
-        public bool RealizoOperacion = false;
+        public bool CompleteAction = false;
 
         public FrmABMInsertUpdateVisibilidad(Visibilidad visibility)
         {
@@ -112,12 +112,12 @@ namespace FrbaCommerce.Abm_Visibilidad
                         if (VisibilidadPersistance.InsertVisibility(visibility) == 1)
                         {
                             MessageBox.Show("Se inserto satisfactoriamente la nueva visibilidad", "Atencion");
-                            RealizoOperacion = true;
+                            CompleteAction = true;
                             Close();
                         }
                     }
 
-                    RealizoOperacion = false;
+                    CompleteAction = false;
 
                     #endregion
                 }
@@ -137,7 +137,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                         if (VisibilidadPersistance.UpdateVisibility(CurrentVisibility) == 1)
                         {
                             MessageBox.Show("Se modifico satisfactoriamente la visibilidad", "Atencion");
-                            RealizoOperacion = true;
+                            CompleteAction = true;
                             Close();
                         }
                     }
