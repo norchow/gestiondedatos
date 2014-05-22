@@ -38,7 +38,8 @@
             // 
             // LblEntrar
             // 
-            this.LblEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.LblEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblEntrar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblEntrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblEntrar.ForeColor = System.Drawing.Color.White;
             this.LblEntrar.Location = new System.Drawing.Point(97, 134);
@@ -68,7 +69,8 @@
             // 
             // LblNuevo
             // 
-            this.LblNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.LblNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblNuevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblNuevo.ForeColor = System.Drawing.Color.White;
             this.LblNuevo.Location = new System.Drawing.Point(191, 134);
@@ -100,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(195)))), ((int)(((byte)(199)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(372, 186);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
