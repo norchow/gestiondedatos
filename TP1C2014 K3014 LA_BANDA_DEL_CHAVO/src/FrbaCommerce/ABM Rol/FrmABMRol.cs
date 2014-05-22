@@ -74,6 +74,13 @@ namespace FrbaCommerce.ABM_Rol
         private void LblEliminar_Click(object sender, EventArgs e)
         {
             var selectedRol = (Rol)CboRoles.SelectedItem;
+
+            if (!selectedRol.Activo)
+            {
+                MessageBox.Show("No se puede eliminar el rol ya que ya se encuentra desactivado", "Atencion");
+                return;
+            }
+
             if (selectedRol != null)
             {
                 var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere desactivar el rol {0}", selectedRol.Descripcion), "Atención", MessageBoxButtons.YesNo);

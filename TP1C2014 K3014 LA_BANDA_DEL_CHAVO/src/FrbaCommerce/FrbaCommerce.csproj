@@ -78,11 +78,17 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Visibilidad\Form1.cs">
+    <Compile Include="Abm Visibilidad\FrmABMInsertUpdateVisibilidad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Visibilidad\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Visibilidad\FrmABMInsertUpdateVisibilidad.designer.cs">
+      <DependentUpon>FrmABMInsertUpdateVisibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Visibilidad\FrmABMVisibilidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Visibilidad\FrmABMVisibilidad.designer.cs">
+      <DependentUpon>FrmABMVisibilidad.cs</DependentUpon>
     </Compile>
     <Compile Include="Calificar Vendedor\Form1.cs">
       <SubType>Form</SubType>
@@ -164,6 +170,12 @@
     <EmbeddedResource Include="ABM Rol\FrmInsertUpdateRol.resx">
       <DependentUpon>FrmInsertUpdateRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Visibilidad\FrmABMInsertUpdateVisibilidad.resx">
+      <DependentUpon>FrmABMInsertUpdateVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Visibilidad\FrmABMVisibilidad.resx">
+      <DependentUpon>FrmABMVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\FrmChooseRol.resx">
       <DependentUpon>FrmChooseRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,6 +215,10 @@
     <ProjectReference Include="..\Configuration\Configuration.csproj">
       <Project>{5EC4A117-A222-419A-BE96-14BD276A9C9B}</Project>
       <Name>Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Filters\Filters.csproj">
+      <Project>{025BAFDE-45A0-4AF8-BCC8-13AC348ED00F}</Project>
+      <Name>Filters</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logic\Logic.csproj">
       <Project>{044B38F2-95F6-4048-9ECA-151AFED10B1F}</Project>

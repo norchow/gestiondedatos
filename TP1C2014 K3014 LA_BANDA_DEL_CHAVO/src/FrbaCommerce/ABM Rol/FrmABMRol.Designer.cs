@@ -37,9 +37,9 @@
             this.ChkActivo = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.LblBuscar = new System.Windows.Forms.Label();
-            this.LblLimpiar = new System.Windows.Forms.Label();
             this.TxtBuscar = new System.Windows.Forms.TextBox();
+            this.LblLimpiar = new System.Windows.Forms.Label();
+            this.LblBuscar = new System.Windows.Forms.Label();
             this.ChkExacta = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -62,7 +62,7 @@
             this.LblNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.LblNuevo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblNuevo.ForeColor = System.Drawing.Color.White;
-            this.LblNuevo.Location = new System.Drawing.Point(23, 490);
+            this.LblNuevo.Location = new System.Drawing.Point(27, 490);
             this.LblNuevo.Name = "LblNuevo";
             this.LblNuevo.Size = new System.Drawing.Size(88, 32);
             this.LblNuevo.TabIndex = 16;
@@ -75,7 +75,7 @@
             this.LblEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.LblEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblEliminar.ForeColor = System.Drawing.Color.White;
-            this.LblEliminar.Location = new System.Drawing.Point(232, 490);
+            this.LblEliminar.Location = new System.Drawing.Point(248, 490);
             this.LblEliminar.Name = "LblEliminar";
             this.LblEliminar.Size = new System.Drawing.Size(88, 32);
             this.LblEliminar.TabIndex = 17;
@@ -88,7 +88,7 @@
             this.LblModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.LblModificar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblModificar.ForeColor = System.Drawing.Color.White;
-            this.LblModificar.Location = new System.Drawing.Point(128, 490);
+            this.LblModificar.Location = new System.Drawing.Point(139, 490);
             this.LblModificar.Name = "LblModificar";
             this.LblModificar.Size = new System.Drawing.Size(88, 32);
             this.LblModificar.TabIndex = 18;
@@ -101,7 +101,7 @@
             this.LblListo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.LblListo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblListo.ForeColor = System.Drawing.Color.White;
-            this.LblListo.Location = new System.Drawing.Point(128, 543);
+            this.LblListo.Location = new System.Drawing.Point(139, 542);
             this.LblListo.Name = "LblListo";
             this.LblListo.Size = new System.Drawing.Size(88, 32);
             this.LblListo.TabIndex = 19;
@@ -151,18 +151,12 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "BUSCAR UN ROL";
             // 
-            // LblBuscar
+            // TxtBuscar
             // 
-            this.LblBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.LblBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblBuscar.ForeColor = System.Drawing.Color.White;
-            this.LblBuscar.Location = new System.Drawing.Point(60, 47);
-            this.LblBuscar.Name = "LblBuscar";
-            this.LblBuscar.Size = new System.Drawing.Size(88, 21);
-            this.LblBuscar.TabIndex = 24;
-            this.LblBuscar.Text = "BUSCAR";
-            this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblBuscar.Click += new System.EventHandler(this.LblBuscar_Click);
+            this.TxtBuscar.Location = new System.Drawing.Point(15, 19);
+            this.TxtBuscar.Name = "TxtBuscar";
+            this.TxtBuscar.Size = new System.Drawing.Size(141, 20);
+            this.TxtBuscar.TabIndex = 26;
             // 
             // LblLimpiar
             // 
@@ -177,17 +171,23 @@
             this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
             // 
-            // TxtBuscar
+            // LblBuscar
             // 
-            this.TxtBuscar.Location = new System.Drawing.Point(15, 19);
-            this.TxtBuscar.Name = "TxtBuscar";
-            this.TxtBuscar.Size = new System.Drawing.Size(141, 20);
-            this.TxtBuscar.TabIndex = 26;
+            this.LblBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.LblBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblBuscar.ForeColor = System.Drawing.Color.White;
+            this.LblBuscar.Location = new System.Drawing.Point(60, 47);
+            this.LblBuscar.Name = "LblBuscar";
+            this.LblBuscar.Size = new System.Drawing.Size(88, 21);
+            this.LblBuscar.TabIndex = 24;
+            this.LblBuscar.Text = "BUSCAR";
+            this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblBuscar.Click += new System.EventHandler(this.LblBuscar_Click);
             // 
             // ChkExacta
             // 
             this.ChkExacta.AutoSize = true;
-            this.ChkExacta.Location = new System.Drawing.Point(162, 21);
+            this.ChkExacta.Location = new System.Drawing.Point(162, 22);
             this.ChkExacta.Name = "ChkExacta";
             this.ChkExacta.Size = new System.Drawing.Size(131, 17);
             this.ChkExacta.TabIndex = 24;
