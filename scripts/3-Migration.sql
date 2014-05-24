@@ -36,8 +36,10 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,Tipo_Docum
  COMMIT
  
  BEGIN TRANSACTION
-	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion (Descripcion)(
-	 SELECT DISTINCT Publicacion_Estado FROM gd_esquema.Maestra);
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion (Descripcion) VALUES ('Borrador');
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion (Descripcion) VALUES ('Publicada');
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion (Descripcion) VALUES ('Pausada');
+	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion (Descripcion) VALUES ('Finalizada');
  COMMIT
  
  BEGIN TRANSACTION
@@ -73,7 +75,7 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Publicacion (ID_Publicacion,ID_Tipo_Publicacio
       ,[Publicacion_Fecha]
       ,[Publicacion_Precio]
       ,[Publicacion_Visibilidad_Cod]
-      ,(SELECT EP.ID_Estado_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP WHERE EP.Descripcion=[Publicacion_Estado])
+      ,(SELECT EP.ID_Estado_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP WHERE EP.Descripcion='Finalizada')
  FROM gd_esquema.Maestra
  WHERE [Publicacion_Cod] IS NOT NULL); 
  COMMIT
