@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using FrbaCommerce.Login;
 using Configuration;
+using FrbaCommerce.Home;
 
 namespace FrbaCommerce
 {

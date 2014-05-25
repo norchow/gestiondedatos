@@ -28,34 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCalificarVendedor = new System.Windows.Forms.Button();
+            this.MsHome = new System.Windows.Forms.MenuStrip();
+            this.holaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administracionDeRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administracionDeVisibilidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MsHome.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnCalificarVendedor
+            // MsHome
             // 
-            this.btnCalificarVendedor.Location = new System.Drawing.Point(28, 45);
-            this.btnCalificarVendedor.Name = "btnCalificarVendedor";
-            this.btnCalificarVendedor.Size = new System.Drawing.Size(141, 41);
-            this.btnCalificarVendedor.TabIndex = 0;
-            this.btnCalificarVendedor.Text = "Calificar Vendedor";
-            this.btnCalificarVendedor.UseVisualStyleBackColor = true;
-            this.btnCalificarVendedor.Click += new System.EventHandler(this.btnCalificarVendedor_Click);
+            this.MsHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.holaToolStripMenuItem});
+            this.MsHome.Location = new System.Drawing.Point(0, 0);
+            this.MsHome.Name = "MsHome";
+            this.MsHome.Size = new System.Drawing.Size(671, 24);
+            this.MsHome.TabIndex = 1;
+            this.MsHome.Text = "MsHome";
+            // 
+            // holaToolStripMenuItem
+            // 
+            this.holaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.administracionDeRolesToolStripMenuItem,
+            this.administracionDeVisibilidadesToolStripMenuItem});
+            this.holaToolStripMenuItem.Name = "holaToolStripMenuItem";
+            this.holaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.holaToolStripMenuItem.Text = "Administracion";
+            // 
+            // administracionDeRolesToolStripMenuItem
+            // 
+            this.administracionDeRolesToolStripMenuItem.Name = "administracionDeRolesToolStripMenuItem";
+            this.administracionDeRolesToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.administracionDeRolesToolStripMenuItem.Text = "Administracion de roles";
+            this.administracionDeRolesToolStripMenuItem.Click += new System.EventHandler(this.administracionDeRolesToolStripMenuItem_Click);
+            // 
+            // administracionDeVisibilidadesToolStripMenuItem
+            // 
+            this.administracionDeVisibilidadesToolStripMenuItem.Name = "administracionDeVisibilidadesToolStripMenuItem";
+            this.administracionDeVisibilidadesToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.administracionDeVisibilidadesToolStripMenuItem.Text = "Administracion de visibilidades";
+            this.administracionDeVisibilidadesToolStripMenuItem.Click += new System.EventHandler(this.administracionDeVisibilidadesToolStripMenuItem_Click);
             // 
             // FrmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.btnCalificarVendedor);
+            this.ClientSize = new System.Drawing.Size(671, 389);
+            this.Controls.Add(this.MsHome);
+            this.MainMenuStrip = this.MsHome;
             this.Name = "FrmHome";
-            this.Text = "FrmHome";
-            this.Load += new System.EventHandler(this.FrmHome_Load);
+            this.Text = "FrbaCommerce - Home";
+            this.MsHome.ResumeLayout(false);
+            this.MsHome.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnCalificarVendedor;
+        private System.Windows.Forms.MenuStrip MsHome;
+        private System.Windows.Forms.ToolStripMenuItem holaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administracionDeRolesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administracionDeVisibilidadesToolStripMenuItem;
+
+
     }
 }

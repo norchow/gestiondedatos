@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Calificar_Vendedor;
+using FrbaCommerce.ABM_Rol;
+using FrbaCommerce.Abm_Visibilidad;
 
 namespace FrbaCommerce.Home
 {
@@ -17,15 +19,16 @@ namespace FrbaCommerce.Home
             InitializeComponent();
         }
 
-        private void btnCalificarVendedor_Click(object sender, EventArgs e)
+        private void administracionDeRolesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frmCalificarVendedor = new FrmCalificarVendedor();
-            frmCalificarVendedor.Show();
+            var frmABMRol = new FrmABMRol();
+            frmABMRol.ShowDialog();
         }
 
-        private void FrmHome_Load(object sender, EventArgs e)
+        private void administracionDeVisibilidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var frmABMVisibilidades = new FrmABMVisibilidad();
+            frmABMVisibilidades.ShowDialog();
         }
     }
 }
