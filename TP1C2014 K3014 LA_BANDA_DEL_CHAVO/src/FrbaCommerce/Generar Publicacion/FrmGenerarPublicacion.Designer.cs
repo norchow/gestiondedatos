@@ -66,6 +66,7 @@
             // CboTipoPublicacion
             // 
             this.CboTipoPublicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboTipoPublicacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CboTipoPublicacion.FormattingEnabled = true;
             this.CboTipoPublicacion.Items.AddRange(new object[] {
             "Compra inmediata",
@@ -87,6 +88,7 @@
             // CboEstadoPublicacion
             // 
             this.CboEstadoPublicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboEstadoPublicacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CboEstadoPublicacion.FormattingEnabled = true;
             this.CboEstadoPublicacion.Items.AddRange(new object[] {
             "Borrador",
@@ -177,6 +179,7 @@
             // CboVisibilidad
             // 
             this.CboVisibilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboVisibilidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CboVisibilidad.FormattingEnabled = true;
             this.CboVisibilidad.Items.AddRange(new object[] {
             "Borrador",
