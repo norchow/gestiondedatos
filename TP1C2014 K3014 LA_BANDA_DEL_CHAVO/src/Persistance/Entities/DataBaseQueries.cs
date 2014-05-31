@@ -25,6 +25,7 @@ namespace Persistance.Entities
         public static class Usuario
         {
             public static String SPGetUserByUsername = "LA_BANDA_DEL_CHAVO.GetUserByUsername";
+            public static String SPGetUserById = "LA_BANDA_DEL_CHAVO.GetUserById";
             public static String SPUpdateUser = "LA_BANDA_DEL_CHAVO.UpdateUser";
             public static String SPUpdatePassword = "LA_BANDA_DEL_CHAVO.UpdatePassword";
         }
@@ -37,6 +38,31 @@ namespace Persistance.Entities
             public static String SPGetVisibilidadById = "LA_BANDA_DEL_CHAVO.GetVisibilidadById";
             public static String SPGetAllVisibilidadByParameters = "LA_BANDA_DEL_CHAVO.GetAllVisibilitidadByParameters";
             public static String SPGetAllVisibilidadByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllVisibilitidadByParametersLike";
+        }
+
+        public static class TipoPublicacion
+        {
+            public static String SPGetAllTipoPublicacion = "LA_BANDA_DEL_CHAVO.GetAllTipoPublicacion";
+            public static String SPGetAllTipoPublicacionById = "LA_BANDA_DEL_CHAVO.GetAllTipoPublicacionById";
+        }
+
+        public static class EstadoPublicacion
+        {
+            public static String SPGetAllEstadoPublicacion = "LA_BANDA_DEL_CHAVO.GetAllEstadoPublicacion";
+            public static String SPGetAllEstadoPublicacionById = "LA_BANDA_DEL_CHAVO.GetAllEstadoPublicacionById"; 
+        }
+
+        public static class Rubro
+        {
+            public static String SPGetAllRubro = "LA_BANDA_DEL_CHAVO.GetAllRubro";
+            public static String SPInsertRubroByPublicacion = "LA_BANDA_DEL_CHAVO.InsertRubroByPublicacion";
+            public static String SPGetAllRubroByPublicationId = "LA_BANDA_DEL_CHAVO.GetAllRubroByPublicacionId";
+        }
+
+        public static class Publicacion
+        {
+            public static String SPGetPublicacionById = "LA_BANDA_DEL_CHAVO.GetPublicacionById";
+            public static String SPInsertPublicacion = "LA_BANDA_DEL_CHAVO.InsertPublicacion";
         }
     }
 }

@@ -43,16 +43,24 @@
   <ItemGroup>
     <Compile Include="Entities\DataBaseManager.cs" />
     <Compile Include="Entities\DataBaseQueries.cs" />
+    <Compile Include="Entities\EstadoPublicacion.cs" />
     <Compile Include="Entities\Funcionalidad.cs" />
     <Compile Include="Entities\IMapable.cs" />
+    <Compile Include="Entities\Publicacion.cs" />
     <Compile Include="Entities\Rol.cs" />
+    <Compile Include="Entities\Rubro.cs" />
     <Compile Include="Entities\SPParameter.cs" />
     <Compile Include="Entities\StoreProcedure.cs" />
+    <Compile Include="Entities\TipoPublicacion.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Visibilidad.cs" />
+    <Compile Include="EstadoPublicacionPersistance.cs" />
     <Compile Include="FuncionalidadPersistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicacionPersistance.cs" />
     <Compile Include="RolPersistance.cs" />
+    <Compile Include="RubroPersistance.cs" />
+    <Compile Include="TipoPublicacionPersistance.cs" />
     <Compile Include="UsuarioPersistance.cs" />
     <Compile Include="VisibilidadPersistance.cs" />
   </ItemGroup>

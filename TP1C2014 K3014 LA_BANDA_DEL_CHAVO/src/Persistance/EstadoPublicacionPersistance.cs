@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Persistance.Entities;
+
+namespace Persistance
+{
+    public static class EstadoPublicacionPersistance
+    {
+        public static List<EstadoPublicacion> GetAll()
+        {
+            var sp = new StoreProcedure(DataBaseConst.EstadoPublicacion.SPGetAllEstadoPublicacion);
+            return sp.ExecuteReader<EstadoPublicacion>();
+        }
+
+        public static EstadoPublicacion GetPublicationStatusById(int idStatusPublication)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Estado_Publicacion", idStatusPublication) };
+            var sp = new StoreProcedure(DataBaseConst.EstadoPublicacion.SPGetAllEstadoPublicacionById, param);
+
+            var statusPublication = sp.ExecuteReader<EstadoPublicacion>();
+
+            if (statusPublication == null || statusPublication.Count == 0)
+                return null;
+
+            return statusPublication[0];
+        }
+    }
+}
+

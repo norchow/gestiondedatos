@@ -192,7 +192,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Calificacion] (
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
-	[ID_Publicacion] numeric(18,0) UNIQUE NOT NULL,
+	[ID_Publicacion] numeric(18, 0) NOT NULL IDENTITY (1, 1),
 	[ID_Tipo_Publicacion] int NOT NULL,
 	[Descripcion] nvarchar(255) NOT NULL,
 	[ID_Usuario] int NOT NULL,

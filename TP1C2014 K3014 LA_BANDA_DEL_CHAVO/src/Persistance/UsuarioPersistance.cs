@@ -42,5 +42,18 @@ namespace Persistance
 
             sp.ExecuteNonQuery(null);
         }
+
+        public static Usuario GetUserById(string idUser)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Usuario", idUser) };
+            var sp = new StoreProcedure(DataBaseConst.Usuario.SPGetUserById, param);
+
+            var users = sp.ExecuteReader<Usuario>();
+
+            if (users == null || users.Count == 0)
+                return null;
+
+            return users[0];
+        }
     }
 }

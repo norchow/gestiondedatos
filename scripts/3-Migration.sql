@@ -65,6 +65,9 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,Tipo_Docum
  COMMIT
  
 BEGIN TRANSACTION
+
+SET IDENTITY_INSERT LA_BANDA_DEL_CHAVO.TL_Publicacion ON
+
 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Publicacion (ID_Publicacion,ID_Tipo_Publicacion,Descripcion,ID_Usuario,Stock,Fecha_Vencimiento,Fecha_Inicio,Precio,ID_Visibilidad,ID_Estado_Publicacion)(
   SELECT DISTINCT [Publicacion_Cod]
 	  ,(SELECT TP.ID_Tipo_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP WHERE TP.Descripcion=[Publicacion_Tipo])
@@ -78,7 +81,12 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Publicacion (ID_Publicacion,ID_Tipo_Publicacio
       ,(SELECT EP.ID_Estado_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP WHERE EP.Descripcion='Finalizada')
  FROM gd_esquema.Maestra
  WHERE [Publicacion_Cod] IS NOT NULL); 
- COMMIT
+ 
+ SET IDENTITY_INSERT LA_BANDA_DEL_CHAVO.TL_Publicacion OFF
+
+ DECLARE @maxid numeric(18,0);
+ SELECT @maxid = MAX(Publicacion_Cod) FROM gd_esquema.Maestra DBCC CHECKIDENT ('LA_BANDA_DEL_CHAVO.TL_Publicacion', RESEED, @maxid);
+COMMIT
 
 BEGIN TRANSACTION
 	UPDATE LA_BANDA_DEL_CHAVO.TL_Empresa

@@ -114,11 +114,11 @@
     <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.cs">
+    <Compile Include="Generar Publicacion\FrmGenerarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Publicacion\FrmGenerarPublicacion.Designer.cs">
+      <DependentUpon>FrmGenerarPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Gestion de Preguntas\Form1.cs">
       <SubType>Form</SubType>
@@ -178,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Calificar Vendedor\FrmCalificarVendedor.resx">
       <DependentUpon>FrmCalificarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\FrmGenerarPublicacion.resx">
+      <DependentUpon>FrmGenerarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>

@@ -1,4 +1,6 @@
 ﻿using System.Configuration;
+using System;
+using System.Globalization;
 
 namespace Configuration
 {
@@ -6,16 +8,28 @@ namespace Configuration
     {
         public static string ConnectionString { get; set; }
 
+        public static DateTime FechaSistema { get; set; }
+
         private static bool _iniciado;
 
         public static void Iniciar()
         {
-            if (!_iniciado)
+            try
             {
-                ConnectionString = ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
+                if (!_iniciado)
+                {
 
-                _iniciado = true;
+                    ConnectionString = ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
+                    FechaSistema = DateTime.ParseExact(ConfigurationManager.AppSettings["FechaSistema"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                    _iniciado = true;
+                }
             }
+            catch (Exception)
+            {
+                throw new Exception("Se produjo un error durante la lectura del archivo de configuracion.");
+            }
+            
         }
     }
 }
