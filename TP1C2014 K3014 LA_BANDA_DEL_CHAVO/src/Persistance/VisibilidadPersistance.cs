@@ -66,7 +66,6 @@ namespace Persistance
         {
             var param = new List<SPParameter>
                 { 
-                    new SPParameter("ID_Visibilidad", visibility.ID),
                     new SPParameter("Descripcion", visibility.Descripcion),
                     new SPParameter("Precio_Publicar", visibility.PrecioPublicar),
                     new SPParameter("Porcentaje_Venta", visibility.PorcentajeVenta),

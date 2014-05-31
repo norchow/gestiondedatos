@@ -37,12 +37,11 @@ namespace FrbaCommerce.Abm_Visibilidad
         private void FrmABMInsertUpdateVisibilidad_Load(object sender, EventArgs e)
         {
             this.Text = (insertMode) ? string.Format("{0} - {1}", "FrbaCommerce", "Nueva funcionalidad") : string.Format("{0} - {1}", "FrbaCommerce", "Modificar funcionalidad");
-            TxtCodigo.Enabled = insertMode;
+            ChkActivo.Checked = insertMode;
             ChkActivo.Checked = true;
 
             if (!insertMode)
             {
-                TxtCodigo.Text = CurrentVisibility.ID.ToString();
                 TxtDescripcion.Text = CurrentVisibility.Descripcion;
                 TxtDuracion.Text = CurrentVisibility.Duracion.ToString();
                 TxtPorcentajeVenta.Text = CurrentVisibility.PorcentajeVenta.ToString();
@@ -58,12 +57,6 @@ namespace FrbaCommerce.Abm_Visibilidad
                 #region Validations
 
                 var exceptionMessage = string.Empty;
-
-                if (TypesHelper.IsEmpty(TxtCodigo.Text))
-                    exceptionMessage += Environment.NewLine + "El codigo de la visibilidad no puede ser vacío.";
-
-                if (!TypesHelper.IsNumeric(TxtCodigo.Text))
-                    exceptionMessage += Environment.NewLine + "El codigo de la visibilidad debe ser numérico.";
 
                 if (TypesHelper.IsEmpty(TxtDescripcion.Text))
                     exceptionMessage += Environment.NewLine + "La descripción de la visibilidad no puede ser vacía.";
@@ -93,13 +86,9 @@ namespace FrbaCommerce.Abm_Visibilidad
 
                 if (insertMode)
                 {
-                    if (VisibilidadPersistance.GetVisibilityById(Convert.ToInt32(TxtCodigo.Text)) != null)
-                        throw new Exception("Ya existe una visibilidad con dicho codigo");
-
                     #region Insert the new visibility
 
                     var visibility = new Visibilidad();
-                    visibility.ID = Convert.ToInt32(TxtCodigo.Text);
                     visibility.Descripcion = TxtDescripcion.Text;
                     visibility.Duracion = Convert.ToInt32(TxtDuracion.Text);
                     visibility.PrecioPublicar = Convert.ToDouble(TxtPrecioPublicar.Text);
@@ -116,8 +105,6 @@ namespace FrbaCommerce.Abm_Visibilidad
                             Close();
                         }
                     }
-
-                    CompleteAction = false;
 
                     #endregion
                 }
@@ -158,9 +145,6 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         private void LblLimpiar_Click(object sender, EventArgs e)
         {
-            if (insertMode)
-                TxtCodigo.Text = string.Empty;
-
             TxtDescripcion.Text = string.Empty;
             TxtDuracion.Text = string.Empty;
             TxtPorcentajeVenta.Text = string.Empty;

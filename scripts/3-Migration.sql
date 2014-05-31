@@ -43,6 +43,9 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,Tipo_Docum
  COMMIT
  
  BEGIN TRANSACTION
+ 
+	SET IDENTITY_INSERT LA_BANDA_DEL_CHAVO.TL_Visibilidad ON
+  
 	 INSERT INTO LA_BANDA_DEL_CHAVO.TL_Visibilidad(ID_Visibilidad, Descripcion, Precio_Publicar,Porcentaje_Venta, Duracion)(
 	 SELECT DISTINCT [Publicacion_Visibilidad_Cod]
       ,[Publicacion_Visibilidad_Desc]
@@ -52,6 +55,11 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,Tipo_Docum
 		  FROM gd_esquema.Maestra
 		  WHERE Publicacion_Visibilidad_Cod = [Publicacion_Visibilidad_Cod])
       FROM gd_esquema.Maestra);
+      
+      SET IDENTITY_INSERT LA_BANDA_DEL_CHAVO.TL_Visibilidad OFF
+
+	DECLARE @maxIdVisibilidad numeric(18,0);
+	SELECT @maxIdVisibilidad = MAX(Publicacion_Visibilidad_Cod) FROM gd_esquema.Maestra DBCC CHECKIDENT ('LA_BANDA_DEL_CHAVO.TL_Visibilidad', RESEED, @maxIdVisibilidad);
  COMMIT
  
  BEGIN TRANSACTION
@@ -84,8 +92,8 @@ INSERT INTO LA_BANDA_DEL_CHAVO.TL_Publicacion (ID_Publicacion,ID_Tipo_Publicacio
  
  SET IDENTITY_INSERT LA_BANDA_DEL_CHAVO.TL_Publicacion OFF
 
- DECLARE @maxid numeric(18,0);
- SELECT @maxid = MAX(Publicacion_Cod) FROM gd_esquema.Maestra DBCC CHECKIDENT ('LA_BANDA_DEL_CHAVO.TL_Publicacion', RESEED, @maxid);
+ DECLARE @maxIdPublicacion numeric(18,0);
+ SELECT @maxIdPublicacion = MAX(Publicacion_Cod) FROM gd_esquema.Maestra DBCC CHECKIDENT ('LA_BANDA_DEL_CHAVO.TL_Publicacion', RESEED, @maxIdPublicacion);
 COMMIT
 
 BEGIN TRANSACTION

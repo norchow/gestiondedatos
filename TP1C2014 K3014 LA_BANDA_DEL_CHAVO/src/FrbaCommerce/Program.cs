@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using FrbaCommerce.Login;
 using Configuration;
+using FrbaCommerce.Abm_Visibilidad;
 
 namespace FrbaCommerce
 {
@@ -19,7 +20,7 @@ namespace FrbaCommerce
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmLogin());
+            Application.Run(new FrmABMVisibilidad());
         }
     }
 }

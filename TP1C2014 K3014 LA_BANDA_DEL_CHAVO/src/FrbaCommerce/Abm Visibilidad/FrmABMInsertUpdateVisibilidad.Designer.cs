@@ -30,8 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ChkActivo = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TxtCodigo = new System.Windows.Forms.TextBox();
             this.TxtDuracion = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,8 +47,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.ChkActivo);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.TxtCodigo);
             this.groupBox1.Controls.Add(this.TxtDuracion);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label1);
@@ -61,7 +57,7 @@
             this.groupBox1.Controls.Add(this.TxtPrecioPublicar);
             this.groupBox1.Location = new System.Drawing.Point(14, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(296, 314);
+            this.groupBox1.Size = new System.Drawing.Size(296, 257);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "INFORMACION";
@@ -69,34 +65,17 @@
             // ChkActivo
             // 
             this.ChkActivo.AutoSize = true;
-            this.ChkActivo.Location = new System.Drawing.Point(17, 69);
+            this.ChkActivo.Location = new System.Drawing.Point(17, 71);
             this.ChkActivo.Name = "ChkActivo";
             this.ChkActivo.Size = new System.Drawing.Size(65, 17);
             this.ChkActivo.TabIndex = 17;
             this.ChkActivo.Text = "ACTIVO";
             this.ChkActivo.UseVisualStyleBackColor = true;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "CODIGO";
-            // 
-            // TxtCodigo
-            // 
-            this.TxtCodigo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtCodigo.Location = new System.Drawing.Point(17, 41);
-            this.TxtCodigo.Name = "TxtCodigo";
-            this.TxtCodigo.Size = new System.Drawing.Size(262, 20);
-            this.TxtCodigo.TabIndex = 0;
-            // 
             // TxtDuracion
             // 
             this.TxtDuracion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtDuracion.Location = new System.Drawing.Point(17, 272);
+            this.TxtDuracion.Location = new System.Drawing.Point(17, 217);
             this.TxtDuracion.Name = "TxtDuracion";
             this.TxtDuracion.Size = new System.Drawing.Size(262, 20);
             this.TxtDuracion.TabIndex = 4;
@@ -104,7 +83,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 256);
+            this.label6.Location = new System.Drawing.Point(17, 201);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 13);
             this.label6.TabIndex = 14;
@@ -113,7 +92,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 97);
+            this.label1.Location = new System.Drawing.Point(17, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 13);
             this.label1.TabIndex = 8;
@@ -122,7 +101,7 @@
             // TxtPorcentajeVenta
             // 
             this.TxtPorcentajeVenta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtPorcentajeVenta.Location = new System.Drawing.Point(17, 221);
+            this.TxtPorcentajeVenta.Location = new System.Drawing.Point(17, 166);
             this.TxtPorcentajeVenta.Name = "TxtPorcentajeVenta";
             this.TxtPorcentajeVenta.Size = new System.Drawing.Size(262, 20);
             this.TxtPorcentajeVenta.TabIndex = 3;
@@ -130,7 +109,7 @@
             // TxtDescripcion
             // 
             this.TxtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtDescripcion.Location = new System.Drawing.Point(17, 113);
+            this.TxtDescripcion.Location = new System.Drawing.Point(17, 43);
             this.TxtDescripcion.Name = "TxtDescripcion";
             this.TxtDescripcion.Size = new System.Drawing.Size(262, 20);
             this.TxtDescripcion.TabIndex = 1;
@@ -138,7 +117,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 205);
+            this.label4.Location = new System.Drawing.Point(17, 150);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 13);
             this.label4.TabIndex = 12;
@@ -147,7 +126,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 152);
+            this.label2.Location = new System.Drawing.Point(17, 97);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(129, 13);
             this.label2.TabIndex = 10;
@@ -156,7 +135,7 @@
             // TxtPrecioPublicar
             // 
             this.TxtPrecioPublicar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtPrecioPublicar.Location = new System.Drawing.Point(17, 168);
+            this.TxtPrecioPublicar.Location = new System.Drawing.Point(17, 113);
             this.TxtPrecioPublicar.Name = "TxtPrecioPublicar";
             this.TxtPrecioPublicar.Size = new System.Drawing.Size(262, 20);
             this.TxtPrecioPublicar.TabIndex = 2;
@@ -167,7 +146,7 @@
             this.LblCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblCancelar.ForeColor = System.Drawing.Color.White;
-            this.LblCancelar.Location = new System.Drawing.Point(217, 343);
+            this.LblCancelar.Location = new System.Drawing.Point(217, 283);
             this.LblCancelar.Name = "LblCancelar";
             this.LblCancelar.Size = new System.Drawing.Size(91, 32);
             this.LblCancelar.TabIndex = 30;
@@ -181,7 +160,7 @@
             this.LblGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblGrabar.ForeColor = System.Drawing.Color.White;
-            this.LblGrabar.Location = new System.Drawing.Point(16, 343);
+            this.LblGrabar.Location = new System.Drawing.Point(16, 283);
             this.LblGrabar.Name = "LblGrabar";
             this.LblGrabar.Size = new System.Drawing.Size(95, 32);
             this.LblGrabar.TabIndex = 29;
@@ -195,7 +174,7 @@
             this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblLimpiar.ForeColor = System.Drawing.Color.White;
-            this.LblLimpiar.Location = new System.Drawing.Point(119, 343);
+            this.LblLimpiar.Location = new System.Drawing.Point(119, 283);
             this.LblLimpiar.Name = "LblLimpiar";
             this.LblLimpiar.Size = new System.Drawing.Size(91, 32);
             this.LblLimpiar.TabIndex = 31;
@@ -208,15 +187,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.ClientSize = new System.Drawing.Size(325, 393);
+            this.ClientSize = new System.Drawing.Size(325, 329);
             this.Controls.Add(this.LblLimpiar);
             this.Controls.Add(this.LblCancelar);
             this.Controls.Add(this.LblGrabar);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(341, 431);
+            this.MaximumSize = new System.Drawing.Size(341, 367);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(341, 431);
+            this.MinimumSize = new System.Drawing.Size(341, 367);
             this.Name = "FrmABMInsertUpdateVisibilidad";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmABMInsertUpdateVisibilidad";
@@ -240,8 +219,6 @@
         private System.Windows.Forms.TextBox TxtPrecioPublicar;
         private System.Windows.Forms.Label LblCancelar;
         private System.Windows.Forms.Label LblGrabar;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TxtCodigo;
         private System.Windows.Forms.CheckBox ChkActivo;
         private System.Windows.Forms.Label LblLimpiar;
     }
