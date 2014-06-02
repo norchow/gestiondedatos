@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Persistance;
 using Persistance.Entities;
 using Tools;
+using Filters;
 
 namespace FrbaCommerce.Abm_Visibilidad
 {
@@ -16,7 +17,7 @@ namespace FrbaCommerce.Abm_Visibilidad
     {
         public bool insertMode { get; set; }
 
-        public Visibilidad CurrentVisibility { get; set; }
+        private Visibilidad CurrentVisibility { get; set; }
 
         public bool CompleteAction = false;
 
@@ -86,6 +87,10 @@ namespace FrbaCommerce.Abm_Visibilidad
 
                 if (insertMode)
                 {
+                    var filters = new VisibilidadFilters { Descripcion = TxtDescripcion.Text };
+                    if (VisibilidadPersistance.GetAllVisibilityByParameters(filters) != null)
+                        throw new Exception("Ya existe una visibilidad con la descripcion informada.");
+
                     #region Insert the new visibility
 
                     var visibility = new Visibilidad();
@@ -135,6 +140,7 @@ namespace FrbaCommerce.Abm_Visibilidad
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Atención");
+                Close();
             }
         }
 

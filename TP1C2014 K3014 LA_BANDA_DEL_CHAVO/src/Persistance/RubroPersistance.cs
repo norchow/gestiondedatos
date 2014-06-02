@@ -44,5 +44,22 @@ namespace Persistance
 
             return regsAffected;
         }
+
+        public static int DeleteByPublication(Publicacion publication, SqlTransaction transaction)
+        {
+            var regsAffected = 0;
+
+            foreach (var rubro in publication.Rubros)
+            {
+                var param = new List<SPParameter> { new SPParameter("ID_Publicacion", publication.ID) };
+                var sp = (transaction != null)
+                            ? new StoreProcedure(DataBaseConst.Rubro.SPDeleteRubroByPublicacion, param, transaction)
+                            : new StoreProcedure(DataBaseConst.Rubro.SPDeleteRubroByPublicacion, param);
+
+                regsAffected += sp.ExecuteNonQuery(transaction);
+            }
+
+            return regsAffected;
+        }
     }
 }

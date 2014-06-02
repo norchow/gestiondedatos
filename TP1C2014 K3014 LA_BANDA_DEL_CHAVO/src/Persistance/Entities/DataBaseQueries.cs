@@ -57,12 +57,15 @@ namespace Persistance.Entities
             public static String SPGetAllRubro = "LA_BANDA_DEL_CHAVO.GetAllRubro";
             public static String SPInsertRubroByPublicacion = "LA_BANDA_DEL_CHAVO.InsertRubroByPublicacion";
             public static String SPGetAllRubroByPublicationId = "LA_BANDA_DEL_CHAVO.GetAllRubroByPublicacionId";
+            public static String SPDeleteRubroByPublicacion = "LA_BANDA_DEL_CHAVO.DeleteRubroByPublicacion";
         }
 
         public static class Publicacion
         {
-            public static String SPGetPublicacionById = "LA_BANDA_DEL_CHAVO.GetPublicacionById";
-            public static String SPInsertPublicacion = "LA_BANDA_DEL_CHAVO.InsertPublicacion";
+            public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetPublicacionById";
+            public static String SPInsert = "LA_BANDA_DEL_CHAVO.InsertPublicacion";
+            public static String SPUpdate = "LA_BANDA_DEL_CHAVO.UpdatePublicacion";
+            public static String SPGetAllByUserId = "LA_BANDA_DEL_CHAVO.GetAllPublicationByUserId";
         }
     }
 }

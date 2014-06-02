@@ -34,9 +34,9 @@ namespace FrbaCommerce.Abm_Visibilidad
 
             #region Get the dictionary of visibilities
 
-            //The datasource must be all the visibilities record from the database
             if (visibilities == null)
             {
+                //The datasource must be all the visibilities records stored in the database
                 CleanFiltersUI();
                 _visibilities = VisibilidadPersistance.GetAll();
                 visibilitiesDictionary = _visibilities.ToDictionary(a => a.ID, a => a);

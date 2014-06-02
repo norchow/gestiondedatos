@@ -49,9 +49,6 @@ namespace FrbaCommerce.ABM_Rol
                 if (string.IsNullOrEmpty(TxtRol.Text))
                     exceptionMessage += "El nombre del rol no puede ser vacío.";
 
-                if (RolPersistance.GetByName(TxtRol.Text) != null && insertMode)
-                    exceptionMessage += Environment.NewLine + "Ya existe un rol con el nombre ingresado.";
-
                 if (LstFuncionalidades.CheckedItems.Count == 0)
                     exceptionMessage += Environment.NewLine +  "Debe seleccionar por lo menos una funcionalidad.";
 
@@ -62,31 +59,27 @@ namespace FrbaCommerce.ABM_Rol
 
                 if (insertMode)
                 {
+                    if (RolPersistance.GetByName(TxtRol.Text) != null)
+                        throw new Exception("Ya existe un rol con el nombre ingresado.");
+
                     #region Insert the new role with its features
 
-                    try
+                    var role = new Rol();
+                    role.Activo = ChkActivo.Checked;
+                    role.Descripcion = TxtRol.Text;
+
+                    foreach (var checkedItem in LstFuncionalidades.CheckedItems)
                     {
-                        var role = new Rol();
-                        role.Activo = ChkActivo.Checked;
-                        role.Descripcion = TxtRol.Text;
-
-                        foreach (var checkedItem in LstFuncionalidades.CheckedItems)
-                        {
-                            var feature = (Funcionalidad)checkedItem;
-                            role.Funcionalidades.Add(feature);
-                        }
-
-                        var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar el nuevo rol?", "Atencion", MessageBoxButtons.YesNo);
-                        if (dialogAnswer == DialogResult.Yes)
-                        {
-                            RolPersistance.InsertRolAndFeatures(role);
-                            CompleteAction = true;
-                            Close();
-                        }
+                        var feature = (Funcionalidad)checkedItem;
+                        role.Funcionalidades.Add(feature);
                     }
-                    catch (Exception ex)
+
+                    var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar el nuevo rol?", "Atencion", MessageBoxButtons.YesNo);
+                    if (dialogAnswer == DialogResult.Yes)
                     {
-                        MessageBox.Show(ex.Message, "Atencion");
+                        RolPersistance.InsertRolAndFeatures(role);
+                        CompleteAction = true;
+                        Close();
                     }
 
                     #endregion
@@ -95,29 +88,22 @@ namespace FrbaCommerce.ABM_Rol
                 {
                     #region Update an existing role and its features
 
-                    try
+                    CurrentRole.Activo = ChkActivo.Checked;
+                    CurrentRole.Descripcion = TxtRol.Text;
+                    CurrentRole.Funcionalidades = new List<Funcionalidad>();
+
+                    foreach (var checkedItem in LstFuncionalidades.CheckedItems)
                     {
-                        CurrentRole.Activo = ChkActivo.Checked;
-                        CurrentRole.Descripcion = TxtRol.Text;
-                        CurrentRole.Funcionalidades = new List<Funcionalidad>();
-
-                        foreach (var checkedItem in LstFuncionalidades.CheckedItems)
-                        {
-                            var feature = (Funcionalidad)checkedItem;
-                            CurrentRole.Funcionalidades.Add(feature);
-                        }
-
-                        var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar el rol {0}?", CurrentRole.Descripcion), "Atencion", MessageBoxButtons.YesNo);
-                        if (dialogAnswer == DialogResult.Yes)
-                        {
-                            RolPersistance.UpdateRoleAndFeatures(CurrentRole);
-                            CompleteAction = true;
-                            Close();
-                        }
+                        var feature = (Funcionalidad)checkedItem;
+                        CurrentRole.Funcionalidades.Add(feature);
                     }
-                    catch (Exception ex)
+
+                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar el rol {0}?", CurrentRole.Descripcion), "Atencion", MessageBoxButtons.YesNo);
+                    if (dialogAnswer == DialogResult.Yes)
                     {
-                        MessageBox.Show(ex.Message, "Atencion");
+                        RolPersistance.UpdateRoleAndFeatures(CurrentRole);
+                        CompleteAction = true;
+                        Close();
                     }
 
                     #endregion
@@ -126,6 +112,7 @@ namespace FrbaCommerce.ABM_Rol
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Atención");
+                Close();
             }
         }
 

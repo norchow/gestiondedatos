@@ -70,7 +70,7 @@ namespace Persistance.Entities
             return new List<SPParameter>();
         }
 
-        internal void GetObjectsById()
+        public void GetObjectsById()
         {
             UsuarioCreador = UsuarioPersistance.GetUserById(_usuarioCreador);
             Visibilidad = VisibilidadPersistance.GetVisibilityById(_visibilidad);

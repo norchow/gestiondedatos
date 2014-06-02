@@ -37,6 +37,7 @@
             this.LblBuscar = new System.Windows.Forms.Label();
             this.ChkExacta = new System.Windows.Forms.CheckBox();
             this.DgvRol = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvRol)).BeginInit();
             this.SuspendLayout();
@@ -72,9 +73,9 @@
             // LstFuncionalidades
             // 
             this.LstFuncionalidades.FormattingEnabled = true;
-            this.LstFuncionalidades.Location = new System.Drawing.Point(457, 104);
+            this.LstFuncionalidades.Location = new System.Drawing.Point(457, 130);
             this.LstFuncionalidades.Name = "LstFuncionalidades";
-            this.LstFuncionalidades.Size = new System.Drawing.Size(214, 316);
+            this.LstFuncionalidades.Size = new System.Drawing.Size(214, 290);
             this.LstFuncionalidades.TabIndex = 20;
             // 
             // groupBox2
@@ -152,12 +153,22 @@
             this.DgvRol.TabIndex = 33;
             this.DgvRol.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvRol_CellClick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(457, 104);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(172, 13);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "FUNCIONALIDADES ASOCIADAS";
+            // 
             // FrmABMRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(691, 490);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.LstFuncionalidades);
             this.Controls.Add(this.DgvRol);
             this.Controls.Add(this.groupBox2);
@@ -172,6 +183,7 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvRol)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -186,5 +198,6 @@
         private System.Windows.Forms.Label LblBuscar;
         private System.Windows.Forms.CheckBox ChkExacta;
         private System.Windows.Forms.DataGridView DgvRol;
+        private System.Windows.Forms.Label label1;
     }
 }

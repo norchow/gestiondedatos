@@ -18,9 +18,19 @@ namespace FrbaCommerce.Generar_Publicacion
     {
         public bool Auction { get; set; }
 
-        public FrmGenerarPublicacion()
+        public bool CompleteAction = false;
+
+        private bool insertMode { get; set; }
+
+        private Publicacion CurrentPublication { get; set; }
+
+        public FrmGenerarPublicacion(Publicacion publication)
         {
             InitializeComponent();
+            insertMode = publication == null;
+
+            if (!insertMode)
+                CurrentPublication = publication;
         }
 
         private void FrmGenerarPublicacion_Load(object sender, EventArgs e)
@@ -48,14 +58,97 @@ namespace FrbaCommerce.Generar_Publicacion
             LstRubro.ValueMember = "ID";
 
             #endregion
+
+            if (!insertMode)
+            {
+                #region Load updating publication data
+
+                CurrentPublication.GetObjectsById();
+
+                CboEstadoPublicacion.Text = CurrentPublication.EstadoPublicacion.Descripcion;
+                CboTipoPublicacion.Text = CurrentPublication.TipoPublicacion.Descripcion;
+                CboVisibilidad.Text = CurrentPublication.Visibilidad.Descripcion;
+                TxtDescripcion.Text = CurrentPublication.Descripcion;
+
+                if (CurrentPublication.TipoPublicacion.Descripcion == "Subasta")
+                {
+                    TxtPrecio.Enabled = false;
+                    TxtValorInicioSubasta.Text = CurrentPublication.Precio.ToString();
+                }
+                else
+                {
+                    TxtValorInicioSubasta.Enabled = false;
+                    TxtPrecio.Text = CurrentPublication.Precio.ToString();
+                }
+
+                TxtStock.Text = CurrentPublication.Stock.ToString();
+                ChkRecibirPreguntas.Checked = CurrentPublication.RecibirPreguntas;
+
+                for (int j = 0; j < LstRubro.Items.Count; j++)
+                {
+                    var checkboxListItem = (Rubro)LstRubro.Items[j];
+
+                    if (CurrentPublication.Rubros.Any(p => p.Descripcion == checkboxListItem.Descripcion))
+                        LstRubro.SetItemChecked(j, true);
+                    else
+                        LstRubro.SetItemChecked(j, false);
+                }
+
+                #endregion
+
+                #region Enable controls depending of publication status
+
+                switch (CurrentPublication.EstadoPublicacion.Descripcion)
+                {
+                    case "Publicada":
+                        #region Publicada
+
+                        DisableUIControls();
+                        TxtDescripcion.Enabled = true;
+                        if (CurrentPublication.TipoPublicacion.Descripcion == "Subasta")
+                            CboEstadoPublicacion.Enabled = false;
+                        else
+                        {
+                            TxtStock.Enabled = true;
+                            CboEstadoPublicacion.Enabled = true;
+                        }
+
+                        break;
+
+                        #endregion
+                        
+                    case "Pausada":
+                    case "Finalizada":
+                        #region Pausada y Finalizada
+
+                        LblLimpiar.Enabled = false;
+                        DisableUIControls();
+
+                        break;
+                        #endregion
+                }
+
+                #endregion
+            }
+        }
+
+        private void DisableUIControls()
+        {
+            CboEstadoPublicacion.Enabled = false;
+            CboTipoPublicacion.Enabled = false;
+            CboVisibilidad.Enabled = false;
+            TxtPrecio.Enabled = false;
+            TxtValorInicioSubasta.Enabled = false;
+            LstRubro.Enabled = false;
+            ChkRecibirPreguntas.Enabled = false;
+            TxtStock.Enabled = false;
+            TxtDescripcion.Enabled = false;
         }
 
         private void LblListo_Click(object sender, EventArgs e)
         {
             try
             {
-                var publication = new Publicacion();
-
                 #region Validations
 
                 var exceptionMessage = string.Empty;
@@ -94,40 +187,87 @@ namespace FrbaCommerce.Generar_Publicacion
 
                 #endregion
 
-                #region Insert the new publication
-
-                publication.Descripcion = TxtDescripcion.Text;
-                publication.Stock = Convert.ToInt32(TxtStock.Text);
-                publication.TipoPublicacion = ((TipoPublicacion)CboTipoPublicacion.SelectedItem);
-                publication.EstadoPublicacion = ((EstadoPublicacion)CboEstadoPublicacion.SelectedItem);
-                publication.Precio = (Auction) ? Convert.ToDouble(TxtValorInicioSubasta.Text) : Convert.ToDouble(TxtPrecio.Text);
-                publication.RecibirPreguntas = ChkRecibirPreguntas.Checked;
-                publication.Visibilidad = ((Visibilidad)CboVisibilidad.SelectedItem);
-                publication.FechaInicio = ConfigurationVariables.FechaSistema;
-                publication.FechaVencimiento = ConfigurationVariables.FechaSistema.AddDays(publication.Visibilidad.Duracion);
-                publication.UsuarioCreador = SessionManager.CurrentUser;
-
-                foreach (var checkedItem in LstRubro.CheckedItems)
+                if (insertMode)
                 {
-                    var category = (Rubro)checkedItem;
-                    publication.Rubros.Add(category);
-                }
+                    #region Insert the new publication
 
-                var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar la nueva publicacion?", "Atencion", MessageBoxButtons.YesNo);
-                if (dialogAnswer == DialogResult.Yes)
-                {
-                    if (PublicacionPersistance.InsertPublication(publication) == 1)
+                    var publication = new Publicacion();
+
+                    LoadObjectFromUIControls(publication);
+
+                    var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar la nueva publicacion?", "Atencion", MessageBoxButtons.YesNo);
+                    if (dialogAnswer == DialogResult.Yes)
                     {
-                        MessageBox.Show("Se inserto satisfactoriamente la nueva publicacion", "Atencion");
-                        Close();
+                        if (PublicacionPersistance.Insert(publication) == 1)
+                        {
+                            MessageBox.Show("Se inserto satisfactoriamente la nueva publicacion", "Atencion");
+                            CompleteAction = true;
+                            Close();
+                        }
                     }
-                }
 
-                #endregion
+                    #endregion
+                }
+                else
+                {
+                    #region Update an existing publication
+
+                    #region Validations
+
+                    var messageExceptions = string.Empty;
+
+                    if (CurrentPublication.EstadoPublicacion.Descripcion == "Publicada" && CboEstadoPublicacion.Text == "Borrador")
+                        messageExceptions += "No se puede cambiar el estado de una publicacion 'Publicada' a 'Borrador'.";
+
+                    if (CurrentPublication.EstadoPublicacion.Descripcion == "Publicada" && CurrentPublication.Stock > Convert.ToInt32(TxtStock.Text))
+                        messageExceptions += Environment.NewLine + "No se puede decrementar el stock de una publicacion en estado 'Publicada'.";
+
+                    if (!TypesHelper.IsEmpty(messageExceptions))
+                        throw new Exception(messageExceptions);
+
+                    #endregion
+
+                    var oldDescription = CurrentPublication.Descripcion;
+                    LoadObjectFromUIControls(CurrentPublication);
+
+                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar la publicacion {0}?", oldDescription), "Atencion", MessageBoxButtons.YesNo);
+                    if (dialogAnswer == DialogResult.Yes)
+                    {
+                        if (PublicacionPersistance.Update(CurrentPublication) == 1)
+                        {
+                            MessageBox.Show("Se modifico satisfactoriamente la publicacion", "Atencion");
+                            CompleteAction = true;
+                            Close();
+                        }
+                    }
+
+                    #endregion
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Atencion");
+                Close();
+            }
+        }
+
+        private void LoadObjectFromUIControls(Publicacion publication)
+        {
+            publication.Descripcion = TxtDescripcion.Text;
+            publication.Stock = Convert.ToInt32(TxtStock.Text);
+            publication.TipoPublicacion = ((TipoPublicacion)CboTipoPublicacion.SelectedItem);
+            publication.EstadoPublicacion = ((EstadoPublicacion)CboEstadoPublicacion.SelectedItem);
+            publication.Precio = (Auction) ? Convert.ToDouble(TxtValorInicioSubasta.Text) : Convert.ToDouble(TxtPrecio.Text);
+            publication.RecibirPreguntas = ChkRecibirPreguntas.Checked;
+            publication.Visibilidad = ((Visibilidad)CboVisibilidad.SelectedItem);
+            publication.FechaInicio = ConfigurationVariables.FechaSistema;
+            publication.FechaVencimiento = ConfigurationVariables.FechaSistema.AddDays(publication.Visibilidad.Duracion);
+            publication.UsuarioCreador = SessionManager.CurrentUser;
+            publication.Rubros = new List<Rubro>();
+            foreach (var checkedItem in LstRubro.CheckedItems)
+            {
+                var category = (Rubro)checkedItem;
+                publication.Rubros.Add(category);
             }
         }
 
@@ -152,18 +292,30 @@ namespace FrbaCommerce.Generar_Publicacion
 
         private void ClearUIControls()
         {
-            CboEstadoPublicacion.SelectedIndex = 0;
-            CboTipoPublicacion.SelectedIndex = 0;
-            CboVisibilidad.SelectedIndex = 0;
-            ChkRecibirPreguntas.Checked = false;
-            TxtValorInicioSubasta.Text = string.Empty;
-            TxtDescripcion.Text = string.Empty;
-            TxtPrecio.Text = string.Empty;
-            TxtStock.Text = string.Empty;
+            if (insertMode || CurrentPublication.EstadoPublicacion.Descripcion == "Borrador")
+            {
+                CboEstadoPublicacion.SelectedIndex = 0;
+                CboTipoPublicacion.SelectedIndex = 0;
+                CboVisibilidad.SelectedIndex = 0;
+                ChkRecibirPreguntas.Checked = false;
+                TxtValorInicioSubasta.Text = string.Empty;
+                TxtDescripcion.Text = string.Empty;
+                TxtPrecio.Text = string.Empty;
+                TxtStock.Text = string.Empty;
 
-            if (LstRubro.CheckedIndices != null)
-                foreach (var checkedIndex in LstRubro.CheckedIndices)
-                    LstRubro.SetItemCheckState((int)checkedIndex, CheckState.Unchecked);
+                if (LstRubro.CheckedIndices != null)
+                    foreach (var checkedIndex in LstRubro.CheckedIndices)
+                        LstRubro.SetItemCheckState((int)checkedIndex, CheckState.Unchecked);
+            }
+            else
+            {
+                if (CurrentPublication.TipoPublicacion.Descripcion != "Subasta")
+                {
+                    TxtDescripcion.Text = string.Empty;
+                    TxtStock.Text = string.Empty;
+                    CboEstadoPublicacion.SelectedIndex = 0;
+                }
+            }
         }
     }
 }

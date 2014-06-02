@@ -120,10 +120,10 @@
             // 
             // TxtDescripcion
             // 
-            this.TxtDescripcion.Location = new System.Drawing.Point(14, 46);
+            this.TxtDescripcion.Location = new System.Drawing.Point(14, 53);
             this.TxtDescripcion.Multiline = true;
             this.TxtDescripcion.Name = "TxtDescripcion";
-            this.TxtDescripcion.Size = new System.Drawing.Size(309, 146);
+            this.TxtDescripcion.Size = new System.Drawing.Size(309, 131);
             this.TxtDescripcion.TabIndex = 25;
             // 
             // label5
