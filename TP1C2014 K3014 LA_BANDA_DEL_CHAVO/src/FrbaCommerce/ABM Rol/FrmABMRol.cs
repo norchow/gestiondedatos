@@ -186,7 +186,7 @@ namespace FrbaCommerce.ABM_Rol
                     if (dialogAnswer == DialogResult.Yes)
                     {
                         selectedRole.Activo = false;
-                        RolPersistance.UpdateRole(selectedRole, null);
+                        RolPersistance.Update(selectedRole, null);
 
                         RefreshSources(null);
                     }

@@ -15,7 +15,7 @@ namespace Persistance
             return sp.ExecuteReader<Visibilidad>();
         }
 
-        public static Visibilidad GetVisibilityById(int id)
+        public static Visibilidad GetById(int id)
         {
             var param = new List<SPParameter>
                 {
@@ -32,7 +32,7 @@ namespace Persistance
             return visibilities[0];
         }
 
-        public static List<Visibilidad> GetAllVisibilityByParameters(VisibilidadFilters filters)
+        public static List<Visibilidad> GetAllByParameters(VisibilidadFilters filters)
         {
             var param = new List<SPParameter>
                 {
@@ -47,7 +47,7 @@ namespace Persistance
             return sp.ExecuteReader<Visibilidad>();
         }
 
-        public static List<Visibilidad> GetAllVisibilityByParametersLike(VisibilidadFilters filters)
+        public static List<Visibilidad> GetAllByParametersLike(VisibilidadFilters filters)
         {
             var param = new List<SPParameter>
                 {
@@ -62,7 +62,7 @@ namespace Persistance
             return sp.ExecuteReader<Visibilidad>();
         }
 
-        public static int InsertVisibility(Visibilidad visibility)
+        public static int Insert(Visibilidad visibility)
         {
             var param = new List<SPParameter>
                 { 
@@ -78,7 +78,7 @@ namespace Persistance
             return sp.ExecuteNonQuery(null);
         }
 
-        public static int UpdateVisibility(Visibilidad visibility)
+        public static int Update(Visibilidad visibility)
         {
             var param = new List<SPParameter>
                 { 

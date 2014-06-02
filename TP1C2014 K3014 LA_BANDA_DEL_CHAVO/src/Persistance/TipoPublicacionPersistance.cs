@@ -14,9 +14,9 @@ namespace Persistance
             return sp.ExecuteReader<TipoPublicacion>();
         }
 
-        public static TipoPublicacion GetPublicationTypeById(int idTypePublication)
+        public static TipoPublicacion GetById(int publicationTypeId)
         {
-            var param = new List<SPParameter> { new SPParameter("ID_Tipo_Publicacion", idTypePublication) };
+            var param = new List<SPParameter> { new SPParameter("ID_Tipo_Publicacion", publicationTypeId) };
             var sp = new StoreProcedure(DataBaseConst.TipoPublicacion.SPGetAllTipoPublicacionById, param);
 
             var typesPublication = sp.ExecuteReader<TipoPublicacion>();

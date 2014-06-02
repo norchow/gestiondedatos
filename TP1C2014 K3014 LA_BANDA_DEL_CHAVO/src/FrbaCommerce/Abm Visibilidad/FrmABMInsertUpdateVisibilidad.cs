@@ -88,7 +88,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                 if (insertMode)
                 {
                     var filters = new VisibilidadFilters { Descripcion = TxtDescripcion.Text };
-                    if (VisibilidadPersistance.GetAllVisibilityByParameters(filters) != null)
+                    if (VisibilidadPersistance.GetAllByParameters(filters) != null)
                         throw new Exception("Ya existe una visibilidad con la descripcion informada.");
 
                     #region Insert the new visibility
@@ -103,7 +103,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                     var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar la nueva visibilidad?", "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
-                        if (VisibilidadPersistance.InsertVisibility(visibility) == 1)
+                        if (VisibilidadPersistance.Insert(visibility) == 1)
                         {
                             MessageBox.Show("Se inserto satisfactoriamente la nueva visibilidad", "Atencion");
                             CompleteAction = true;
@@ -126,7 +126,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar la visibilidad {0}?", CurrentVisibility.Descripcion), "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
-                        if (VisibilidadPersistance.UpdateVisibility(CurrentVisibility) == 1)
+                        if (VisibilidadPersistance.Update(CurrentVisibility) == 1)
                         {
                             MessageBox.Show("Se modifico satisfactoriamente la visibilidad", "Atencion");
                             CompleteAction = true;

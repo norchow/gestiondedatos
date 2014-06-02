@@ -77,7 +77,7 @@ namespace FrbaCommerce.ABM_Rol
                     var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar el nuevo rol?", "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
-                        RolPersistance.InsertRolAndFeatures(role);
+                        RolPersistance.InsertRoleAndFeatures(role);
                         CompleteAction = true;
                         Close();
                     }

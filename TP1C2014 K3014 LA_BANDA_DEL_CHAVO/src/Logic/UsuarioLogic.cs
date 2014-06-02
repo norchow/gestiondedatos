@@ -10,7 +10,7 @@ namespace Logic
     {
         public Usuario Login(string userName, string password)
         {
-            var usuario = UsuarioPersistance.GetUserByUsername(userName);
+            var usuario = UsuarioPersistance.GetByUsername(userName);
 
             if (usuario == null)
                 throw new Exception("El nombre de usuario ingresado no existe.");

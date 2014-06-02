@@ -51,7 +51,7 @@ namespace Persistance
             return sp.ExecuteReader<Rol>();
         }
 
-        public static Rol InsertRole(Rol role, SqlTransaction transaction)
+        public static Rol Insert(Rol role, SqlTransaction transaction)
         {
             var param = new List<SPParameter>
                 {
@@ -68,7 +68,7 @@ namespace Persistance
             return role;
         } 
 
-        public static void InsertRolAndFeatures(Rol role)
+        public static void InsertRoleAndFeatures(Rol role)
         {
             /* Lo tengo que hacer transaccionado ya que no quiero que pueda llegar a quedar un rol insertado
             sin las funcionalidades asociadas debido a un error */
@@ -76,7 +76,7 @@ namespace Persistance
             {
                 try
                 {
-                    role = InsertRole(role, transaction);
+                    role = Insert(role, transaction);
                     FuncionalidadPersistance.InsertByRole(role, transaction);
 
                     transaction.Commit();
@@ -97,7 +97,7 @@ namespace Persistance
             {
                 try
                 {
-                    UpdateRole(role, transaction);
+                    Update(role, transaction);
 
                     if (FuncionalidadPersistance.DeleteByRole(role, transaction) > 0)
                         if (FuncionalidadPersistance.InsertByRole(role, transaction) > 0)
@@ -118,7 +118,7 @@ namespace Persistance
             }
         }
 
-        public static int UpdateRole(Rol role, SqlTransaction transaction)
+        public static int Update(Rol role, SqlTransaction transaction)
         {
             var param = new List<SPParameter>
                 {

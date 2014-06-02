@@ -134,7 +134,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                     if (dialogAnswer == DialogResult.Yes)
                     {
                         selectedVisibility.Activo = false;
-                        VisibilidadPersistance.UpdateVisibility(selectedVisibility);
+                        VisibilidadPersistance.Update(selectedVisibility);
 
                         RefreshSources(null);
                     }
@@ -205,7 +205,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                     Duracion = (!TypesHelper.IsEmpty(TxtDuracion.Text)) ? Convert.ToInt32(TxtDuracion.Text) : (int?)null
                 };
 
-                var visibilities = (ChkBusquedaExacta.Checked) ? VisibilidadPersistance.GetAllVisibilityByParameters(filters) : VisibilidadPersistance.GetAllVisibilityByParametersLike(filters);
+                var visibilities = (ChkBusquedaExacta.Checked) ? VisibilidadPersistance.GetAllByParameters(filters) : VisibilidadPersistance.GetAllByParametersLike(filters);
 
                 if (visibilities == null || visibilities.Count == 0)
                     throw new Exception("No se encontraron visibilidades según los filtros informados.");

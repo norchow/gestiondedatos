@@ -72,10 +72,10 @@ namespace Persistance.Entities
 
         public void GetObjectsById()
         {
-            UsuarioCreador = UsuarioPersistance.GetUserById(_usuarioCreador);
-            Visibilidad = VisibilidadPersistance.GetVisibilityById(_visibilidad);
-            EstadoPublicacion = EstadoPublicacionPersistance.GetPublicationStatusById(_estadoPublicacion);
-            TipoPublicacion = TipoPublicacionPersistance.GetPublicationTypeById(_tipoPublicacion);
+            UsuarioCreador = UsuarioPersistance.GetById(_usuarioCreador);
+            Visibilidad = VisibilidadPersistance.GetById(_visibilidad);
+            EstadoPublicacion = EstadoPublicacionPersistance.GetById(_estadoPublicacion);
+            TipoPublicacion = TipoPublicacionPersistance.GetById(_tipoPublicacion);
             Rubros = RubroPersistance.GetByPublicationId(ID);
         }
     }

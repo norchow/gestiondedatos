@@ -14,7 +14,7 @@ namespace Persistance
             return sp.ExecuteReader<EstadoPublicacion>();
         }
 
-        public static EstadoPublicacion GetPublicationStatusById(int idStatusPublication)
+        public static EstadoPublicacion GetById(int idStatusPublication)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Estado_Publicacion", idStatusPublication) };
             var sp = new StoreProcedure(DataBaseConst.EstadoPublicacion.SPGetAllEstadoPublicacionById, param);
