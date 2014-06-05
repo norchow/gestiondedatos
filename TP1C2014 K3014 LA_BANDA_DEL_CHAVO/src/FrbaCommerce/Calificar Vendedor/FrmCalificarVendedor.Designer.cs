@@ -166,7 +166,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmCalificarVendedor";
             this.Text = "Calificar Vendedor";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.FrmCalificarVendedor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPublicaciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStar3)).EndInit();

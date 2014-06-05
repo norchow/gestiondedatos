@@ -9,13 +9,15 @@ using System.Windows.Forms;
 using Persistance.Entities;
 using Persistance;
 using Session;
+using FrbaCommerce.Properties;
 
 namespace FrbaCommerce.Calificar_Vendedor
 {
     public partial class FrmCalificarVendedor : Form
     {
         private int calification;
-        private List<PublicacionNotCalified> _publicacionNotCalified = new List<PublicacionNotCalified>();
+        private List<PublicacionNotCalified> _publicationsNotCalified = new List<PublicacionNotCalified>();
+
         public FrmCalificarVendedor()
         {
             InitializeComponent();
@@ -28,25 +30,22 @@ namespace FrbaCommerce.Calificar_Vendedor
             dgvPublicaciones.Columns.Clear();
         }
 
-        private void RefreshSources(List<PublicacionNotCalified> publicacionNotCalified)        
+        private void RefreshSources(List<PublicacionNotCalified> publicationNotCalified)
         {
             ClearDataGridView();
-             var publicationNotCalifiedDictionary = new Dictionary<int, PublicacionNotCalified>();
+            var publicationNotCalifiedDictionary = new Dictionary<int, PublicacionNotCalified>();
 
-
-             if (publicacionNotCalified == null)
+            if (publicationNotCalified == null)
             {
-                //The datasource must be all the visibilities records stored in the database
-                Usuario myUser = SessionManager.CurrentUser;
-                _publicacionNotCalified =  CalificacionesPersistance.GetAllPubicacionNotCalified(myUser);
-                publicationNotCalifiedDictionary = _publicacionNotCalified.ToDictionary(a => a.ID, a => a); ;
+                //The datasource must be all the publications not calified records stored in the database
+                _publicationsNotCalified = CalificacionesPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
+                publicationNotCalifiedDictionary = _publicationsNotCalified.ToDictionary(a => a.ID, a => a); ;
             }
             else
             {
-                //The datasource must be the list of visibilities received as parameter
-                publicationNotCalifiedDictionary = publicacionNotCalified.ToDictionary(a => a.ID, a => a);
+                //The datasource must be the list of publications not calified received as parameter
+                publicationNotCalifiedDictionary = publicationNotCalified.ToDictionary(a => a.ID, a => a);
             }
-
 
             var bind = publicationNotCalifiedDictionary.Values.Select(a => new
             {
@@ -55,7 +54,9 @@ namespace FrbaCommerce.Calificar_Vendedor
                 Precio = a.Precio,
                 Vendedor = a.NombreVendedor
             });
+
             dgvPublicaciones.DataSource = bind.ToList();
+            dgvPublicaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ShowStars();
         }
 
@@ -69,64 +70,61 @@ namespace FrbaCommerce.Calificar_Vendedor
             btnSend.Visible = true;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            RefreshSources(null);
-        }
-
         private Image getYellowStar()
         {
-            return FrbaCommerce.Properties.Resources.YellowStar;
+            return Resources.YellowStar;
         }
 
         private Image getWhiteStar()
         {
-            return FrbaCommerce.Properties.Resources.WhiteStar;
+            return Resources.WhiteStar;
         }
 
         private void drawStars(int calification)
         {
-                pbStar1.Image = getWhiteStar();
-                pbStar2.Image = getWhiteStar();
-                pbStar3.Image = getWhiteStar();
-                pbStar4.Image = getWhiteStar();
-                pbStar5.Image = getWhiteStar();
+            pbStar1.Image = getWhiteStar();
+            pbStar2.Image = getWhiteStar();
+            pbStar3.Image = getWhiteStar();
+            pbStar4.Image = getWhiteStar();
+            pbStar5.Image = getWhiteStar();
 
-                switch (calification)
-	            {
-                    case 1: 
-                        pbStar1.Image = getYellowStar();
-                        break;
-                    case 2:
-                        pbStar1.Image = getYellowStar();
-                        pbStar2.Image = getYellowStar();
-                        break;
-                    case 3:
-                        pbStar1.Image = getYellowStar();
-                        pbStar2.Image = getYellowStar();
-                        pbStar3.Image = getYellowStar();
-                        break;
-                    case 4:
-                        pbStar1.Image = getYellowStar();
-                        pbStar2.Image = getYellowStar();
-                        pbStar3.Image = getYellowStar();
-                        pbStar4.Image = getYellowStar();
-                        break;
-                    case 5:
-                        pbStar1.Image = getYellowStar();
-                        pbStar2.Image = getYellowStar();
-                        pbStar3.Image = getYellowStar();
-                        pbStar4.Image = getYellowStar();
-                        pbStar5.Image = getYellowStar();
-                        break;
-		            default:
-                        break;
-	            }
+            switch (calification)
+            {
+                case 1:
+                    pbStar1.Image = getYellowStar();
+                    break;
 
-                if (calification > 0)
-                {
-                    btnSend.Enabled = true;
-                }
+                case 2:
+                    pbStar1.Image = getYellowStar();
+                    pbStar2.Image = getYellowStar();
+                    break;
+
+                case 3:
+                    pbStar1.Image = getYellowStar();
+                    pbStar2.Image = getYellowStar();
+                    pbStar3.Image = getYellowStar();
+                    break;
+
+                case 4:
+                    pbStar1.Image = getYellowStar();
+                    pbStar2.Image = getYellowStar();
+                    pbStar3.Image = getYellowStar();
+                    pbStar4.Image = getYellowStar();
+                    break;
+
+                case 5:
+                    pbStar1.Image = getYellowStar();
+                    pbStar2.Image = getYellowStar();
+                    pbStar3.Image = getYellowStar();
+                    pbStar4.Image = getYellowStar();
+                    pbStar5.Image = getYellowStar();
+                    break;
+
+                default:
+                    break;
+            }
+
+            btnSend.Enabled = calification > 0;
         }
 
         private void pbStar1_MouseHover(object sender, EventArgs e)
@@ -202,6 +200,11 @@ namespace FrbaCommerce.Calificar_Vendedor
         private void pbStar5_Click(object sender, EventArgs e)
         {
             calification = 5;
+        }
+
+        private void FrmCalificarVendedor_Load(object sender, EventArgs e)
+        {
+            RefreshSources(null);
         }
     }
 }
