@@ -10,6 +10,7 @@ using FrbaCommerce.Calificar_Vendedor;
 using FrbaCommerce.ABM_Rol;
 using FrbaCommerce.Abm_Visibilidad;
 
+
 namespace FrbaCommerce.Home
 {
     public partial class FrmHome : Form
@@ -29,6 +30,12 @@ namespace FrbaCommerce.Home
         {
             var frmABMVisibilidades = new FrmABMVisibilidad();
             frmABMVisibilidades.ShowDialog();
+        }
+
+        private void calificarVendedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmCalificarVendedor = new FrmCalificarVendedor();
+            frmCalificarVendedor.ShowDialog();
         }
     }
 }

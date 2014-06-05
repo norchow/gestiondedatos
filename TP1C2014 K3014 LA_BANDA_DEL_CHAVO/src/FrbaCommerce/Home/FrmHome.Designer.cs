@@ -32,13 +32,16 @@
             this.holaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionDeRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionDeVisibilidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.juliaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calificarVendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsHome.SuspendLayout();
             this.SuspendLayout();
             // 
             // MsHome
             // 
             this.MsHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.holaToolStripMenuItem});
+            this.holaToolStripMenuItem,
+            this.juliaToolStripMenuItem});
             this.MsHome.Location = new System.Drawing.Point(0, 0);
             this.MsHome.Name = "MsHome";
             this.MsHome.Size = new System.Drawing.Size(671, 24);
@@ -68,6 +71,21 @@
             this.administracionDeVisibilidadesToolStripMenuItem.Text = "Administracion de visibilidades";
             this.administracionDeVisibilidadesToolStripMenuItem.Click += new System.EventHandler(this.administracionDeVisibilidadesToolStripMenuItem_Click);
             // 
+            // juliaToolStripMenuItem
+            // 
+            this.juliaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.calificarVendedorToolStripMenuItem});
+            this.juliaToolStripMenuItem.Name = "juliaToolStripMenuItem";
+            this.juliaToolStripMenuItem.Size = new System.Drawing.Size(175, 20);
+            this.juliaToolStripMenuItem.Text = "Julian Fuks (no me lo saquen)";
+            // 
+            // calificarVendedorToolStripMenuItem
+            // 
+            this.calificarVendedorToolStripMenuItem.Name = "calificarVendedorToolStripMenuItem";
+            this.calificarVendedorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.calificarVendedorToolStripMenuItem.Text = "Calificar Vendedor";
+            this.calificarVendedorToolStripMenuItem.Click += new System.EventHandler(this.calificarVendedorToolStripMenuItem_Click);
+            // 
             // FrmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -90,6 +108,8 @@
         private System.Windows.Forms.ToolStripMenuItem holaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administracionDeRolesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administracionDeVisibilidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem juliaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calificarVendedorToolStripMenuItem;
 
 
     }

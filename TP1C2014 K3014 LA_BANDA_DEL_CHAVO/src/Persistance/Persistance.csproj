@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalificacionesPersistance.cs" />
+    <Compile Include="Entities\Calificacion.cs" />
+    <Compile Include="Entities\PublicacionNotCalified.cs" />
     <Compile Include="Entities\DataBaseManager.cs" />
     <Compile Include="Entities\DataBaseQueries.cs" />
     <Compile Include="Entities\EstadoPublicacion.cs" />

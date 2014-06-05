@@ -6,21 +6,72 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Persistance.Entities;
+using Persistance;
+using Session;
 
 namespace FrbaCommerce.Calificar_Vendedor
 {
     public partial class FrmCalificarVendedor : Form
     {
         private int calification;
+        private List<PublicacionNotCalified> _publicacionNotCalified = new List<PublicacionNotCalified>();
         public FrmCalificarVendedor()
         {
             InitializeComponent();
             calification = 0;
         }
 
+        private void ClearDataGridView()
+        {
+            dgvPublicaciones.DataSource = null;
+            dgvPublicaciones.Columns.Clear();
+        }
+
+        private void RefreshSources(List<PublicacionNotCalified> publicacionNotCalified)        
+        {
+            ClearDataGridView();
+             var publicationNotCalifiedDictionary = new Dictionary<int, PublicacionNotCalified>();
+
+
+             if (publicacionNotCalified == null)
+            {
+                //The datasource must be all the visibilities records stored in the database
+                Usuario myUser = SessionManager.CurrentUser;
+                _publicacionNotCalified =  CalificacionesPersistance.GetAllPubicacionNotCalified(myUser);
+                publicationNotCalifiedDictionary = _publicacionNotCalified.ToDictionary(a => a.ID, a => a); ;
+            }
+            else
+            {
+                //The datasource must be the list of visibilities received as parameter
+                publicationNotCalifiedDictionary = publicacionNotCalified.ToDictionary(a => a.ID, a => a);
+            }
+
+
+            var bind = publicationNotCalifiedDictionary.Values.Select(a => new
+            {
+                Codigo = a.ID,
+                Descripcion = a.Descripcion,
+                Precio = a.Precio,
+                Vendedor = a.NombreVendedor
+            });
+            dgvPublicaciones.DataSource = bind.ToList();
+            ShowStars();
+        }
+
+        private void ShowStars()
+        {
+            pbStar1.Visible = true;
+            pbStar2.Visible = true;
+            pbStar3.Visible = true;
+            pbStar4.Visible = true;
+            pbStar5.Visible = true;
+            btnSend.Visible = true;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            RefreshSources(null);
         }
 
         private Image getYellowStar()
@@ -70,7 +121,12 @@ namespace FrbaCommerce.Calificar_Vendedor
                         break;
 		            default:
                         break;
-	            } 
+	            }
+
+                if (calification > 0)
+                {
+                    btnSend.Enabled = true;
+                }
         }
 
         private void pbStar1_MouseHover(object sender, EventArgs e)
