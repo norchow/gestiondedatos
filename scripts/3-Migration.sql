@@ -135,6 +135,9 @@ BEGIN TRANSACTION
 COMMIT
 
 BEGIN TRANSACTION
+
+	SET IDENTITY_INSERT LA_BANDA_DEL_CHAVO.TL_Calificacion ON
+
 	INSERT INTO LA_BANDA_DEL_CHAVO.TL_Calificacion (Codigo_Calificacion, ID_Publicacion, ID_Comprador, Cantidad_Estrellas, Descripcion) (
 		SELECT [Calificacion_Codigo],
 			   [Publicacion_Cod],
@@ -143,6 +146,11 @@ BEGIN TRANSACTION
 		       [Calificacion_Descripcion]
 		FROM gd_esquema.Maestra
 		WHERE [Calificacion_Codigo] IS NOT NULL)
+		
+	SET IDENTITY_INSERT LA_BANDA_DEL_CHAVO.TL_Calificacion OFF
+
+	DECLARE @maxIdCalificacion numeric(18,0);
+	SELECT @maxIdCalificacion = MAX(Calificacion_Codigo) FROM gd_esquema.Maestra DBCC CHECKIDENT ('LA_BANDA_DEL_CHAVO.TL_Calificacion', RESEED, @maxIdCalificacion);
 COMMIT
 
 BEGIN TRANSACTION 
