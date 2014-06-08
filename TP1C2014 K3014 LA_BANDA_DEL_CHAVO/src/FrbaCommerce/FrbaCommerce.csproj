@@ -126,11 +126,11 @@
     <Compile Include="Gestion de Preguntas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Historial Cliente\Form1.cs">
+    <Compile Include="Historial Cliente\FrmHistorialCliemte.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Historial Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Historial Cliente\FrmHistorialCliemte.Designer.cs">
+      <DependentUpon>FrmHistorialCliemte.cs</DependentUpon>
     </Compile>
     <Compile Include="Home\FrmHome.cs">
       <SubType>Form</SubType>

@@ -16,6 +16,7 @@ namespace FrbaCommerce.Calificar_Vendedor
     public partial class FrmCalificarVendedor : Form
     {
         private int calification;
+        private int publicationSelected;
         private List<PublicacionNotCalified> _publicationsNotCalified = new List<PublicacionNotCalified>();
 
         public FrmCalificarVendedor()
@@ -67,7 +68,7 @@ namespace FrbaCommerce.Calificar_Vendedor
             pbStar3.Visible = true;
             pbStar4.Visible = true;
             pbStar5.Visible = true;
-            btnSend.Visible = true;
+            lblCalificar.Visible = true;
         }
 
         private Image getYellowStar()
@@ -124,7 +125,6 @@ namespace FrbaCommerce.Calificar_Vendedor
                     break;
             }
 
-            btnSend.Enabled = calification > 0;
         }
 
         private void pbStar1_MouseHover(object sender, EventArgs e)
@@ -205,6 +205,91 @@ namespace FrbaCommerce.Calificar_Vendedor
         private void FrmCalificarVendedor_Load(object sender, EventArgs e)
         {
             RefreshSources(null);
+        }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LblBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LblLimpiar_Click(object sender, EventArgs e)
+        {
+            txtCodigo.Text = "";
+            txtDesc.Text = "";
+            txtPrecio.Text = "";
+            txtVendedir.Text = "";
+            RefreshSources(null);
+        }
+
+        private void LblBuscar_Click_1(object sender, EventArgs e)
+        {
+            if (cBExact.Checked)
+            {
+                RefreshSources(null);
+            }
+            else
+            {
+                RefreshSources(null);
+            }
+        }
+
+        private void lblCalificar_Click(object sender, EventArgs e)
+        {
+            bool validations = true;
+            if (calification == 0)
+            {
+                validations = false;
+            }
+            if (txtDescripcion.Text == "")
+            {
+                validations = false;
+            }
+            if (publicationSelected == 0)
+            {
+                validations = false;
+            }
+            if (validations)
+            { 
+                Calificacion califObject = new Calificacion();
+                califObject.ID_Comprador = ((Usuario)SessionManager.CurrentUser).ID;
+                califObject.ID_Publicacion = publicationSelected;
+                califObject.stars = calification;
+                califObject.description = txtDescripcion.Text;
+                if (califObject.ID_Publicacion != 0)
+                {
+                    int califId = CalificacionesPersistance.InsertCalification(califObject);
+                    if (califId == 1)
+                    {
+                        RefreshSources(null);
+                        publicationSelected = 0;
+                        txtDescripcion.Text = "";
+                        calification = 0;
+                        drawStars(0);
+                    }
+                }
+                
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor, verifique Calificacion, Descripción y Publicacion seleccionada.", "Atencion");
+            }
+        }
+
+        private void LblListo_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void dgvPublicaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var publicationSelectedObject = _publicationsNotCalified.Find(publication => publication.ID == (int)dgvPublicaciones.Rows[e.RowIndex].Cells[0].Value);
+            publicationSelected = publicationSelectedObject.ID;
         }
     }
 }

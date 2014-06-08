@@ -68,5 +68,10 @@ namespace Persistance.Entities
             public static String SPGetAllByUserId = "LA_BANDA_DEL_CHAVO.GetAllPublicationByUserId";
             public static String SPGetNotCalifiedByClientId = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByCliente";
         }
+
+        public static class Calificacion
+        {
+            public static String SPInsertCalificacion = "LA_BANDA_DEL_CHAVO.InsertCalificacion";
+          }
     }
 }
