@@ -15,7 +15,7 @@
  COMMIT
 
  BEGIN TRANSACTION
-INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,Tipo_Documento,Nro_Documento,Mail,Telefono,Direccion,Codigo_Postal,Fecha_nacimiento)(
+INSERT INTO LA_BANDA_DEL_CHAVO.TL_Cliente (ID_Usuario,Nombre,Apellido,ID_Tipo_Documento,Nro_Documento,Mail,Telefono,Direccion,Codigo_Postal,Fecha_nacimiento)(
   SELECT DISTINCT 0
 	  ,LEFT([Publ_Cli_Nombre],1)+LOWER(SUBSTRING([Publ_Cli_Nombre],2,LEN([Publ_Cli_Nombre])))
 	  ,[Publ_Cli_Apeliido]

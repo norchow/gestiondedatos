@@ -88,7 +88,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Cliente](
 	[ID_Usuario] int NOT NULL,
 	[Nombre] nvarchar(255) NOT NULL,
 	[Apellido] nvarchar(255) NOT NULL,
-	[Tipo_Documento] nvarchar(255) NOT NULL,
+	[ID_Tipo_Documento] int NOT NULL,
 	[Nro_Documento] numeric(18,0) NOT NULL,
 	[Mail] nvarchar(255) NOT NULL,
 	[Telefono] nvarchar(255),

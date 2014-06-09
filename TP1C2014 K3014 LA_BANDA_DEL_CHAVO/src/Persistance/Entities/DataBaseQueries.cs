@@ -26,6 +26,7 @@ namespace Persistance.Entities
         {
             public static String SPGetUserByUsername = "LA_BANDA_DEL_CHAVO.GetUserByUsername";
             public static String SPGetUserById = "LA_BANDA_DEL_CHAVO.GetUserById";
+            public static String SPInsertUser = "LA_BANDA_DEL_CHAVO.InsertUser";
             public static String SPUpdateUser = "LA_BANDA_DEL_CHAVO.UpdateUser";
             public static String SPUpdatePassword = "LA_BANDA_DEL_CHAVO.UpdatePassword";
         }
@@ -75,6 +76,17 @@ namespace Persistance.Entities
             public static String SPGetNotCalifiedByClientId = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByCliente";
             public static String SPGetNotCalifiedByClientIdByParameters = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParameters";
             public static String SPGetNotCalifiedByClientIdByParametersLike = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParametersLike";
+        }
+
+        public static class TipoDocumento
+        {
+            public static String SPGetAllTipoDocumento = "LA_BANDA_DEL_CHAVO.GetAllTipoDocumento";
+        }
+        public static class Cliente
+        {
+            public static String SPGetClientByPhone = "LA_BANDA_DEL_CHAVO.GetClientByPhone";
+            public static String SPGetClientByDocument = "LA_BANDA_DEL_CHAVO.GetClientByDocument";
+            public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
         }
     }
 }

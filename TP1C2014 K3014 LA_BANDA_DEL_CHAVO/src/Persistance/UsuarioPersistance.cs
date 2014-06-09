@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Persistance.Entities;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Persistance
 {
@@ -55,5 +57,22 @@ namespace Persistance
 
             return users[0];
         }
+
+        public static Usuario InsertUser(Usuario user, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Username", user.Username), 
+                    new SPParameter("Password", user.Password)
+                };
+
+            var sp = (transaction != null)
+                        ? new StoreProcedure(DataBaseConst.Usuario.SPInsertUser, param, transaction)
+                        : new StoreProcedure(DataBaseConst.Usuario.SPInsertUser, param);
+
+            user.ID = (int)sp.ExecuteScalar(transaction);
+            
+            return user;
+        } 
     }
 }
