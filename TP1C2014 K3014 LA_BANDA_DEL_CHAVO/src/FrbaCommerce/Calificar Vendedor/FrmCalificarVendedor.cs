@@ -207,7 +207,7 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         private void FrmCalificarVendedor_Load(object sender, EventArgs e)
         {
-            RefreshSources(null);
+            ClearFiltersAndTable();
         }
 
         private void btnSend_Click(object sender, EventArgs e)
@@ -221,14 +221,18 @@ namespace FrbaCommerce.Calificar_Vendedor
         }
 
 
-
-        private void LblLimpiar_Click(object sender, EventArgs e)
+        private void ClearFiltersAndTable()
         {
             txtCodigo.Text = "";
             txtDesc.Text = "";
             txtPrecio.Text = "";
             txtVendedor.Text = "";
             RefreshSources(null);
+        }
+
+        private void LblLimpiar_Click(object sender, EventArgs e)
+        {
+            ClearFiltersAndTable();
         }
 
         private void LblBuscar_Click_1(object sender, EventArgs e)
@@ -276,7 +280,7 @@ namespace FrbaCommerce.Calificar_Vendedor
                 var filters = new PublicacionNotCalifiedFilters
                 {
                     Codigo = (!TypesHelper.IsEmpty(txtCodigo.Text)) ? Convert.ToInt32(txtCodigo.Text) : (int?) null,
-                    Descripcion = (!TypesHelper.IsEmpty(txtDescripcion.Text)) ? txtDescripcion.Text : null,
+                    Descripcion = (!TypesHelper.IsEmpty(txtDesc.Text)) ? txtDesc.Text : null,
                     Precio = (!TypesHelper.IsEmpty(txtPrecio.Text)) ? Convert.ToDouble(txtPrecio.Text) : (double?)null,
                     Vendedor = (!TypesHelper.IsEmpty(txtVendedor.Text)) ? txtVendedor.Text : null
                 };
@@ -284,13 +288,16 @@ namespace FrbaCommerce.Calificar_Vendedor
                 var pubNotCalified = (cBExact.Checked) ? CalificacionPersistance.GetAllPubicacionNotCalifiedByParameters(filters, SessionManager.CurrentUser) : CalificacionPersistance.GetAllPubicacionNotCalifiedByParametersLike(filters, SessionManager.CurrentUser);
 
                 if (pubNotCalified == null || pubNotCalified.Count == 0)
+                {
                     throw new Exception("No se encontraron publicaciones no calificadas según los filtros informados.");
-
+                    ClearFiltersAndTable();
+                }
                 RefreshSources(pubNotCalified);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Atención");
+                ClearFiltersAndTable();
             }
         }
 
@@ -321,13 +328,13 @@ namespace FrbaCommerce.Calificar_Vendedor
                     int califId = CalificacionPersistance.InsertCalification(califObject);
                     if (califId == 1)
                     {
-                        RefreshSources(null);
+                        ClearFiltersAndTable();
                         publicationSelected = 0;
                         txtDescripcion.Text = "";
                         calification = 0;
                         drawStars(0);
 
-                        MessageBox.Show("La publicación del vendedor fué calificada", "Éxito");
+                        MessageBox.Show("La publicación " + califObject.ID_Publicacion + " fué calificada con " + califObject.stars + " estrellas. Descripción: " + califObject.description, "Éxito");
                     }
                 }
                 
