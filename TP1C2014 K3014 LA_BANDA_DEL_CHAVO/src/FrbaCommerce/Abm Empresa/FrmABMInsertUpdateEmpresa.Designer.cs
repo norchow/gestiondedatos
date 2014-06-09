@@ -207,6 +207,7 @@
             this.LblCancelar.TabIndex = 58;
             this.LblCancelar.Text = "CANCELAR";
             this.LblCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblCancelar.Click += new System.EventHandler(this.LblCancelar_Click);
             // 
             // LblGrabar
             // 
@@ -220,6 +221,7 @@
             this.LblGrabar.TabIndex = 57;
             this.LblGrabar.Text = "GRABAR";
             this.LblGrabar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblGrabar.Click += new System.EventHandler(this.LblGrabar_Click);
             // 
             // FrmABMInsertUpdateEmpresa
             // 

@@ -13,6 +13,7 @@ namespace Persistance.Entities
         public static class Rol
         {
             public static String SPGetAllRol = "LA_BANDA_DEL_CHAVO.GetAllRol";
+            public static String SPGetAllRolNotAdmin = "LA_BANDA_DEL_CHAVO.GetAllRolNotAdmin";
             public static String SPGetRolByName = "LA_BANDA_DEL_CHAVO.GetRolByName";
             public static String SPGetAllRolByUser = "LA_BANDA_DEL_CHAVO.GetAllRolByUser";
             public static String SPGetAllRolByNameLike = "LA_BANDA_DEL_CHAVO.GetAllRolByNameLike";
@@ -82,11 +83,19 @@ namespace Persistance.Entities
         {
             public static String SPGetAllTipoDocumento = "LA_BANDA_DEL_CHAVO.GetAllTipoDocumento";
         }
+
         public static class Cliente
         {
             public static String SPGetClientByPhone = "LA_BANDA_DEL_CHAVO.GetClientByPhone";
             public static String SPGetClientByDocument = "LA_BANDA_DEL_CHAVO.GetClientByDocument";
             public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
+        }
+
+        public static class Empresa
+        {
+            public static String SPGetCompanyByBusinessName = "LA_BANDA_DEL_CHAVO.GetCompanyByBusinessName";
+            public static String SPGetCompanyByCUIT = "LA_BANDA_DEL_CHAVO.GetCompanyByCUIT";
+            public static String SPInsertCompany = "LA_BANDA_DEL_CHAVO.InsertCompany";
         }
     }
 }

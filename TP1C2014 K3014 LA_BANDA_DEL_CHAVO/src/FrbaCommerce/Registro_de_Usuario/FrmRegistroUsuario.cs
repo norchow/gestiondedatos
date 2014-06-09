@@ -29,7 +29,7 @@ namespace FrbaCommerce.Registro_de_Usuario
         {
             CboRoles.DisplayMember = "Descripcion";
             CboRoles.ValueMember = "ID_Rol";
-            CboRoles.DataSource = RolPersistance.GetAll();
+            CboRoles.DataSource = RolPersistance.GetAllNotAdmin();
         }
 
         private void CboRoles_SelectedIndexChanged(object sender, EventArgs e)

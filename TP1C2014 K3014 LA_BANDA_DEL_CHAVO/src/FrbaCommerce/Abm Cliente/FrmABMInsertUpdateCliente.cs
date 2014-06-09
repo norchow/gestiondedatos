@@ -80,7 +80,7 @@ namespace FrbaCommerce.Abm_Cliente
                     exceptionMessage += "El código postal del cliente no puede ser vacío.\n";
 
                 if (string.IsNullOrEmpty(TxtCuil.Text))
-                    exceptionMessage += "El CUIL postal del cliente no puede ser vacío.\n";
+                    exceptionMessage += "El CUIL del cliente no puede ser vacío.\n";
 
                 if (!string.IsNullOrEmpty(exceptionMessage))
                     throw new Exception(exceptionMessage);

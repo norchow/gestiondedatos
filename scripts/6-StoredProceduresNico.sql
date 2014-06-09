@@ -89,3 +89,78 @@ BEGIN
       ,@CUIL)
 END
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllRolNotAdmin]
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT *
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Rol]
+	WHERE [Descripcion] <> 'Administrativo'
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetCompanyByBusinessName]
+	@Razon_Social nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa]
+	WHERE [Razon_Social] = @Razon_Social
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetCompanyByCUIT]
+	@CUIT nvarchar(50)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa]
+	WHERE [CUIT] = @CUIT
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertCompany]
+	@ID_Usuario int 
+      ,@Razon_Social nvarchar(255)
+      ,@Mail nvarchar(255)
+      ,@Telefono nvarchar(255)
+      ,@Direccion nvarchar(255)
+      ,@Codigo_Postal nvarchar(255)
+      ,@Ciudad nvarchar(255)
+      ,@CUIT nvarchar(50)
+      ,@Nombre_Contacto nvarchar(255)
+      ,@Fecha_Creacion datetime
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Empresa] ([ID_Usuario]
+      ,[Razon_Social]
+      ,[Mail]
+      ,[Telefono]
+      ,[Direccion]
+      ,[Codigo_Postal]
+      ,[Ciudad]
+      ,[CUIT]
+      ,[Nombre_Contacto]
+      ,[Fecha_Creacion])
+	OUTPUT inserted.ID_Empresa
+	VALUES (@ID_Usuario
+      ,@Razon_Social
+      ,@Mail
+      ,@Telefono
+      ,@Direccion
+      ,@Codigo_Postal
+      ,@Ciudad
+      ,@CUIT
+      ,@Nombre_Contacto
+      ,@Fecha_Creacion)
+END
+GO

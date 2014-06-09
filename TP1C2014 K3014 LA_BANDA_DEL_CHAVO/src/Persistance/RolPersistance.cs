@@ -14,6 +14,12 @@ namespace Persistance
             return sp.ExecuteReader<Rol>();
         }
 
+        public static List<Rol> GetAllNotAdmin()
+        {
+            var sp = new StoreProcedure(DataBaseConst.Rol.SPGetAllRolNotAdmin);
+            return sp.ExecuteReader<Rol>();
+        }
+
         public static List<Rol> GetByUser(Usuario user)
         {
             var param = new List<SPParameter> { new SPParameter("ID_User", user.ID) };

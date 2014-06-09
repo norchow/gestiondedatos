@@ -1,3 +1,1 @@
 -UsuarioLogic login debería ser estático.
--Las entities no deberían estar en persistance, pasarlas a logic o ver como armamos la arquitectura.
--Revisar arquitectura entre todos. DEMASIADOS proyectos de más, no suman.
