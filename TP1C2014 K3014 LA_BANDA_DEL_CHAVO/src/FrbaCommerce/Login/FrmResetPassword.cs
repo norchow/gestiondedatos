@@ -8,15 +8,25 @@ using System.Text;
 using System.Windows.Forms;
 using Tools;
 using Persistance;
+using Persistance.Entities;
 using Session;
 
 namespace FrbaCommerce.Login
 {
     public partial class FrmResetPassword : Form
     {
+        public Usuario currentUser { get; set; }
+ 
         public FrmResetPassword()
         {
             InitializeComponent();
+            this.currentUser = SessionManager.CurrentUser;
+        }
+
+        public FrmResetPassword(Usuario user)
+        {
+            InitializeComponent();
+            this.currentUser = user;
         }
 
         private void LblAceptar_Click(object sender, EventArgs e)
@@ -29,11 +39,16 @@ namespace FrbaCommerce.Login
             {
                 var hashedPassword = SHA256Helper.Encode(TxtContrasena.Text);
 
-                UsuarioPersistance.ChangePassword(SessionManager.CurrentUser, hashedPassword);
-                SessionManager.CurrentUser = UsuarioPersistance.GetByUsername(SessionManager.CurrentUser.Username);
+                UsuarioPersistance.ChangePassword(this.currentUser, hashedPassword);
+                this.currentUser = UsuarioPersistance.GetByUsername(this.currentUser.Username);
                 
                 Close();
             }
+        }
+
+        private void FrmResetPassword_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

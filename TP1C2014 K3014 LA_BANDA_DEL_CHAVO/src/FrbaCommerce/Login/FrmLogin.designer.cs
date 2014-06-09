@@ -79,6 +79,7 @@
             this.LblNuevo.TabIndex = 3;
             this.LblNuevo.Text = "REGISTRARME";
             this.LblNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblNuevo.Click += new System.EventHandler(this.LblNuevo_Click);
             // 
             // label2
             // 

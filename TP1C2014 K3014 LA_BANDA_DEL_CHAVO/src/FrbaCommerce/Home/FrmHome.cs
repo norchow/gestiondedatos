@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FrbaCommerce.Calificar_Vendedor;
 using FrbaCommerce.ABM_Rol;
 using FrbaCommerce.Abm_Visibilidad;
+using FrbaCommerce.Registro_de_Usuario;
 
 
 namespace FrbaCommerce.Home
@@ -36,6 +37,12 @@ namespace FrbaCommerce.Home
         {
             var frmCalificarVendedor = new FrmCalificarVendedor();
             frmCalificarVendedor.ShowDialog();
+        }
+
+        private void administracionDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmAdministrarUsuarios = new FrmAdministrarUsuarios();
+            frmAdministrarUsuarios.ShowDialog();
         }
     }
 }

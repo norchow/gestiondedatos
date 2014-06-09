@@ -7,6 +7,12 @@ namespace Persistance
 {
     public static class UsuarioPersistance
     {
+        public static List<Usuario> GetAll()
+        {
+            var sp = new StoreProcedure(DataBaseConst.Usuario.SPGetAllUsuario);
+            return sp.ExecuteReader<Usuario>();
+        }
+
         public static Usuario GetByUsername(string userName)
         {
             var param = new List<SPParameter> { new SPParameter("Username", userName) };
@@ -45,7 +51,7 @@ namespace Persistance
             sp.ExecuteNonQuery(null);
         }
 
-        public static Usuario GetById(string idUser)
+        public static Usuario GetById(int idUser)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Usuario", idUser) };
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPGetUserById, param);

@@ -25,6 +25,7 @@ namespace Persistance.Entities
 
         public static class Usuario
         {
+            public static String SPGetAllUsuario = "LA_BANDA_DEL_CHAVO.GetAllUsuario";
             public static String SPGetUserByUsername = "LA_BANDA_DEL_CHAVO.GetUserByUsername";
             public static String SPGetUserById = "LA_BANDA_DEL_CHAVO.GetUserById";
             public static String SPInsertUser = "LA_BANDA_DEL_CHAVO.InsertUser";
