@@ -41,7 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cBExact = new System.Windows.Forms.CheckBox();
-            this.txtVendedir = new System.Windows.Forms.TextBox();
+            this.txtVendedor = new System.Windows.Forms.TextBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtDesc = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -199,7 +199,7 @@
             this.groupBox1.Controls.Add(this.LblLimpiar);
             this.groupBox1.Controls.Add(this.LblBuscar);
             this.groupBox1.Controls.Add(this.cBExact);
-            this.groupBox1.Controls.Add(this.txtVendedir);
+            this.groupBox1.Controls.Add(this.txtVendedor);
             this.groupBox1.Controls.Add(this.txtPrecio);
             this.groupBox1.Controls.Add(this.txtDesc);
             this.groupBox1.Controls.Add(this.txtCodigo);
@@ -224,12 +224,12 @@
             this.cBExact.Text = "BUSQUEDA EXACTA";
             this.cBExact.UseVisualStyleBackColor = true;
             // 
-            // txtVendedir
+            // txtVendedor
             // 
-            this.txtVendedir.Location = new System.Drawing.Point(256, 46);
-            this.txtVendedir.Name = "txtVendedir";
-            this.txtVendedir.Size = new System.Drawing.Size(74, 20);
-            this.txtVendedir.TabIndex = 16;
+            this.txtVendedor.Location = new System.Drawing.Point(256, 46);
+            this.txtVendedor.Name = "txtVendedor";
+            this.txtVendedor.Size = new System.Drawing.Size(74, 20);
+            this.txtVendedor.TabIndex = 16;
             // 
             // txtPrecio
             // 
@@ -373,7 +373,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.CheckBox cBExact;
-        private System.Windows.Forms.TextBox txtVendedir;
+        private System.Windows.Forms.TextBox txtVendedor;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.Label LblLimpiar;

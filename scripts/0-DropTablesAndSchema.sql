@@ -58,6 +58,8 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[DeleteRubroByPublicacion];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdatePublicacion];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertCalificacion];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByCliente];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParametersLike];
 
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];

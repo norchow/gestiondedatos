@@ -66,12 +66,15 @@ namespace Persistance.Entities
             public static String SPInsert = "LA_BANDA_DEL_CHAVO.InsertPublicacion";
             public static String SPUpdate = "LA_BANDA_DEL_CHAVO.UpdatePublicacion";
             public static String SPGetAllByUserId = "LA_BANDA_DEL_CHAVO.GetAllPublicationByUserId";
-            public static String SPGetNotCalifiedByClientId = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByCliente";
+            
         }
 
         public static class Calificacion
         {
             public static String SPInsertCalificacion = "LA_BANDA_DEL_CHAVO.InsertCalificacion";
-          }
+            public static String SPGetNotCalifiedByClientId = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByCliente";
+            public static String SPGetNotCalifiedByClientIdByParameters = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParameters";
+            public static String SPGetNotCalifiedByClientIdByParametersLike = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParametersLike";
+        }
     }
 }

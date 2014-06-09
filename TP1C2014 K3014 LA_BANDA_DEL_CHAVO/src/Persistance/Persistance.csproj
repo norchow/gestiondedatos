@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalificacionesPersistance.cs" />
+    <Compile Include="CalificacionPersistance.cs" />
     <Compile Include="Entities\Calificacion.cs" />
     <Compile Include="Entities\PublicacionNotCalified.cs" />
     <Compile Include="Entities\DataBaseManager.cs" />
