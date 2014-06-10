@@ -1,0 +1,18 @@
+USE [GD1C2014]
+GO
+
+/****** Object:  StoredProcedure [LA_BANDA_DEL_CHAVO].[[GetAllFormaPago]]    Script Date: 06/09/2014 02:43:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllFormaPago]
+AS
+BEGIN
+	SELECT *
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago]
+END
+
+GO

@@ -76,5 +76,11 @@ namespace Persistance.Entities
             public static String SPGetNotCalifiedByClientIdByParameters = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParameters";
             public static String SPGetNotCalifiedByClientIdByParametersLike = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParametersLike";
         }
+
+        public static class FormaPago
+        {
+            public static String SPGetAllFormaPago = "LA_BANDA_DEL_CHAVO.GetAllFormaPago";
+            public static String SPGetAllFormaPagoById = "LA_BANDA_DEL_CHAVO.GetAllFormaPagoById";
+        }
     }
 }

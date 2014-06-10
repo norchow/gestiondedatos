@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CalificacionPersistance.cs" />
     <Compile Include="Entities\Calificacion.cs" />
+    <Compile Include="Entities\FormaPago.cs" />
     <Compile Include="Entities\PublicacionNotCalified.cs" />
     <Compile Include="Entities\DataBaseManager.cs" />
     <Compile Include="Entities\DataBaseQueries.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Visibilidad.cs" />
     <Compile Include="EstadoPublicacionPersistance.cs" />
+    <Compile Include="FormaPagoPersistance.cs" />
     <Compile Include="FuncionalidadPersistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicacionPersistance.cs" />

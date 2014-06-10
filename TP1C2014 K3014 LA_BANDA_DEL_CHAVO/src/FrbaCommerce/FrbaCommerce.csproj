@@ -108,11 +108,11 @@
     <Compile Include="Editar Publicacion\FrmMisPublicaciones.Designer.cs">
       <DependentUpon>FrmMisPublicaciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Facturar Publicaciones\Form1.cs">
+    <Compile Include="Facturar Publicaciones\FrmFacturarPublicaciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Facturar Publicaciones\FrmFacturarPublicaciones.Designer.cs">
+      <DependentUpon>FrmFacturarPublicaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Publicacion\FrmGenerarPublicacion.cs">
       <SubType>Form</SubType>
@@ -181,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\FrmMisPublicaciones.resx">
       <DependentUpon>FrmMisPublicaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturar Publicaciones\FrmFacturarPublicaciones.resx">
+      <DependentUpon>FrmFacturarPublicaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\FrmGenerarPublicacion.resx">
       <DependentUpon>FrmGenerarPublicacion.cs</DependentUpon>

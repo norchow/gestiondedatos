@@ -60,6 +60,7 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertCalificacion];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByCliente];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParameters];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParametersLike];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllFormaPago];
 
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];
