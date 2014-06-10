@@ -13,6 +13,7 @@ namespace Persistance.Entities
         public static class Rol
         {
             public static String SPGetAllRol = "LA_BANDA_DEL_CHAVO.GetAllRol";
+            public static String SPGetAllRolNotAdmin = "LA_BANDA_DEL_CHAVO.GetAllRolNotAdmin";
             public static String SPGetRolByName = "LA_BANDA_DEL_CHAVO.GetRolByName";
             public static String SPGetAllRolByUser = "LA_BANDA_DEL_CHAVO.GetAllRolByUser";
             public static String SPGetAllRolByNameLike = "LA_BANDA_DEL_CHAVO.GetAllRolByNameLike";
@@ -24,8 +25,10 @@ namespace Persistance.Entities
 
         public static class Usuario
         {
+            public static String SPGetAllUsuario = "LA_BANDA_DEL_CHAVO.GetAllUsuario";
             public static String SPGetUserByUsername = "LA_BANDA_DEL_CHAVO.GetUserByUsername";
             public static String SPGetUserById = "LA_BANDA_DEL_CHAVO.GetUserById";
+            public static String SPInsertUser = "LA_BANDA_DEL_CHAVO.InsertUser";
             public static String SPUpdateUser = "LA_BANDA_DEL_CHAVO.UpdateUser";
             public static String SPUpdatePassword = "LA_BANDA_DEL_CHAVO.UpdatePassword";
         }
@@ -77,10 +80,30 @@ namespace Persistance.Entities
             public static String SPGetNotCalifiedByClientIdByParametersLike = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParametersLike";
         }
 
+
         public static class FormaPago
         {
             public static String SPGetAllFormaPago = "LA_BANDA_DEL_CHAVO.GetAllFormaPago";
             public static String SPGetAllFormaPagoById = "LA_BANDA_DEL_CHAVO.GetAllFormaPagoById";
+        }
+            
+        public static class TipoDocumento
+        {
+            public static String SPGetAllTipoDocumento = "LA_BANDA_DEL_CHAVO.GetAllTipoDocumento";
+        }
+
+        public static class Cliente
+        {
+            public static String SPGetClientByPhone = "LA_BANDA_DEL_CHAVO.GetClientByPhone";
+            public static String SPGetClientByDocument = "LA_BANDA_DEL_CHAVO.GetClientByDocument";
+            public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
+        }
+
+        public static class Empresa
+        {
+            public static String SPGetCompanyByBusinessName = "LA_BANDA_DEL_CHAVO.GetCompanyByBusinessName";
+            public static String SPGetCompanyByCUIT = "LA_BANDA_DEL_CHAVO.GetCompanyByCUIT";
+            public static String SPInsertCompany = "LA_BANDA_DEL_CHAVO.InsertCompany";
         }
     }
 }

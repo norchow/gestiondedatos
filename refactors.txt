@@ -1,0 +1,1 @@
+-UsuarioLogic login debería ser estático.

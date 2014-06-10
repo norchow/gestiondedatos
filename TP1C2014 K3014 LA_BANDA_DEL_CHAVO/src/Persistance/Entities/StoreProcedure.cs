@@ -103,7 +103,7 @@ namespace Persistance.Entities
          * ExecuteReader(): Return the SqlDataReader
          * Remember to close SqlDataReader after.
          */
-        public SqlDataReader ExecuteReader()
+        public SqlDataReader ExecuteReader(SqlTransaction transaction)
         {
             var conn = _dataBaseManager.Connection;
 
@@ -113,6 +113,9 @@ namespace Persistance.Entities
 
                 foreach (var parameter in Parameters.Values)
                     cmd.Parameters.AddWithValue(parameter.Name, parameter.Value);
+
+                if (transaction != null)
+                    cmd.Transaction = transaction;
 
                 // Don't close the SqlDataReader
                 return cmd.ExecuteReader();
@@ -131,7 +134,7 @@ namespace Persistance.Entities
             try
             {
                 // Execute the SP and get the SqlDataReader
-                var reader = ExecuteReader();
+                var reader = ExecuteReader(null);
 
                 // Map the Entities
                 var map = new List<T>();
@@ -152,27 +155,25 @@ namespace Persistance.Entities
             {
                 throw e;
             }
-
         }
 
         /*
-         * ExecuteReader(DelegateMap customMap): Return the entities with a custom Map
-         */
-        public delegate IMapable DelegateMap(SqlDataReader reader);
-
-        public List<IMapable> ExecuteReader(DelegateMap customMap)
+        * ExecuteReader<T>(): Return the entities mapped
+        */
+        public List<T> ExecuteReaderTransactioned<T>(SqlTransaction transaction) where T : IMapable, new()
         {
             try
             {
                 // Execute the SP and get the SqlDataReader
-                var reader = ExecuteReader();
+                var reader = ExecuteReader(transaction);
 
                 // Map the Entities
-                var map = new List<IMapable>();
+                var map = new List<T>();
 
                 while (!reader.IsClosed && reader.Read())
                 {
-                    map.Add(customMap(reader));
+                    var mapable = new T();
+                    map.Add((T)mapable.Map(reader));
                 }
 
                 // Close the SqlDataReader
@@ -186,6 +187,11 @@ namespace Persistance.Entities
                 throw e;
             }
         }
+
+        /*
+         * ExecuteReader(DelegateMap customMap): Return the entities with a custom Map
+         */
+        public delegate IMapable DelegateMap(SqlDataReader reader);
 
         public Dictionary<String, Object> ExecuteOutput()
         {

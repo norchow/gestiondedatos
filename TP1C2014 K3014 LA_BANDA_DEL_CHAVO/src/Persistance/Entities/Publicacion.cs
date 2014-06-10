@@ -33,7 +33,7 @@ namespace Persistance.Entities
 
         public bool RecibirPreguntas { get; set; }
 
-        private string _usuarioCreador;
+        private int _usuarioCreador;
 
         private int _visibilidad;
 
@@ -55,7 +55,7 @@ namespace Persistance.Entities
                 Descripcion = ((String)reader["Descripcion"]).Trim(),
                 Stock = Int32.Parse(reader["Stock"].ToString()),
                 Precio = double.Parse(reader["Precio"].ToString()),
-                _usuarioCreador = reader["ID_Usuario"].ToString(),
+                _usuarioCreador = Int32.Parse(reader["ID_Usuario"].ToString()),
                 _visibilidad = Convert.ToInt32(reader["ID_Visibilidad"].ToString()),
                 _estadoPublicacion = Convert.ToInt32(reader["ID_Estado_Publicacion"].ToString()),
                 _tipoPublicacion = Int32.Parse(reader["ID_Tipo_Publicacion"].ToString()),

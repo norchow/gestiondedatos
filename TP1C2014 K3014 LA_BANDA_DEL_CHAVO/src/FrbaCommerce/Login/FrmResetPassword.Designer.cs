@@ -103,6 +103,7 @@
             this.Name = "FrmResetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrbaCommerce - Resetear contrasena";
+            this.Load += new System.EventHandler(this.FrmResetPassword_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

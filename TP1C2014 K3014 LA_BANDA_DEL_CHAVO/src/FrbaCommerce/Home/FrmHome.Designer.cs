@@ -34,6 +34,7 @@
             this.administracionDeVisibilidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.juliaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calificarVendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administracionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@
             // 
             this.holaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.administracionDeRolesToolStripMenuItem,
-            this.administracionDeVisibilidadesToolStripMenuItem});
+            this.administracionDeVisibilidadesToolStripMenuItem,
+            this.administracionDeUsuariosToolStripMenuItem});
             this.holaToolStripMenuItem.Name = "holaToolStripMenuItem";
             this.holaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.holaToolStripMenuItem.Text = "Administracion";
@@ -86,6 +88,13 @@
             this.calificarVendedorToolStripMenuItem.Text = "Calificar Vendedor";
             this.calificarVendedorToolStripMenuItem.Click += new System.EventHandler(this.calificarVendedorToolStripMenuItem_Click);
             // 
+            // administracionDeUsuariosToolStripMenuItem
+            // 
+            this.administracionDeUsuariosToolStripMenuItem.Name = "administracionDeUsuariosToolStripMenuItem";
+            this.administracionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.administracionDeUsuariosToolStripMenuItem.Text = "Administracion de usuarios";
+            this.administracionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.administracionDeUsuariosToolStripMenuItem_Click);
+            // 
             // FrmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,6 +119,7 @@
         private System.Windows.Forms.ToolStripMenuItem administracionDeVisibilidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem juliaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calificarVendedorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administracionDeUsuariosToolStripMenuItem;
 
 
     }

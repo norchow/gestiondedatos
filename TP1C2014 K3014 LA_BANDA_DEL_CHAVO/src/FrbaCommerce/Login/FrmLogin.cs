@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using FrbaCommerce.Home;
 using Logic;
 using Session;
+using Persistance;
+using FrbaCommerce.Registro_de_Usuario;
 
 namespace FrbaCommerce.Login
 {
@@ -35,6 +37,9 @@ namespace FrbaCommerce.Login
 
                         var resetPassword = new FrmResetPassword();
                         resetPassword.ShowDialog();
+
+                        //refresco el currentUser por si ya lo modificó
+                        SessionManager.CurrentUser = UsuarioPersistance.GetByUsername(SessionManager.CurrentUser.Username);
                     }
                     
                     Hide();
@@ -66,6 +71,12 @@ namespace FrbaCommerce.Login
         private void LblEntrar_Click(object sender, EventArgs e)
         {
             DoLogin(TxtUsuario.Text, TxtContrasena.Text);
+        }
+
+        private void LblNuevo_Click(object sender, EventArgs e)
+        {
+            var frmRegistroUsuario = new FrmRegistroUsuario();
+            frmRegistroUsuario.ShowDialog();
         }
     }
 }

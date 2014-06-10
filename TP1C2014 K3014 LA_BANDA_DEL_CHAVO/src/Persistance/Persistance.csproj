@@ -42,8 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalificacionPersistance.cs" />
+    <Compile Include="ClientePersistance.cs" />
+    <Compile Include="EmpresaPersistance.cs" />
     <Compile Include="Entities\Calificacion.cs" />
     <Compile Include="Entities\FormaPago.cs" />
+    <Compile Include="Entities\Cliente.cs" />
+    <Compile Include="Entities\Empresa.cs" />
     <Compile Include="Entities\PublicacionNotCalified.cs" />
     <Compile Include="Entities\DataBaseManager.cs" />
     <Compile Include="Entities\DataBaseQueries.cs" />
@@ -55,6 +59,7 @@
     <Compile Include="Entities\Rubro.cs" />
     <Compile Include="Entities\SPParameter.cs" />
     <Compile Include="Entities\StoreProcedure.cs" />
+    <Compile Include="Entities\TipoDocumento.cs" />
     <Compile Include="Entities\TipoPublicacion.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Visibilidad.cs" />
@@ -65,6 +70,7 @@
     <Compile Include="PublicacionPersistance.cs" />
     <Compile Include="RolPersistance.cs" />
     <Compile Include="RubroPersistance.cs" />
+    <Compile Include="TipoDocumentoPersistance.cs" />
     <Compile Include="TipoPublicacionPersistance.cs" />
     <Compile Include="UsuarioPersistance.cs" />
     <Compile Include="VisibilidadPersistance.cs" />

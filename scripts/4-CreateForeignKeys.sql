@@ -98,4 +98,8 @@ REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Visibilidad](ID_Visibilidad);
 ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Tarjeta_Credito]
 ADD FOREIGN KEY ([ID_Factura])
 REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Factura](ID_Factura);
+
+ALTER TABLE [LA_BANDA_DEL_CHAVO].[TL_Cliente]
+ADD FOREIGN KEY ([ID_Tipo_Documento])
+REFERENCES [LA_BANDA_DEL_CHAVO].[TL_Tipo_Documento](ID_Tipo_Documento);
 COMMIT
