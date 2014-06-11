@@ -69,6 +69,8 @@ namespace Persistance.Entities
             public static String SPInsert = "LA_BANDA_DEL_CHAVO.InsertPublicacion";
             public static String SPUpdate = "LA_BANDA_DEL_CHAVO.UpdatePublicacion";
             public static String SPGetAllByUserId = "LA_BANDA_DEL_CHAVO.GetAllPublicationByUserId";
+            public static String SPGetPublicacionesARendirByUser = "LA_BANDA_DEL_CHAVO.GetPublicacionesARendirByUser";
+            public static String SPGetPublicacionesMasAntiguasARendirByUser = "LA_BANDA_DEL_CHAVO.GetPublicacionesMasAntiguasARendirByUser";
             public static String SPGetAllActive = "LA_BANDA_DEL_CHAVO.GetAllPublicationActive";
         }
 

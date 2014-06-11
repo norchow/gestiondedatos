@@ -5,6 +5,7 @@ using System.Text;
 using Persistance.Entities;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Persistance
 {
@@ -173,6 +174,43 @@ namespace Persistance
                         : new StoreProcedure(DataBaseConst.Publicacion.SPUpdate, param);
 
             return sp.ExecuteNonQuery(transaction);
+        }
+
+        public static List<Publicacion> GetPublicacionesARendirByUser(int userId)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Id_User", userId),
+                    new SPParameter("Fecha_Actual", ConfigurationSettings.AppSettings["FechaSistema"])
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetPublicacionesARendirByUser, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return null;
+
+            return publications;
+        }
+
+        public static List<Publicacion> GetPublicacionesMasAntiguasARendirByUser(int userId, int cantidad)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Id_User", userId),
+                    new SPParameter("Cantidad", cantidad),
+                    new SPParameter("Fecha_Actual", ConfigurationSettings.AppSettings["FechaSistema"])
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetPublicacionesMasAntiguasARendirByUser, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return null;
+
+            return publications;
         }
     }
 }

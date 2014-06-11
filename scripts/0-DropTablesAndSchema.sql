@@ -76,5 +76,7 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertQuestion];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuario];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuarioByParameters];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuarioByParametersLike];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetPublicacionesARendirByUser];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetPublicacionesMasAntiguasARendirByUser];
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];

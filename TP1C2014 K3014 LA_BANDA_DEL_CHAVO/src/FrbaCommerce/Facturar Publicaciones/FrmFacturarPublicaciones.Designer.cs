@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LblLimpiar = new System.Windows.Forms.Label();
+            this.CboFormaPago = new System.Windows.Forms.ComboBox();
+            this.LblCancelar = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LblFacturar = new System.Windows.Forms.Label();
+            this.LstPublicaciones = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.TxtCantidad = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.LstPublicaciones = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.CboFormaPago = new System.Windows.Forms.ComboBox();
-            this.LblLimpiar = new System.Windows.Forms.Label();
-            this.LblCancelar = new System.Windows.Forms.Label();
-            this.LblFacturar = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +58,80 @@
             this.groupBox2.TabIndex = 39;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "FACTURACIÓN";
+            // 
+            // LblLimpiar
+            // 
+            this.LblLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblLimpiar.ForeColor = System.Drawing.Color.White;
+            this.LblLimpiar.Location = new System.Drawing.Point(377, 236);
+            this.LblLimpiar.Name = "LblLimpiar";
+            this.LblLimpiar.Size = new System.Drawing.Size(95, 32);
+            this.LblLimpiar.TabIndex = 46;
+            this.LblLimpiar.Text = "LIMPIAR";
+            this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // CboFormaPago
+            // 
+            this.CboFormaPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboFormaPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CboFormaPago.FormattingEnabled = true;
+            this.CboFormaPago.Items.AddRange(new object[] {
+            "Borrador",
+            "Activa",
+            "Pausada",
+            "Finalizada"});
+            this.CboFormaPago.Location = new System.Drawing.Point(475, 99);
+            this.CboFormaPago.Name = "CboFormaPago";
+            this.CboFormaPago.Size = new System.Drawing.Size(124, 21);
+            this.CboFormaPago.TabIndex = 43;
+            // 
+            // LblCancelar
+            // 
+            this.LblCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblCancelar.ForeColor = System.Drawing.Color.White;
+            this.LblCancelar.Location = new System.Drawing.Point(517, 236);
+            this.LblCancelar.Name = "LblCancelar";
+            this.LblCancelar.Size = new System.Drawing.Size(95, 32);
+            this.LblCancelar.TabIndex = 45;
+            this.LblCancelar.Text = "CANCELAR";
+            this.LblCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblCancelar.Click += new System.EventHandler(this.LblCancelar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(373, 102);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 13);
+            this.label1.TabIndex = 42;
+            this.label1.Text = "FORMA DE PAGO";
+            // 
+            // LblFacturar
+            // 
+            this.LblFacturar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblFacturar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblFacturar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblFacturar.ForeColor = System.Drawing.Color.White;
+            this.LblFacturar.Location = new System.Drawing.Point(377, 140);
+            this.LblFacturar.Name = "LblFacturar";
+            this.LblFacturar.Size = new System.Drawing.Size(95, 32);
+            this.LblFacturar.TabIndex = 44;
+            this.LblFacturar.Text = "FACTURAR";
+            this.LblFacturar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblFacturar.Click += new System.EventHandler(this.LblFacturar_Click);
+            // 
+            // LstPublicaciones
+            // 
+            this.LstPublicaciones.FormattingEnabled = true;
+            this.LstPublicaciones.Location = new System.Drawing.Point(26, 56);
+            this.LstPublicaciones.Name = "LstPublicaciones";
+            this.LstPublicaciones.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.LstPublicaciones.Size = new System.Drawing.Size(309, 212);
+            this.LstPublicaciones.TabIndex = 41;
             // 
             // label9
             // 
@@ -84,80 +158,7 @@
             this.label6.TabIndex = 27;
             this.label6.Text = "CANTIDAD";
             // 
-            // LstPublicaciones
-            // 
-            this.LstPublicaciones.FormattingEnabled = true;
-            this.LstPublicaciones.Location = new System.Drawing.Point(26, 56);
-            this.LstPublicaciones.Name = "LstPublicaciones";
-            this.LstPublicaciones.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.LstPublicaciones.Size = new System.Drawing.Size(309, 212);
-            this.LstPublicaciones.TabIndex = 41;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(373, 102);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 42;
-            this.label1.Text = "FORMA DE PAGO";
-            // 
-            // CboFormaPago
-            // 
-            this.CboFormaPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CboFormaPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CboFormaPago.FormattingEnabled = true;
-            this.CboFormaPago.Items.AddRange(new object[] {
-            "Borrador",
-            "Activa",
-            "Pausada",
-            "Finalizada"});
-            this.CboFormaPago.Location = new System.Drawing.Point(475, 99);
-            this.CboFormaPago.Name = "CboFormaPago";
-            this.CboFormaPago.Size = new System.Drawing.Size(124, 21);
-            this.CboFormaPago.TabIndex = 43;
-            // 
-            // LblLimpiar
-            // 
-            this.LblLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
-            this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblLimpiar.ForeColor = System.Drawing.Color.White;
-            this.LblLimpiar.Location = new System.Drawing.Point(377, 236);
-            this.LblLimpiar.Name = "LblLimpiar";
-            this.LblLimpiar.Size = new System.Drawing.Size(95, 32);
-            this.LblLimpiar.TabIndex = 46;
-            this.LblLimpiar.Text = "LIMPIAR";
-            this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // LblCancelar
-            // 
-            this.LblCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
-            this.LblCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblCancelar.ForeColor = System.Drawing.Color.White;
-            this.LblCancelar.Location = new System.Drawing.Point(517, 236);
-            this.LblCancelar.Name = "LblCancelar";
-            this.LblCancelar.Size = new System.Drawing.Size(95, 32);
-            this.LblCancelar.TabIndex = 45;
-            this.LblCancelar.Text = "CANCELAR";
-            this.LblCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblCancelar.Click += new System.EventHandler(this.LblCancelar_Click);
-            // 
-            // LblFacturar
-            // 
-            this.LblFacturar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
-            this.LblFacturar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblFacturar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblFacturar.ForeColor = System.Drawing.Color.White;
-            this.LblFacturar.Location = new System.Drawing.Point(377, 140);
-            this.LblFacturar.Name = "LblFacturar";
-            this.LblFacturar.Size = new System.Drawing.Size(95, 32);
-            this.LblFacturar.TabIndex = 44;
-            this.LblFacturar.Text = "FACTURAR";
-            this.LblFacturar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Form1
+            // FrmFacturarPublicaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
