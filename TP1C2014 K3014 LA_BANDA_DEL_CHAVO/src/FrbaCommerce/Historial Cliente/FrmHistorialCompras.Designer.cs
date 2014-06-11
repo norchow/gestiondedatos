@@ -30,6 +30,9 @@
         {
             this.LblListo = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.LblLimpiar = new System.Windows.Forms.Label();
             this.LblBuscar = new System.Windows.Forms.Label();
             this.cBExact = new System.Windows.Forms.CheckBox();
@@ -43,9 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dgvHistory = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCantidad = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).BeginInit();
             this.SuspendLayout();
@@ -86,6 +86,32 @@
             this.groupBox1.TabIndex = 48;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "BUSQUEDA AVANZADA";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(185, 69);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 9);
+            this.label7.TabIndex = 40;
+            this.label7.Text = "AAAA-MM-DD";
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(328, 46);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(74, 20);
+            this.txtCantidad.TabIndex = 39;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(335, 30);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(62, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "CANTIDAD";
             // 
             // LblLimpiar
             // 
@@ -215,32 +241,6 @@
             this.label1.Size = new System.Drawing.Size(75, 16);
             this.label1.TabIndex = 41;
             this.label1.Text = "COMPRAS";
-            // 
-            // txtCantidad
-            // 
-            this.txtCantidad.Location = new System.Drawing.Point(328, 46);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(74, 20);
-            this.txtCantidad.TabIndex = 39;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(335, 30);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 13);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "Cantidad";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(185, 69);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 9);
-            this.label7.TabIndex = 40;
-            this.label7.Text = "AAAA-MM-DD";
             // 
             // FrmHistorialCompras
             // 

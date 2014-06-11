@@ -15,5 +15,10 @@ namespace FrbaCommerce.Historial_Cliente
         {
             InitializeComponent();
         }
+
+        private void LblListo_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
