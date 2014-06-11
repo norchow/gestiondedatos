@@ -10,6 +10,9 @@ using FrbaCommerce.Calificar_Vendedor;
 using FrbaCommerce.ABM_Rol;
 using FrbaCommerce.Abm_Visibilidad;
 using FrbaCommerce.Registro_de_Usuario;
+using FrbaCommerce.Generar_Publicacion;
+using FrbaCommerce.Editar_Publicacion;
+using FrbaCommerce.Comprar_Ofertar;
 
 
 namespace FrbaCommerce.Home
@@ -43,6 +46,29 @@ namespace FrbaCommerce.Home
         {
             var frmAdministrarUsuarios = new FrmAdministrarUsuarios();
             frmAdministrarUsuarios.ShowDialog();
+        }
+
+        private void juliaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generarPublicacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmGenerarPublicacion = new FrmGenerarPublicacion(null);
+            frmGenerarPublicacion.ShowDialog();
+        }
+
+        private void editarMisPublicacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmMisPublicaciones = new FrmMisPublicaciones();
+            frmMisPublicaciones.ShowDialog();
+        }
+
+        private void listadoDePublicacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmListadoPublicaciones = new FrmListadoPublicaciones();
+            frmListadoPublicaciones.ShowDialog();
         }
     }
 }

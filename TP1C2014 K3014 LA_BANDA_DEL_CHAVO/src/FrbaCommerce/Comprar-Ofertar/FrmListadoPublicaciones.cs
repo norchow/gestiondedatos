@@ -7,22 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Persistance;
-using Session;
 using Persistance.Entities;
-using FrbaCommerce.Generar_Publicacion;
+using Session;
 
-namespace FrbaCommerce.Editar_Publicacion
+namespace FrbaCommerce.Comprar_Ofertar
 {
-    public partial class FrmMisPublicaciones : Form
+    public partial class FrmListadoPublicaciones : Form
     {
         private List<Publicacion> _publications = new List<Publicacion>();
 
-        public FrmMisPublicaciones()
+        public FrmListadoPublicaciones()
         {
             InitializeComponent();
         }
 
-        private void MisPublicaciones_Load(object sender, EventArgs e)
+        private void FrmListadoPublicaciones_Load(object sender, EventArgs e)
         {
             RefreshSources(null);
         }
@@ -37,9 +36,9 @@ namespace FrbaCommerce.Editar_Publicacion
             if (publications == null)
             {
                 //The datasource must be all the publications records from the user stored in the database
-                CleanFiltersUI();
-                _publications = PublicacionPersistance.GetAllByUserId(SessionManager.CurrentUser.ID);
-                publicationsDictionary = _publications.ToDictionary(a => a.ID, a => a);
+                _publications = PublicacionPersistance.GetAllActive();
+                if(_publications!=null)
+                    publicationsDictionary = _publications.ToDictionary(a => a.ID, a => a);
             }
             else
             {
@@ -75,23 +74,12 @@ namespace FrbaCommerce.Editar_Publicacion
         {
             var updateColumn = new DataGridViewButtonColumn
             {
-                Text = "Modificar",
+                Text = "Ver detalle",
                 UseColumnTextForButtonValue = true,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };
 
             DgvPublicacion.Columns.Add(updateColumn);
-        }
-
-        private void CleanFiltersUI()
-        {
-            /*
-            TxtDescripcion.Text = string.Empty;
-            TxtDuracion.Text = string.Empty;
-            TxtPorcentajeVenta.Text = string.Empty;
-            TxtPrecioPublicar.Text = string.Empty;
-            ChkBusquedaExacta.Checked = false;
-             */
         }
 
         private void LblListo_Click(object sender, EventArgs e)
@@ -109,11 +97,10 @@ namespace FrbaCommerce.Editar_Publicacion
 
             if (selectedPublication != null)
             {
-                var editPublication = new FrmGenerarPublicacion(selectedPublication);
+                var editPublication = new FrmDetallePublicacion(selectedPublication);
                 editPublication.ShowDialog();
 
-                if (editPublication.CompleteAction)
-                    RefreshSources(null);
+                RefreshSources(null);
             }
         }
     }
