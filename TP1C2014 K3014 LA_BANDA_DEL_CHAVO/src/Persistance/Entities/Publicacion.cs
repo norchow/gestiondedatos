@@ -60,8 +60,8 @@ namespace Persistance.Entities
                 _estadoPublicacion = Convert.ToInt32(reader["ID_Estado_Publicacion"].ToString()),
                 _tipoPublicacion = Int32.Parse(reader["ID_Tipo_Publicacion"].ToString()),
                 RecibirPreguntas = bool.Parse(reader["Permitir_Preguntas"].ToString()),
-                FechaInicio = DateTime.Today,
-                FechaVencimiento = DateTime.Today
+                FechaInicio = DateTime.Parse(reader["Fecha_Inicio"].ToString()),
+                FechaVencimiento = DateTime.Parse(reader["Fecha_Vencimiento"].ToString())
             };
         }
 

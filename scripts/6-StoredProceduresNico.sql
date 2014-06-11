@@ -174,3 +174,31 @@ BEGIN
 	FROM [LA_BANDA_DEL_CHAVO].[TL_Usuario]
 END
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicationActive]
+	@Fecha_hoy datetime
+AS
+BEGIN
+	SELECT P.* FROM [LA_BANDA_DEL_CHAVO].[TL_Publicacion] P
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP ON P.ID_Estado_Publicacion=EP.ID_Estado_Publicacion
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion=TP.ID_Tipo_Publicacion
+	WHERE EP.Descripcion='Publicada'
+	AND P.Fecha_Vencimiento>@Fecha_hoy
+	AND (TP.Descripcion = 'Subasta' OR P.Stock>0)
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertQuestion]
+	@ID_Publicacion int 
+    ,@Texto text
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Pregunta] ([ID_Publicacion]
+      ,[Texto])
+	OUTPUT inserted.ID_Pregunta
+	VALUES (@ID_Publicacion
+      ,@Texto)
+END
+GO

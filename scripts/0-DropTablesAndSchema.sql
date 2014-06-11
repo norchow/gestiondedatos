@@ -71,5 +71,10 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllUsuario];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParameters];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParametersLike];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllFormaPago];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicationActive];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertQuestion];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetPublicacionesARendirByUser];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetPublicacionesMasAntiguasARendirByUser];
+
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];

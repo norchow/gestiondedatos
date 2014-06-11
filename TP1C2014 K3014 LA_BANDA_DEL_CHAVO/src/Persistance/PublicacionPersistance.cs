@@ -81,6 +81,23 @@ namespace Persistance
             return publication;
         }
 
+        public static List<Publicacion> GetAllActive()
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_hoy", Configuration.ConfigurationVariables.FechaSistema)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllActive, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return null;
+
+            return publications;
+        }
+
         public static List<Publicacion> GetAllByUserId(int userId)
         {
             var param = new List<SPParameter>

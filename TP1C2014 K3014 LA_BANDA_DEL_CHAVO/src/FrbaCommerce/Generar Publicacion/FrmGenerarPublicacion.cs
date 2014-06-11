@@ -247,7 +247,6 @@ namespace FrbaCommerce.Generar_Publicacion
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Atencion");
-                Close();
             }
         }
 

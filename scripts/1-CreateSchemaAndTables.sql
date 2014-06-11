@@ -128,13 +128,14 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta](
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Pregunta](
 	[ID_Pregunta] int IDENTITY (1,1),
-	[ID_Publicacion] numeric(18,0) NOT NULL
+	[ID_Publicacion] numeric(18,0) NOT NULL,
+	[Texto] text
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Respuesta](
 	[ID_Respuesta] int IDENTITY (1,1),
 	[ID_Pregunta] int NOT NULL,
-	[Texto] varchar,
+	[Texto] text,
 	[Efectiva] bit NOT NULL
 );
 

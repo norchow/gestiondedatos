@@ -32,9 +32,12 @@
             this.holaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionDeRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionDeVisibilidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administracionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.juliaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calificarVendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administracionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generarPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarMisPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDePublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,13 +76,24 @@
             this.administracionDeVisibilidadesToolStripMenuItem.Text = "Administracion de visibilidades";
             this.administracionDeVisibilidadesToolStripMenuItem.Click += new System.EventHandler(this.administracionDeVisibilidadesToolStripMenuItem_Click);
             // 
+            // administracionDeUsuariosToolStripMenuItem
+            // 
+            this.administracionDeUsuariosToolStripMenuItem.Name = "administracionDeUsuariosToolStripMenuItem";
+            this.administracionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.administracionDeUsuariosToolStripMenuItem.Text = "Administracion de usuarios";
+            this.administracionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.administracionDeUsuariosToolStripMenuItem_Click);
+            // 
             // juliaToolStripMenuItem
             // 
             this.juliaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.calificarVendedorToolStripMenuItem});
+            this.calificarVendedorToolStripMenuItem,
+            this.generarPublicacionesToolStripMenuItem,
+            this.editarMisPublicacionesToolStripMenuItem,
+            this.listadoDePublicacionesToolStripMenuItem});
             this.juliaToolStripMenuItem.Name = "juliaToolStripMenuItem";
-            this.juliaToolStripMenuItem.Size = new System.Drawing.Size(175, 20);
-            this.juliaToolStripMenuItem.Text = "Julian Fuks (no me lo saquen)";
+            this.juliaToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.juliaToolStripMenuItem.Text = "Publicaciones";
+            this.juliaToolStripMenuItem.Click += new System.EventHandler(this.juliaToolStripMenuItem_Click);
             // 
             // calificarVendedorToolStripMenuItem
             // 
@@ -88,12 +102,26 @@
             this.calificarVendedorToolStripMenuItem.Text = "Calificar Vendedor";
             this.calificarVendedorToolStripMenuItem.Click += new System.EventHandler(this.calificarVendedorToolStripMenuItem_Click);
             // 
-            // administracionDeUsuariosToolStripMenuItem
+            // generarPublicacionesToolStripMenuItem
             // 
-            this.administracionDeUsuariosToolStripMenuItem.Name = "administracionDeUsuariosToolStripMenuItem";
-            this.administracionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.administracionDeUsuariosToolStripMenuItem.Text = "Administracion de usuarios";
-            this.administracionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.administracionDeUsuariosToolStripMenuItem_Click);
+            this.generarPublicacionesToolStripMenuItem.Name = "generarPublicacionesToolStripMenuItem";
+            this.generarPublicacionesToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.generarPublicacionesToolStripMenuItem.Text = "Generar Publicaciones";
+            this.generarPublicacionesToolStripMenuItem.Click += new System.EventHandler(this.generarPublicacionesToolStripMenuItem_Click);
+            // 
+            // editarMisPublicacionesToolStripMenuItem
+            // 
+            this.editarMisPublicacionesToolStripMenuItem.Name = "editarMisPublicacionesToolStripMenuItem";
+            this.editarMisPublicacionesToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.editarMisPublicacionesToolStripMenuItem.Text = "Editar mis publicaciones";
+            this.editarMisPublicacionesToolStripMenuItem.Click += new System.EventHandler(this.editarMisPublicacionesToolStripMenuItem_Click);
+            // 
+            // listadoDePublicacionesToolStripMenuItem
+            // 
+            this.listadoDePublicacionesToolStripMenuItem.Name = "listadoDePublicacionesToolStripMenuItem";
+            this.listadoDePublicacionesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.listadoDePublicacionesToolStripMenuItem.Text = "Listado de publicaciones";
+            this.listadoDePublicacionesToolStripMenuItem.Click += new System.EventHandler(this.listadoDePublicacionesToolStripMenuItem_Click);
             // 
             // FrmHome
             // 
@@ -120,6 +148,9 @@
         private System.Windows.Forms.ToolStripMenuItem juliaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calificarVendedorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administracionDeUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generarPublicacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarMisPublicacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoDePublicacionesToolStripMenuItem;
 
 
     }

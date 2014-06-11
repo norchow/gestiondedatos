@@ -96,11 +96,17 @@
     <Compile Include="Calificar Vendedor\FrmCalificarVendedor.Designer.cs">
       <DependentUpon>FrmCalificarVendedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comprar-Ofertar\Form1.cs">
+    <Compile Include="Comprar-Ofertar\FrmDetallePublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar-Ofertar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Comprar-Ofertar\FrmDetallePublicacion.Designer.cs">
+      <DependentUpon>FrmDetallePublicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\FrmListadoPublicaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\FrmListadoPublicaciones.Designer.cs">
+      <DependentUpon>FrmListadoPublicaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Editar Publicacion\FrmMisPublicaciones.cs">
       <SubType>Form</SubType>
@@ -120,11 +126,11 @@
     <Compile Include="Generar Publicacion\FrmGenerarPublicacion.Designer.cs">
       <DependentUpon>FrmGenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion de Preguntas\Form1.cs">
+    <Compile Include="Gestion de Preguntas\FrmPreguntar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion de Preguntas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Gestion de Preguntas\FrmPreguntar.Designer.cs">
+      <DependentUpon>FrmPreguntar.cs</DependentUpon>
     </Compile>
     <Compile Include="Historial Cliente\FrmHistorialCliemte.cs">
       <SubType>Form</SubType>
@@ -185,6 +191,12 @@
     <EmbeddedResource Include="Calificar Vendedor\FrmCalificarVendedor.resx">
       <DependentUpon>FrmCalificarVendedor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Comprar-Ofertar\FrmDetallePublicacion.resx">
+      <DependentUpon>FrmDetallePublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar-Ofertar\FrmListadoPublicaciones.resx">
+      <DependentUpon>FrmListadoPublicaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\FrmMisPublicaciones.resx">
       <DependentUpon>FrmMisPublicaciones.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\FrmGenerarPublicacion.resx">
       <DependentUpon>FrmGenerarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\FrmPreguntar.resx">
+      <DependentUpon>FrmPreguntar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>
