@@ -41,10 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SessionManager.cs" />
     <Compile Include="SHA256Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypesHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Persistance\Persistance.csproj">
+      <Project>{5148E74D-C5CE-467D-A86D-451F7B0CF263}</Project>
+      <Name>Persistance</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
