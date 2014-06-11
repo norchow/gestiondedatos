@@ -101,6 +101,14 @@ namespace Persistance.Entities
             public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
         }
 
+        public static class Compra
+        {
+            public static String SPGetHistoryComprasByUsuario = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuario";
+            public static String SPGetHistoryComprasByUsuarioByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuarioByParameters";
+            public static String SPGetHistoryComprasByUsuarioByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuarioByParametersLike";
+        }
+
+
         public static class Empresa
         {
             public static String SPGetCompanyByBusinessName = "LA_BANDA_DEL_CHAVO.GetCompanyByBusinessName";
