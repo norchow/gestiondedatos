@@ -13,7 +13,7 @@ using FrbaCommerce.Registro_de_Usuario;
 using FrbaCommerce.Generar_Publicacion;
 using FrbaCommerce.Editar_Publicacion;
 using FrbaCommerce.Comprar_Ofertar;
-
+using FrbaCommerce.Historial_Cliente;
 
 namespace FrbaCommerce.Home
 {
@@ -69,6 +69,12 @@ namespace FrbaCommerce.Home
         {
             var frmListadoPublicaciones = new FrmListadoPublicaciones();
             frmListadoPublicaciones.ShowDialog();
+        }
+
+        private void historialClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmHistorialCliemte = new FrmHistorialCliente();
+            frmHistorialCliemte.ShowDialog();
         }
     }
 }

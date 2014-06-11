@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HistoryCompraFilters.cs" />
     <Compile Include="PublicacionNotCalifiedFilters.cs" />
     <Compile Include="VisibilidadFilters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

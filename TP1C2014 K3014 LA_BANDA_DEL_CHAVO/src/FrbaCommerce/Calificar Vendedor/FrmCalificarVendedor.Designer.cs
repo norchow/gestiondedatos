@@ -40,13 +40,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LblLimpiar = new System.Windows.Forms.Label();
+            this.LblBuscar = new System.Windows.Forms.Label();
             this.cBExact = new System.Windows.Forms.CheckBox();
             this.txtVendedor = new System.Windows.Forms.TextBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtDesc = new System.Windows.Forms.TextBox();
             this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.LblLimpiar = new System.Windows.Forms.Label();
-            this.LblBuscar = new System.Windows.Forms.Label();
             this.lblCalificar = new System.Windows.Forms.Label();
             this.LblListo = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
@@ -63,12 +63,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 115);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 123);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(177, 20);
+            this.label1.Size = new System.Drawing.Size(198, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Vendedores sin calificar";
+            this.label1.Text = "VENDEDORES SIN CALIFICAR";
             // 
             // dgvPublicaciones
             // 
@@ -214,6 +214,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "BUSQUEDA AVANZADA";
             // 
+            // LblLimpiar
+            // 
+            this.LblLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblLimpiar.ForeColor = System.Drawing.Color.White;
+            this.LblLimpiar.Location = new System.Drawing.Point(337, 62);
+            this.LblLimpiar.Name = "LblLimpiar";
+            this.LblLimpiar.Size = new System.Drawing.Size(88, 32);
+            this.LblLimpiar.TabIndex = 37;
+            this.LblLimpiar.Text = "LIMPIAR";
+            this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
+            // 
+            // LblBuscar
+            // 
+            this.LblBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.LblBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LblBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblBuscar.ForeColor = System.Drawing.Color.White;
+            this.LblBuscar.Location = new System.Drawing.Point(337, 16);
+            this.LblBuscar.Name = "LblBuscar";
+            this.LblBuscar.Size = new System.Drawing.Size(88, 32);
+            this.LblBuscar.TabIndex = 36;
+            this.LblBuscar.Text = "BUSCAR";
+            this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblBuscar.Click += new System.EventHandler(this.LblBuscar_Click_1);
+            // 
             // cBExact
             // 
             this.cBExact.AutoSize = true;
@@ -251,34 +279,6 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(74, 20);
             this.txtCodigo.TabIndex = 13;
-            // 
-            // LblLimpiar
-            // 
-            this.LblLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
-            this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblLimpiar.ForeColor = System.Drawing.Color.White;
-            this.LblLimpiar.Location = new System.Drawing.Point(337, 62);
-            this.LblLimpiar.Name = "LblLimpiar";
-            this.LblLimpiar.Size = new System.Drawing.Size(88, 32);
-            this.LblLimpiar.TabIndex = 37;
-            this.LblLimpiar.Text = "LIMPIAR";
-            this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
-            // 
-            // LblBuscar
-            // 
-            this.LblBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
-            this.LblBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LblBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblBuscar.ForeColor = System.Drawing.Color.White;
-            this.LblBuscar.Location = new System.Drawing.Point(337, 16);
-            this.LblBuscar.Name = "LblBuscar";
-            this.LblBuscar.Size = new System.Drawing.Size(88, 32);
-            this.LblBuscar.TabIndex = 36;
-            this.LblBuscar.Text = "BUSCAR";
-            this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblBuscar.Click += new System.EventHandler(this.LblBuscar_Click_1);
             // 
             // lblCalificar
             // 

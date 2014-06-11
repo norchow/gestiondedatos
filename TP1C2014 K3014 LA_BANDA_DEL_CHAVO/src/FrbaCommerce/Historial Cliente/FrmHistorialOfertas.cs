@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce.Historial_Cliente
 {
-    public partial class FrmHistorialCliemte : Form
+    public partial class FrmHistorialOfertas : Form
     {
-        public FrmHistorialCliemte()
+        public FrmHistorialOfertas()
         {
             InitializeComponent();
         }

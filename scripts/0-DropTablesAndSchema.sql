@@ -73,5 +73,8 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParameter
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllFormaPago];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicationActive];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertQuestion];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuario];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuarioByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuarioByParametersLike];
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];
