@@ -145,6 +145,7 @@ namespace FrbaCommerce.Abm_Visibilidad
         private void LblLimpiar_Click(object sender, EventArgs e)
         {
             RefreshSources(null);
+            CleanFiltersUI();
         }
 
         private void CleanFiltersUI()
@@ -220,7 +221,7 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         private void ChkBusquedaExacta_CheckedChanged(object sender, EventArgs e)
         {
-            TxtDuracion.Enabled = TxtPorcentajeVenta.Enabled = TxtPrecioPublicar.Enabled = ChkBusquedaExacta.Checked;        
+            TxtDuracion.Enabled = TxtPorcentajeVenta.Enabled = TxtPrecioPublicar.Enabled = ChkBusquedaExacta.Checked;
         }
     }
 }

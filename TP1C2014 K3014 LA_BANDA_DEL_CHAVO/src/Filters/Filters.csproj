@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HistoryCompraFilters.cs" />
+    <Compile Include="PublicacionFilters.cs" />
     <Compile Include="PublicacionNotCalifiedFilters.cs" />
     <Compile Include="VisibilidadFilters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

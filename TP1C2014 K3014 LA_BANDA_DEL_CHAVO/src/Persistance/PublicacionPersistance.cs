@@ -212,5 +212,35 @@ namespace Persistance
 
             return publications;
         }
+
+        public static List<Publicacion> GetAllByParameters(Filters.PublicacionFilters filters)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Usuario", filters.IdUsuario),
+                    new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
+                    new SPParameter("Stock", filters.Stock ?? (object)DBNull.Value),
+                    new SPParameter("Precio", filters.Precio ?? (object)DBNull.Value),
+                    new SPParameter("FechaInicio", filters.FechaInicio ?? (object)DBNull.Value),
+                    new SPParameter("FechaVencimiento", filters.FechaVencimiento ?? (object)DBNull.Value),
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllPublicacionByParameters, param);
+
+            return sp.ExecuteReader<Publicacion>();
+        }
+
+        public static List<Publicacion> GetAllByParametersLike(Filters.PublicacionFilters filters)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Usuario", filters.IdUsuario),
+                    new SPParameter("Descripcion", filters.Descripcion)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllPublicacionByParametersLike, param);
+
+            return sp.ExecuteReader<Publicacion>();
+        }
     }
 }

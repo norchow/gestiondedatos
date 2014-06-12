@@ -10,6 +10,9 @@ using Persistance;
 using Session;
 using Persistance.Entities;
 using FrbaCommerce.Generar_Publicacion;
+using Tools;
+using Filters;
+using System.Globalization;
 
 namespace FrbaCommerce.Editar_Publicacion
 {
@@ -44,7 +47,7 @@ namespace FrbaCommerce.Editar_Publicacion
             else
             {
                 //The datasource must be the list of visibilities received as parameter
-                publicationsDictionary = _publications.ToDictionary(a => a.ID, a => a);
+                publicationsDictionary = publications.ToDictionary(a => a.ID, a => a);
             }
 
             #endregion
@@ -85,13 +88,11 @@ namespace FrbaCommerce.Editar_Publicacion
 
         private void CleanFiltersUI()
         {
-            /*
             TxtDescripcion.Text = string.Empty;
-            TxtDuracion.Text = string.Empty;
-            TxtPorcentajeVenta.Text = string.Empty;
-            TxtPrecioPublicar.Text = string.Empty;
+            TxtPrecio.Text = string.Empty;
+            TxtStock.Text = string.Empty;
+            MtbInicio.Text = MtbVencimiento.Text = "__/__/____";
             ChkBusquedaExacta.Checked = false;
-             */
         }
 
         private void LblListo_Click(object sender, EventArgs e)
@@ -115,6 +116,101 @@ namespace FrbaCommerce.Editar_Publicacion
                 if (editPublication.CompleteAction)
                     RefreshSources(null);
             }
+        }
+
+        private void ChkBusquedaExacta_CheckedChanged(object sender, EventArgs e)
+        {
+            TxtStock.Enabled = TxtPrecio.Enabled = MtbInicio.Enabled = MtbVencimiento.Enabled = ChkBusquedaExacta.Checked;
+        }
+
+        private void LblBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime? fechaInicio = null;
+                DateTime? fechaVencimiento = null;
+
+                #region Validations
+
+                var filtersSetted = false;
+                var exceptionMessage = string.Empty;
+
+                if (!TypesHelper.IsEmpty(TxtDescripcion.Text))
+                    filtersSetted = true;
+
+                if (!TypesHelper.IsEmpty(TxtStock.Text))
+                {
+                    filtersSetted = true;
+                    if (!TypesHelper.IsNumeric(TxtStock.Text))
+                        exceptionMessage += Environment.NewLine + "El stock de la publicacion debe ser numérico.";
+                }
+
+                if (!TypesHelper.IsEmpty(TxtPrecio.Text))
+                {
+                    filtersSetted = true;
+                    if (!TypesHelper.IsDecimal(TxtPrecio.Text))
+                        exceptionMessage += Environment.NewLine + "El precio de la publicacion debe ser decimal (o numérico).";
+                }
+
+                if (getFromMaskedTextBox(MtbInicio.Text) != string.Empty)
+                {
+                    filtersSetted = true;
+                    if (!TypesHelper.IsDateTime(MtbInicio.Text))
+                        exceptionMessage += Environment.NewLine + "La fecha de inicio de la publicacion debe ser una fecha.";
+                    else
+                        fechaInicio = DateTime.ParseExact(MtbInicio.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+
+                if (getFromMaskedTextBox(MtbVencimiento.Text) != string.Empty)
+                {
+                    filtersSetted = true;
+                    if (!TypesHelper.IsDateTime(MtbVencimiento.Text))
+                        exceptionMessage += Environment.NewLine + "La fecha de vencimiento de la publicacion debe ser una fecha.";
+                    else
+                        fechaVencimiento = DateTime.ParseExact(MtbVencimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+
+                if (!filtersSetted)
+                    exceptionMessage = "No se puede realizar la busqueda ya que no se informó ningún filtro";
+
+                if (!TypesHelper.IsEmpty(exceptionMessage))
+                    throw new Exception(exceptionMessage);
+
+                #endregion
+
+                var filters = new PublicacionFilters
+                {
+                    IdUsuario = SessionManager.CurrentUser.ID,
+                    Descripcion = (!TypesHelper.IsEmpty(TxtDescripcion.Text)) ? TxtDescripcion.Text : null,
+                    Stock = (!TypesHelper.IsEmpty(TxtStock.Text) && ChkBusquedaExacta.Checked) ? Convert.ToInt32(TxtStock.Text) : (int?)null,
+                    Precio = (!TypesHelper.IsEmpty(TxtPrecio.Text) && ChkBusquedaExacta.Checked) ? Convert.ToDouble(TxtPrecio.Text) : (double?)null,
+                    FechaInicio = (ChkBusquedaExacta.Checked && fechaInicio != null) ? fechaInicio : (DateTime?)null,
+                    FechaVencimiento = (ChkBusquedaExacta.Checked && fechaVencimiento != null) ? fechaVencimiento : (DateTime?)null,
+                };
+
+
+                var publications = (ChkBusquedaExacta.Checked) ? PublicacionPersistance.GetAllByParameters(filters) : PublicacionPersistance.GetAllByParametersLike(filters);
+
+                if (publications == null || publications.Count == 0)
+                    throw new Exception("No se encontraron publicaciones según los filtros informados.");
+
+                RefreshSources(publications);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Atención");
+            }
+        }
+
+        private string getFromMaskedTextBox(string input)
+        {
+            return input.Replace("/", string.Empty).Trim();
+        }
+
+        private void LblLimpiar_Click(object sender, EventArgs e)
+        {
+            RefreshSources(null);
+            CleanFiltersUI();
         }
     }
 }

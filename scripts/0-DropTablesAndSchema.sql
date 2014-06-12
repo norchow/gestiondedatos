@@ -79,6 +79,7 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuarioByParametersLike]
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetPublicacionesARendirByUser];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetPublicacionesMasAntiguasARendirByUser];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesRecibidas];
-
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicacionByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicacionByParametersLike];
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];
