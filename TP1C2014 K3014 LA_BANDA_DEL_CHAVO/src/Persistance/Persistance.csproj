@@ -46,6 +46,7 @@
     <Compile Include="CompraPersistance.cs" />
     <Compile Include="EmpresaPersistance.cs" />
     <Compile Include="Entities\Calificacion.cs" />
+    <Compile Include="Entities\HistoryReputacion.cs" />
     <Compile Include="Entities\HistoryCompra.cs" />
     <Compile Include="Entities\FormaPago.cs" />
     <Compile Include="Entities\Cliente.cs" />

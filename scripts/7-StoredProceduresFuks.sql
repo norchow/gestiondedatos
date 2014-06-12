@@ -159,3 +159,62 @@ END
 
 
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesRecibidasByParameters]
+	@idUsuario int = NULL,
+	@Codigo_Calificacion int= NULL,
+	@Descripcion varchar(255) = NULL,
+	@Cantidad_Estrellas int = NULL,
+	@Nombre varchar(255) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT C.Codigo_Calificacion, P.Descripcion, C.Cantidad_Estrellas, CLI.Apellido + ', ' + CLI.Nombre AS Nombre
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] AS C
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Cliente = C.ID_Comprador
+	WHERE P.ID_Usuario = @idUsuario
+	AND ((C.Codigo_Calificacion = @Codigo_Calificacion) OR @Codigo_Calificacion is NULL)
+	AND ((P.Descripcion = @Descripcion) OR @Descripcion is NULL)
+	AND ((C.Cantidad_Estrellas = @Cantidad_Estrellas) OR @Cantidad_Estrellas is NULL)
+	AND ((CLI.Apellido + ', ' + CLI.Nombre = @Nombre) OR @Nombre is NULL)
+	
+	
+	
+END
+
+
+
+
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesRecibidasByParametersLike]
+	@idUsuario int = NULL,
+	@Codigo_Calificacion varchar(255) = NULL,
+	@Descripcion varchar(255) = NULL,
+	@Cantidad_Estrellas varchar(255) = NULL,
+	@Nombre varchar(255) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT C.Codigo_Calificacion, P.Descripcion, C.Cantidad_Estrellas, CLI.Apellido + ', ' + CLI.Nombre AS Nombre
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] AS C
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Cliente = C.ID_Comprador
+	WHERE P.ID_Usuario = @idUsuario
+	AND ((C.Codigo_Calificacion LIKE ('%' + @Codigo_Calificacion + '%')) OR @Codigo_Calificacion is NULL)
+	AND ((P.Descripcion LIKE ('%' + @Descripcion + '%')) OR @Descripcion is NULL)
+	AND ((C.Cantidad_Estrellas LIKE ('%' + @Cantidad_Estrellas + '%')) OR @Cantidad_Estrellas is NULL)
+	AND ((CLI.Apellido + ', ' + CLI.Nombre LIKE ('%' + @Nombre + '%')) OR @Nombre is NULL)
+	
+	
+	
+END
+
+
+
+
+
+GO

@@ -82,6 +82,10 @@ namespace Persistance.Entities
             public static String SPGetNotCalifiedByClientId = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByCliente";
             public static String SPGetNotCalifiedByClientIdByParameters = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParameters";
             public static String SPGetNotCalifiedByClientIdByParametersLike = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParametersLike";
+            public static String SPGetHistoryCalificacionesRecibidas = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidas";
+            public static String SPGetHistoryCalificacionesRecibidasByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidasByParameters";
+            public static String SPGetHistoryCalificacionesRecibidasByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidasByParametersLike";
+           
         }
 
 

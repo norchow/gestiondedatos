@@ -152,7 +152,7 @@ namespace FrbaCommerce.Historial_Cliente
 
                 if (historyCompras == null || historyCompras.Count == 0)
                 {
-                    throw new Exception("No se encontraron publicaciones no calificadas según los filtros informados.");
+                    throw new Exception("No se encontraron compras según los filtros informados.");
                     ClearFiltersAndTable();
                 }
                 RefreshSources(historyCompras);
