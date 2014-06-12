@@ -200,9 +200,9 @@ namespace FrbaCommerce.Abm_Visibilidad
                 var filters = new VisibilidadFilters 
                 { 
                     Descripcion = (!TypesHelper.IsEmpty(TxtDescripcion.Text)) ? TxtDescripcion.Text : null,
-                    PrecioPublicar = (!TypesHelper.IsEmpty(TxtPrecioPublicar.Text)) ? Convert.ToDouble(TxtPrecioPublicar.Text) : (double?)null,
-                    PorcentajeVenta = (!TypesHelper.IsEmpty(TxtPorcentajeVenta.Text)) ? Convert.ToDouble(TxtPorcentajeVenta.Text) : (double?)null,
-                    Duracion = (!TypesHelper.IsEmpty(TxtDuracion.Text)) ? Convert.ToInt32(TxtDuracion.Text) : (int?)null
+                    PrecioPublicar = (!TypesHelper.IsEmpty(TxtPrecioPublicar.Text) && ChkBusquedaExacta.Checked) ? Convert.ToDouble(TxtPrecioPublicar.Text) : (double?)null,
+                    PorcentajeVenta = (!TypesHelper.IsEmpty(TxtPorcentajeVenta.Text) && ChkBusquedaExacta.Checked) ? Convert.ToDouble(TxtPorcentajeVenta.Text) : (double?)null,
+                    Duracion = (!TypesHelper.IsEmpty(TxtDuracion.Text) && ChkBusquedaExacta.Checked) ? Convert.ToInt32(TxtDuracion.Text) : (int?)null
                 };
 
                 var visibilities = (ChkBusquedaExacta.Checked) ? VisibilidadPersistance.GetAllByParameters(filters) : VisibilidadPersistance.GetAllByParametersLike(filters);
@@ -216,6 +216,11 @@ namespace FrbaCommerce.Abm_Visibilidad
             {
                 MessageBox.Show(ex.Message, "Atención");
             }
+        }
+
+        private void ChkBusquedaExacta_CheckedChanged(object sender, EventArgs e)
+        {
+            TxtDuracion.Enabled = TxtPorcentajeVenta.Enabled = TxtPrecioPublicar.Enabled = ChkBusquedaExacta.Checked;        
         }
     }
 }

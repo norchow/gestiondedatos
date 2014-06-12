@@ -51,10 +51,7 @@ namespace Persistance
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
-                    new SPParameter("Precio_Publicar", filters.PrecioPublicar ?? (object)DBNull.Value),
-                    new SPParameter("Porcentaje_Venta", filters.PorcentajeVenta ?? (object)DBNull.Value),
-                    new SPParameter("Duracion", filters.Duracion ?? (object)DBNull.Value)
+                    new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value)
                 };
 
             var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPGetAllVisibilidadByParametersLike, param);
