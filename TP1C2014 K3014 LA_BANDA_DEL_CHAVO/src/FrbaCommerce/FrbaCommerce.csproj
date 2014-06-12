@@ -233,6 +233,9 @@
     <EmbeddedResource Include="Gestion de Preguntas\FrmPreguntar.resx">
       <DependentUpon>FrmPreguntar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\FrmHistorialCalificacionesOtorgadas.resx">
+      <DependentUpon>FrmHistorialCalificacionesOtorgadas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\FrmHistorialCliente.resx">
       <DependentUpon>FrmHistorialCliente.cs</DependentUpon>
     </EmbeddedResource>

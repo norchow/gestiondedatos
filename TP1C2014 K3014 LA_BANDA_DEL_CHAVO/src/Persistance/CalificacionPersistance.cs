@@ -80,7 +80,7 @@ namespace Persistance
             return sp.ExecuteReader<HistoryReputacion>();
         }
 
-                public static List<HistoryReputacion> getAllCalifiedToMeByParametersLike(Usuario user, HistoryReputacionFilters filters)
+        public static List<HistoryReputacion> getAllCalifiedToMeByParametersLike(Usuario user, HistoryReputacionFilters filters)
         {
             var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID),
                     new SPParameter("Codigo_Calificacion", filters.Codigo ?? (object)DBNull.Value),
@@ -94,7 +94,45 @@ namespace Persistance
         }
         
 
+                public static List<HistoryReputacion> getAllCalifiedByMeToOther(Usuario user)
+        {
+            var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID) };
+            var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetHistoryCalificacionesOtorgadas, param);
+            return sp.ExecuteReader<HistoryReputacion>();
+        }
 
+
+                public static List<HistoryReputacion> getAllCalifiedByMeToOtherByParameters(Usuario user, HistoryReputacionFilters filters)
+        {
+            var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID),
+                    new SPParameter("Codigo_Calificacion", filters.Codigo ?? (object)DBNull.Value),
+                    new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
+                    new SPParameter("Cantidad_Estrellas", filters.Cantidad ?? (object)DBNull.Value),
+                    new SPParameter("Nombre", filters.Nombre ?? (object)DBNull.Value)
+            
+            };
+            var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetHistoryCalificacionesOtorgadasByParameters, param);
+            return sp.ExecuteReader<HistoryReputacion>();
+        }
+
+        public static List<HistoryReputacion> getAllCalifiedByMeToOtherByParametersLike(Usuario user, HistoryReputacionFilters filters)
+        {
+            var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID),
+                    new SPParameter("Codigo_Calificacion", filters.Codigo ?? (object)DBNull.Value),
+                    new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
+                    new SPParameter("Cantidad_Estrellas", filters.Cantidad ?? (object)DBNull.Value),
+                    new SPParameter("Nombre", filters.Nombre ?? (object)DBNull.Value)
+            
+            };
+            var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetHistoryCalificacionesOtorgadasByParametersLike, param);
+            return sp.ExecuteReader<HistoryReputacion>();
+        }
+        
+
+
+        
+            
+            
 
     }
 

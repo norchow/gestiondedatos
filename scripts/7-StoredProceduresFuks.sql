@@ -218,3 +218,101 @@ END
 
 
 GO
+
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadas]
+	@idUsuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT C.Codigo_Calificacion, P.Descripcion, C.Cantidad_Estrellas,  (case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end) AS Nombre
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] AS C
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
+	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = P.ID_Usuario
+	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Empresa] AS E ON E.ID_Empresa = P.ID_Usuario
+	WHERE C.ID_Comprador = (SELECT C.ID_Cliente
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
+	WHERE C.ID_Usuario = @idUsuario)
+END
+
+
+
+
+
+
+GO
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadasByParameters]
+	@idUsuario int = NULL,
+	@Codigo_Calificacion int= NULL,
+	@Descripcion varchar(255) = NULL,
+	@Cantidad_Estrellas int = NULL,
+	@Nombre varchar(255) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT C.Codigo_Calificacion, P.Descripcion, C.Cantidad_Estrellas,  (case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end) AS Nombre
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] AS C
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
+	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = P.ID_Usuario
+	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Empresa] AS E ON E.ID_Empresa = P.ID_Usuario
+	WHERE C.ID_Comprador = (SELECT C.ID_Cliente
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
+	WHERE C.ID_Usuario = @idUsuario)
+	AND ((C.Codigo_Calificacion = @Codigo_Calificacion) OR @Codigo_Calificacion is NULL)
+	AND ((P.Descripcion = @Descripcion) OR @Descripcion is NULL)
+	AND ((C.Cantidad_Estrellas = @Cantidad_Estrellas) OR @Cantidad_Estrellas is NULL)
+	AND (((case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end) = @Nombre) OR @Nombre is NULL)
+	
+END
+
+
+
+
+
+
+GO
+
+
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadasByParametersLike]
+	@idUsuario int = NULL,
+	@Codigo_Calificacion varchar(255)= NULL,
+	@Descripcion varchar(255) = NULL,
+	@Cantidad_Estrellas varchar(255) = NULL,
+	@Nombre varchar(255) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT C.Codigo_Calificacion, P.Descripcion, C.Cantidad_Estrellas,  (case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end) AS Nombre
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] AS C
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
+	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = P.ID_Usuario
+	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Empresa] AS E ON E.ID_Empresa = P.ID_Usuario
+	WHERE C.ID_Comprador = (SELECT C.ID_Cliente
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
+	WHERE C.ID_Usuario = @idUsuario)
+	AND ((C.Codigo_Calificacion LIKE ('%' + @Codigo_Calificacion  + '%')) OR @Codigo_Calificacion is NULL)
+	AND ((P.Descripcion LIKE ('%' + @Descripcion  + '%')) OR @Descripcion is NULL)
+	AND ((C.Cantidad_Estrellas LIKE ('%' + @Cantidad_Estrellas  + '%')) OR @Cantidad_Estrellas is NULL)
+	AND (((case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end) LIKE ('%' + @Nombre  + '%')) OR @Nombre is NULL)
+	
+END
+
+
+
+
+
+
+
+GO
+

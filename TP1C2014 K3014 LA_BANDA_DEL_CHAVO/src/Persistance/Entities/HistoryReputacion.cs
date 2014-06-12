@@ -20,8 +20,9 @@ namespace Persistance.Entities
             {
                 Codigo_Calificacion = Int32.Parse(reader["Codigo_Calificacion"].ToString()),
                 Descripcion = ((String)reader["Descripcion"].ToString()),
-                Nombre = ((String)reader["Nombre"].ToString()),
-                Cantidad_Estrellas = Int32.Parse(reader["Cantidad_Estrellas"].ToString())
+                                Cantidad_Estrellas = Int32.Parse(reader["Cantidad_Estrellas"].ToString()),
+                Nombre = ((String)reader["Nombre"].ToString())
+
 
             };
         }
