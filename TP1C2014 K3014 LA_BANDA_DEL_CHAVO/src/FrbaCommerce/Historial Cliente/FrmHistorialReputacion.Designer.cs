@@ -43,6 +43,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dgvHistory = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblPromedio = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistory)).BeginInit();
             this.SuspendLayout();
@@ -210,11 +212,33 @@
             this.label1.TabIndex = 52;
             this.label1.Text = "CALIFICACIONES RECIBIDAS";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(174, 334);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(267, 16);
+            this.label4.TabIndex = 56;
+            this.label4.Text = "PROMEDIO CALIFICACIONES RECIBIDAS:";
+            // 
+            // lblPromedio
+            // 
+            this.lblPromedio.AutoSize = true;
+            this.lblPromedio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPromedio.Location = new System.Drawing.Point(438, 334);
+            this.lblPromedio.Name = "lblPromedio";
+            this.lblPromedio.Size = new System.Drawing.Size(11, 16);
+            this.lblPromedio.TabIndex = 57;
+            this.lblPromedio.Text = " ";
+            // 
             // FrmHistorialReputacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(515, 383);
+            this.Controls.Add(this.lblPromedio);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.LblListo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvHistory);
@@ -247,6 +271,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvHistory;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblPromedio;
 
     }
 }
