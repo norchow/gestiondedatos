@@ -58,14 +58,20 @@ namespace FrbaCommerce.Historial_Cliente
                 //The datasource must be all the publications not calified records stored in the database
                 _history = CalificacionPersistance.getAllCalifiedToMe(SessionManager.CurrentUser);
                 historyDictionary = _history.ToDictionary(a => a.Codigo_Calificacion, a => a);
-
-                lblPromedio.Text = _history.Average(x => x.Cantidad_Estrellas).ToString();
+                if (_history.Count > 0)
+                {
+                    lblPromedio.Text = _history.Average(x => x.Cantidad_Estrellas).ToString();
+                }
             }
             else
             {
                 //The datasource must be the list of publications not calified received as parameter
                 historyDictionary = history.ToDictionary(a => a.Codigo_Calificacion, a => a);
-                lblPromedio.Text = history.Average(x => x.Cantidad_Estrellas).ToString();
+
+                if (history.Count > 0)
+                {
+                    lblPromedio.Text = history.Average(x => x.Cantidad_Estrellas).ToString();
+                }
             }
 
             var bind = historyDictionary.Values.Select(a => new

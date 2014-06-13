@@ -120,6 +120,12 @@ namespace Persistance.Entities
             public static String SPGetHistoryComprasByUsuarioByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuarioByParametersLike";
         }
 
+        public static class Oferta
+        {
+            public static String SPGetHistoryOfertasByUsuario = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuario";
+            public static String SPGetHistoryOfertasByUsuarioByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuarioByParameters";
+            public static String SPGetHistoryOfertasByUsuarioByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuarioByParametersLike";
+        }
 
         public static class Empresa
         {

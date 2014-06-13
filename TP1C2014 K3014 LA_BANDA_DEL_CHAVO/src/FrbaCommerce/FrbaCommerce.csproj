@@ -242,6 +242,9 @@
     <EmbeddedResource Include="Historial Cliente\FrmHistorialCompras.resx">
       <DependentUpon>FrmHistorialCompras.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\FrmHistorialOfertas.resx">
+      <DependentUpon>FrmHistorialOfertas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\FrmHistorialReputacion.resx">
       <DependentUpon>FrmHistorialReputacion.cs</DependentUpon>
     </EmbeddedResource>

@@ -316,3 +316,100 @@ END
 
 GO
 
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuario]
+	@idUsuario int,
+	@Fecha_hoy datetime
+AS
+BEGIN
+SELECT O.ID_Oferta, O.Monto, O.Fecha, P.Descripcion, (CASE WHEN O.Monto = (SELECT MAX(Monto)
+FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
+WHERE ID_Publicacion=O.ID_Publicacion ) AND P.Fecha_Vencimiento < @Fecha_hoy THEN 'Si' ELSE 'No' END) AS Ganada
+FROM [LA_BANDA_DEL_CHAVO].[TL_Oferta] AS O
+INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Publicacion AS P ON O.ID_Publicacion = P.ID_Publicacion 
+INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Cliente AS CLI ON CLI.ID_Cliente = O.ID_Cliente 
+WHERE CLI.ID_Usuario = @idUsuario
+
+END
+
+
+
+
+GO
+
+
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuarioByParameters]
+	@idUsuario int = NULL,
+	@Fecha_hoy datetime = NULL,
+	@ID_Oferta int = NULL,
+	@Monto numeric (18, 2) = NULL,
+	@Fecha varchar(255) = NULL,
+	@Descripcion varchar(255) = NULL,
+	@Ganada varchar(255) = NULL
+AS
+BEGIN
+SELECT O.ID_Oferta, O.Monto, O.Fecha, P.Descripcion, (CASE WHEN O.Monto = (SELECT MAX(Monto)
+FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
+WHERE ID_Publicacion=O.ID_Publicacion ) AND P.Fecha_Vencimiento < @Fecha_hoy THEN 'Si' ELSE 'No' END) AS Ganada
+FROM [LA_BANDA_DEL_CHAVO].[TL_Oferta] AS O
+INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Publicacion AS P ON O.ID_Publicacion = P.ID_Publicacion 
+INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Cliente AS CLI ON CLI.ID_Cliente = O.ID_Cliente 
+WHERE CLI.ID_Usuario = @idUsuario
+	AND ((O.ID_Oferta  = @ID_Oferta) OR @ID_Oferta is NULL)
+	AND ((O.Monto = @Monto) OR @Monto is NULL)
+	AND ((O.Fecha = @Fecha) OR @Fecha is NULL)
+	AND ((P.Descripcion = @Descripcion) OR @Descripcion is NULL)
+	AND (((CASE WHEN O.Monto = (SELECT MAX(Monto)
+FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
+WHERE ID_Publicacion=O.ID_Publicacion ) AND P.Fecha_Vencimiento < @Fecha_hoy THEN 'Si' ELSE 'No' END) = @Ganada) OR @Ganada is NULL)
+	
+END
+
+
+
+
+
+GO
+
+
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuarioByParametersLike]
+	@idUsuario int = NULL,
+	@Fecha_hoy datetime = NULL,
+	@ID_Oferta varchar(255) = NULL,
+	@Monto varchar(255) = NULL,
+	@Fecha varchar(255) = NULL,
+	@Descripcion varchar(255) = NULL,
+	@Ganada varchar(255) = NULL
+AS
+BEGIN
+SELECT O.ID_Oferta, O.Monto, O.Fecha, P.Descripcion, (CASE WHEN O.Monto = (SELECT MAX(Monto)
+FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
+WHERE ID_Publicacion=O.ID_Publicacion ) AND P.Fecha_Vencimiento < @Fecha_hoy THEN 'Si' ELSE 'No' END) AS Ganada
+FROM [LA_BANDA_DEL_CHAVO].[TL_Oferta] AS O
+INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Publicacion AS P ON O.ID_Publicacion = P.ID_Publicacion 
+INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Cliente AS CLI ON CLI.ID_Cliente = O.ID_Cliente 
+WHERE CLI.ID_Usuario = @idUsuario
+	AND ((O.ID_Oferta  LIKE ('%'+ @ID_Oferta + '%') ) OR @ID_Oferta is NULL)
+	AND ((O.Monto LIKE ('%'+ @Monto + '%')  ) OR @Monto is NULL)
+	AND ((O.Fecha LIKE ('%'+ @Fecha + '%')) OR @Fecha is NULL)
+	AND ((P.Descripcion LIKE ('%'+ @Descripcion + '%') ) OR @Descripcion is NULL)
+	AND (((CASE WHEN O.Monto = (SELECT MAX(Monto)
+FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
+WHERE ID_Publicacion=O.ID_Publicacion ) AND P.Fecha_Vencimiento < @Fecha_hoy THEN 'Si' ELSE 'No' END) LIKE ('%'+ @Ganada + '%')) OR @Ganada is NULL)
+	
+END
+
+
+
+
+
+
+GO
+
+
