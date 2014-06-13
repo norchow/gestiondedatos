@@ -86,11 +86,9 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesRecibidasByParamete
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadas];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadasByParameters];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadasByParametersLike];
-
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuario];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuarioByParameters];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuarioByParametersLike];
-
-
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetUnansweredQuestionsByUserId];
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];

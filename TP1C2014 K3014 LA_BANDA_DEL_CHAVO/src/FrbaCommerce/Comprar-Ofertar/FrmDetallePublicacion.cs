@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Persistance;
 using Persistance.Entities;
 using FrbaCommerce.Gestion_de_Preguntas;
+using Session;
 
 namespace FrbaCommerce.Comprar_Ofertar
 {
@@ -21,8 +22,8 @@ namespace FrbaCommerce.Comprar_Ofertar
             InitializeComponent();
 
             CurrentPublication = unaPublicacion;
-
-            if (CurrentPublication.RecibirPreguntas)
+            CurrentPublication.GetObjectsById();
+            if (CurrentPublication.RecibirPreguntas && CurrentPublication.UsuarioCreador.ID!=SessionManager.CurrentUser.ID)
                 lblPreguntar.Visible = true;
             else
                 lblPreguntar.Visible = false;

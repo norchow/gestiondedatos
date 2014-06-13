@@ -25,5 +25,22 @@ namespace Persistance
 
             return question;
         }
+
+        public static List<PublicacionPregunta> GetUnansweredQuestionsByUserId(int userId)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Usuario", userId)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Pregunta.SPGetUnansweredByUserId, param);
+
+            var preguntas = sp.ExecuteReader<PublicacionPregunta>();
+
+            if (preguntas == null || preguntas.Count == 0)
+                return null;
+
+            return preguntas;
+        }
     }
 }

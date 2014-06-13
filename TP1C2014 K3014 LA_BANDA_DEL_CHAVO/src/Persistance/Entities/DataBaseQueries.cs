@@ -137,6 +137,7 @@ namespace Persistance.Entities
         public static class Pregunta
         {
             public static String SPInsertQuestion = "LA_BANDA_DEL_CHAVO.InsertQuestion";
+            public static String SPGetUnansweredByUserId = "LA_BANDA_DEL_CHAVO.GetUnansweredQuestionsByUserId";
         }
     }
 }

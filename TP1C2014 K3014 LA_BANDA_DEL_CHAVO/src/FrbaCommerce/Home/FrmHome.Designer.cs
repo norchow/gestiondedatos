@@ -40,6 +40,7 @@
             this.listadoDePublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historialClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.responderPreguntasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +93,8 @@
             this.calificarVendedorToolStripMenuItem,
             this.generarPublicacionesToolStripMenuItem,
             this.editarMisPublicacionesToolStripMenuItem,
-            this.listadoDePublicacionesToolStripMenuItem});
+            this.listadoDePublicacionesToolStripMenuItem,
+            this.responderPreguntasToolStripMenuItem});
             this.juliaToolStripMenuItem.Name = "juliaToolStripMenuItem";
             this.juliaToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.juliaToolStripMenuItem.Text = "Publicaciones";
@@ -141,6 +143,13 @@
             this.historialClienteToolStripMenuItem.Text = "Historial Cliente";
             this.historialClienteToolStripMenuItem.Click += new System.EventHandler(this.historialClienteToolStripMenuItem_Click);
             // 
+            // responderPreguntasToolStripMenuItem
+            // 
+            this.responderPreguntasToolStripMenuItem.Name = "responderPreguntasToolStripMenuItem";
+            this.responderPreguntasToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.responderPreguntasToolStripMenuItem.Text = "Responder preguntas";
+            this.responderPreguntasToolStripMenuItem.Click += new System.EventHandler(this.responderPreguntasToolStripMenuItem_Click);
+            // 
             // FrmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +180,7 @@
         private System.Windows.Forms.ToolStripMenuItem listadoDePublicacionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem estadisticasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem historialClienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem responderPreguntasToolStripMenuItem;
 
 
     }

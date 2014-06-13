@@ -60,6 +60,7 @@
     <Compile Include="Entities\Funcionalidad.cs" />
     <Compile Include="Entities\IMapable.cs" />
     <Compile Include="Entities\Publicacion.cs" />
+    <Compile Include="Entities\PublicacionPregunta.cs" />
     <Compile Include="Entities\Respuesta.cs" />
     <Compile Include="Entities\Rol.cs" />
     <Compile Include="Entities\Rubro.cs" />

@@ -14,6 +14,7 @@ using FrbaCommerce.Generar_Publicacion;
 using FrbaCommerce.Editar_Publicacion;
 using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Historial_Cliente;
+using FrbaCommerce.Gestion_de_Preguntas;
 
 namespace FrbaCommerce.Home
 {
@@ -75,6 +76,12 @@ namespace FrbaCommerce.Home
         {
             var frmHistorialCliemte = new FrmHistorialCliente();
             frmHistorialCliemte.ShowDialog();
+        }
+
+        private void responderPreguntasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmResponderPreguntas = new FrmResponderPreguntas();
+            frmResponderPreguntas.ShowDialog();
         }
     }
 }
