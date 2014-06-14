@@ -112,6 +112,7 @@ namespace Persistance.Entities
             public static String SPGetClientByPhone = "LA_BANDA_DEL_CHAVO.GetClientByPhone";
             public static String SPGetClientByDocument = "LA_BANDA_DEL_CHAVO.GetClientByDocument";
             public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
+            public static String SPGetClientByUserId = "LA_BANDA_DEL_CHAVO.GetClientByUserId";
         }
 
         public static class Compra
@@ -128,6 +129,8 @@ namespace Persistance.Entities
             public static String SPGetHistoryOfertasByUsuario = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuario";
             public static String SPGetHistoryOfertasByUsuarioByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuarioByParameters";
             public static String SPGetHistoryOfertasByUsuarioByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuarioByParametersLike";
+            public static String SPGetLastOfertaByPublication = "LA_BANDA_DEL_CHAVO.GetLastOfertaByPublication";
+            public static String SPInsertOffer = "LA_BANDA_DEL_CHAVO.InsertOffer";
         }
 
         public static class Empresa
@@ -135,6 +138,7 @@ namespace Persistance.Entities
             public static String SPGetCompanyByBusinessName = "LA_BANDA_DEL_CHAVO.GetCompanyByBusinessName";
             public static String SPGetCompanyByCUIT = "LA_BANDA_DEL_CHAVO.GetCompanyByCUIT";
             public static String SPInsertCompany = "LA_BANDA_DEL_CHAVO.InsertCompany";
+            public static String SPGetCompanyByUserId = "LA_BANDA_DEL_CHAVO.GetCompanyByUserId";
         }
 
         public static class Pregunta

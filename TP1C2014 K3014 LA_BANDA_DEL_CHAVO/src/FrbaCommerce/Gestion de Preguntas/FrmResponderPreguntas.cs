@@ -84,7 +84,7 @@ namespace FrbaCommerce.Gestion_de_Preguntas
                 });
 
                 DgvPreguntas.DataSource = bind.ToList();
-                DgvPreguntas.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                DgvPreguntas.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 AddButtonsColumns();
             }
         }

@@ -55,6 +55,7 @@
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Empresa.cs" />
     <Compile Include="Entities\ItemFactura.cs" />
+    <Compile Include="Entities\Oferta.cs" />
     <Compile Include="Entities\Pregunta.cs" />
     <Compile Include="Entities\PreguntaRespuesta.cs" />
     <Compile Include="Entities\PublicacionNotCalified.cs" />
