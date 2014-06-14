@@ -37,5 +37,55 @@ namespace Tools
                 return false;
             }
         }
+
+        public static bool IsCUITValid(string value)
+        {
+            if (value.Length == 0) return false;
+
+			var CUITValidado = string.Empty;
+			bool Valido = false;
+
+			for(int i = 0; i < value.Length; i++)
+			{
+                var Ch = value[i];
+				if ((Ch > 47) && (Ch < 58))
+				{
+					CUITValidado = CUITValidado + Ch;
+				}
+			}
+
+            value = CUITValidado;
+            Valido = (value.Length == 11);
+			if (Valido)
+			{
+                int Verificador = FindVerifier(value);
+                Valido = (value[10].ToString() == Verificador.ToString());
+			}
+ 
+			return Valido;
+        }
+
+        private static int FindVerifier(string CUIT)
+        {
+            int Sumador = 0;
+            int Producto = 0;
+            int Coeficiente = 0;
+            int Resta = 5;
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 4) Resta = 11;
+                Producto = CUIT[i];
+                Producto -= 48;
+                Coeficiente = Resta - i;
+                Producto = Producto * Coeficiente;
+                Sumador = Sumador + Producto;
+            }
+
+            int Resultado = Sumador - (11 * (Sumador / 11));
+            Resultado = 11 - Resultado;
+
+            if (Resultado == 11) return 0;
+            else return Resultado;
+        }		
     }
 }
