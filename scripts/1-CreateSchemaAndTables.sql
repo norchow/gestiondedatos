@@ -7,7 +7,8 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario](
 	[Password] nvarchar (64) NOT NULL,
 	[Intentos_Fallidos] int DEFAULT 0,
 	[Pass_Temporal] bit DEFAULT 0,
-	[Activo] bit DEFAULT 1
+	[Activo] bit DEFAULT 1,
+	[Habilitado] bit DEFAULT 1
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rol](
