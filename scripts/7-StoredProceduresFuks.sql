@@ -11,55 +11,105 @@ GO
 
 
 
+
 CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParametersLike]
 @idUsuario numeric(18,2) = NULL,
+@Fecha_hoy datetime = NULL,
 @CodigoPublicacion nvarchar(255) = NULL,
 @Descripcion nvarchar(255) = NULL,
-@Precio nvarchar(255) = NULL,
-@Vendedor nvarchar(255) = NULL
+@Precio nvarchar(255) = NULL
 AS
 BEGIN
-SELECT  DISTINCT C.ID_Publicacion, P.Descripcion, '$' + CAST(P.Precio AS varchar(10)) AS Precio, (case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end) AS Nombre
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Publicacion] P
-	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Compra] C ON C.ID_Publicacion  = P.ID_Publicacion
-	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Empresa] E ON P.ID_Usuario = E.ID_Usuario
-	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] CLI ON P.ID_Usuario = CLI.ID_Usuario
-	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Calificacion] CA ON CA.ID_Publicacion = P.ID_Publicacion
-	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] CLIE ON CLIE.ID_Cliente = C.ID_Cliente
-	WHERE CLIE.ID_Usuario = @idUsuario AND CA.ID_Publicacion IS NULL AND P.ID_Tipo_Publicacion = 1
+
+SELECT C.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
+FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Compra C ON C.ID_Publicacion  = P.ID_Publicacion
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente CLI ON C.ID_Cliente = CLI.ID_Cliente
+WHERE CLI.ID_Usuario=@idUsuario
+AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
+				WHERE CAL.ID_Comprador=(SELECT C.ID_Cliente
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
+	WHERE C.ID_Usuario = @idUsuario) AND CAL.ID_Publicacion = C.ID_Publicacion)
 	AND ((C.ID_Publicacion LIKE ('%' + @CodigoPublicacion + '%')) OR @CodigoPublicacion is NULL)
 	AND ((LOWER(P.Descripcion) LIKE ('%' + @Descripcion + '%')) OR @Descripcion is NULL)
 	AND ((P.Precio LIKE ('%' + @Precio + '%')) OR @Precio is NULL)
-	AND ((LOWER(case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end) LIKE ('%' + LOWER(@Vendedor) + '%')) OR @Vendedor is NULL)
-	ORDER BY Precio ASC
+				
+UNION
+
+SELECT O.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
+FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Oferta O ON O.ID_Publicacion  = P.ID_Publicacion
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente CLI ON O.ID_Cliente = CLI.ID_Cliente
+WHERE CLI.ID_Usuario=@idUsuario 
+AND O.Monto = (	SELECT MAX(Monto)
+							FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
+							WHERE ID_Publicacion=O.ID_Publicacion ) 
+AND P.Fecha_Vencimiento < @Fecha_hoy
+AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
+				WHERE CAL.ID_Comprador=(SELECT C.ID_Cliente
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
+	WHERE C.ID_Usuario = @idUsuario) AND CAL.ID_Publicacion = O.ID_Publicacion)
+	AND ((O.ID_Publicacion LIKE ('%' + @CodigoPublicacion + '%')) OR @CodigoPublicacion is NULL)
+	AND ((LOWER(P.Descripcion) LIKE ('%' + @Descripcion + '%')) OR @Descripcion is NULL)
+	AND ((P.Precio LIKE ('%' + @Precio + '%')) OR @Precio is NULL)
+
+
+
+
+
+
+
+
+
 END
+
 GO
+
 
 CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParameters]
 @idUsuario numeric(18,2) = NULL,
+@Fecha_hoy datetime = NULL,
 @CodigoPublicacion numeric(18,2) = NULL,
 @Descripcion nvarchar(255) = NULL,
-@Precio numeric(18,2) = NULL,
-@Vendedor nvarchar(255) = NULL
+@Precio numeric(18,2) = NULL
 AS
 BEGIN
-SELECT  DISTINCT C.ID_Publicacion, P.Descripcion, '$' + CAST(P.Precio AS varchar(10)) AS Precio, (case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end) AS Nombre
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Publicacion] P
-	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Compra] C ON C.ID_Publicacion  = P.ID_Publicacion
-	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Empresa] E ON P.ID_Usuario = E.ID_Usuario
-	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] CLI ON P.ID_Usuario = CLI.ID_Usuario
-	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Calificacion] CA ON CA.ID_Publicacion = P.ID_Publicacion
-	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] CLIE ON CLIE.ID_Cliente = C.ID_Cliente
-	WHERE CLIE.ID_Usuario = @idUsuario AND CA.ID_Publicacion IS NULL AND P.ID_Tipo_Publicacion = 1
+SELECT C.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
+FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Compra C ON C.ID_Publicacion  = P.ID_Publicacion
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente CLI ON C.ID_Cliente = CLI.ID_Cliente
+WHERE CLI.ID_Usuario=@idUsuario
+AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
+				WHERE CAL.ID_Comprador=(SELECT C.ID_Cliente
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
+	WHERE C.ID_Usuario = @idUsuario) AND CAL.ID_Publicacion = C.ID_Publicacion)
 	AND ((C.ID_Publicacion = @CodigoPublicacion) OR @CodigoPublicacion is NULL)
 	AND ((LOWER(P.Descripcion) = LOWER(@Descripcion)) OR @Descripcion is NULL)
 	AND ((P.Precio = @Precio) OR @Precio is NULL)
-	AND ((LOWER((case when CLI.ID_Usuario IS NULL then E.Razon_Social else CLI.Apellido + ', ' + CLI.Nombre end)) = LOWER(@Vendedor)) OR @Vendedor is NULL)
-	ORDER BY Precio ASC
-	
-END
-GO
+					
+UNION
 
+SELECT O.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
+FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Oferta O ON O.ID_Publicacion  = P.ID_Publicacion
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente CLI ON O.ID_Cliente = CLI.ID_Cliente
+WHERE CLI.ID_Usuario=@idUsuario 
+AND O.Monto = (	SELECT MAX(Monto)
+							FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
+							WHERE ID_Publicacion=O.ID_Publicacion ) 
+AND P.Fecha_Vencimiento < @Fecha_hoy
+AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
+				WHERE CAL.ID_Comprador=(SELECT C.ID_Cliente
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
+	WHERE C.ID_Usuario = @idUsuario) AND CAL.ID_Publicacion = O.ID_Publicacion)
+	AND ((O.ID_Publicacion = @CodigoPublicacion) OR @CodigoPublicacion is NULL)
+	AND ((LOWER(P.Descripcion) = LOWER(@Descripcion)) OR @Descripcion is NULL)
+	AND ((P.Precio = @Precio) OR @Precio is NULL)
+	
+
+END
+
+GO
 
 
 

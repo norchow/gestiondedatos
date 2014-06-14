@@ -12,7 +12,6 @@ namespace Persistance.Entities
         public int ID { get; set; }
         public string Descripcion { get; set; }
         public string Precio { get; set; }
-        public string NombreVendedor { get; set; }
 
 
         //Implement of IMapable
@@ -22,8 +21,7 @@ namespace Persistance.Entities
             {
                 ID = Int32.Parse(reader["ID_Publicacion"].ToString()),
                 Descripcion = ((String)reader["Descripcion"]).Trim(),
-                Precio = ((String)reader["Precio"]).Trim(),
-                NombreVendedor = ((String)reader["Nombre"]).Trim()
+                Precio = ((String)reader["Precio"]).Trim()
             };
         }
 

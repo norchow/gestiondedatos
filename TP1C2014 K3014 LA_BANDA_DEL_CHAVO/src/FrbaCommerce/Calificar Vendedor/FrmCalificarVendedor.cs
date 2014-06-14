@@ -54,8 +54,7 @@ namespace FrbaCommerce.Calificar_Vendedor
             {
                 Codigo = a.ID,
                 Descripcion = a.Descripcion,
-                Precio = a.Precio,
-                Vendedor = a.NombreVendedor
+                Precio = a.Precio
             });
 
             dgvPublicaciones.DataSource = bind.ToList();
@@ -226,7 +225,6 @@ namespace FrbaCommerce.Calificar_Vendedor
             txtCodigo.Text = "";
             txtDesc.Text = "";
             txtPrecio.Text = "";
-            txtVendedor.Text = "";
             RefreshSources(null);
         }
 
@@ -262,12 +260,6 @@ namespace FrbaCommerce.Calificar_Vendedor
                         exceptionMessage += Environment.NewLine + "El precio de la publicacion ser decimal (o numérico).";
                 }
 
-                if (!TypesHelper.IsEmpty(txtVendedor.Text))
-                {
-                    filtersSetted = true;
-                }
-
-
 
                 if (!filtersSetted)
                     exceptionMessage = "No se puede realizar la busqueda ya que no se informó ningún filtro";
@@ -282,8 +274,7 @@ namespace FrbaCommerce.Calificar_Vendedor
                     Codigo = (!TypesHelper.IsEmpty(txtCodigo.Text)) ? Convert.ToInt32(txtCodigo.Text) : (int?) null,
                     Descripcion = (!TypesHelper.IsEmpty(txtDesc.Text)) ? txtDesc.Text : null,
                     Precio = (!TypesHelper.IsEmpty(txtPrecio.Text)) ? Convert.ToDouble(txtPrecio.Text) : (double?)null,
-                    Vendedor = (!TypesHelper.IsEmpty(txtVendedor.Text)) ? txtVendedor.Text : null
-                };
+                    };
 
                 var pubNotCalified = (cBExact.Checked) ? CalificacionPersistance.GetAllPubicacionNotCalifiedByParameters(filters, SessionManager.CurrentUser) : CalificacionPersistance.GetAllPubicacionNotCalifiedByParametersLike(filters, SessionManager.CurrentUser);
 
