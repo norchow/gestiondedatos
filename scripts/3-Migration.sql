@@ -142,7 +142,7 @@ BEGIN TRANSACTION
 		SELECT [Calificacion_Codigo],
 			   [Publicacion_Cod],
 			   (SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE CONVERT(nvarchar(255), Cli_Dni) = U.Username),
-		       [Calificacion_Cant_Estrellas],
+		       CAST(ROUND([Calificacion_Cant_Estrellas]/2,0) AS INT),
 		       [Calificacion_Descripcion]
 		FROM gd_esquema.Maestra
 		WHERE [Calificacion_Codigo] IS NOT NULL)
