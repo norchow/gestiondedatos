@@ -185,11 +185,12 @@ INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago] (Descripcion) (
 COMMIT
 
 BEGIN TRANSACTION 
-INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Factura] (Numero, Fecha, Total, ID_Forma_Pago) (
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Factura] (Numero, Fecha, Total, ID_Forma_Pago, ID_Usuario) (
 	SELECT DISTINCT [Factura_Nro],
 	 [Factura_Fecha],
 	 [Factura_Total],
-	 (SELECT ID_Forma_Pago FROM LA_BANDA_DEL_CHAVO.TL_Forma_Pago FP WHERE FP.Descripcion=[Forma_Pago_Desc])
+	 (SELECT ID_Forma_Pago FROM LA_BANDA_DEL_CHAVO.TL_Forma_Pago FP WHERE FP.Descripcion=[Forma_Pago_Desc]),
+	 (SELECT U.ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE U.Username = CONVERT(nvarchar(255),[Publ_Cli_Dni]) OR U.Username = [Publ_Empresa_Cuit])
 	FROM [gd_esquema].[Maestra]
 	WHERE [Factura_Fecha] IS NOT NULL)
 COMMIT

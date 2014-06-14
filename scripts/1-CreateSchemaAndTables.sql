@@ -174,7 +174,8 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Factura] (
 	[Numero] numeric(18, 0) UNIQUE NOT NULL,
 	[Fecha] datetime NOT NULL,
 	[Total] numeric(18, 2) NOT NULL,
-	[ID_Forma_Pago] int NOT NULL
+	[ID_Forma_Pago] int NOT NULL,
+	[ID_Usuario] int NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (
