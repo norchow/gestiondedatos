@@ -112,5 +112,24 @@ namespace Persistance.Entities
         {
             public static String SPInsertQuestion = "LA_BANDA_DEL_CHAVO.InsertQuestion";
         }
+
+        public static class Factura
+        {
+            public static String SPGetUltimoNumeroFactura = "LA_BANDA_DEL_CHAVO.GetUltimoNumeroFactura";
+            public static String SPGetFacturaByPublicationId = "LA_BANDA_DEL_CHAVO.GetFacturaByPublicacionId";
+            public static String SPInsertFactura = "LA_BANDA_DEL_CHAVO.InsertFactura";
+        }
+
+        public static class Compra
+        {
+            public static String SPGetAllCompraByPublicationId = "LA_BANDA_DEL_CHAVO.GetAllCompraByPublicacionId";
+            public static String SPGetCantidadComprasByPublicationIdGroupByClient = "LA_BANDA_DEL_CHAVO.GetCantidadComprasByPublicationIdGroupByClient";
+        }
+
+        public static class ItemFactura
+        {
+            public static String SPGetAllItemFacturaByFacturaId = "LA_BANDA_DEL_CHAVO.GetAllItemFacturaByFacturaId";
+            public static String SPInsertItemFactura = "LA_BANDA_DEL_CHAVO.InsertItemFactura";
+        }
     }
 }

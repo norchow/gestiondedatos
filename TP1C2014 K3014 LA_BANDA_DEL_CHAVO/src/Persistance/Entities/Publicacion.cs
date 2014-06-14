@@ -31,6 +31,8 @@ namespace Persistance.Entities
 
         public List<Rubro> Rubros { get; set; }
 
+        public List<Compra> Compras { get; set; }
+
         public bool RecibirPreguntas { get; set; }
 
         private int _usuarioCreador;
@@ -44,6 +46,7 @@ namespace Persistance.Entities
         public Publicacion()
         {
             Rubros = new List<Rubro>();
+            Compras = new List<Compra>();
         }
 
         //Implement of IMapable
@@ -77,6 +80,7 @@ namespace Persistance.Entities
             EstadoPublicacion = EstadoPublicacionPersistance.GetById(_estadoPublicacion);
             TipoPublicacion = TipoPublicacionPersistance.GetById(_tipoPublicacion);
             Rubros = RubroPersistance.GetByPublicationId(ID);
+            Compras = CompraPersistance.GetByPublicationId(ID);
         }
     }
 }
