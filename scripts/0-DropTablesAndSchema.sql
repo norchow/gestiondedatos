@@ -90,5 +90,7 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuario];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuarioByParameters];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuarioByParametersLike];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetUnansweredQuestionsByUserId];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertAnswer];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetQuestionsAndAnswersById];
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];

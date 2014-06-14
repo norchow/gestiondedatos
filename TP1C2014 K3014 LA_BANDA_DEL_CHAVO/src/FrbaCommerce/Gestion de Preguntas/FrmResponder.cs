@@ -33,5 +33,26 @@ namespace FrbaCommerce.Gestion_de_Preguntas
         {
             Close();
         }
+
+        private void LblResponder_Click(object sender, EventArgs e)
+        {
+            if (txtRespuesta.Text != "")
+            {
+                var dialogAnswer = MessageBox.Show("Esta seguro que quiere enviar la respuesta?", "Atencion", MessageBoxButtons.YesNo);
+                if (dialogAnswer == DialogResult.Yes)
+                {
+                    Respuesta respuestaNueva = new Respuesta();
+                    respuestaNueva.IdPregunta = CurrentPublicationQuestion.ID_Pregunta;
+                    respuestaNueva.Texto = txtRespuesta.Text;
+                    RespuestaPersistance.InsertAnswer(respuestaNueva, null);
+                    CompleteAction = true;
+                    Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar un texto en la pregunta", "Atención");
+            }
+        }
     }
 }

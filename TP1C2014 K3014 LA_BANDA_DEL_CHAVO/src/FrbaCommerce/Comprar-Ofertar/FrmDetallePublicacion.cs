@@ -37,6 +37,32 @@ namespace FrbaCommerce.Comprar_Ofertar
             lblDescripcion.Text = CurrentPublication.Descripcion;
             lblPrecio.Text = CurrentPublication.Precio.ToString();//LA SUBASTA DEBERÍA TRAER LA ULTIMA OFERTA
             lblStock.Text = CurrentPublication.Stock.ToString();
+
+            if (CurrentPublication.RecibirPreguntas)
+            {
+                var questionAnswerDictionary = new Dictionary<int, PreguntaRespuesta>();
+
+                #region Get the dictionary of questions and answers
+
+                List<PreguntaRespuesta> _questionanswers = PublicacionPersistance.GetQuestionsAndAnswersById(CurrentPublication.ID);
+                questionAnswerDictionary = _questionanswers.ToDictionary(a => a.IdPregunta, a => a);
+                
+                #endregion
+
+                var bind = questionAnswerDictionary.Values.Select(a => new
+                {
+                    Pregunta = a.TextoPregunta,
+                    Respuesta = a.TextoRespuesta
+                });
+
+                DgvPreguntasRespuestas.DataSource = bind.ToList();
+                DgvPreguntasRespuestas.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            else 
+            {
+                lblPreguntasText.Visible = false;
+                DgvPreguntasRespuestas.Visible = false;
+            }
         }
 
         private void lblPreguntar_Click(object sender, EventArgs e)

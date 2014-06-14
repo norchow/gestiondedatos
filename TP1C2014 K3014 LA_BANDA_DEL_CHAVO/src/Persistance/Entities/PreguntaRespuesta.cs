@@ -6,22 +6,22 @@ using System.Data.SqlClient;
 
 namespace Persistance.Entities
 {
-    public class Respuesta : IMapable
+    public class PreguntaRespuesta : IMapable
     {
-        public int ID { get; set; }
         public int IdPregunta { get; set; }
-        public string Texto { get; set; }
-        public DateTime Fecha { get; set; }
+        public string TextoPregunta { get; set; }
+        public int IdRespuesta { get; set; }
+        public string TextoRespuesta { get; set; }
 
         //Implement of IMapable
         public IMapable Map(SqlDataReader reader)
         {
-            return new Respuesta
+            return new PreguntaRespuesta
             {
-                ID = Int32.Parse(reader["ID_Respuesta"].ToString()),
                 IdPregunta = Int32.Parse(reader["ID_Pregunta"].ToString()),
-                Texto = ((String)reader["Texto"]).Trim(), 
-                Fecha = DateTime.Parse(reader["Fecha"].ToString())
+                TextoPregunta = ((String)reader["TextoPregunta"]).Trim(),
+                IdRespuesta = Int32.Parse(reader["ID_Respuesta"].ToString()),
+                TextoRespuesta = ((String)reader["TextoRespuesta"]).Trim()
             };
         }
 

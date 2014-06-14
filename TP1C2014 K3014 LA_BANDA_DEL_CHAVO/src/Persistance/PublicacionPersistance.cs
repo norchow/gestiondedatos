@@ -242,5 +242,18 @@ namespace Persistance
 
             return sp.ExecuteReader<Publicacion>();
         }
+
+        public static List<PreguntaRespuesta> GetQuestionsAndAnswersById(int IdPublicacion)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Publicacion", IdPublicacion)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetQuestionsAndAnswersById, param);
+
+            return sp.ExecuteReader<PreguntaRespuesta>();
+        }
+        
     }
 }

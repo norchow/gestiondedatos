@@ -53,6 +53,7 @@
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Empresa.cs" />
     <Compile Include="Entities\Pregunta.cs" />
+    <Compile Include="Entities\PreguntaRespuesta.cs" />
     <Compile Include="Entities\PublicacionNotCalified.cs" />
     <Compile Include="Entities\DataBaseManager.cs" />
     <Compile Include="Entities\DataBaseQueries.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="PreguntaPersistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicacionPersistance.cs" />
+    <Compile Include="RespuestaPersistance.cs" />
     <Compile Include="RolPersistance.cs" />
     <Compile Include="RubroPersistance.cs" />
     <Compile Include="TipoDocumentoPersistance.cs" />

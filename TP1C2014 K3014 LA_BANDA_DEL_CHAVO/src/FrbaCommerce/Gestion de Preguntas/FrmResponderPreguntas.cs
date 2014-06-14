@@ -64,23 +64,29 @@ namespace FrbaCommerce.Gestion_de_Preguntas
 
         private void RefreshSources()
         {
+            DgvPreguntas.DataSource = null;
+            DgvPreguntas.Columns.Clear();
+
             var questionsDictionary = new Dictionary<int, PublicacionPregunta>();
 
             _questions = PreguntaPersistance.GetUnansweredQuestionsByUserId(SessionManager.CurrentUser.ID);
 
-            questionsDictionary = _questions.ToDictionary(a => a.ID_Pregunta, a => a);
-
-            var bind = questionsDictionary.Values.Select(a => new
+            if (_questions != null)
             {
-                ID_Publicacion = a.ID_Publicacion,
-                Descripcion = a.Descripcion,
-                ID_Pregunta = a.ID_Pregunta,
-                Texto = a.Texto
-            });
+                questionsDictionary = _questions.ToDictionary(a => a.ID_Pregunta, a => a);
 
-            DgvPreguntas.DataSource = bind.ToList();
-            DgvPreguntas.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            AddButtonsColumns();
+                var bind = questionsDictionary.Values.Select(a => new
+                {
+                    ID_Publicacion = a.ID_Publicacion,
+                    Descripcion = a.Descripcion,
+                    ID_Pregunta = a.ID_Pregunta,
+                    Texto = a.Texto
+                });
+
+                DgvPreguntas.DataSource = bind.ToList();
+                DgvPreguntas.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                AddButtonsColumns();
+            }
         }
 
     }

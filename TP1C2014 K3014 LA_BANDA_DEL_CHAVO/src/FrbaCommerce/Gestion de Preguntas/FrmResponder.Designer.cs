@@ -63,6 +63,7 @@
             this.LblResponder.TabIndex = 48;
             this.LblResponder.Text = "RESPONDER";
             this.LblResponder.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblResponder.Click += new System.EventHandler(this.LblResponder_Click);
             // 
             // txtRespuesta
             // 

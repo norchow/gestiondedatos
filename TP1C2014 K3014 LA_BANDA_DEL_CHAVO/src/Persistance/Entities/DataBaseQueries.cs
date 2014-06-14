@@ -74,6 +74,7 @@ namespace Persistance.Entities
             public static String SPGetAllActive = "LA_BANDA_DEL_CHAVO.GetAllPublicationActive";
             public static String SPGetAllPublicacionByParameters = "LA_BANDA_DEL_CHAVO.GetAllPublicacionByParameters";
             public static String SPGetAllPublicacionByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllPublicacionByParametersLike";
+            public static String SPGetQuestionsAndAnswersById = "LA_BANDA_DEL_CHAVO.GetQuestionsAndAnswersById";
         }
 
         public static class Calificacion
@@ -138,6 +139,11 @@ namespace Persistance.Entities
         {
             public static String SPInsertQuestion = "LA_BANDA_DEL_CHAVO.InsertQuestion";
             public static String SPGetUnansweredByUserId = "LA_BANDA_DEL_CHAVO.GetUnansweredQuestionsByUserId";
+        }
+
+        public static class Respuesta
+        {
+            public static String SPInsertAnswer = "LA_BANDA_DEL_CHAVO.InsertAnswer";
         }
     }
 }
