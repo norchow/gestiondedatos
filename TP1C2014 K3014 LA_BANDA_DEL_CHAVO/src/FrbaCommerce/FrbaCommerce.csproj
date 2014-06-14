@@ -132,11 +132,47 @@
     <Compile Include="Gestion de Preguntas\FrmPreguntar.Designer.cs">
       <DependentUpon>FrmPreguntar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Historial Cliente\FrmHistorialCliemte.cs">
+    <Compile Include="Gestion de Preguntas\FrmResponder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Historial Cliente\FrmHistorialCliemte.Designer.cs">
-      <DependentUpon>FrmHistorialCliemte.cs</DependentUpon>
+    <Compile Include="Gestion de Preguntas\FrmResponder.Designer.cs">
+      <DependentUpon>FrmResponder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\FrmResponderPreguntas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\FrmResponderPreguntas.Designer.cs">
+      <DependentUpon>FrmResponderPreguntas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialCalificacionesOtorgadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialCalificacionesOtorgadas.Designer.cs">
+      <DependentUpon>FrmHistorialCalificacionesOtorgadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialCompras.Designer.cs">
+      <DependentUpon>FrmHistorialCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialCliente.Designer.cs">
+      <DependentUpon>FrmHistorialCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialOfertas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialOfertas.Designer.cs">
+      <DependentUpon>FrmHistorialOfertas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialReputacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historial Cliente\FrmHistorialReputacion.Designer.cs">
+      <DependentUpon>FrmHistorialReputacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Home\FrmHome.cs">
       <SubType>Form</SubType>
@@ -208,6 +244,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion de Preguntas\FrmPreguntar.resx">
       <DependentUpon>FrmPreguntar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\FrmResponder.resx">
+      <DependentUpon>FrmResponder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\FrmResponderPreguntas.resx">
+      <DependentUpon>FrmResponderPreguntas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\FrmHistorialCalificacionesOtorgadas.resx">
+      <DependentUpon>FrmHistorialCalificacionesOtorgadas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\FrmHistorialCliente.resx">
+      <DependentUpon>FrmHistorialCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\FrmHistorialCompras.resx">
+      <DependentUpon>FrmHistorialCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\FrmHistorialOfertas.resx">
+      <DependentUpon>FrmHistorialOfertas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\FrmHistorialReputacion.resx">
+      <DependentUpon>FrmHistorialReputacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>

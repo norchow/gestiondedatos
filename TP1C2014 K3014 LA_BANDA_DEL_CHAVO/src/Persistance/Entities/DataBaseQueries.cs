@@ -39,8 +39,8 @@ namespace Persistance.Entities
             public static String SPInsertVisibilidad = "LA_BANDA_DEL_CHAVO.InsertVisibilidad";
             public static String SPUpdateVisibilidad = "LA_BANDA_DEL_CHAVO.UpdateVisibilidad";
             public static String SPGetVisibilidadById = "LA_BANDA_DEL_CHAVO.GetVisibilidadById";
-            public static String SPGetAllVisibilidadByParameters = "LA_BANDA_DEL_CHAVO.GetAllVisibilitidadByParameters";
-            public static String SPGetAllVisibilidadByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllVisibilitidadByParametersLike";
+            public static String SPGetAllVisibilidadByParameters = "LA_BANDA_DEL_CHAVO.GetAllVisibilidadByParameters";
+            public static String SPGetAllVisibilidadByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllVisibilidadByParametersLike";
         }
 
         public static class TipoPublicacion
@@ -72,6 +72,9 @@ namespace Persistance.Entities
             public static String SPGetPublicacionesARendirByUser = "LA_BANDA_DEL_CHAVO.GetPublicacionesARendirByUser";
             public static String SPGetPublicacionesMasAntiguasARendirByUser = "LA_BANDA_DEL_CHAVO.GetPublicacionesMasAntiguasARendirByUser";
             public static String SPGetAllActive = "LA_BANDA_DEL_CHAVO.GetAllPublicationActive";
+            public static String SPGetAllPublicacionByParameters = "LA_BANDA_DEL_CHAVO.GetAllPublicacionByParameters";
+            public static String SPGetAllPublicacionByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllPublicacionByParametersLike";
+            public static String SPGetQuestionsAndAnswersById = "LA_BANDA_DEL_CHAVO.GetQuestionsAndAnswersById";
         }
 
         public static class Calificacion
@@ -80,6 +83,16 @@ namespace Persistance.Entities
             public static String SPGetNotCalifiedByClientId = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByCliente";
             public static String SPGetNotCalifiedByClientIdByParameters = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParameters";
             public static String SPGetNotCalifiedByClientIdByParametersLike = "LA_BANDA_DEL_CHAVO.GetComprasNotCalificadaByClienteByParametersLike";
+            public static String SPGetHistoryCalificacionesRecibidas = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidas";
+            public static String SPGetHistoryCalificacionesRecibidasByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidasByParameters";
+            public static String SPGetHistoryCalificacionesRecibidasByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidasByParametersLike";
+
+
+            public static String SPGetHistoryCalificacionesOtorgadas = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesOtorgadas";
+            public static String SPGetHistoryCalificacionesOtorgadasByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesOtorgadasByParameters";
+            public static String SPGetHistoryCalificacionesOtorgadasByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesOtorgadasByParametersLike";
+           
+           
         }
 
 
@@ -101,6 +114,22 @@ namespace Persistance.Entities
             public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
         }
 
+        public static class Compra
+        {
+            public static String SPGetHistoryComprasByUsuario = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuario";
+            public static String SPGetHistoryComprasByUsuarioByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuarioByParameters";
+            public static String SPGetHistoryComprasByUsuarioByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuarioByParametersLike";
+            public static String SPGetAllCompraByPublicationId = "LA_BANDA_DEL_CHAVO.GetAllCompraByPublicacionId";
+            public static String SPGetCantidadComprasByPublicationIdGroupByClient = "LA_BANDA_DEL_CHAVO.GetCantidadComprasByPublicationIdGroupByClient";
+        }
+
+        public static class Oferta
+        {
+            public static String SPGetHistoryOfertasByUsuario = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuario";
+            public static String SPGetHistoryOfertasByUsuarioByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuarioByParameters";
+            public static String SPGetHistoryOfertasByUsuarioByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryOfertasByUsuarioByParametersLike";
+        }
+
         public static class Empresa
         {
             public static String SPGetCompanyByBusinessName = "LA_BANDA_DEL_CHAVO.GetCompanyByBusinessName";
@@ -111,6 +140,12 @@ namespace Persistance.Entities
         public static class Pregunta
         {
             public static String SPInsertQuestion = "LA_BANDA_DEL_CHAVO.InsertQuestion";
+            public static String SPGetUnansweredByUserId = "LA_BANDA_DEL_CHAVO.GetUnansweredQuestionsByUserId";
+        }
+
+        public static class Respuesta
+        {
+            public static String SPInsertAnswer = "LA_BANDA_DEL_CHAVO.InsertAnswer";
         }
 
         public static class Factura
@@ -118,12 +153,6 @@ namespace Persistance.Entities
             public static String SPGetUltimoNumeroFactura = "LA_BANDA_DEL_CHAVO.GetUltimoNumeroFactura";
             public static String SPGetFacturaByPublicationId = "LA_BANDA_DEL_CHAVO.GetFacturaByPublicacionId";
             public static String SPInsertFactura = "LA_BANDA_DEL_CHAVO.InsertFactura";
-        }
-
-        public static class Compra
-        {
-            public static String SPGetAllCompraByPublicationId = "LA_BANDA_DEL_CHAVO.GetAllCompraByPublicacionId";
-            public static String SPGetCantidadComprasByPublicationIdGroupByClient = "LA_BANDA_DEL_CHAVO.GetCantidadComprasByPublicationIdGroupByClient";
         }
 
         public static class ItemFactura

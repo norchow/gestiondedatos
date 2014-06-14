@@ -121,6 +121,7 @@
             this.ChkBusquedaExacta.TabIndex = 36;
             this.ChkBusquedaExacta.Text = "BUSQUEDA EXACTA";
             this.ChkBusquedaExacta.UseVisualStyleBackColor = true;
+            this.ChkBusquedaExacta.CheckedChanged += new System.EventHandler(this.ChkBusquedaExacta_CheckedChanged);
             // 
             // LblLimpiar
             // 
@@ -161,6 +162,7 @@
             // 
             // TxtDuracion
             // 
+            this.TxtDuracion.Enabled = false;
             this.TxtDuracion.Location = new System.Drawing.Point(314, 56);
             this.TxtDuracion.Name = "TxtDuracion";
             this.TxtDuracion.Size = new System.Drawing.Size(134, 20);
@@ -177,6 +179,7 @@
             // 
             // TxtPorcentajeVenta
             // 
+            this.TxtPorcentajeVenta.Enabled = false;
             this.TxtPorcentajeVenta.Location = new System.Drawing.Point(401, 23);
             this.TxtPorcentajeVenta.Name = "TxtPorcentajeVenta";
             this.TxtPorcentajeVenta.Size = new System.Drawing.Size(47, 20);
@@ -193,6 +196,7 @@
             // 
             // TxtPrecioPublicar
             // 
+            this.TxtPrecioPublicar.Enabled = false;
             this.TxtPrecioPublicar.Location = new System.Drawing.Point(149, 56);
             this.TxtPrecioPublicar.Name = "TxtPrecioPublicar";
             this.TxtPrecioPublicar.Size = new System.Drawing.Size(69, 20);

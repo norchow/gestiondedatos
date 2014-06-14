@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 
 namespace Tools
 {
@@ -22,6 +23,19 @@ namespace Tools
         public static bool IsEmpty(string value)
         {
             return string.IsNullOrEmpty(value);
+        }
+
+        public static bool IsDateTime(string value)
+        {
+            try
+            {
+                var i = DateTime.ParseExact(value, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

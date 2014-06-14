@@ -136,7 +136,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Respuesta](
 	[ID_Respuesta] int IDENTITY (1,1),
 	[ID_Pregunta] int NOT NULL,
 	[Texto] text,
-	[Efectiva] bit NOT NULL
+	[Fecha] datetime NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Tipo_Publicacion](

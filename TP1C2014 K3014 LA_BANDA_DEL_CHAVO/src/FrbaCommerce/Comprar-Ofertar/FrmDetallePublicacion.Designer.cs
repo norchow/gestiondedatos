@@ -40,6 +40,7 @@
             this.LblComprar = new System.Windows.Forms.Label();
             this.LblVolver = new System.Windows.Forms.Label();
             this.lblPreguntar = new System.Windows.Forms.Label();
+            this.lblPreguntasText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPreguntasRespuestas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,9 +119,9 @@
             // DgvPreguntasRespuestas
             // 
             this.DgvPreguntasRespuestas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvPreguntasRespuestas.Location = new System.Drawing.Point(13, 253);
+            this.DgvPreguntasRespuestas.Location = new System.Drawing.Point(13, 277);
             this.DgvPreguntasRespuestas.Name = "DgvPreguntasRespuestas";
-            this.DgvPreguntasRespuestas.Size = new System.Drawing.Size(611, 198);
+            this.DgvPreguntasRespuestas.Size = new System.Drawing.Size(611, 174);
             this.DgvPreguntasRespuestas.TabIndex = 39;
             // 
             // LblComprar
@@ -164,11 +165,21 @@
             this.lblPreguntar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblPreguntar.Click += new System.EventHandler(this.lblPreguntar_Click);
             // 
+            // lblPreguntasText
+            // 
+            this.lblPreguntasText.AutoSize = true;
+            this.lblPreguntasText.Location = new System.Drawing.Point(12, 251);
+            this.lblPreguntasText.Name = "lblPreguntasText";
+            this.lblPreguntasText.Size = new System.Drawing.Size(74, 13);
+            this.lblPreguntasText.TabIndex = 43;
+            this.lblPreguntasText.Text = "PREGUNTAS";
+            // 
             // FrmDetallePublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 518);
+            this.Controls.Add(this.lblPreguntasText);
             this.Controls.Add(this.lblPreguntar);
             this.Controls.Add(this.LblVolver);
             this.Controls.Add(this.LblComprar);
@@ -204,5 +215,6 @@
         private System.Windows.Forms.Label LblComprar;
         private System.Windows.Forms.Label LblVolver;
         private System.Windows.Forms.Label lblPreguntar;
+        private System.Windows.Forms.Label lblPreguntasText;
     }
 }

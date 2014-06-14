@@ -48,11 +48,15 @@
     <Compile Include="Entities\Calificacion.cs" />
     <Compile Include="Entities\Compra.cs" />
     <Compile Include="Entities\Factura.cs" />
+    <Compile Include="Entities\HistoryOferta.cs" />
+    <Compile Include="Entities\HistoryReputacion.cs" />
+    <Compile Include="Entities\HistoryCompra.cs" />
     <Compile Include="Entities\FormaPago.cs" />
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Empresa.cs" />
     <Compile Include="Entities\ItemFactura.cs" />
     <Compile Include="Entities\Pregunta.cs" />
+    <Compile Include="Entities\PreguntaRespuesta.cs" />
     <Compile Include="Entities\PublicacionNotCalified.cs" />
     <Compile Include="Entities\DataBaseManager.cs" />
     <Compile Include="Entities\DataBaseQueries.cs" />
@@ -60,6 +64,7 @@
     <Compile Include="Entities\Funcionalidad.cs" />
     <Compile Include="Entities\IMapable.cs" />
     <Compile Include="Entities\Publicacion.cs" />
+    <Compile Include="Entities\PublicacionPregunta.cs" />
     <Compile Include="Entities\Respuesta.cs" />
     <Compile Include="Entities\Rol.cs" />
     <Compile Include="Entities\Rubro.cs" />
@@ -74,9 +79,11 @@
     <Compile Include="FormaPagoPersistance.cs" />
     <Compile Include="FuncionalidadPersistance.cs" />
     <Compile Include="ItemFacturaPersistance.cs" />
+    <Compile Include="OfertaPersistance.cs" />
     <Compile Include="PreguntaPersistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicacionPersistance.cs" />
+    <Compile Include="RespuestaPersistance.cs" />
     <Compile Include="RolPersistance.cs" />
     <Compile Include="RubroPersistance.cs" />
     <Compile Include="TipoDocumentoPersistance.cs" />

@@ -56,7 +56,7 @@ namespace FrbaCommerce.Comprar_Ofertar
                 FechaVencimiento = a.FechaVencimiento,
                 Stock = a.Stock,
                 Precio = a.Precio,
-                RecibirPreguntas = a.RecibirPreguntas
+                RecibirPreguntas = a.RecibirPreguntas,
             });
 
             DgvPublicacion.DataSource = bind.ToList();

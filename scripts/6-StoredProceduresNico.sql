@@ -202,3 +202,43 @@ BEGIN
       ,@Texto)
 END
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetUnansweredQuestionsByUserId]
+	@ID_Usuario int
+AS
+BEGIN
+	SELECT P.ID_Publicacion, P.Descripcion, PREG.ID_Pregunta, PREG.Texto FROM LA_BANDA_DEL_CHAVO.TL_Pregunta PREG
+	INNER JOIN	[LA_BANDA_DEL_CHAVO].[TL_Publicacion] P ON PREG.ID_Publicacion=P.ID_Publicacion
+	WHERE P.ID_Usuario = @ID_Usuario
+	AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Respuesta R WHERE R.ID_Pregunta=PREG.ID_Pregunta)
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertAnswer]
+	@ID_Pregunta int 
+    ,@Texto text
+    ,@Fecha datetime
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Respuesta] ([ID_Pregunta]
+      ,[Texto]
+      ,[Fecha])
+	OUTPUT inserted.ID_Respuesta
+	VALUES (@ID_Pregunta
+      ,@Texto
+      ,@Fecha)
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetQuestionsAndAnswersById]
+	@ID_Publicacion int
+AS
+BEGIN
+	SELECT PREG.ID_Pregunta, PREG.Texto AS TextoPregunta, R.ID_Respuesta, R.Texto AS TextoRespuesta
+	FROM LA_BANDA_DEL_CHAVO.TL_Pregunta PREG
+	INNER JOIN	[LA_BANDA_DEL_CHAVO].[TL_Respuesta] R ON PREG.ID_Pregunta=R.ID_Pregunta
+	WHERE PREG.ID_Publicacion= @ID_Publicacion
+END
+GO

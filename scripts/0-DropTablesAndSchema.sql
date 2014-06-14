@@ -41,8 +41,8 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllVisibilidad];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertVisibilidad];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateVisibilidad];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetVisibilidadById];
-DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllVisibilitidadByParameters];
-DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllVisibilitidadByParametersLike];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllVisibilidadByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllVisibilidadByParametersLike];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllTipoPublicacion];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllEstadoPublicacion];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllRubro];
@@ -73,8 +73,24 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetComprasNotCalificadaByClienteByParameter
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllFormaPago];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicationActive];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertQuestion];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuario];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuarioByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryComprasByUsuarioByParametersLike];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetPublicacionesARendirByUser];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetPublicacionesMasAntiguasARendirByUser];
-
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesRecibidas];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicacionByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicacionByParametersLike];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesRecibidasByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesRecibidasByParametersLike];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadas];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadasByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryCalificacionesOtorgadasByParametersLike];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuario];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuarioByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetHistoryOfertasByUsuarioByParametersLike];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetUnansweredQuestionsByUserId];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertAnswer];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetQuestionsAndAnswersById];
 
 DROP SCHEMA [LA_BANDA_DEL_CHAVO];
