@@ -190,7 +190,7 @@ GO
 
 CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertQuestion]
 	@ID_Publicacion int 
-    ,@Texto text
+    ,@Texto nvarchar(255)
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -216,7 +216,7 @@ GO
 
 CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertAnswer]
 	@ID_Pregunta int 
-    ,@Texto text
+    ,@Texto nvarchar(255)
     ,@Fecha datetime
 AS
 BEGIN
