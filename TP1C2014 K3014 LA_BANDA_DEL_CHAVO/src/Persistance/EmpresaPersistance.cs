@@ -61,6 +61,19 @@ namespace Persistance
             return users[0];
         }
 
+        public static Empresa GetByUserId(int userId)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Usuario", userId) };
+            var sp = new StoreProcedure(DataBaseConst.Empresa.SPGetCompanyByUserId, param);
+
+            var users = sp.ExecuteReader<Empresa>();
+
+            if (users == null || users.Count == 0)
+                return null;
+
+            return users[0];
+        }
+
         public static Empresa InsertCompany(Empresa company, SqlTransaction transaction)
         {
             var param = new List<SPParameter>

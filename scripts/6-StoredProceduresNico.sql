@@ -242,3 +242,61 @@ BEGIN
 	WHERE PREG.ID_Publicacion= @ID_Publicacion
 END
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetClientByUserId]
+	@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente]
+	WHERE ID_Usuario = @ID_Usuario
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetCompanyByUserId]
+	@ID_Usuario int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT *
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa]
+	WHERE ID_Usuario = @ID_Usuario
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetLastOfertaByPublication]
+	@idPublicacion int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT TOP 1 *
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Oferta]
+	WHERE ID_Publicacion = @idPublicacion
+	ORDER BY Monto DESC
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertOffer]
+	@ID_Publicacion int 
+	,@ID_Cliente int 
+	,@Monto int
+    ,@Fecha datetime
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Oferta] ([ID_Publicacion]
+	  ,[ID_Cliente]
+      ,[Monto]
+      ,[Fecha])
+	OUTPUT inserted.ID_Oferta
+	VALUES (@ID_Publicacion
+	  ,@ID_Cliente
+      ,@Monto
+      ,@Fecha)
+END
+GO

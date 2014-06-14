@@ -96,6 +96,12 @@
     <Compile Include="Calificar Vendedor\FrmCalificarVendedor.Designer.cs">
       <DependentUpon>FrmCalificarVendedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comprar-Ofertar\FrmDatosVendedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\FrmDatosVendedor.Designer.cs">
+      <DependentUpon>FrmDatosVendedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comprar-Ofertar\FrmDetallePublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Calificar Vendedor\FrmCalificarVendedor.resx">
       <DependentUpon>FrmCalificarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar-Ofertar\FrmDatosVendedor.resx">
+      <DependentUpon>FrmDatosVendedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comprar-Ofertar\FrmDetallePublicacion.resx">
       <DependentUpon>FrmDetallePublicacion.cs</DependentUpon>
