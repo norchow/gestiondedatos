@@ -1,3 +1,2 @@
 .Agregar el numero del grupo tanto a la carpeta del proyecto como al Readme.txtx
 .Trigger en el after de un update de Rol para que si lo desactivó, elimine todos los usuarios_rol correspondientes
-.Setearle por defecto el stock en 1 a las subastas (generar publicacion)

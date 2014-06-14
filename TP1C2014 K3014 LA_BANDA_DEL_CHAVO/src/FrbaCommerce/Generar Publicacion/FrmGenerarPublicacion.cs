@@ -262,6 +262,7 @@ namespace FrbaCommerce.Generar_Publicacion
             publication.FechaInicio = ConfigurationVariables.FechaSistema;
             publication.FechaVencimiento = ConfigurationVariables.FechaSistema.AddDays(publication.Visibilidad.Duracion);
             publication.UsuarioCreador = SessionManager.CurrentUser;
+            
             publication.Rubros = new List<Rubro>();
             foreach (var checkedItem in LstRubro.CheckedItems)
             {
@@ -277,6 +278,16 @@ namespace FrbaCommerce.Generar_Publicacion
                 Auction = TxtValorInicioSubasta.Enabled = publicationTypeSelected.Descripcion == "Subasta";
 
             TxtPrecio.Enabled = !Auction;
+            if (Auction)
+            {
+                TxtStock.Enabled = false;
+                TxtStock.Text = "1";
+            }
+            else
+            {
+                TxtStock.Enabled = true;
+                TxtStock.Text = string.Empty;
+            }
         }
 
         private void LblLimpiar_Click(object sender, EventArgs e)
