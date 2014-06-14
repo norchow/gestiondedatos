@@ -66,6 +66,7 @@
             this.TxtContrasena.PasswordChar = '*';
             this.TxtContrasena.Size = new System.Drawing.Size(296, 20);
             this.TxtContrasena.TabIndex = 2;
+            this.TxtContrasena.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtContrasena_KeyPress);
             // 
             // LblNuevo
             // 

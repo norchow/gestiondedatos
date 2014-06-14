@@ -10,5 +10,12 @@ namespace Session
         public static Rol CurrentRol { get; set; }
 
         public static DateTime CurrentLoginDate { get; set; }
+
+        public static void ClearCurrentSession()
+        {
+            SessionManager.CurrentRol = null;
+            SessionManager.CurrentUser = null;
+            SessionManager.CurrentLoginDate = new DateTime();
+        }
     }
 }

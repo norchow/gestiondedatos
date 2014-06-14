@@ -38,9 +38,10 @@
             this.generarPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarMisPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDePublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.responderPreguntasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historialClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.responderPreguntasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,8 @@
             this.MsHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.holaToolStripMenuItem,
             this.juliaToolStripMenuItem,
-            this.estadisticasToolStripMenuItem});
+            this.estadisticasToolStripMenuItem,
+            this.logOutToolStripMenuItem});
             this.MsHome.Location = new System.Drawing.Point(0, 0);
             this.MsHome.Name = "MsHome";
             this.MsHome.Size = new System.Drawing.Size(671, 24);
@@ -128,6 +130,13 @@
             this.listadoDePublicacionesToolStripMenuItem.Text = "Listado de publicaciones";
             this.listadoDePublicacionesToolStripMenuItem.Click += new System.EventHandler(this.listadoDePublicacionesToolStripMenuItem_Click);
             // 
+            // responderPreguntasToolStripMenuItem
+            // 
+            this.responderPreguntasToolStripMenuItem.Name = "responderPreguntasToolStripMenuItem";
+            this.responderPreguntasToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.responderPreguntasToolStripMenuItem.Text = "Responder preguntas";
+            this.responderPreguntasToolStripMenuItem.Click += new System.EventHandler(this.responderPreguntasToolStripMenuItem_Click);
+            // 
             // estadisticasToolStripMenuItem
             // 
             this.estadisticasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -143,12 +152,12 @@
             this.historialClienteToolStripMenuItem.Text = "Historial Cliente";
             this.historialClienteToolStripMenuItem.Click += new System.EventHandler(this.historialClienteToolStripMenuItem_Click);
             // 
-            // responderPreguntasToolStripMenuItem
+            // logOutToolStripMenuItem
             // 
-            this.responderPreguntasToolStripMenuItem.Name = "responderPreguntasToolStripMenuItem";
-            this.responderPreguntasToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.responderPreguntasToolStripMenuItem.Text = "Responder preguntas";
-            this.responderPreguntasToolStripMenuItem.Click += new System.EventHandler(this.responderPreguntasToolStripMenuItem_Click);
+            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.logOutToolStripMenuItem.Text = "Log out";
+            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
             // FrmHome
             // 
@@ -181,6 +190,7 @@
         private System.Windows.Forms.ToolStripMenuItem estadisticasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem historialClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem responderPreguntasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
 
 
     }

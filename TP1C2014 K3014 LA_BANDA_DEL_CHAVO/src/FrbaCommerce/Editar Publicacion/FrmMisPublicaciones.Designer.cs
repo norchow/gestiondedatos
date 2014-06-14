@@ -30,6 +30,8 @@
         {
             this.DgvPublicacion = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.MtbVencimiento = new System.Windows.Forms.MaskedTextBox();
+            this.MtbInicio = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,8 +44,6 @@
             this.LblLimpiar = new System.Windows.Forms.Label();
             this.LblBuscar = new System.Windows.Forms.Label();
             this.LblListo = new System.Windows.Forms.Label();
-            this.MtbInicio = new System.Windows.Forms.MaskedTextBox();
-            this.MtbVencimiento = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPublicacion)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +86,26 @@
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FILTROS DE BUSQUEDA";
+            // 
+            // MtbVencimiento
+            // 
+            this.MtbVencimiento.Enabled = false;
+            this.MtbVencimiento.Location = new System.Drawing.Point(535, 24);
+            this.MtbVencimiento.Mask = "99/99/9999";
+            this.MtbVencimiento.Name = "MtbVencimiento";
+            this.MtbVencimiento.Size = new System.Drawing.Size(97, 20);
+            this.MtbVencimiento.TabIndex = 48;
+            this.MtbVencimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // MtbInicio
+            // 
+            this.MtbInicio.Enabled = false;
+            this.MtbInicio.Location = new System.Drawing.Point(326, 50);
+            this.MtbInicio.Mask = "99/99/9999";
+            this.MtbInicio.Name = "MtbInicio";
+            this.MtbInicio.Size = new System.Drawing.Size(118, 20);
+            this.MtbInicio.TabIndex = 47;
+            this.MtbInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
             // 
@@ -207,26 +227,6 @@
             this.LblListo.Text = "LISTO";
             this.LblListo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblListo.Click += new System.EventHandler(this.LblListo_Click);
-            // 
-            // MtbInicio
-            // 
-            this.MtbInicio.Enabled = false;
-            this.MtbInicio.Location = new System.Drawing.Point(326, 50);
-            this.MtbInicio.Mask = "99/99/9999";
-            this.MtbInicio.Name = "MtbInicio";
-            this.MtbInicio.Size = new System.Drawing.Size(118, 20);
-            this.MtbInicio.TabIndex = 47;
-            this.MtbInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // MtbVencimiento
-            // 
-            this.MtbVencimiento.Enabled = false;
-            this.MtbVencimiento.Location = new System.Drawing.Point(535, 24);
-            this.MtbVencimiento.Mask = "99/99/9999";
-            this.MtbVencimiento.Name = "MtbVencimiento";
-            this.MtbVencimiento.Size = new System.Drawing.Size(97, 20);
-            this.MtbVencimiento.TabIndex = 48;
-            this.MtbVencimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FrmMisPublicaciones
             // 
