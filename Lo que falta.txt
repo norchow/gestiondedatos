@@ -4,5 +4,4 @@
 .Trigger en before insert de una empresa para normalizar el texto de nombre_contacto con la primera mayúscula y las demás minúsculas
 .Validaciones de CUIT y CUIL (buscar algoritmo)
 .Agregar columna Habilitado en la tabla TL_Usuario (ponerle por defecto 1)
-.Quitar columna 'Efectiva' de la tabla TL_Respuesta
 .Revisar migration de tabla TL_Compra
