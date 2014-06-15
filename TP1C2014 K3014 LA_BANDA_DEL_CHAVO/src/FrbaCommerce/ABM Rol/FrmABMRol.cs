@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Persistance;
 using Persistance.Entities;
 using Tools;
+using Session;
 
 namespace FrbaCommerce.ABM_Rol
 {
@@ -179,6 +180,12 @@ namespace FrbaCommerce.ABM_Rol
                     if (!selectedRole.Activo)
                     {
                         MessageBox.Show("No se puede eliminar la funcionalidad ya que ya se encuentra desactivada", "Atencion");
+                        return;
+                    }
+
+                    if (selectedRole.ID == SessionManager.CurrentRol.ID)
+                    {
+                        MessageBox.Show("No se puede eliminar el rol ya que es el rol con el que actualmente se encuentra logueado", "Atencion");
                         return;
                     }
 
