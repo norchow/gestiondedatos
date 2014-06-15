@@ -167,7 +167,7 @@ COMMIT
 
 BEGIN TRANSACTION 
 	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Compra] (ID_Publicacion, ID_Cliente, Compra_Fecha, Compra_Cantidad) (
-		SELECT 
+		SELECT DISTINCT
 			[Publicacion_Cod],
 			(SELECT ID_Cliente FROM LA_BANDA_DEL_CHAVO.TL_Cliente C WHERE Cli_Dni = C.Nro_Documento),
 			[Compra_Fecha],
