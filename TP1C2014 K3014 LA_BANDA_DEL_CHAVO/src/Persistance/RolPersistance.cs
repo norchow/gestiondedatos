@@ -139,5 +139,20 @@ namespace Persistance
 
             return sp.ExecuteNonQuery(transaction);
         }
+
+        public static int InsertUserRole(Usuario user, Rol role, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Usuario", user.ID),
+                    new SPParameter("ID_Rol", role.ID)
+                };
+
+            var sp = (transaction != null)
+                        ? new StoreProcedure(DataBaseConst.Rol.SPInsertUserRole, param, transaction)
+                        : new StoreProcedure(DataBaseConst.Rol.SPInsertUserRole, param);
+
+            return sp.ExecuteNonQuery(transaction);
+        }
     }
 }

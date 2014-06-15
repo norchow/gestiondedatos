@@ -79,5 +79,25 @@ namespace Persistance
             return cantidades;
         }
 
+        public static Compra Insert(Compra purchase, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Publicacion", purchase.Publicacion.ID),
+                    new SPParameter("ID_Cliente", purchase.Cliente.ID),
+                    new SPParameter("Compra_Fecha", purchase.Fecha),
+                    new SPParameter("Compra_Cantidad", purchase.Cantidad)
+                };
+
+            var sp = (transaction != null)
+                        ? new StoreProcedure(DataBaseConst.Compra.SPInsertPurchase, param, transaction)
+                        : new StoreProcedure(DataBaseConst.Compra.SPInsertPurchase, param);
+
+            purchase.ID = (int)sp.ExecuteScalar(transaction);
+
+            return purchase;
+        }
+
+
     }
 }

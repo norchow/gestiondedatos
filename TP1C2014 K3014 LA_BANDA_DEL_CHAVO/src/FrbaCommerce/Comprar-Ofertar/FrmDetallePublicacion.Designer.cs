@@ -44,6 +44,8 @@
             this.lblOfertar = new System.Windows.Forms.Label();
             this.txtMonto = new System.Windows.Forms.TextBox();
             this.lblMontoText = new System.Windows.Forms.Label();
+            this.lblCantidadText = new System.Windows.Forms.Label();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPreguntasRespuestas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -213,11 +215,31 @@
             this.lblMontoText.Text = "MONTO";
             this.lblMontoText.Visible = false;
             // 
+            // lblCantidadText
+            // 
+            this.lblCantidadText.AutoSize = true;
+            this.lblCantidadText.Location = new System.Drawing.Point(469, 102);
+            this.lblCantidadText.Name = "lblCantidadText";
+            this.lblCantidadText.Size = new System.Drawing.Size(62, 13);
+            this.lblCantidadText.TabIndex = 48;
+            this.lblCantidadText.Text = "CANTIDAD";
+            this.lblCantidadText.Visible = false;
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(472, 133);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(70, 20);
+            this.txtCantidad.TabIndex = 47;
+            this.txtCantidad.Visible = false;
+            // 
             // FrmDetallePublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 518);
+            this.Controls.Add(this.lblCantidadText);
+            this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.lblMontoText);
             this.Controls.Add(this.txtMonto);
             this.Controls.Add(this.lblOfertar);
@@ -261,5 +283,7 @@
         private System.Windows.Forms.Label lblOfertar;
         private System.Windows.Forms.TextBox txtMonto;
         private System.Windows.Forms.Label lblMontoText;
+        private System.Windows.Forms.Label lblCantidadText;
+        private System.Windows.Forms.TextBox txtCantidad;
     }
 }

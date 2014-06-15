@@ -300,3 +300,39 @@ BEGIN
       ,@Fecha)
 END
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertPurchase]
+	@ID_Publicacion int 
+	,@ID_Cliente int 
+    ,@Compra_Fecha datetime
+    ,@Compra_Cantidad int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Compra] ([ID_Publicacion]
+	  ,[ID_Cliente]
+      ,[Compra_Fecha]
+      ,[Compra_Cantidad])
+	OUTPUT inserted.ID_Compra
+	VALUES (@ID_Publicacion
+	  ,@ID_Cliente
+      ,@Compra_Fecha
+      ,@Compra_Cantidad)
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertUserRole]
+	@ID_Usuario int 
+	,@ID_Rol int 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol] ([ID_Usuario]
+      ,[ID_Rol])
+	OUTPUT inserted.ID_Usuario_Rol
+	VALUES (@ID_Usuario
+	  ,@ID_Rol)
+END
+GO

@@ -21,6 +21,7 @@ namespace Persistance.Entities
             public static String SPInsertFuncionalidadByRol = "LA_BANDA_DEL_CHAVO.InsertFuncionalidadByRol";
             public static String SPUpdateRolById = "LA_BANDA_DEL_CHAVO.UpdateRolById";
             public static String SPDeleteAllFuncionalidadByRol = "LA_BANDA_DEL_CHAVO.DeleteAllFuncionalidadByRol";
+            public static String SPInsertUserRole = "LA_BANDA_DEL_CHAVO.InsertUserRole";
         }
 
         public static class Usuario
@@ -124,6 +125,7 @@ namespace Persistance.Entities
             public static String SPGetHistoryComprasByUsuarioByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuarioByParametersLike";
             public static String SPGetAllCompraByPublicationId = "LA_BANDA_DEL_CHAVO.GetAllCompraByPublicacionId";
             public static String SPGetCantidadComprasByPublicationIdGroupByClient = "LA_BANDA_DEL_CHAVO.GetCantidadComprasByPublicationIdGroupByClient";
+            public static String SPInsertPurchase = "LA_BANDA_DEL_CHAVO.InsertPurchase";
         }
 
         public static class Oferta
