@@ -97,7 +97,7 @@ namespace FrbaCommerce.Home
             Hide();
 
             FrmLogin formLogin = new FrmLogin();
-            formLogin.Show();
+            formLogin.ShowDialog();
         }
     }
 }
