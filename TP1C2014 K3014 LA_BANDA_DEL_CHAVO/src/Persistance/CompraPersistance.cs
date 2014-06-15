@@ -61,18 +61,22 @@ namespace Persistance
 
         public static List<int> GetCantidadComprasByPublicationIdGroupByClient(int publicationID, SqlTransaction transaction)
         {
+            var cantidades = new List<int>();
             var param = new List<SPParameter> { new SPParameter("ID_Publicacion", publicationID) };
 
             var sp = new StoreProcedure(DataBaseConst.Compra.SPGetCantidadComprasByPublicationIdGroupByClient, param);
 
-            //var cantidades = (List<int>)sp.ExecuteReader(transaction);
+            var dataReader = sp.ExecuteReader(transaction);
+            while (dataReader.Read())
+                cantidades.Add(Convert.ToInt32(dataReader[0]));
 
-            //if (cantidades == null || cantidades.Count == 0)
-            //    return null;
+            if (!dataReader.IsClosed)
+                dataReader.Close();
 
-            //return cantidades;
+            if (cantidades.Count == 0)
+                return null;
 
-            return null;
+            return cantidades;
         }
 
     }

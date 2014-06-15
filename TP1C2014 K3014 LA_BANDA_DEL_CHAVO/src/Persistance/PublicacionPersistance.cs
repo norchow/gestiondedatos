@@ -181,7 +181,7 @@ namespace Persistance
             var param = new List<SPParameter>
                 {
                     new SPParameter("Id_User", userId),
-                    new SPParameter("Fecha_Actual", ConfigurationSettings.AppSettings["FechaSistema"])
+                    new SPParameter("Fecha_Actual", Configuration.ConfigurationVariables.FechaSistema)
                 };
 
             var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetPublicacionesARendirByUser, param);
@@ -200,7 +200,7 @@ namespace Persistance
                 {
                     new SPParameter("Id_User", userId),
                     new SPParameter("Cantidad", cantidad),
-                    new SPParameter("Fecha_Actual", ConfigurationSettings.AppSettings["FechaSistema"])
+                    new SPParameter("Fecha_Actual", Configuration.ConfigurationVariables.FechaSistema)
                 };
 
             var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetPublicacionesMasAntiguasARendirByUser, param);

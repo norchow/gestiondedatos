@@ -28,6 +28,9 @@ namespace FrbaCommerce.Login
 
                 var user = new UsuarioLogic().Login(userName, password);
 
+                if (!UsuarioPersistance.GetById(user.ID).Habilitado)
+                    throw new Exception("No puede loguearse. El usuario se encuentra inhabilitado debido a que acumula más de 10 compras sin rendir. Por favor, acérquese a la oficina de administración.");
+
                 if (user.RolesActivos != null)
                 {
                     SessionManager.CurrentUser = user;

@@ -33,19 +33,19 @@ namespace Persistance
         {
             var sp = new StoreProcedure(DataBaseConst.Factura.SPGetUltimoNumeroFactura);
 
-            var numeroFactura = Convert.ToInt32(sp.ExecuteReader(null));
+            var numeroFactura = Convert.ToInt32(sp.ExecuteScalar(null));
 
             return numeroFactura;
         }
 
-        public static Factura GetFacturaByPublicationId(int publicationId)
+        public static Factura GetFacturaByNumero(long numero)
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("ID_Publicacion", publicationId)
+                    new SPParameter("Numero", numero)
                 };
 
-            var sp = new StoreProcedure(DataBaseConst.Factura.SPGetFacturaByPublicationId, param);
+            var sp = new StoreProcedure(DataBaseConst.Factura.SPGetFacturaByNumero, param);
 
             var facturas = sp.ExecuteReader<Factura>();
 

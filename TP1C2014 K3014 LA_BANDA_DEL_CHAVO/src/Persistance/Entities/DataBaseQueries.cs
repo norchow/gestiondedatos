@@ -31,6 +31,7 @@ namespace Persistance.Entities
             public static String SPInsertUser = "LA_BANDA_DEL_CHAVO.InsertUser";
             public static String SPUpdateUser = "LA_BANDA_DEL_CHAVO.UpdateUser";
             public static String SPUpdatePassword = "LA_BANDA_DEL_CHAVO.UpdatePassword";
+            public static String SPInhabilitarUser = "LA_BANDA_DEL_CHAVO.InhabilitarUser";
         }
 
         public static class Visibilidad
@@ -156,7 +157,7 @@ namespace Persistance.Entities
         public static class Factura
         {
             public static String SPGetUltimoNumeroFactura = "LA_BANDA_DEL_CHAVO.GetUltimoNumeroFactura";
-            public static String SPGetFacturaByPublicationId = "LA_BANDA_DEL_CHAVO.GetFacturaByPublicacionId";
+            public static String SPGetFacturaByNumero = "LA_BANDA_DEL_CHAVO.GetFacturaByNumero";
             public static String SPInsertFactura = "LA_BANDA_DEL_CHAVO.InsertFactura";
             public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetFacturaById";
         }

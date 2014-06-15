@@ -79,6 +79,17 @@ namespace Persistance
             user.ID = (int)sp.ExecuteScalar(transaction);
             
             return user;
-        } 
+        }
+
+        public static void InhabilitarUser(Usuario user)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", user.ID)
+                };
+            var sp = new StoreProcedure(DataBaseConst.Usuario.SPInhabilitarUser, param);
+
+            sp.ExecuteNonQuery(null);
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace Persistance.Entities
         public string Username { get; set; }
         public string Password { get; set; }
         public bool Activo { get; set; }
+        public bool Habilitado { get; set; }
         public bool PassTemporal { get; set; }
         public int LoginFails { get; set; }
         private List<Rol> _roles { get; set; }
@@ -41,6 +42,7 @@ namespace Persistance.Entities
                     Username = reader["Username"].ToString(),
                     Password = reader["Password"].ToString(),
                     Activo = bool.Parse(reader["Activo"].ToString()),
+                    Habilitado = bool.Parse(reader["Habilitado"].ToString()),
                     PassTemporal = bool.Parse(reader["Pass_Temporal"].ToString()),
                     LoginFails = int.Parse(reader["Intentos_Fallidos"].ToString())
                 };

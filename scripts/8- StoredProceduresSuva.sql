@@ -23,7 +23,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT * 
+	SELECT P.* 
 	FROM [LA_BANDA_DEL_CHAVO].TL_Publicacion P
 		LEFT JOIN [LA_BANDA_DEL_CHAVO].TL_Usuario U ON U.ID_Usuario = P.ID_Usuario
 	WHERE (P.Fecha_Vencimiento <= @Fecha_Actual 
@@ -43,7 +43,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT TOP (@Cantidad) *
+	SELECT TOP (@Cantidad) P.*
 	FROM [LA_BANDA_DEL_CHAVO].TL_Publicacion P
 		LEFT JOIN [LA_BANDA_DEL_CHAVO].TL_Usuario U ON U.ID_Usuario = P.ID_Usuario
 		INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Compra C ON C.ID_Publicacion = P.ID_Publicacion
@@ -110,15 +110,14 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetFacturaByPublicacionId]
-	@ID_Publicacion int
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetFacturaByNumero]
+	@Numero numeric(18, 0)
 AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT * FROM [LA_BANDA_DEL_CHAVO].TL_Factura F 
-	INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Item_Factura ITF ON ITF.ID_Factura = F.ID_Factura
-	WHERE ITF.ID_Publicacion = @ID_Publicacion
+	SELECT F.* FROM [LA_BANDA_DEL_CHAVO].TL_Factura F 
+	WHERE F.Numero = @Numero
 END
 GO
 
@@ -184,5 +183,15 @@ AS
 BEGIN
 	SELECT * FROM [LA_BANDA_DEL_CHAVO].[TL_Factura] 
 	WHERE ID_Factura = @ID_Factura
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InhabilitarUser]
+	@ID_User int
+AS
+BEGIN
+	UPDATE [LA_BANDA_DEL_CHAVO].[TL_Usuario]
+	SET Habilitado = 0
+	WHERE ID_Usuario = @ID_User
 END
 GO
