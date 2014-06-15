@@ -168,3 +168,21 @@ BEGIN
       ,@ID_Usuario)
 END
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetClientById]
+	@ID_Cliente numeric(18,0)
+AS
+BEGIN
+	SELECT * FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] 
+	WHERE ID_Cliente = @ID_Cliente
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetFacturaById]
+	@ID_Factura numeric(18,0)
+AS
+BEGIN
+	SELECT * FROM [LA_BANDA_DEL_CHAVO].[TL_Factura] 
+	WHERE ID_Factura = @ID_Factura
+END
+GO

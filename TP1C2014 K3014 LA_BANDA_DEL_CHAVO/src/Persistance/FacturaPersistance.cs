@@ -11,6 +11,24 @@ namespace Persistance
 {
     public static class FacturaPersistance
     {
+        public static Factura GetById(int id)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Factura", id)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Factura.SPGetById, param);
+
+            var facturas = sp.ExecuteReader<Factura>();
+
+            if (facturas == null || facturas.Count == 0)
+                return null;
+
+            facturas[0].GetObjectsById();
+            return facturas[0];
+        }
+
         public static int GetUltimoNumeroFactura()
         {
             var sp = new StoreProcedure(DataBaseConst.Factura.SPGetUltimoNumeroFactura);

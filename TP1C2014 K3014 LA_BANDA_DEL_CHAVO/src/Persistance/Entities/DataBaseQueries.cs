@@ -113,6 +113,7 @@ namespace Persistance.Entities
             public static String SPGetClientByDocument = "LA_BANDA_DEL_CHAVO.GetClientByDocument";
             public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
             public static String SPGetClientByUserId = "LA_BANDA_DEL_CHAVO.GetClientByUserId";
+            public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetClientById";
         }
 
         public static class Compra
@@ -157,6 +158,7 @@ namespace Persistance.Entities
             public static String SPGetUltimoNumeroFactura = "LA_BANDA_DEL_CHAVO.GetUltimoNumeroFactura";
             public static String SPGetFacturaByPublicationId = "LA_BANDA_DEL_CHAVO.GetFacturaByPublicacionId";
             public static String SPInsertFactura = "LA_BANDA_DEL_CHAVO.InsertFactura";
+            public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetFacturaById";
         }
 
         public static class ItemFactura

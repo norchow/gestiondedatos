@@ -10,6 +10,23 @@ namespace Persistance
 {
     public static class ClientePersistance
     {
+        public static Cliente GetById(int id)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Cliente", id)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Cliente.SPGetById, param);
+
+            var clients = sp.ExecuteReader<Cliente>();
+
+            if (clients == null || clients.Count == 0)
+                return null;
+
+            return clients[0];
+        }
+
         public static Cliente GetByPhone(string phone)
         {
             var param = new List<SPParameter> { new SPParameter("Telefono", phone) };

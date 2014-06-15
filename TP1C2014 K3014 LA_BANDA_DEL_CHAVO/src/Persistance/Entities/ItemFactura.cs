@@ -19,9 +19,9 @@ namespace Persistance.Entities
 
         public int Cantidad { get; set; }
 
-        private int _factura;
+        private int _idFactura;
 
-        private int _publicacion;
+        private int _idPublicacion;
 
 
 
@@ -31,8 +31,8 @@ namespace Persistance.Entities
             return new ItemFactura
             {
                 ID = Int32.Parse(reader["ID_Factura"].ToString()),
-                _factura = Convert.ToInt32(reader["ID_Factura"].ToString()),
-                _publicacion = Convert.ToInt32(reader["ID_Publicacion"].ToString()),
+                _idFactura = Convert.ToInt32(reader["ID_Factura"].ToString()),
+                _idPublicacion = Convert.ToInt32(reader["ID_Publicacion"].ToString()),
                 Monto = double.Parse(reader["Monto"].ToString()),
                 Cantidad = Int32.Parse(reader["Cantidad"].ToString())
             };
@@ -41,6 +41,12 @@ namespace Persistance.Entities
         public List<SPParameter> UnMap(IMapable entity)
         {
             return new List<SPParameter>();
+        }
+
+        public void GetObjectsById()
+        {
+            Factura = FacturaPersistance.GetById(_idFactura);
+            Publicacion = PublicacionPersistance.GetById(_idPublicacion);
         }
     }
 }

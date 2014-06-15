@@ -23,7 +23,7 @@ namespace Persistance.Entities
 
         public Usuario Usuario { get; set; }
 
-        private int _formaPago;
+        private int _idFormaPago;
 
         private int _idUsuario;
 
@@ -41,7 +41,7 @@ namespace Persistance.Entities
                 Numero = long.Parse(reader["Numero"].ToString()),
                 Fecha = DateTime.Parse(reader["Fecha"].ToString()),
                 Total = double.Parse(reader["Total"].ToString()),
-                _formaPago = Convert.ToInt32(reader["ID_Forma_Pago"].ToString()),
+                _idFormaPago = Convert.ToInt32(reader["ID_Forma_Pago"].ToString()),
                 _idUsuario = Convert.ToInt32(reader["ID_Usuario"].ToString()),
             };
         }
@@ -54,6 +54,7 @@ namespace Persistance.Entities
         public void GetObjectsById()
         {
             ItemsFactura = ItemFacturaPersistance.GetByFacturaId(ID);
+            FormaPago = FormaPagoPersistance.GetById(_idFormaPago);
             Usuario = UsuarioPersistance.GetById(_idUsuario);
         }
     }
