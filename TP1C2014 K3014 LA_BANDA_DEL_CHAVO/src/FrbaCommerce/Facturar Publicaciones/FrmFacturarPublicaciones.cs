@@ -111,6 +111,7 @@ namespace FrbaCommerce.Facturar_Publicaciones
                     factura.Fecha = Convert.ToDateTime(ConfigurationSettings.AppSettings["FechaSistema"]);
                     factura.Total = listItemsFactura.Sum(x => x.Monto * x.Cantidad);
                     factura.FormaPago = FormaPagoPersistance.GetById((int)CboFormaPago.SelectedValue);
+                    factura.Usuario = SessionManager.CurrentUser;
 
                     var dialogAnswer = MessageBox.Show("Esta seguro que quiere facturar estas " + cant + " publicaciones?", "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)

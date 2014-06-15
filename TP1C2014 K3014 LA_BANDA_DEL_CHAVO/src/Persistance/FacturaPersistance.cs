@@ -45,7 +45,8 @@ namespace Persistance
                     new SPParameter("Numero", factura.Numero),
                     new SPParameter("Fecha", factura.Fecha),
                     new SPParameter("Total", factura.Total),
-                    new SPParameter("ID_Forma_Pago", factura.FormaPago.ID)
+                    new SPParameter("ID_Forma_Pago", factura.FormaPago.ID),
+                    new SPParameter("ID_Usuario" , factura.Usuario.ID)
                 };
 
             var sp = (transaction != null)
