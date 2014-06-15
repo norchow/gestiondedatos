@@ -41,6 +41,9 @@
             this.LblVolver = new System.Windows.Forms.Label();
             this.lblPreguntar = new System.Windows.Forms.Label();
             this.lblPreguntasText = new System.Windows.Forms.Label();
+            this.lblOfertar = new System.Windows.Forms.Label();
+            this.txtMonto = new System.Windows.Forms.TextBox();
+            this.lblMontoText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPreguntasRespuestas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,6 +139,8 @@
             this.LblComprar.TabIndex = 40;
             this.LblComprar.Text = "COMPRAR";
             this.LblComprar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblComprar.Visible = false;
+            this.LblComprar.Click += new System.EventHandler(this.LblComprar_Click);
             // 
             // LblVolver
             // 
@@ -163,6 +168,7 @@
             this.lblPreguntar.TabIndex = 42;
             this.lblPreguntar.Text = "PREGUNTAR";
             this.lblPreguntar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPreguntar.Visible = false;
             this.lblPreguntar.Click += new System.EventHandler(this.lblPreguntar_Click);
             // 
             // lblPreguntasText
@@ -174,11 +180,47 @@
             this.lblPreguntasText.TabIndex = 43;
             this.lblPreguntasText.Text = "PREGUNTAS";
             // 
+            // lblOfertar
+            // 
+            this.lblOfertar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.lblOfertar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblOfertar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblOfertar.ForeColor = System.Drawing.Color.White;
+            this.lblOfertar.Location = new System.Drawing.Point(378, 174);
+            this.lblOfertar.Name = "lblOfertar";
+            this.lblOfertar.Size = new System.Drawing.Size(88, 32);
+            this.lblOfertar.TabIndex = 44;
+            this.lblOfertar.Text = "OFERTAR";
+            this.lblOfertar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblOfertar.Visible = false;
+            this.lblOfertar.Click += new System.EventHandler(this.lblOfertar_Click);
+            // 
+            // txtMonto
+            // 
+            this.txtMonto.Location = new System.Drawing.Point(378, 133);
+            this.txtMonto.Name = "txtMonto";
+            this.txtMonto.Size = new System.Drawing.Size(70, 20);
+            this.txtMonto.TabIndex = 45;
+            this.txtMonto.Visible = false;
+            // 
+            // lblMontoText
+            // 
+            this.lblMontoText.AutoSize = true;
+            this.lblMontoText.Location = new System.Drawing.Point(375, 102);
+            this.lblMontoText.Name = "lblMontoText";
+            this.lblMontoText.Size = new System.Drawing.Size(47, 13);
+            this.lblMontoText.TabIndex = 46;
+            this.lblMontoText.Text = "MONTO";
+            this.lblMontoText.Visible = false;
+            // 
             // FrmDetallePublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 518);
+            this.Controls.Add(this.lblMontoText);
+            this.Controls.Add(this.txtMonto);
+            this.Controls.Add(this.lblOfertar);
             this.Controls.Add(this.lblPreguntasText);
             this.Controls.Add(this.lblPreguntar);
             this.Controls.Add(this.LblVolver);
@@ -216,5 +258,8 @@
         private System.Windows.Forms.Label LblVolver;
         private System.Windows.Forms.Label lblPreguntar;
         private System.Windows.Forms.Label lblPreguntasText;
+        private System.Windows.Forms.Label lblOfertar;
+        private System.Windows.Forms.TextBox txtMonto;
+        private System.Windows.Forms.Label lblMontoText;
     }
 }

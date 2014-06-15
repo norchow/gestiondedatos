@@ -1,7 +1,2 @@
 .Agregar el numero del grupo tanto a la carpeta del proyecto como al Readme.txtx
 .Trigger en el after de un update de Rol para que si lo desactivó, elimine todos los usuarios_rol correspondientes
-.Trigger en before insert de un  cliente para normalizar los textos de nombre y apellido con la primera mayúscula y las demás minúsculas
-.Trigger en before insert de una empresa para normalizar el texto de nombre_contacto con la primera mayúscula y las demás minúsculas
-.Validaciones de CUIT y CUIL (buscar algoritmo)
-.Agregar columna Habilitado en la tabla TL_Usuario (ponerle por defecto 1)
-.Revisar migration de tabla TL_Compra

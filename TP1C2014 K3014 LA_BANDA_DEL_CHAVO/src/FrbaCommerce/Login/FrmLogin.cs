@@ -78,5 +78,13 @@ namespace FrbaCommerce.Login
             var frmRegistroUsuario = new FrmRegistroUsuario();
             frmRegistroUsuario.ShowDialog();
         }
+
+        private void TxtContrasena_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                DoLogin(TxtUsuario.Text, TxtContrasena.Text);
+            }
+        }
     }
 }

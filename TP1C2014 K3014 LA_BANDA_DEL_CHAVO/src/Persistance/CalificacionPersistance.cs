@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Persistance.Entities;
 using Filters;
+using Configuration;
 
 namespace Persistance
 {
@@ -11,7 +12,8 @@ namespace Persistance
     {
         public static List<PublicacionNotCalified> GetAllPubicacionNotCalified(Usuario user)
         {
-            var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID) };
+            var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID),
+                                               new SPParameter("Fecha_hoy", ConfigurationVariables.FechaSistema)};
             var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetNotCalifiedByClientId, param);
             return sp.ExecuteReader<PublicacionNotCalified>();
         }
@@ -22,10 +24,10 @@ namespace Persistance
             var param = new List<SPParameter>
                 {
                     new SPParameter("idUsuario", user.ID),
+                     new SPParameter("Fecha_hoy", ConfigurationVariables.FechaSistema),
                     new SPParameter("CodigoPublicacion", filters.Codigo ?? (object)DBNull.Value),
                     new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
-                    new SPParameter("Precio", filters.Precio ?? (object)DBNull.Value),
-                    new SPParameter("Vendedor", filters.Vendedor ?? (object)DBNull.Value)
+                    new SPParameter("Precio", filters.Precio ?? (object)DBNull.Value)
                 };
 
             var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetNotCalifiedByClientIdByParameters, param);
@@ -38,10 +40,10 @@ namespace Persistance
             var param = new List<SPParameter>
                 {
                     new SPParameter("idUsuario", user.ID),
+                     new SPParameter("Fecha_hoy", ConfigurationVariables.FechaSistema),
                     new SPParameter("CodigoPublicacion", filters.Codigo ?? (object)DBNull.Value),
                     new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
-                    new SPParameter("Precio", filters.Precio ?? (object)DBNull.Value),
-                    new SPParameter("Vendedor", filters.Vendedor ?? (object)DBNull.Value)
+                    new SPParameter("Precio", filters.Precio ?? (object)DBNull.Value)
                 };
 
             var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetNotCalifiedByClientIdByParametersLike, param);

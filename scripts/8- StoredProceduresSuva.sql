@@ -149,6 +149,7 @@ CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertFactura]
       ,@Fecha datetime
       ,@Total numeric(18,2)
       ,@ID_Forma_Pago int
+      ,@ID_Usuario int
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -157,11 +158,13 @@ BEGIN
 	([Numero]
       ,[Fecha]
       ,[Total]
-      ,[ID_Forma_Pago])
+      ,[ID_Forma_Pago]
+      ,[ID_Usuario])
 	OUTPUT inserted.ID_Factura
 	VALUES (@Numero
       ,@Fecha
       ,@Total
-      ,@ID_Forma_Pago)
+      ,@ID_Forma_Pago
+      ,@ID_Usuario)
 END
 GO

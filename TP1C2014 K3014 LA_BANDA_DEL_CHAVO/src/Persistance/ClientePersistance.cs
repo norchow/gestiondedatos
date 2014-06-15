@@ -36,6 +36,19 @@ namespace Persistance
             return users[0];
         }
 
+        public static Cliente GetByUserId(int userId)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Usuario", userId) };
+            var sp = new StoreProcedure(DataBaseConst.Cliente.SPGetClientByUserId, param);
+
+            var users = sp.ExecuteReader<Cliente>();
+
+            if (users == null || users.Count == 0)
+                return null;
+
+            return users[0];
+        }
+
         public static Cliente GetByDocument(int tipoDocumento, int nroDocumento)
         {
             var param = new List<SPParameter> { new SPParameter("Tipo_documento", tipoDocumento), new SPParameter("Nro_documento", nroDocumento) };

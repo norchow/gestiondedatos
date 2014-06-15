@@ -5,6 +5,7 @@ using System.Text;
 using Persistance.Entities;
 using Filters;
 using Configuration;
+using System.Data.SqlClient;
 
 namespace Persistance
 {
@@ -44,6 +45,38 @@ namespace Persistance
             };
             var sp = new StoreProcedure(DataBaseConst.Oferta.SPGetHistoryOfertasByUsuarioByParametersLike, param);
             return sp.ExecuteReader<HistoryOferta>();
+        }
+
+        public static Oferta GetLastOfertaByPublication(int idPublicacion)
+        {
+            var param = new List<SPParameter> { new SPParameter("idPublicacion", idPublicacion)};
+            var sp = new StoreProcedure(DataBaseConst.Oferta.SPGetLastOfertaByPublication, param);
+
+
+            var offers = sp.ExecuteReader<Oferta>();
+            if (offers == null || offers.Count == 0)
+                return null;
+
+            return offers[0];
+        }
+
+        public static Oferta Insert(Oferta offer, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Publicacion", offer.IdPublicacion),
+                    new SPParameter("ID_Cliente", offer.IdCliente),
+                    new SPParameter("Monto", offer.Monto),
+                    new SPParameter("Fecha", offer.Fecha)
+                };
+
+            var sp = (transaction != null)
+                        ? new StoreProcedure(DataBaseConst.Oferta.SPInsertOffer, param, transaction)
+                        : new StoreProcedure(DataBaseConst.Oferta.SPInsertOffer, param);
+
+            offer.ID = (int)sp.ExecuteScalar(transaction);
+
+            return offer;
         }
 
 

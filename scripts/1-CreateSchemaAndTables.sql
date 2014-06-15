@@ -7,7 +7,8 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario](
 	[Password] nvarchar (64) NOT NULL,
 	[Intentos_Fallidos] int DEFAULT 0,
 	[Pass_Temporal] bit DEFAULT 0,
-	[Activo] bit DEFAULT 1
+	[Activo] bit DEFAULT 1,
+	[Habilitado] bit DEFAULT 1
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rol](
@@ -129,13 +130,13 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta](
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Pregunta](
 	[ID_Pregunta] int IDENTITY (1,1),
 	[ID_Publicacion] numeric(18,0) NOT NULL,
-	[Texto] text
+	[Texto] nvarchar(255)
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Respuesta](
 	[ID_Respuesta] int IDENTITY (1,1),
 	[ID_Pregunta] int NOT NULL,
-	[Texto] text,
+	[Texto] nvarchar(255),
 	[Fecha] datetime NOT NULL
 );
 
@@ -173,7 +174,8 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Factura] (
 	[Numero] numeric(18, 0) UNIQUE NOT NULL,
 	[Fecha] datetime NOT NULL,
 	[Total] numeric(18, 2) NOT NULL,
-	[ID_Forma_Pago] int NOT NULL
+	[ID_Forma_Pago] int NOT NULL,
+	[ID_Usuario] int NOT NULL
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (

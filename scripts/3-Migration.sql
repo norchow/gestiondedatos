@@ -142,7 +142,7 @@ BEGIN TRANSACTION
 		SELECT [Calificacion_Codigo],
 			   [Publicacion_Cod],
 			   (SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE CONVERT(nvarchar(255), Cli_Dni) = U.Username),
-		       [Calificacion_Cant_Estrellas],
+		       CAST(ROUND([Calificacion_Cant_Estrellas]/2,0) AS INT),
 		       [Calificacion_Descripcion]
 		FROM gd_esquema.Maestra
 		WHERE [Calificacion_Codigo] IS NOT NULL)
@@ -167,7 +167,7 @@ COMMIT
 
 BEGIN TRANSACTION 
 	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Compra] (ID_Publicacion, ID_Cliente, Compra_Fecha, Compra_Cantidad) (
-		SELECT 
+		SELECT DISTINCT
 			[Publicacion_Cod],
 			(SELECT ID_Cliente FROM LA_BANDA_DEL_CHAVO.TL_Cliente C WHERE Cli_Dni = C.Nro_Documento),
 			[Compra_Fecha],
@@ -185,11 +185,12 @@ INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago] (Descripcion) (
 COMMIT
 
 BEGIN TRANSACTION 
-INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Factura] (Numero, Fecha, Total, ID_Forma_Pago) (
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Factura] (Numero, Fecha, Total, ID_Forma_Pago, ID_Usuario) (
 	SELECT DISTINCT [Factura_Nro],
 	 [Factura_Fecha],
 	 [Factura_Total],
-	 (SELECT ID_Forma_Pago FROM LA_BANDA_DEL_CHAVO.TL_Forma_Pago FP WHERE FP.Descripcion=[Forma_Pago_Desc])
+	 (SELECT ID_Forma_Pago FROM LA_BANDA_DEL_CHAVO.TL_Forma_Pago FP WHERE FP.Descripcion=[Forma_Pago_Desc]),
+	 (SELECT U.ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE U.Username = CONVERT(nvarchar(255),[Publ_Cli_Dni]) OR U.Username = [Publ_Empresa_Cuit])
 	FROM [gd_esquema].[Maestra]
 	WHERE [Factura_Fecha] IS NOT NULL)
 COMMIT

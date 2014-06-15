@@ -15,6 +15,8 @@ using FrbaCommerce.Editar_Publicacion;
 using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Historial_Cliente;
 using FrbaCommerce.Gestion_de_Preguntas;
+using Session;
+using FrbaCommerce.Login;
 
 namespace FrbaCommerce.Home
 {
@@ -82,6 +84,20 @@ namespace FrbaCommerce.Home
         {
             var frmResponderPreguntas = new FrmResponderPreguntas();
             frmResponderPreguntas.ShowDialog();
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LogOutCurrentUser();
+        }
+
+        private void LogOutCurrentUser()
+        {
+            SessionManager.ClearCurrentSession();
+            Hide();
+
+            FrmLogin formLogin = new FrmLogin();
+            formLogin.Show();
         }
     }
 }

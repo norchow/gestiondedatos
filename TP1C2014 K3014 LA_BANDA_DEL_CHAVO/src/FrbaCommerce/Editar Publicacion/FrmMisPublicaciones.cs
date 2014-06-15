@@ -212,5 +212,10 @@ namespace FrbaCommerce.Editar_Publicacion
             RefreshSources(null);
             CleanFiltersUI();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

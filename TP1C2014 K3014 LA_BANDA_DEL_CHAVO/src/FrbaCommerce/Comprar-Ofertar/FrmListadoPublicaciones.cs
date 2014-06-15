@@ -48,6 +48,7 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             #endregion
 
+            #region Load publications in the datagrid
             var bind = publicationsDictionary.Values.Select(a => new
             {
                 Codigo = a.ID,
@@ -55,13 +56,19 @@ namespace FrbaCommerce.Comprar_Ofertar
                 FechaInicio = a.FechaInicio,
                 FechaVencimiento = a.FechaVencimiento,
                 Stock = a.Stock,
-                Precio = a.Precio,
+                Precio = (OfertaPersistance.GetLastOfertaByPublication(a.ID) != null) ? OfertaPersistance.GetLastOfertaByPublication(a.ID).Monto: a.Precio,
                 RecibirPreguntas = a.RecibirPreguntas,
             });
 
             DgvPublicacion.DataSource = bind.ToList();
             DgvPublicacion.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             AddButtonsColumns();
+            #endregion
+
+            var rubros = RubroPersistance.GetAll();
+            LstRubro.DataSource = rubros;
+            LstRubro.DisplayMember = "Descripcion";
+            LstRubro.ValueMember = "ID";
         }
 
         private void ClearDataGridView()
