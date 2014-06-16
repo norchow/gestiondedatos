@@ -278,6 +278,8 @@ namespace FrbaCommerce.Generar_Publicacion
                 Auction = TxtValorInicioSubasta.Enabled = publicationTypeSelected.Descripcion == "Subasta";
 
             TxtPrecio.Enabled = !Auction;
+            LblRequeridoPrecio.Visible = !Auction;
+            LblRequeridoValorInicial.Visible = Auction;
             if (Auction)
             {
                 TxtStock.Enabled = false;
