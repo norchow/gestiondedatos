@@ -37,6 +37,10 @@
             this.TxtDescripcion = new System.Windows.Forms.TextBox();
             this.LblLimpiar = new System.Windows.Forms.Label();
             this.LblBuscar = new System.Windows.Forms.Label();
+            this.lblFirst = new System.Windows.Forms.Label();
+            this.lblPrevious = new System.Windows.Forms.Label();
+            this.lblLast = new System.Windows.Forms.Label();
+            this.lblNext = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPublicacion)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -49,12 +53,12 @@
             this.DgvPublicacion.AllowUserToResizeRows = false;
             this.DgvPublicacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.DgvPublicacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvPublicacion.Location = new System.Drawing.Point(12, 132);
+            this.DgvPublicacion.Location = new System.Drawing.Point(12, 156);
             this.DgvPublicacion.MultiSelect = false;
             this.DgvPublicacion.Name = "DgvPublicacion";
             this.DgvPublicacion.RowHeadersVisible = false;
             this.DgvPublicacion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvPublicacion.Size = new System.Drawing.Size(868, 290);
+            this.DgvPublicacion.Size = new System.Drawing.Size(868, 266);
             this.DgvPublicacion.TabIndex = 34;
             this.DgvPublicacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPublicacion_CellContentClick);
             // 
@@ -82,7 +86,7 @@
             this.groupBox1.Controls.Add(this.LblBuscar);
             this.groupBox1.Location = new System.Drawing.Point(12, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(868, 87);
+            this.groupBox1.Size = new System.Drawing.Size(868, 127);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FILTROS DE BUSQUEDA";
@@ -90,9 +94,9 @@
             // LstRubro
             // 
             this.LstRubro.FormattingEnabled = true;
-            this.LstRubro.Location = new System.Drawing.Point(309, 14);
+            this.LstRubro.Location = new System.Drawing.Point(309, 12);
             this.LstRubro.Name = "LstRubro";
-            this.LstRubro.Size = new System.Drawing.Size(261, 64);
+            this.LstRubro.Size = new System.Drawing.Size(261, 109);
             this.LstRubro.TabIndex = 45;
             // 
             // label1
@@ -127,12 +131,13 @@
             this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblLimpiar.ForeColor = System.Drawing.Color.White;
-            this.LblLimpiar.Location = new System.Drawing.Point(767, 40);
+            this.LblLimpiar.Location = new System.Drawing.Point(767, 87);
             this.LblLimpiar.Name = "LblLimpiar";
             this.LblLimpiar.Size = new System.Drawing.Size(88, 32);
             this.LblLimpiar.TabIndex = 42;
             this.LblLimpiar.Text = "LIMPIAR";
             this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
             // 
             // LblBuscar
             // 
@@ -140,18 +145,79 @@
             this.LblBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblBuscar.ForeColor = System.Drawing.Color.White;
-            this.LblBuscar.Location = new System.Drawing.Point(663, 40);
+            this.LblBuscar.Location = new System.Drawing.Point(663, 87);
             this.LblBuscar.Name = "LblBuscar";
             this.LblBuscar.Size = new System.Drawing.Size(88, 32);
             this.LblBuscar.TabIndex = 41;
             this.LblBuscar.Text = "BUSCAR";
             this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblBuscar.Click += new System.EventHandler(this.LblBuscar_Click);
+            // 
+            // lblFirst
+            // 
+            this.lblFirst.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.lblFirst.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblFirst.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblFirst.ForeColor = System.Drawing.Color.White;
+            this.lblFirst.Location = new System.Drawing.Point(12, 425);
+            this.lblFirst.Name = "lblFirst";
+            this.lblFirst.Size = new System.Drawing.Size(27, 19);
+            this.lblFirst.TabIndex = 38;
+            this.lblFirst.Text = "<<";
+            this.lblFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblFirst.Click += new System.EventHandler(this.lblFirst_Click);
+            // 
+            // lblPrevious
+            // 
+            this.lblPrevious.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.lblPrevious.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPrevious.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblPrevious.ForeColor = System.Drawing.Color.White;
+            this.lblPrevious.Location = new System.Drawing.Point(45, 425);
+            this.lblPrevious.Name = "lblPrevious";
+            this.lblPrevious.Size = new System.Drawing.Size(27, 19);
+            this.lblPrevious.TabIndex = 39;
+            this.lblPrevious.Text = "<";
+            this.lblPrevious.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPrevious.Click += new System.EventHandler(this.lblPrevious_Click);
+            // 
+            // lblLast
+            // 
+            this.lblLast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.lblLast.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLast.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblLast.ForeColor = System.Drawing.Color.White;
+            this.lblLast.Location = new System.Drawing.Point(853, 425);
+            this.lblLast.Name = "lblLast";
+            this.lblLast.Size = new System.Drawing.Size(27, 19);
+            this.lblLast.TabIndex = 40;
+            this.lblLast.Text = ">>";
+            this.lblLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLast.Click += new System.EventHandler(this.lblLast_Click);
+            // 
+            // lblNext
+            // 
+            this.lblNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.lblNext.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblNext.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblNext.ForeColor = System.Drawing.Color.White;
+            this.lblNext.Location = new System.Drawing.Point(820, 425);
+            this.lblNext.Name = "lblNext";
+            this.lblNext.Size = new System.Drawing.Size(27, 19);
+            this.lblNext.TabIndex = 41;
+            this.lblNext.Text = ">";
+            this.lblNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNext.Click += new System.EventHandler(this.lblNext_Click);
             // 
             // FrmListadoPublicaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 494);
+            this.Controls.Add(this.lblNext);
+            this.Controls.Add(this.lblLast);
+            this.Controls.Add(this.lblPrevious);
+            this.Controls.Add(this.lblFirst);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.LblListo);
             this.Controls.Add(this.DgvPublicacion);
@@ -176,5 +242,9 @@
         private System.Windows.Forms.Label LblBuscar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckedListBox LstRubro;
+        private System.Windows.Forms.Label lblFirst;
+        private System.Windows.Forms.Label lblPrevious;
+        private System.Windows.Forms.Label lblLast;
+        private System.Windows.Forms.Label lblNext;
     }
 }

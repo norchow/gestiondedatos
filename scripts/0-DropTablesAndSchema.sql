@@ -115,6 +115,8 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllBusinessByParameters];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllBusinessByParametersLike];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertUserTemporal];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateUserToDisabledById];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicationActiveByParameters];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicationActiveByParametersLike];
 
 DROP TRIGGER [LA_BANDA_DEL_CHAVO].[TL_Rol_After_Update];
 
