@@ -95,6 +95,11 @@ namespace Persistance
             if (publications == null || publications.Count == 0)
                 return null;
 
+            foreach (var pub in publications)
+            {
+                pub.GetObjectsById();
+            }
+
             return publications;
         }
 

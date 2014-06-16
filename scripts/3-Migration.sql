@@ -141,7 +141,9 @@ BEGIN TRANSACTION
 	INSERT INTO LA_BANDA_DEL_CHAVO.TL_Calificacion (Codigo_Calificacion, ID_Publicacion, ID_Comprador, Cantidad_Estrellas, Descripcion) (
 		SELECT [Calificacion_Codigo],
 			   [Publicacion_Cod],
-			   (SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U WHERE CONVERT(nvarchar(255), Cli_Dni) = U.Username),
+			   (SELECT C.ID_Cliente FROM LA_BANDA_DEL_CHAVO.TL_Usuario U 
+				INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON U.ID_Usuario=C.ID_Usuario
+				WHERE CONVERT(nvarchar(255), Cli_Dni) = U.Username),
 		       CAST(ROUND([Calificacion_Cant_Estrellas]/2,0) AS INT),
 		       [Calificacion_Descripcion]
 		FROM gd_esquema.Maestra

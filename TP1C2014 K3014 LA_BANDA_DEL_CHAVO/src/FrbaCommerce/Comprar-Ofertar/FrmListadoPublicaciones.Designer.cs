@@ -31,12 +31,12 @@
             this.DgvPublicacion = new System.Windows.Forms.DataGridView();
             this.LblListo = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LstRubro = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.ChkBusquedaExacta = new System.Windows.Forms.CheckBox();
             this.TxtDescripcion = new System.Windows.Forms.TextBox();
             this.LblLimpiar = new System.Windows.Forms.Label();
             this.LblBuscar = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.LstRubro = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPublicacion)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -87,6 +87,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FILTROS DE BUSQUEDA";
             // 
+            // LstRubro
+            // 
+            this.LstRubro.FormattingEnabled = true;
+            this.LstRubro.Location = new System.Drawing.Point(309, 14);
+            this.LstRubro.Name = "LstRubro";
+            this.LstRubro.Size = new System.Drawing.Size(261, 64);
+            this.LstRubro.TabIndex = 45;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "DESCRIPCION";
+            // 
             // ChkBusquedaExacta
             // 
             this.ChkBusquedaExacta.AutoSize = true;
@@ -129,23 +146,6 @@
             this.LblBuscar.TabIndex = 41;
             this.LblBuscar.Text = "BUSCAR";
             this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 44;
-            this.label1.Text = "DESCRIPCION";
-            // 
-            // LstRubro
-            // 
-            this.LstRubro.FormattingEnabled = true;
-            this.LstRubro.Location = new System.Drawing.Point(309, 14);
-            this.LstRubro.Name = "LstRubro";
-            this.LstRubro.Size = new System.Drawing.Size(261, 64);
-            this.LstRubro.TabIndex = 45;
             // 
             // FrmListadoPublicaciones
             // 
