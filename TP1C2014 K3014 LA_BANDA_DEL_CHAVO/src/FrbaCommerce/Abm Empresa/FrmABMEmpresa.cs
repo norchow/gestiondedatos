@@ -172,7 +172,7 @@ namespace FrbaCommerce.Abm_Empresa
 
         private void LblNuevo_Click(object sender, EventArgs e)
         {
-            var frmRegistroUsuario = new FrmRegistroUsuario(true);
+            var frmRegistroUsuario = new FrmRegistroUsuario(true, false);
             frmRegistroUsuario.Show();
         }
 

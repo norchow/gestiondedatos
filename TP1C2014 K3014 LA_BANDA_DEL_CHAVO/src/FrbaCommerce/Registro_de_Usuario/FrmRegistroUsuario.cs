@@ -20,17 +20,20 @@ namespace FrbaCommerce.Registro_de_Usuario
     {
 
         private Boolean _abmEmpresa;
+        private Boolean _abmCliente;
 
         public FrmRegistroUsuario()
         {
             InitializeComponent();
             _abmEmpresa = false;
+            _abmCliente = false;
         }
 
-        public FrmRegistroUsuario(Boolean abmEmpresa)
+        public FrmRegistroUsuario(Boolean abmEmpresa, Boolean abmCliente)
         {
             InitializeComponent();
             _abmEmpresa = abmEmpresa;
+            _abmCliente = abmCliente;
         }
 
         private void FrmRegistroUsuario_Load(object sender, EventArgs e)
@@ -41,6 +44,10 @@ namespace FrbaCommerce.Registro_de_Usuario
 
             if (_abmEmpresa){
                 CboRoles.SelectedIndex = 1;
+                CboRoles.Enabled = false;
+            }
+            else if (_abmCliente) {
+                CboRoles.SelectedIndex = 0;
                 CboRoles.Enabled = false;
             }
         }
@@ -82,7 +89,7 @@ namespace FrbaCommerce.Registro_de_Usuario
                 {
                     using (var transaction = DataBaseManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
                     {
-                        if (_abmEmpresa)
+                        if (_abmEmpresa || _abmCliente)
                             user = UsuarioPersistance.InsertUserTemporal(user, transaction);
                         else
                             user = UsuarioPersistance.InsertUser(user, transaction);
@@ -90,7 +97,7 @@ namespace FrbaCommerce.Registro_de_Usuario
                         Rol selectedRol = (Rol)CboRoles.SelectedItem;
                         RolPersistance.InsertUserRole(user, selectedRol, transaction);
 
-                        if (!_abmEmpresa)
+                        if (!_abmEmpresa && !_abmCliente)
                         {
                             //Cargo los datos en sesion
                             SessionManager.CurrentUser = user;
@@ -102,7 +109,7 @@ namespace FrbaCommerce.Registro_de_Usuario
                         {
                             case "Cliente":
                                 this.Hide();
-                                var frmABMInsertUpdateCliente = new FrmABMInsertUpdateCliente(transaction);
+                                var frmABMInsertUpdateCliente = new FrmABMInsertUpdateCliente(transaction, _abmCliente, user);
                                 frmABMInsertUpdateCliente.ShowDialog();
                                 break;
                             case "Empresa":

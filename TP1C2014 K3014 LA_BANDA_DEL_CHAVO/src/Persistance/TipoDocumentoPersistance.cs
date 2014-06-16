@@ -21,5 +21,22 @@ namespace Persistance
             var sp = new StoreProcedure(DataBaseConst.TipoDocumento.SPGetAllTipoDocumento, null, transaction);
             return sp.ExecuteReaderTransactioned<TipoDocumento>(transaction);
         }
+
+        public static TipoDocumento GetById(int id)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Tipo_Documento", id)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.TipoDocumento.SPGetById, param);
+
+            var documentTypes = sp.ExecuteReader<TipoDocumento>();
+
+            if (documentTypes == null || documentTypes.Count == 0)
+                return null;
+
+            return documentTypes[0];
+        }
     }
 }

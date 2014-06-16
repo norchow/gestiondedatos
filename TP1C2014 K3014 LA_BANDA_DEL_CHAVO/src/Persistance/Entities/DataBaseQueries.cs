@@ -113,6 +113,7 @@ namespace Persistance.Entities
         public static class TipoDocumento
         {
             public static String SPGetAllTipoDocumento = "LA_BANDA_DEL_CHAVO.GetAllTipoDocumento";
+            public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetTipoDocumentoById";
         }
 
         public static class Cliente
@@ -120,8 +121,12 @@ namespace Persistance.Entities
             public static String SPGetClientByPhone = "LA_BANDA_DEL_CHAVO.GetClientByPhone";
             public static String SPGetClientByDocument = "LA_BANDA_DEL_CHAVO.GetClientByDocument";
             public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
+            public static String SPUpdateClient = "LA_BANDA_DEL_CHAVO.UpdateClient";
             public static String SPGetClientByUserId = "LA_BANDA_DEL_CHAVO.GetClientByUserId";
             public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetClientById";
+            public static String SPGetAllClients = "LA_BANDA_DEL_CHAVO.GetAllClients";
+            public static String SPGetAllClientsByParameters = "LA_BANDA_DEL_CHAVO.GetAllClientsByParameters";
+            public static String SPGetAllClientsByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllClientsByParametersLike";
         }
 
         public static class Compra
