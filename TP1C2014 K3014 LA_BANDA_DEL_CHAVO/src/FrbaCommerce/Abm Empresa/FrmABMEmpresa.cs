@@ -198,8 +198,6 @@ namespace FrbaCommerce.Abm_Empresa
                 else
                 {
                     //User clicked delete button
-
-
                     if (selectedEmpresa.Habilitado == true)
                     {
                         var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere desactivar la empresa {0}?", selectedEmpresa.RazonSocial), "Atención", MessageBoxButtons.YesNo);

@@ -101,6 +101,10 @@
       <Project>{025BAFDE-45A0-4AF8-BCC8-13AC348ED00F}</Project>
       <Name>Filters</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tools\Tools.csproj">
+      <Project>{8BB63B62-926C-489D-A25F-ADF51C8C0410}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

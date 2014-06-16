@@ -2,6 +2,8 @@
 using Persistance.Entities;
 using System.Data.SqlClient;
 using System.Data;
+using System;
+using Tools;
 
 namespace Persistance
 {
@@ -73,10 +75,6 @@ namespace Persistance
             sp.ExecuteNonQuery(null);
         }
 
-
-
-        
-
         public static Usuario GetById(int idUser)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Usuario", idUser) };
@@ -124,7 +122,6 @@ namespace Persistance
             return user;
         }
 
-
         public static void InhabilitarUser(Usuario user)
         {
             var param = new List<SPParameter>
@@ -134,6 +131,34 @@ namespace Persistance
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPInhabilitarUser, param);
 
             sp.ExecuteNonQuery(null);
+        }
+
+        public static Usuario Login(string userName, string password)
+        {
+            var usuario = GetByUsername(userName);
+
+            if (usuario == null)
+                throw new Exception("El nombre de usuario ingresado no existe.");
+
+            if (!usuario.Activo)
+                throw new Exception("El usuario ingresado no se encuentra habilitado para operar el sistema.");
+
+            if (usuario.Password != SHA256Helper.Encode(password))
+            {
+                usuario.LoginFails += 1;
+                usuario.Activo = usuario.LoginFails < 3;
+                UsuarioPersistance.Update(usuario);
+
+                throw new Exception("La contraseña ingresada no es valida.");
+            }
+
+            if (usuario.RolesActivos.Count == 0)
+                throw new Exception("No cuenta con un rol habilitado, por lo que no puede ingresar al sistema.");
+
+            usuario.LoginFails = 0;
+            UsuarioPersistance.Update(usuario);
+
+            return usuario;
         }
     }
 }

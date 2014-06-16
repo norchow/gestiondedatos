@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using Persistance;
 using Persistance.Entities;
-using Logic;
 using Tools;
 using FrbaCommerce.Abm_Cliente;
 using FrbaCommerce.Abm_Empresa;

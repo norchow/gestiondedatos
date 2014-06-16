@@ -344,10 +344,6 @@
       <Project>{025BAFDE-45A0-4AF8-BCC8-13AC348ED00F}</Project>
       <Name>Filters</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
-      <Project>{044B38F2-95F6-4048-9ECA-151AFED10B1F}</Project>
-      <Name>Logic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Persistance\Persistance.csproj">
       <Project>{5148E74D-C5CE-467D-A86D-451F7B0CF263}</Project>
       <Name>Persistance</Name>

@@ -1,3 +1,2 @@
 .Agregar el numero del grupo tanto a la carpeta del proyecto como al Readme.txt
-.Mostrar los distintos menuitems dependiendo de la visibilidad del usuario logueado.
 .Redactar el archivo Estrategia.pdf

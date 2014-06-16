@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Forms;
 using FrbaCommerce.Home;
-using Logic;
 using Session;
 using Persistance;
 using FrbaCommerce.Registro_de_Usuario;
@@ -26,7 +25,7 @@ namespace FrbaCommerce.Login
                 if (string.IsNullOrEmpty(password))
                     throw new Exception("La contraseña no puede ser vacía.");
 
-                var user = new UsuarioLogic().Login(userName, password);
+                var user = UsuarioPersistance.Login(userName, password);
 
                 if (!UsuarioPersistance.GetById(user.ID).Habilitado)
                     throw new Exception("No puede loguearse. El usuario se encuentra inhabilitado debido a que acumula más de 10 compras sin rendir. Por favor, acérquese a la oficina de administración.");
