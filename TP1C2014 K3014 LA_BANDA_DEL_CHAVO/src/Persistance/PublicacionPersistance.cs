@@ -103,6 +103,58 @@ namespace Persistance
             return publications;
         }
 
+        public static List<Publicacion> GetAllActiveByParameters(String description, List<Rubro> lstRubros)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_hoy", Configuration.ConfigurationVariables.FechaSistema),
+                    new SPParameter("Descripcion", description)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllActiveByParameters, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return null;
+
+            var result = new List<Publicacion>();
+            foreach (var pub in publications)
+            {
+                pub.GetObjectsById();
+                if (pub.Rubros.Count == lstRubros.Count && pub.Rubros.Select(i => i.ID).Intersect(lstRubros.Select(j => j.ID)).Count() == pub.Rubros.Count)
+                    result.Add(pub);
+            }
+
+            return result;
+        }
+
+        public static List<Publicacion> GetAllActiveByParametersLike(String description, List<Rubro> lstRubros)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_hoy", Configuration.ConfigurationVariables.FechaSistema),
+                    new SPParameter("Descripcion", description)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllActiveByParametersLike, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return null;
+
+            var result = new List<Publicacion>();
+            foreach (var pub in publications)
+            {
+                pub.GetObjectsById();
+                if (lstRubros.Count == 0 || pub.Rubros.Select(i => i.ID).Intersect(lstRubros.Select(j => j.ID)).Count() > 0)
+                    result.Add(pub);
+            }
+
+            return result;
+        }
+
         public static List<Publicacion> GetAllByUserId(int userId)
         {
             var param = new List<SPParameter>

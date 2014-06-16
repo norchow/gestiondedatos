@@ -15,6 +15,7 @@ namespace FrbaCommerce.Comprar_Ofertar
     public partial class FrmListadoPublicaciones : Form
     {
         private List<Publicacion> _publications = new List<Publicacion>();
+        private int _offset = 0;
 
         public FrmListadoPublicaciones()
         {
@@ -59,12 +60,16 @@ namespace FrbaCommerce.Comprar_Ofertar
                 Precio = (OfertaPersistance.GetLastOfertaByPublication(a.ID) != null) ? OfertaPersistance.GetLastOfertaByPublication(a.ID).Monto: a.Precio,
                 RecibirPreguntas = a.RecibirPreguntas,
                 Tipo = a.TipoPublicacion.Descripcion,
-                Estado = a.Visibilidad.Descripcion,
+                Visibilidad = a.Visibilidad.Descripcion,
                 Rubros = a.GetTextRubros(),
                 CalificacionVendedor = CalificacionPersistance.getAverageCalificationToMe(a.UsuarioCreador)
             });
 
-            DgvPublicacion.DataSource = bind.ToList();
+            var bindlist = bind.ToList();
+            if(bindlist.Count - _offset > 10)
+                DgvPublicacion.DataSource = bindlist.GetRange(_offset, 10); //paginas de a 10 contenidos
+            else
+                DgvPublicacion.DataSource = bindlist.GetRange(_offset, bindlist.Count - _offset);
             DgvPublicacion.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             AddButtonsColumns();
             #endregion
@@ -113,6 +118,69 @@ namespace FrbaCommerce.Comprar_Ofertar
 
                 RefreshSources(null);
             }
+        }
+
+        private void LblLimpiar_Click(object sender, EventArgs e)
+        {
+            TxtDescripcion.Text = string.Empty;
+            foreach (var checkedIndex in LstRubro.CheckedIndices)
+                LstRubro.SetItemCheckState((int)checkedIndex, CheckState.Unchecked);
+        }
+
+        private void LblBuscar_Click(object sender, EventArgs e)
+        {
+            _offset = 0;
+            var lstRubros = new List<Rubro>();
+            foreach (var checkedItem in LstRubro.CheckedItems)
+            {
+                var category = (Rubro)checkedItem;
+                lstRubros.Add(category);
+            }
+
+            if (ChkBusquedaExacta.Checked)
+            {
+                _publications = PublicacionPersistance.GetAllActiveByParameters(TxtDescripcion.Text, lstRubros);
+                RefreshSources(_publications);
+            }
+            else
+            {
+                _publications = PublicacionPersistance.GetAllActiveByParametersLike(TxtDescripcion.Text, lstRubros);
+                RefreshSources(_publications);
+            }
+        }
+
+        private void lblFirst_Click(object sender, EventArgs e)
+        {
+            _offset = 0;
+            RefreshSources(_publications);
+            lblPrevious.Visible = false;
+            lblNext.Visible = true;
+        }
+
+        private void lblLast_Click(object sender, EventArgs e)
+        {
+            _offset = _publications.Count - (_publications.Count % 10);
+            RefreshSources(_publications);
+            lblPrevious.Visible = true;
+            lblNext.Visible = false;
+        }
+
+        private void lblNext_Click(object sender, EventArgs e)
+        {
+            _offset += 10;
+            RefreshSources(_publications);
+            lblPrevious.Visible = true;
+            if (_publications.Count - _offset < 10)
+                lblNext.Visible = false;
+        }
+
+        private void lblPrevious_Click(object sender, EventArgs e)
+        {
+            _offset -= 10;
+            RefreshSources(_publications);
+            lblNext.Visible = true;
+            if (_offset == 0)
+                lblPrevious.Visible = false;
         }
     }
 }

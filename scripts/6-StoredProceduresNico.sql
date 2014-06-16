@@ -182,9 +182,11 @@ BEGIN
 	SELECT P.* FROM [LA_BANDA_DEL_CHAVO].[TL_Publicacion] P
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP ON P.ID_Estado_Publicacion=EP.ID_Estado_Publicacion
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion=TP.ID_Tipo_Publicacion
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Visibilidad V ON P.ID_Visibilidad = V.ID_Visibilidad
 	WHERE EP.Descripcion='Publicada'
 	AND P.Fecha_Vencimiento>@Fecha_hoy
 	AND (TP.Descripcion = 'Subasta' OR P.Stock>0)
+	ORDER BY V.Precio_Publicar DESC
 END
 GO
 
@@ -334,5 +336,39 @@ BEGIN
 	OUTPUT inserted.ID_Usuario_Rol
 	VALUES (@ID_Usuario
 	  ,@ID_Rol)
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicationActiveByParameters]
+	@Fecha_hoy datetime
+	,@Descripcion nvarchar(255) = NULL
+AS
+BEGIN
+	SELECT P.* FROM [LA_BANDA_DEL_CHAVO].[TL_Publicacion] P
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP ON P.ID_Estado_Publicacion=EP.ID_Estado_Publicacion
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion=TP.ID_Tipo_Publicacion
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Visibilidad V ON P.ID_Visibilidad = V.ID_Visibilidad
+	WHERE EP.Descripcion='Publicada'
+	AND P.Fecha_Vencimiento>@Fecha_hoy
+	AND (TP.Descripcion = 'Subasta' OR P.Stock>0)
+	AND ((LOWER(P.[Descripcion]) = LOWER(@Descripcion)) OR @Descripcion is NULL)
+	ORDER BY V.Precio_Publicar DESC
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllPublicationActiveByParametersLike]
+	@Fecha_hoy datetime
+	,@Descripcion nvarchar(255) = NULL
+AS
+BEGIN
+	SELECT P.* FROM [LA_BANDA_DEL_CHAVO].[TL_Publicacion] P
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP ON P.ID_Estado_Publicacion=EP.ID_Estado_Publicacion
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion=TP.ID_Tipo_Publicacion
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Visibilidad V ON P.ID_Visibilidad = V.ID_Visibilidad
+	WHERE EP.Descripcion='Publicada'
+	AND P.Fecha_Vencimiento>@Fecha_hoy
+	AND (TP.Descripcion = 'Subasta' OR P.Stock>0)
+	AND ((LOWER(P.[Descripcion]) LIKE '%' + LOWER(@Descripcion) + '%'))
+	ORDER BY V.Precio_Publicar DESC
 END
 GO
