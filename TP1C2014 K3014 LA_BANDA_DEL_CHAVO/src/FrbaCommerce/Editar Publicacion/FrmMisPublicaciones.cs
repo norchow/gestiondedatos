@@ -42,7 +42,10 @@ namespace FrbaCommerce.Editar_Publicacion
                 //The datasource must be all the publications records from the user stored in the database
                 CleanFiltersUI();
                 _publications = PublicacionPersistance.GetAllByUserId(SessionManager.CurrentUser.ID);
-                publicationsDictionary = _publications.ToDictionary(a => a.ID, a => a);
+                if (_publications != null)
+                    publicationsDictionary = _publications.ToDictionary(a => a.ID, a => a);
+                else
+                    publicationsDictionary = null;
             }
             else
             {
@@ -51,21 +54,23 @@ namespace FrbaCommerce.Editar_Publicacion
             }
 
             #endregion
-
-            var bind = publicationsDictionary.Values.Select(a => new
+            if (publicationsDictionary != null)
             {
-                Codigo = a.ID,
-                Descripcion = a.Descripcion,
-                FechaInicio = a.FechaInicio,
-                FechaVencimiento = a.FechaVencimiento,
-                Stock = a.Stock,
-                Precio = a.Precio,
-                RecibirPreguntas = a.RecibirPreguntas
-            });
+                var bind = publicationsDictionary.Values.Select(a => new
+                {
+                    Codigo = a.ID,
+                    Descripcion = a.Descripcion,
+                    FechaInicio = a.FechaInicio,
+                    FechaVencimiento = a.FechaVencimiento,
+                    Stock = a.Stock,
+                    Precio = a.Precio,
+                    RecibirPreguntas = a.RecibirPreguntas
+                });
 
-            DgvPublicacion.DataSource = bind.ToList();
-            DgvPublicacion.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            AddButtonsColumns();
+                DgvPublicacion.DataSource = bind.ToList();
+                DgvPublicacion.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                AddButtonsColumns();
+            }
         }
 
         private void ClearDataGridView()
