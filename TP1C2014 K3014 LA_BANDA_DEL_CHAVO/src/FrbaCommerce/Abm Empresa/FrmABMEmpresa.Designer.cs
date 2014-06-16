@@ -66,7 +66,7 @@
             // ChkBusquedaExacta
             // 
             this.ChkBusquedaExacta.AutoSize = true;
-            this.ChkBusquedaExacta.Location = new System.Drawing.Point(605, 59);
+            this.ChkBusquedaExacta.Location = new System.Drawing.Point(564, 59);
             this.ChkBusquedaExacta.Name = "ChkBusquedaExacta";
             this.ChkBusquedaExacta.Size = new System.Drawing.Size(131, 17);
             this.ChkBusquedaExacta.TabIndex = 36;
@@ -79,11 +79,11 @@
             this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblLimpiar.ForeColor = System.Drawing.Color.White;
-            this.LblLimpiar.Location = new System.Drawing.Point(788, 50);
+            this.LblLimpiar.Location = new System.Drawing.Point(752, 50);
             this.LblLimpiar.Name = "LblLimpiar";
-            this.LblLimpiar.Size = new System.Drawing.Size(88, 32);
+            this.LblLimpiar.Size = new System.Drawing.Size(124, 32);
             this.LblLimpiar.TabIndex = 35;
-            this.LblLimpiar.Text = "LIMPIAR";
+            this.LblLimpiar.Text = "LIMPIAR/REFRESCAR";
             this.LblLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblLimpiar.Click += new System.EventHandler(this.LblLimpiar_Click);
             // 
@@ -93,9 +93,9 @@
             this.LblBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblBuscar.ForeColor = System.Drawing.Color.White;
-            this.LblBuscar.Location = new System.Drawing.Point(788, 11);
+            this.LblBuscar.Location = new System.Drawing.Point(752, 11);
             this.LblBuscar.Name = "LblBuscar";
-            this.LblBuscar.Size = new System.Drawing.Size(88, 32);
+            this.LblBuscar.Size = new System.Drawing.Size(124, 32);
             this.LblBuscar.TabIndex = 34;
             this.LblBuscar.Text = "BUSCAR";
             this.LblBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -114,7 +114,7 @@
             // 
             this.TxtEmail.Location = new System.Drawing.Point(564, 23);
             this.TxtEmail.Name = "TxtEmail";
-            this.TxtEmail.Size = new System.Drawing.Size(204, 20);
+            this.TxtEmail.Size = new System.Drawing.Size(175, 20);
             this.TxtEmail.TabIndex = 4;
             // 
             // label2

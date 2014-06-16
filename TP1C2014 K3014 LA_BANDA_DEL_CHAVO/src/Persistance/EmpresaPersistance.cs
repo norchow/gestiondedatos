@@ -128,5 +128,30 @@ namespace Persistance
 
             return company;
         }
+
+
+        public static Empresa UpdateCompany(Empresa company)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", company.IdUsuario),
+                    new SPParameter("Razon_Social", company.RazonSocial),
+                    new SPParameter("Mail", company.Mail),
+                    new SPParameter("Telefono", company.Telefono),
+                    new SPParameter("Direccion", company.Direccion),
+                    new SPParameter("Codigo_Postal", company.CodigoPostal),
+                    new SPParameter("Ciuidad", company.Ciudad),
+                    new SPParameter("CUIT", company.CUIT),
+                    new SPParameter("Nombre_Contacto", company.NombreContacto),
+                    new SPParameter("Fecha_Creacion", company.FechaCreacion)                    
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Empresa.SPUpdateCompany, param);
+
+            company.ID = (int)sp.ExecuteNonQuery(null);
+
+            return company; 
+        }
+
     }
 }

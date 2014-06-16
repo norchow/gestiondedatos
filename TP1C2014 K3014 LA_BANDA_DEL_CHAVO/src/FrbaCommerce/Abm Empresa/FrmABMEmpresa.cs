@@ -104,13 +104,13 @@ namespace FrbaCommerce.Abm_Empresa
             {
                 Text = "Modificar",
                 UseColumnTextForButtonValue = true,
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             };
             var deleteColumn = new DataGridViewButtonColumn
             {
-                Text = "Desactivar",
+                Text = "Des/Habilitar",
                 UseColumnTextForButtonValue = true,
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             };
 
             DgvEmpresas.Columns.Add(updateColumn);
@@ -179,7 +179,7 @@ namespace FrbaCommerce.Abm_Empresa
         private void DgvEmpresas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //Only works when user clicks one of the buttons (column index 5 and 6)
-            if (e.ColumnIndex < 6 || e.RowIndex == -1)
+            if (e.ColumnIndex < 12 || e.RowIndex == -1)
                 return;
 
             var selectedEmpresa = _empresas.Find(empresa => empresa.ID == (int)DgvEmpresas.Rows[e.RowIndex].Cells[0].Value);
@@ -199,12 +199,26 @@ namespace FrbaCommerce.Abm_Empresa
                 {
                     //User clicked delete button
 
-                    var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere desactivar la empresa {0}?", selectedEmpresa.RazonSocial), "Atención", MessageBoxButtons.YesNo);
-                    if (dialogAnswer == DialogResult.Yes)
-                    {
-                        UsuarioPersistance.UpdateToDisabledById(selectedEmpresa.IdUsuario);
 
-                        RefreshSources(null);
+                    if (selectedEmpresa.Habilitado == true)
+                    {
+                        var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere desactivar la empresa {0}?", selectedEmpresa.RazonSocial), "Atención", MessageBoxButtons.YesNo);
+                        if (dialogAnswer == DialogResult.Yes)
+                        {
+                            UsuarioPersistance.UpdateToDisabledById(selectedEmpresa.IdUsuario);
+
+                            RefreshSources(null);
+                        }
+                    }
+                    else
+                    {
+                        var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere activar la empresa {0}?", selectedEmpresa.RazonSocial), "Atención", MessageBoxButtons.YesNo);
+                        if (dialogAnswer == DialogResult.Yes)
+                        {
+                            UsuarioPersistance.UpdateToActivateById(selectedEmpresa.IdUsuario);
+
+                            RefreshSources(null);
+                        }
                     }
                 }
             }

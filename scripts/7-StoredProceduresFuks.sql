@@ -559,3 +559,43 @@ END
 GO
 
 
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateUserToActivateById]
+	@ID_User int
+AS
+BEGIN
+	UPDATE [LA_BANDA_DEL_CHAVO].[TL_Usuario]
+	SET Habilitado = 1
+	WHERE ID_Usuario = @ID_User
+END
+
+
+
+GO
+
+
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateBusiness]
+	@ID_User int,
+	@Razon_Social varchar(255),
+	@Mail varchar(255),
+	@Telefono varchar(255),
+	@Direccion varchar(255),
+	@Codigo_Postal varchar(255),
+	@Ciuidad varchar(255),
+	@CUIT varchar(255),
+	@Nombre_Contacto varchar(255),
+	@Fecha_Creacion datetime
+AS
+BEGIN
+	UPDATE [LA_BANDA_DEL_CHAVO].[TL_Empresa] 
+	SET Razon_Social = @Razon_Social, Mail = @Mail, Telefono = @Telefono,
+	Direccion = @Direccion, Codigo_Postal = @Codigo_Postal, Ciudad = @Ciuidad,
+	CUIT = @CUIT, Nombre_Contacto = @Nombre_Contacto, Fecha_Creacion = @Fecha_Creacion
+	WHERE ID_Usuario = @ID_User
+END
+
+
+GO
+

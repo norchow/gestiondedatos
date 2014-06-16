@@ -62,6 +62,18 @@ namespace Persistance
             sp.ExecuteNonQuery(null);
         }
 
+        public static void UpdateToActivateById(int userID)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", userID)
+                };
+            var sp = new StoreProcedure(DataBaseConst.Usuario.SPUpdateUserToActivateById, param);
+
+            sp.ExecuteNonQuery(null);
+        }
+
+
 
         
 

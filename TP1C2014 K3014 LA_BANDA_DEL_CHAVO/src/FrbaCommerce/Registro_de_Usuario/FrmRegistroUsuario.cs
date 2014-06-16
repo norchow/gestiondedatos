@@ -91,10 +91,14 @@ namespace FrbaCommerce.Registro_de_Usuario
                         Rol selectedRol = (Rol)CboRoles.SelectedItem;
                         RolPersistance.InsertUserRole(user, selectedRol, transaction);
 
-                        //Cargo los datos en sesion
-                        SessionManager.CurrentUser = user;
-                        SessionManager.CurrentRol = selectedRol;
-                        SessionManager.CurrentRol.Funcionalidades = FuncionalidadPersistance.GetByRole(SessionManager.CurrentRol, transaction);
+                        if (!_abmEmpresa)
+                        {
+                            //Cargo los datos en sesion
+                            SessionManager.CurrentUser = user;
+                            SessionManager.CurrentRol = selectedRol;
+                            SessionManager.CurrentRol.Funcionalidades = FuncionalidadPersistance.GetByRole(SessionManager.CurrentRol, transaction);
+                        }
+
                         switch (selectedRol.Descripcion)
                         {
                             case "Cliente":
@@ -104,7 +108,7 @@ namespace FrbaCommerce.Registro_de_Usuario
                                 break;
                             case "Empresa":
                                 this.Hide();
-                                var frmABMInsertUpdateEmpresa = new FrmABMInsertUpdateEmpresa(transaction, _abmEmpresa);
+                                var frmABMInsertUpdateEmpresa = new FrmABMInsertUpdateEmpresa(transaction, _abmEmpresa, user);
                                 frmABMInsertUpdateEmpresa.ShowDialog();
                                 break;
                             default:

@@ -34,6 +34,8 @@ namespace Persistance.Entities
             public static String SPUpdatePassword = "LA_BANDA_DEL_CHAVO.UpdatePassword";
             public static String SPInhabilitarUser = "LA_BANDA_DEL_CHAVO.InhabilitarUser";
             public static String SPUpdateUserToDisabledById = "LA_BANDA_DEL_CHAVO.UpdateUserToDisabledById";
+            public static String SPUpdateUserToActivateById = "LA_BANDA_DEL_CHAVO.UpdateUserToActivateById";
+            
             public static String SPInsertUserTemporal = "LA_BANDA_DEL_CHAVO.InsertUserTemporal";
         }
 
@@ -144,6 +146,8 @@ namespace Persistance.Entities
             public static String SPGetCompanyByBusinessName = "LA_BANDA_DEL_CHAVO.GetCompanyByBusinessName";
             public static String SPGetCompanyByCUIT = "LA_BANDA_DEL_CHAVO.GetCompanyByCUIT";
             public static String SPInsertCompany = "LA_BANDA_DEL_CHAVO.InsertCompany";
+            public static String SPUpdateCompany = "LA_BANDA_DEL_CHAVO.UpdateBusiness";
+            
             public static String SPGetCompanyByUserId = "LA_BANDA_DEL_CHAVO.GetCompanyByUserId";
             public static String SPGetAllBusiness = "LA_BANDA_DEL_CHAVO.GetAllBusiness";
             public static String SPGetAllBusinessByParameters = "LA_BANDA_DEL_CHAVO.GetAllBusinessByParameters";
