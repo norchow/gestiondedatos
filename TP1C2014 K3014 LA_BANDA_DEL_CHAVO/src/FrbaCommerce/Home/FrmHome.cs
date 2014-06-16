@@ -15,6 +15,7 @@ using FrbaCommerce.Editar_Publicacion;
 using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Historial_Cliente;
 using FrbaCommerce.Gestion_de_Preguntas;
+using FrbaCommerce.Abm_Empresa;
 using FrbaCommerce.Login;
 using Session;
 using FrbaCommerce.Facturar_Publicaciones;
@@ -198,6 +199,12 @@ namespace FrbaCommerce.Home
         {
             var frmFacturarPublicaciones = new FrmFacturarPublicaciones();
             frmFacturarPublicaciones.ShowDialog();
+        }
+
+        private void administracionDeEmpresasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmABMEmpresa = new FrmABMEmpresa();
+            frmABMEmpresa.ShowDialog();
         }
     }
 }

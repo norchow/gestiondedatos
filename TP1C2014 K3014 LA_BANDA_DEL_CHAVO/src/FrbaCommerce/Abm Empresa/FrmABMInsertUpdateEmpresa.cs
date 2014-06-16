@@ -18,17 +18,33 @@ namespace FrbaCommerce.Abm_Empresa
     {
         public bool insertMode { get; set; }
         public SqlTransaction currentTransaction { get; set; }
+        private bool _abmEmpresa;
+        private Empresa CurrentEmpresa { get; set; }
+        public bool CompleteAction = false;
+
 
         public FrmABMInsertUpdateEmpresa()
         {
             InitializeComponent();
+            _abmEmpresa = false;
         }
 
-        public FrmABMInsertUpdateEmpresa(SqlTransaction transaction)
+        public FrmABMInsertUpdateEmpresa(Empresa empresa)
+        {
+            InitializeComponent();
+            _abmEmpresa = false;
+
+            insertMode = empresa == null;
+
+            if (!insertMode)
+                CurrentEmpresa = empresa;
+        }
+
+        public FrmABMInsertUpdateEmpresa(SqlTransaction transaction, Boolean abmEmpresa)
         {
             InitializeComponent();
             insertMode = transaction != null;
-
+            _abmEmpresa = abmEmpresa;
             this.currentTransaction = transaction;
         }
 
@@ -116,8 +132,11 @@ namespace FrbaCommerce.Abm_Empresa
                         EmpresaPersistance.InsertCompany(company, this.currentTransaction);
                         this.currentTransaction.Commit();
                         this.Hide();
-                        var frmHome = new FrmHome();
-                        frmHome.ShowDialog();
+                        if (!_abmEmpresa)
+                        {
+                            var frmHome = new FrmHome();
+                            frmHome.ShowDialog();
+                        }
                     }
 
                     #endregion

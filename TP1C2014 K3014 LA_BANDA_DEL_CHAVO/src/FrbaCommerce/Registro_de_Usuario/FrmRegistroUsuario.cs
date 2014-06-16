@@ -20,9 +20,18 @@ namespace FrbaCommerce.Registro_de_Usuario
     public partial class FrmRegistroUsuario : Form
     {
 
+        private Boolean _abmEmpresa;
+
         public FrmRegistroUsuario()
         {
             InitializeComponent();
+            _abmEmpresa = false;
+        }
+
+        public FrmRegistroUsuario(Boolean abmEmpresa)
+        {
+            InitializeComponent();
+            _abmEmpresa = abmEmpresa;
         }
 
         private void FrmRegistroUsuario_Load(object sender, EventArgs e)
@@ -30,6 +39,11 @@ namespace FrbaCommerce.Registro_de_Usuario
             CboRoles.DisplayMember = "Descripcion";
             CboRoles.ValueMember = "ID_Rol";
             CboRoles.DataSource = RolPersistance.GetAllNotAdmin();
+
+            if (_abmEmpresa){
+                CboRoles.SelectedIndex = 1;
+                CboRoles.Enabled = false;
+            }
         }
 
         private void CboRoles_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,7 +83,10 @@ namespace FrbaCommerce.Registro_de_Usuario
                 {
                     using (var transaction = DataBaseManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
                     {
-                        user = UsuarioPersistance.InsertUser(user, transaction);
+                        if (_abmEmpresa)
+                            user = UsuarioPersistance.InsertUserTemporal(user, transaction);
+                        else
+                            user = UsuarioPersistance.InsertUser(user, transaction);
 
                         Rol selectedRol = (Rol)CboRoles.SelectedItem;
                         RolPersistance.InsertUserRole(user, selectedRol, transaction);
@@ -87,7 +104,7 @@ namespace FrbaCommerce.Registro_de_Usuario
                                 break;
                             case "Empresa":
                                 this.Hide();
-                                var frmABMInsertUpdateEmpresa = new FrmABMInsertUpdateEmpresa(transaction);
+                                var frmABMInsertUpdateEmpresa = new FrmABMInsertUpdateEmpresa(transaction, _abmEmpresa);
                                 frmABMInsertUpdateEmpresa.ShowDialog();
                                 break;
                             default:

@@ -33,6 +33,8 @@ namespace Persistance.Entities
             public static String SPUpdateUser = "LA_BANDA_DEL_CHAVO.UpdateUser";
             public static String SPUpdatePassword = "LA_BANDA_DEL_CHAVO.UpdatePassword";
             public static String SPInhabilitarUser = "LA_BANDA_DEL_CHAVO.InhabilitarUser";
+            public static String SPUpdateUserToDisabledById = "LA_BANDA_DEL_CHAVO.UpdateUserToDisabledById";
+            public static String SPInsertUserTemporal = "LA_BANDA_DEL_CHAVO.InsertUserTemporal";
         }
 
         public static class Visibilidad
@@ -143,6 +145,10 @@ namespace Persistance.Entities
             public static String SPGetCompanyByCUIT = "LA_BANDA_DEL_CHAVO.GetCompanyByCUIT";
             public static String SPInsertCompany = "LA_BANDA_DEL_CHAVO.InsertCompany";
             public static String SPGetCompanyByUserId = "LA_BANDA_DEL_CHAVO.GetCompanyByUserId";
+            public static String SPGetAllBusiness = "LA_BANDA_DEL_CHAVO.GetAllBusiness";
+            public static String SPGetAllBusinessByParameters = "LA_BANDA_DEL_CHAVO.GetAllBusinessByParameters";
+            public static String SPGetAllBusinessByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllBusinessByParametersLike";
+            
         }
 
         public static class Pregunta

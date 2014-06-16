@@ -19,7 +19,8 @@ namespace Persistance.Entities
         public String CUIT { get; set; }
         public String NombreContacto { get; set; }
         public DateTime FechaCreacion { get; set; }
-        
+
+        public Boolean Habilitado { get; set; }
 
         //Implement of IMapable
         public IMapable Map(SqlDataReader reader)
@@ -36,7 +37,8 @@ namespace Persistance.Entities
                 Ciudad = (!(reader["Ciudad"] is DBNull)) ? ((String)reader["Ciudad"]).Trim() : "",
                 CUIT = ((String)reader["CUIT"]).Trim(),
                 NombreContacto = (!(reader["Nombre_Contacto"] is DBNull)) ? ((String)reader["Nombre_Contacto"]).Trim() : "",
-                FechaCreacion = DateTime.Parse(reader["Fecha_Creacion"].ToString())
+                FechaCreacion = DateTime.Parse(reader["Fecha_Creacion"].ToString()),
+                Habilitado = Boolean.Parse(reader["Habilitado"].ToString())
             };
         }
 

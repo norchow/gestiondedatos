@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmpresaFilters.cs" />
     <Compile Include="HistoryOfertaFilters.cs" />
     <Compile Include="HistoryReputacionFilters.cs" />
     <Compile Include="HistoryCompraFilters.cs" />

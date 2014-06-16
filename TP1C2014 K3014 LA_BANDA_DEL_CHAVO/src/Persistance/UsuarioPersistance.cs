@@ -51,6 +51,20 @@ namespace Persistance
             sp.ExecuteNonQuery(null);
         }
 
+        public static void UpdateToDisabledById(int userID)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", userID)
+                };
+            var sp = new StoreProcedure(DataBaseConst.Usuario.SPUpdateUserToDisabledById, param);
+
+            sp.ExecuteNonQuery(null);
+        }
+
+
+        
+
         public static Usuario GetById(int idUser)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Usuario", idUser) };
@@ -80,6 +94,24 @@ namespace Persistance
             
             return user;
         }
+
+        public static Usuario InsertUserTemporal(Usuario user, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Username", user.Username), 
+                    new SPParameter("Password", user.Password)
+                };
+
+            var sp = (transaction != null)
+                        ? new StoreProcedure(DataBaseConst.Usuario.SPInsertUserTemporal, param, transaction)
+                        : new StoreProcedure(DataBaseConst.Usuario.SPInsertUserTemporal, param);
+
+            user.ID = (int)sp.ExecuteScalar(transaction);
+
+            return user;
+        }
+
 
         public static void InhabilitarUser(Usuario user)
         {

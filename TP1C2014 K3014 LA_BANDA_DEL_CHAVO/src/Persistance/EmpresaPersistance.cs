@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Persistance.Entities;
 using System.Data.SqlClient;
+using Filters;
 
 namespace Persistance
 {
@@ -72,6 +73,35 @@ namespace Persistance
                 return null;
 
             return users[0];
+        }
+
+        public static List<Empresa> GetAllBusiness()
+        {
+            var sp = new StoreProcedure(DataBaseConst.Empresa.SPGetAllBusiness);
+
+            return sp.ExecuteReader<Empresa>();
+        }
+
+        public static List<Empresa> GetAllBusinessByParameters(EmpresaFilters filters)
+        {
+            var param = new List<SPParameter> { new SPParameter("Razon_Social", filters.RazonSocial),
+                                                new SPParameter("Cuit", filters.Cuit),
+                                                new SPParameter("Email", filters.Email)};
+            
+            var sp = new StoreProcedure(DataBaseConst.Empresa.SPGetAllBusinessByParameters, param);
+
+            return sp.ExecuteReader<Empresa>();
+        }
+
+        public static List<Empresa> GetAllBusinessByParametersLike(EmpresaFilters filters)
+        {
+            var param = new List<SPParameter> { new SPParameter("Razon_Social", filters.RazonSocial ?? (object)DBNull.Value),
+                                                new SPParameter("Cuit", filters.Cuit ?? (object)DBNull.Value),
+                                                new SPParameter("Email", filters.Email ?? (object)DBNull.Value)};
+
+            var sp = new StoreProcedure(DataBaseConst.Empresa.SPGetAllBusinessByParametersLike, param);
+
+            return sp.ExecuteReader<Empresa>();
         }
 
         public static Empresa InsertCompany(Empresa company, SqlTransaction transaction)

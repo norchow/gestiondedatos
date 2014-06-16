@@ -33,19 +33,19 @@
             this.administracionDeRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionDeVisibilidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administracionDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administracionDeEmpresasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.publicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calificarVendedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarMisPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprarOfertarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.responderPreguntasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facturarPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historialClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facturarPublicacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administracionDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administracionDeEmpresasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,6 +97,21 @@
             this.administracionDeUsuariosToolStripMenuItem.Text = "Administracion de usuarios";
             this.administracionDeUsuariosToolStripMenuItem.Visible = false;
             this.administracionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.administracionDeUsuariosToolStripMenuItem_Click);
+            // 
+            // administracionDeClientesToolStripMenuItem
+            // 
+            this.administracionDeClientesToolStripMenuItem.Name = "administracionDeClientesToolStripMenuItem";
+            this.administracionDeClientesToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.administracionDeClientesToolStripMenuItem.Text = "Administracion de clientes";
+            this.administracionDeClientesToolStripMenuItem.Visible = false;
+            // 
+            // administracionDeEmpresasToolStripMenuItem
+            // 
+            this.administracionDeEmpresasToolStripMenuItem.Name = "administracionDeEmpresasToolStripMenuItem";
+            this.administracionDeEmpresasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.administracionDeEmpresasToolStripMenuItem.Text = "Administracion de empresas";
+            this.administracionDeEmpresasToolStripMenuItem.Visible = false;
+            this.administracionDeEmpresasToolStripMenuItem.Click += new System.EventHandler(this.administracionDeEmpresasToolStripMenuItem_Click);
             // 
             // publicacionesToolStripMenuItem
             // 
@@ -152,6 +167,14 @@
             this.responderPreguntasToolStripMenuItem.Visible = false;
             this.responderPreguntasToolStripMenuItem.Click += new System.EventHandler(this.responderPreguntasToolStripMenuItem_Click);
             // 
+            // facturarPublicacionesToolStripMenuItem
+            // 
+            this.facturarPublicacionesToolStripMenuItem.Name = "facturarPublicacionesToolStripMenuItem";
+            this.facturarPublicacionesToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.facturarPublicacionesToolStripMenuItem.Text = "Facturar publicaciones";
+            this.facturarPublicacionesToolStripMenuItem.Visible = false;
+            this.facturarPublicacionesToolStripMenuItem.Click += new System.EventHandler(this.facturarPublicacionesToolStripMenuItem_Click);
+            // 
             // estadisticasToolStripMenuItem
             // 
             this.estadisticasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -169,13 +192,6 @@
             this.historialClienteToolStripMenuItem.Visible = false;
             this.historialClienteToolStripMenuItem.Click += new System.EventHandler(this.historialClienteToolStripMenuItem_Click);
             // 
-            // logOutToolStripMenuItem
-            // 
-            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.logOutToolStripMenuItem.Text = "Log out";
-            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
-            // 
             // listadoEstadisticoToolStripMenuItem
             // 
             this.listadoEstadisticoToolStripMenuItem.Name = "listadoEstadisticoToolStripMenuItem";
@@ -183,27 +199,12 @@
             this.listadoEstadisticoToolStripMenuItem.Text = "Listado estadistico";
             this.listadoEstadisticoToolStripMenuItem.Visible = false;
             // 
-            // facturarPublicacionesToolStripMenuItem
+            // logOutToolStripMenuItem
             // 
-            this.facturarPublicacionesToolStripMenuItem.Name = "facturarPublicacionesToolStripMenuItem";
-            this.facturarPublicacionesToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.facturarPublicacionesToolStripMenuItem.Text = "Facturar publicaciones";
-            this.facturarPublicacionesToolStripMenuItem.Visible = false;
-            this.facturarPublicacionesToolStripMenuItem.Click += new System.EventHandler(this.facturarPublicacionesToolStripMenuItem_Click);
-            // 
-            // administracionDeClientesToolStripMenuItem
-            // 
-            this.administracionDeClientesToolStripMenuItem.Name = "administracionDeClientesToolStripMenuItem";
-            this.administracionDeClientesToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.administracionDeClientesToolStripMenuItem.Text = "Administracion de clientes";
-            this.administracionDeClientesToolStripMenuItem.Visible = false;
-            // 
-            // administracionDeEmpresasToolStripMenuItem
-            // 
-            this.administracionDeEmpresasToolStripMenuItem.Name = "administracionDeEmpresasToolStripMenuItem";
-            this.administracionDeEmpresasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.administracionDeEmpresasToolStripMenuItem.Text = "Administracion de empresas";
-            this.administracionDeEmpresasToolStripMenuItem.Visible = false;
+            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.logOutToolStripMenuItem.Text = "Log out";
+            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
             // FrmHome
             // 
