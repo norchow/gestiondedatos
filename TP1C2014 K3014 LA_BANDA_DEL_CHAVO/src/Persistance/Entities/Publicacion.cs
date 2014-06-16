@@ -82,5 +82,15 @@ namespace Persistance.Entities
             Rubros = RubroPersistance.GetByPublicationId(ID);
             Compras = CompraPersistance.GetByPublicationId(ID);
         }
+
+        public string GetTextRubros()
+        {
+            string result = "";
+            foreach (var rubro in this.Rubros)
+            {
+                result += rubro.Descripcion + ", ";
+            }
+            return result.Remove(result.Length - 2);
+        }
     }
 }

@@ -51,17 +51,21 @@ namespace FrbaCommerce.Comprar_Ofertar
             #region Load publications in the datagrid
             var bind = publicationsDictionary.Values.Select(a => new
             {
-                Codigo = a.ID,
+                ID = a.ID,
                 Descripcion = a.Descripcion,
-                FechaInicio = a.FechaInicio,
-                FechaVencimiento = a.FechaVencimiento,
+                Inicio = a.FechaInicio,
+                Vencimiento = a.FechaVencimiento,
                 Stock = a.Stock,
                 Precio = (OfertaPersistance.GetLastOfertaByPublication(a.ID) != null) ? OfertaPersistance.GetLastOfertaByPublication(a.ID).Monto: a.Precio,
                 RecibirPreguntas = a.RecibirPreguntas,
+                Tipo = a.TipoPublicacion.Descripcion,
+                Estado = a.Visibilidad.Descripcion,
+                Rubros = a.GetTextRubros(),
+                CalificacionVendedor = CalificacionPersistance.getAverageCalificationToMe(a.UsuarioCreador)
             });
 
             DgvPublicacion.DataSource = bind.ToList();
-            DgvPublicacion.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            DgvPublicacion.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             AddButtonsColumns();
             #endregion
 
@@ -97,7 +101,7 @@ namespace FrbaCommerce.Comprar_Ofertar
         private void DgvPublicacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //Only works when user clicks one of the buttons (column index 8)
-            if (e.ColumnIndex < 7 || e.RowIndex == -1)
+            if (e.ColumnIndex < 11 || e.RowIndex == -1)
                 return;
 
             var selectedPublication = _publications.Find(publication => publication.ID == (int)DgvPublicacion.Rows[e.RowIndex].Cells[0].Value);
