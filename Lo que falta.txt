@@ -1,2 +1,3 @@
+.Generar el archivo de script inicial
+.Generar el zip123
 .Agregar el numero del grupo tanto a la carpeta del proyecto como al Readme.txt
-.Redactar el archivo Estrategia.pdf
