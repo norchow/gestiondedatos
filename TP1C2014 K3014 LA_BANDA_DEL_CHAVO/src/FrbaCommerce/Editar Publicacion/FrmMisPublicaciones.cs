@@ -19,6 +19,9 @@ namespace FrbaCommerce.Editar_Publicacion
     public partial class FrmMisPublicaciones : Form
     {
         private List<Publicacion> _publications = new List<Publicacion>();
+        private List<TipoPublicacion> _publicationTypes = new List<TipoPublicacion>();
+        private List<Visibilidad> _visibilities = new List<Visibilidad>();
+        private List<EstadoPublicacion> _publicationStatus = new List<EstadoPublicacion>();
 
         public FrmMisPublicaciones()
         {
@@ -27,7 +30,23 @@ namespace FrbaCommerce.Editar_Publicacion
 
         private void MisPublicaciones_Load(object sender, EventArgs e)
         {
+            RefreshComboBoxSources();
             RefreshSources(null);
+        }
+
+        private void RefreshComboBoxSources()
+        {
+            CboTipoPublicacion.DisplayMember = "Descripcion";
+            CboTipoPublicacion.ValueMember = "ID";
+            CboTipoPublicacion.DataSource = _publicationTypes = TipoPublicacionPersistance.GetAll();
+
+            CboVisibilidad.DisplayMember = "Descripcion";
+            CboVisibilidad.ValueMember = "ID";
+            CboVisibilidad.DataSource = _visibilities = VisibilidadPersistance.GetAll();
+
+            CboEstadoPublicacion.DisplayMember = "Descripcion";
+            CboEstadoPublicacion.ValueMember = "ID";
+            CboEstadoPublicacion.DataSource = _publicationStatus = EstadoPublicacionPersistance.GetAll();
         }
 
         private void RefreshSources(List<Publicacion> publications)
@@ -35,7 +54,7 @@ namespace FrbaCommerce.Editar_Publicacion
             ClearDataGridView();
             var publicationsDictionary = new Dictionary<int, Publicacion>();
 
-            #region Get the dictionary of visibilities
+            #region Get the dictionary of publications
 
             if (publications == null)
             {
@@ -54,17 +73,18 @@ namespace FrbaCommerce.Editar_Publicacion
             }
 
             #endregion
+
             if (publicationsDictionary != null)
             {
                 var bind = publicationsDictionary.Values.Select(a => new
                 {
                     Codigo = a.ID,
                     Descripcion = a.Descripcion,
-                    FechaInicio = a.FechaInicio,
-                    FechaVencimiento = a.FechaVencimiento,
+                    EstadoPublicacion = _publicationStatus.First(status => status.ID == a.GetStatusID()).Descripcion,
+                    Visibilidad = _visibilities.First(visibility => visibility.ID == a.GetVisibilityId()).Descripcion,
+                    TipoPublicacion = _publicationTypes.First(type => type.ID == a.GetTipoPublicacionId()).Descripcion,
                     Stock = a.Stock,
-                    Precio = a.Precio,
-                    RecibirPreguntas = a.RecibirPreguntas
+                    Precio = a.Precio
                 });
 
                 DgvPublicacion.DataSource = bind.ToList();
@@ -96,7 +116,6 @@ namespace FrbaCommerce.Editar_Publicacion
             TxtDescripcion.Text = string.Empty;
             TxtPrecio.Text = string.Empty;
             TxtStock.Text = string.Empty;
-            MtbInicio.Text = MtbVencimiento.Text = "__/__/____";
             ChkBusquedaExacta.Checked = false;
         }
 
@@ -125,16 +144,13 @@ namespace FrbaCommerce.Editar_Publicacion
 
         private void ChkBusquedaExacta_CheckedChanged(object sender, EventArgs e)
         {
-            TxtStock.Enabled = TxtPrecio.Enabled = MtbInicio.Enabled = MtbVencimiento.Enabled = ChkBusquedaExacta.Checked;
+            TxtStock.Enabled = CboTipoPublicacion.Enabled = CboEstadoPublicacion.Enabled = CboVisibilidad.Enabled = TxtPrecio.Enabled = ChkBusquedaExacta.Checked;
         }
 
         private void LblBuscar_Click(object sender, EventArgs e)
         {
             try
             {
-                DateTime? fechaInicio = null;
-                DateTime? fechaVencimiento = null;
-
                 #region Validations
 
                 var filtersSetted = false;
@@ -157,23 +173,14 @@ namespace FrbaCommerce.Editar_Publicacion
                         exceptionMessage += Environment.NewLine + "El precio de la publicacion debe ser decimal (o numérico).";
                 }
 
-                if (getFromMaskedTextBox(MtbInicio.Text) != string.Empty)
-                {
+                if (!TypesHelper.IsEmpty(CboEstadoPublicacion.Text))
                     filtersSetted = true;
-                    if (!TypesHelper.IsDateTime(MtbInicio.Text))
-                        exceptionMessage += Environment.NewLine + "La fecha de inicio de la publicacion debe ser una fecha.";
-                    else
-                        fechaInicio = DateTime.ParseExact(MtbInicio.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                }
 
-                if (getFromMaskedTextBox(MtbVencimiento.Text) != string.Empty)
-                {
+                if (!TypesHelper.IsEmpty(CboVisibilidad.Text))
                     filtersSetted = true;
-                    if (!TypesHelper.IsDateTime(MtbVencimiento.Text))
-                        exceptionMessage += Environment.NewLine + "La fecha de vencimiento de la publicacion debe ser una fecha.";
-                    else
-                        fechaVencimiento = DateTime.ParseExact(MtbVencimiento.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                }
+
+                if (!TypesHelper.IsEmpty(CboTipoPublicacion.Text))
+                    filtersSetted = true;
 
                 if (!filtersSetted)
                     exceptionMessage = "No se puede realizar la busqueda ya que no se informó ningún filtro";
@@ -189,10 +196,10 @@ namespace FrbaCommerce.Editar_Publicacion
                     Descripcion = (!TypesHelper.IsEmpty(TxtDescripcion.Text)) ? TxtDescripcion.Text : null,
                     Stock = (!TypesHelper.IsEmpty(TxtStock.Text) && ChkBusquedaExacta.Checked) ? Convert.ToInt32(TxtStock.Text) : (int?)null,
                     Precio = (!TypesHelper.IsEmpty(TxtPrecio.Text) && ChkBusquedaExacta.Checked) ? Convert.ToDouble(TxtPrecio.Text) : (double?)null,
-                    FechaInicio = (ChkBusquedaExacta.Checked && fechaInicio != null) ? fechaInicio : (DateTime?)null,
-                    FechaVencimiento = (ChkBusquedaExacta.Checked && fechaVencimiento != null) ? fechaVencimiento : (DateTime?)null,
+                    IdEstadoPublicacion = (ChkBusquedaExacta.Checked) ? ((EstadoPublicacion)CboEstadoPublicacion.SelectedItem).ID : (int?)null,
+                    IdVisibilidad = (ChkBusquedaExacta.Checked) ? ((Visibilidad)CboVisibilidad.SelectedItem).ID : (int?)null,
+                    IdTipoPublicacion = (ChkBusquedaExacta.Checked) ? ((TipoPublicacion)CboTipoPublicacion.SelectedItem).ID : (int?)null
                 };
-
 
                 var publications = (ChkBusquedaExacta.Checked) ? PublicacionPersistance.GetAllByParameters(filters) : PublicacionPersistance.GetAllByParametersLike(filters);
 
@@ -205,11 +212,6 @@ namespace FrbaCommerce.Editar_Publicacion
             {
                 MessageBox.Show(ex.Message, "Atención");
             }
-        }
-
-        private string getFromMaskedTextBox(string input)
-        {
-            return input.Replace("/", string.Empty).Trim();
         }
 
         private void LblLimpiar_Click(object sender, EventArgs e)

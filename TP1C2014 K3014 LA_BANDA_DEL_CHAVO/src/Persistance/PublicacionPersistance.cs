@@ -278,8 +278,9 @@ namespace Persistance
                     new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
                     new SPParameter("Stock", filters.Stock ?? (object)DBNull.Value),
                     new SPParameter("Precio", filters.Precio ?? (object)DBNull.Value),
-                    new SPParameter("FechaInicio", filters.FechaInicio ?? (object)DBNull.Value),
-                    new SPParameter("FechaVencimiento", filters.FechaVencimiento ?? (object)DBNull.Value),
+                    new SPParameter("ID_Estado_Publicacion", filters.IdEstadoPublicacion ?? (object)DBNull.Value),
+                    new SPParameter("ID_Visibilidad", filters.IdVisibilidad ?? (object)DBNull.Value),
+                    new SPParameter("ID_Tipo_Publicacion", filters.IdTipoPublicacion ?? (object)DBNull.Value),
                 };
 
             var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllPublicacionByParameters, param);

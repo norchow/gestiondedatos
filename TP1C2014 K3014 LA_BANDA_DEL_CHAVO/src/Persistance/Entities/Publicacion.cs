@@ -73,6 +73,21 @@ namespace Persistance.Entities
             return new List<SPParameter>();
         }
 
+        public int GetTipoPublicacionId()
+        {
+            return _tipoPublicacion;
+        }
+
+        public int GetVisibilityId()
+        {
+            return _visibilidad;
+        }
+
+        public int GetStatusID()
+        {
+            return _estadoPublicacion;
+        }
+
         public void GetObjectsById()
         {
             UsuarioCreador = UsuarioPersistance.GetById(_usuarioCreador);
