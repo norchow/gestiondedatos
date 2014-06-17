@@ -183,5 +183,13 @@ namespace Persistance.Entities
             public static String SPGetAllItemFacturaByFacturaId = "LA_BANDA_DEL_CHAVO.GetAllItemFacturaByFacturaId";
             public static String SPInsertItemFactura = "LA_BANDA_DEL_CHAVO.InsertItemFactura";
         }
+
+        public static class Estadistica
+        {
+            public static String SPGetSellersWithMoreProductsNotSold = "LA_BANDA_DEL_CHAVO.GetSellersWithMoreProductsNotSold";
+            public static String SPGetSellersWithMoreBilling = "LA_BANDA_DEL_CHAVO.GetSellersWithMoreBilling";
+            public static String SPGetClientsWithMoreNotQualifiedPublications = "LA_BANDA_DEL_CHAVO.GetClientsWithMoreNotQualifiedPublications";
+            public static String SPGetSellersWithBetterQualifications = "LA_BANDA_DEL_CHAVO.GetSellersWithBetterQualifications";
+        }
     }
 }

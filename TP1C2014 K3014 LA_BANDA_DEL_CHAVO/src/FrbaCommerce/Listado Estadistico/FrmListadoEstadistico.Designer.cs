@@ -30,7 +30,7 @@
         {
             this.GroupFiltros = new System.Windows.Forms.GroupBox();
             this.CboVisibilidad = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblVisibilidadText = new System.Windows.Forms.Label();
             this.CboListado = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.CboTrimestre = new System.Windows.Forms.ComboBox();
@@ -41,14 +41,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.DgvListado = new System.Windows.Forms.DataGridView();
             this.LblCerrar = new System.Windows.Forms.Label();
+            this.cboMes = new System.Windows.Forms.ComboBox();
+            this.lblMesText = new System.Windows.Forms.Label();
             this.GroupFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListado)).BeginInit();
             this.SuspendLayout();
             // 
             // GroupFiltros
             // 
+            this.GroupFiltros.Controls.Add(this.cboMes);
+            this.GroupFiltros.Controls.Add(this.lblMesText);
             this.GroupFiltros.Controls.Add(this.CboVisibilidad);
-            this.GroupFiltros.Controls.Add(this.label3);
+            this.GroupFiltros.Controls.Add(this.lblVisibilidadText);
             this.GroupFiltros.Controls.Add(this.CboListado);
             this.GroupFiltros.Controls.Add(this.label4);
             this.GroupFiltros.Controls.Add(this.CboTrimestre);
@@ -66,28 +70,33 @@
             // 
             // CboVisibilidad
             // 
+            this.CboVisibilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboVisibilidad.FormattingEnabled = true;
-            this.CboVisibilidad.Location = new System.Drawing.Point(406, 57);
+            this.CboVisibilidad.Location = new System.Drawing.Point(377, 57);
             this.CboVisibilidad.Name = "CboVisibilidad";
-            this.CboVisibilidad.Size = new System.Drawing.Size(300, 21);
+            this.CboVisibilidad.Size = new System.Drawing.Size(144, 21);
             this.CboVisibilidad.TabIndex = 47;
+            this.CboVisibilidad.Visible = false;
             // 
-            // label3
+            // lblVisibilidadText
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(331, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
-            this.label3.TabIndex = 46;
-            this.label3.Text = "VISIBILIDAD";
+            this.lblVisibilidadText.AutoSize = true;
+            this.lblVisibilidadText.Location = new System.Drawing.Point(302, 60);
+            this.lblVisibilidadText.Name = "lblVisibilidadText";
+            this.lblVisibilidadText.Size = new System.Drawing.Size(69, 13);
+            this.lblVisibilidadText.TabIndex = 46;
+            this.lblVisibilidadText.Text = "VISIBILIDAD";
+            this.lblVisibilidadText.Visible = false;
             // 
             // CboListado
             // 
+            this.CboListado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboListado.FormattingEnabled = true;
             this.CboListado.Location = new System.Drawing.Point(406, 30);
             this.CboListado.Name = "CboListado";
             this.CboListado.Size = new System.Drawing.Size(300, 21);
             this.CboListado.TabIndex = 45;
+            this.CboListado.SelectedIndexChanged += new System.EventHandler(this.CboListado_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -100,11 +109,13 @@
             // 
             // CboTrimestre
             // 
+            this.CboTrimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboTrimestre.FormattingEnabled = true;
             this.CboTrimestre.Location = new System.Drawing.Point(114, 57);
             this.CboTrimestre.Name = "CboTrimestre";
             this.CboTrimestre.Size = new System.Drawing.Size(169, 21);
             this.CboTrimestre.TabIndex = 43;
+            this.CboTrimestre.SelectedIndexChanged += new System.EventHandler(this.CboTrimestre_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -117,6 +128,7 @@
             // 
             // CboAño
             // 
+            this.CboAño.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboAño.FormattingEnabled = true;
             this.CboAño.Location = new System.Drawing.Point(114, 30);
             this.CboAño.Name = "CboAño";
@@ -190,6 +202,26 @@
             this.LblCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblCerrar.Click += new System.EventHandler(this.LblCerrar_Click);
             // 
+            // cboMes
+            // 
+            this.cboMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMes.FormattingEnabled = true;
+            this.cboMes.Location = new System.Drawing.Point(580, 57);
+            this.cboMes.Name = "cboMes";
+            this.cboMes.Size = new System.Drawing.Size(144, 21);
+            this.cboMes.TabIndex = 49;
+            this.cboMes.Visible = false;
+            // 
+            // lblMesText
+            // 
+            this.lblMesText.AutoSize = true;
+            this.lblMesText.Location = new System.Drawing.Point(544, 60);
+            this.lblMesText.Name = "lblMesText";
+            this.lblMesText.Size = new System.Drawing.Size(30, 13);
+            this.lblMesText.TabIndex = 48;
+            this.lblMesText.Text = "MES";
+            this.lblMesText.Visible = false;
+            // 
             // FrmListadoEstadistico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -217,11 +249,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView DgvListado;
         private System.Windows.Forms.ComboBox CboVisibilidad;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblVisibilidadText;
         private System.Windows.Forms.ComboBox CboListado;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox CboTrimestre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LblCerrar;
+        private System.Windows.Forms.ComboBox cboMes;
+        private System.Windows.Forms.Label lblMesText;
     }
 }

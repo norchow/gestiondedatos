@@ -76,6 +76,7 @@
     <Compile Include="Entities\TipoPublicacion.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Visibilidad.cs" />
+    <Compile Include="EstadisticaPersistance.cs" />
     <Compile Include="EstadoPublicacionPersistance.cs" />
     <Compile Include="FacturaPersistance.cs" />
     <Compile Include="FormaPagoPersistance.cs" />

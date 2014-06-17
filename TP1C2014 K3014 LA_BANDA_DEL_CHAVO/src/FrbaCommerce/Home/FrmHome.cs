@@ -22,6 +22,8 @@ using FrbaCommerce.Facturar_Publicaciones;
 using Persistance.Entities;
 using FrbaCommerce.Abm_Cliente;
 using FrbaCommerce.Facturar_Publicaciones;
+using FrbaCommerce.Listado_Estadistico;
+
 namespace FrbaCommerce.Home
 {
     public partial class FrmHome : Form
@@ -212,6 +214,12 @@ namespace FrbaCommerce.Home
         {
             var frmABMCliente = new FrmABMCliente();
             frmABMCliente.ShowDialog();
+        }
+
+        private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmListadoEstadistico = new FrmListadoEstadistico();
+            frmListadoEstadistico.ShowDialog();
         }
     }
 }

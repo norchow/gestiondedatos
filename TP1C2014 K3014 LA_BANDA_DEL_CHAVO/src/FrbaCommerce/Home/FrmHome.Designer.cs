@@ -199,6 +199,7 @@
             this.listadoEstadisticoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.listadoEstadisticoToolStripMenuItem.Text = "Listado estadistico";
             this.listadoEstadisticoToolStripMenuItem.Visible = false;
+            this.listadoEstadisticoToolStripMenuItem.Click += new System.EventHandler(this.listadoEstadisticoToolStripMenuItem_Click);
             // 
             // logOutToolStripMenuItem
             // 

@@ -53,7 +53,7 @@ namespace FrbaCommerce.Listado_Estadistico
 
             var dataSourceAño = new List<object>();
             for (var i = 1980; i <= Convert.ToInt32(Configuration.ConfigurationVariables.FechaSistema.Year); i++)
-                dataSourceAño.Add(new { Name = i, Value = i });
+                dataSourceAño.Add(new { Name = i.ToString(), Value = i });
             CboAño.DataSource = dataSourceAño;
             CboAño.ValueMember = "Value";
             CboAño.DisplayMember = "Name";
@@ -63,9 +63,9 @@ namespace FrbaCommerce.Listado_Estadistico
             dataSourceTrimestre.Add(new { Name = "Abril - Junio", Value = 2 });
             dataSourceTrimestre.Add(new { Name = "Julio - Septiembre", Value = 3 });
             dataSourceTrimestre.Add(new { Name = "Octubre - Diciembre", Value = 4 });
-            CboTrimestre.DataSource = dataSourceTrimestre;
             CboTrimestre.ValueMember = "Value";
             CboTrimestre.DisplayMember = "Name";
+            CboTrimestre.DataSource = dataSourceTrimestre;
 
             var dataSourceListado = new List<object>();
             dataSourceListado.Add(new { Name = "[Vendedores] Mayor cant. de productos no vendidos", Value = 1 });
@@ -76,70 +76,18 @@ namespace FrbaCommerce.Listado_Estadistico
             CboListado.ValueMember = "Value";
             CboListado.DisplayMember = "Name";
 
-            CboVisibilidad.DataSource = VisibilidadPersistance.GetAll();
+            var dataSourceVisibilidad = VisibilidadPersistance.GetAll();
+            var visibilidadTodos = new Visibilidad();
+            visibilidadTodos.ID = 0;
+            visibilidadTodos.Descripcion = "Todos";
+            dataSourceVisibilidad.Add(visibilidadTodos);
+            CboVisibilidad.DataSource = dataSourceVisibilidad;
             CboVisibilidad.ValueMember = "ID";
             CboVisibilidad.DisplayMember = "Descripcion";
 
             #endregion
 
             ClearDataGridView();
-            var estadisticasList = new List<Estadistica>();
-
-            #region Get the dictionary of visibilities
-
-            if (estadisticas == null)
-            {
-                //The datasource must be empty
-                CleanFiltersUI();
-                DgvListado.DataSource = null;
-            }
-            else
-            {
-                //The datasource must be the list of visibilities received as parameter
-                estadisticasList = estadisticas.ToList();
-            }
-
-            #endregion
-
-            //var bind = new List<object>();
-            //switch ((int)CboListado.SelectedValue)
-            //{
-            //    case 1:
-            //        bind = estadisticasList.Select(a => new
-            //        {
-            //            Vendedor = a.Usuario,
-            //            Cantidad = a.Valor
-            //        });
-            //        break;
-
-            //    case 2:
-            //        bind = estadisticasList.Select(a => new
-            //        {
-            //            Vendedor = a.Usuario,
-            //            Total = a.Valor
-            //        });
-            //        break;
-            //    case 3:
-            //        bind = estadisticasList.Select(a => new
-            //        {
-            //            Vendedor = a.Usuario,
-            //            Calificacion = a.Valor
-            //        });
-            //        break;
-            //    case 4:
-            //        bind = estadisticasList.Select(a => new
-            //        {
-            //            Cliente = a.Usuario,
-            //            Cantidad = a.Valor
-            //        });
-            //        break;
-            //}
-            
-
-            //DgvListado.DataSource = bind.ToList();
-
-            DgvListado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
         }
 
         private void FrmListadoEstadistico_Load(object sender, EventArgs e)
@@ -176,63 +124,193 @@ namespace FrbaCommerce.Listado_Estadistico
 
                 #endregion
 
-                var monthDesde = 0;
-                var dayHasta = 0;
-                var monthHasta = 0;
-                switch ((int)CboTrimestre.SelectedValue)
+                var monthDesde = "";
+                var dayHasta = "";
+                var monthHasta = "";
+                if ((string)cboMes.SelectedValue == "00" || (int)CboListado.SelectedValue != 1)
                 {
-                    case 1: monthDesde = 1; monthHasta = 3; break;
-                    case 2: monthDesde = 4; monthHasta = 6; break;
-                    case 3: monthDesde = 7; monthHasta = 9; break;
-                    case 4: monthDesde = 10; monthHasta = 12; break;
+                    switch ((int)CboTrimestre.SelectedValue)
+                    {
+                        case 1: monthDesde = "01"; monthHasta = "03"; break;
+                        case 2: monthDesde = "04"; monthHasta = "06"; break;
+                        case 3: monthDesde = "07"; monthHasta = "09"; break;
+                        case 4: monthDesde = "10"; monthHasta = "12"; break;
+                    }
+                }
+                else
+                {
+                    monthDesde = monthHasta = (string)cboMes.SelectedValue;
                 }
 
                 switch (monthHasta)
                 {
-                    case 1: case 3: case 5: case 7: case 8: case 10: case 12: dayHasta = 31; break;
-                    case 4: case 6: case 9: case 11: dayHasta = 30; break;
-                    case 2: dayHasta = 28; break;
+                    case "01": case "03": case "05": case "07": case "08": case "10": case "12": dayHasta = "31"; break;
+                    case "04": case "06": case "09": case "11": dayHasta = "30"; break;
+                    case "02": dayHasta = "28"; break;
                 }
 
-                var fechaDesde = "01/" + monthDesde.ToString("00") + "/" + CboAño.SelectedText;
-                var fechaHasta = dayHasta.ToString("00") + "/" + monthHasta.ToString("00") + "/" + CboAño.SelectedText;
+                var fechaDesde = DateTime.Parse("01/" + monthDesde + "/" + CboAño.SelectedValue.ToString());
+                var fechaHasta = DateTime.Parse(dayHasta + "/" + monthHasta + "/" + CboAño.SelectedValue.ToString());
 
                 var filters = new EstadisticaFilters
                 {
-                    FechaDesde = (!TypesHelper.IsEmpty(CboAño.Text) && !TypesHelper.IsEmpty(CboTrimestre.Text)) ? fechaDesde : null,
-                    FechaHasta = (!TypesHelper.IsEmpty(CboAño.Text) && !TypesHelper.IsEmpty(CboTrimestre.Text)) ? fechaHasta : null,
-                    Visibilidad = (!TypesHelper.IsEmpty(CboVisibilidad.Text)) ? (int)CboVisibilidad.SelectedValue : (int?)null
+                    FechaDesde = fechaDesde,
+                    FechaHasta = fechaHasta,
+                    Visibilidad = (!TypesHelper.IsEmpty(CboVisibilidad.Text) && (int)CboVisibilidad.SelectedValue != 0) ? (int)CboVisibilidad.SelectedValue : (int?)null
                 };
 
-                //var listado;
-                //switch ((int)CboListado.SelectedValue)
-                //{
-                //    case 1:
-                //        listado = EstadisticaPersistance.GetEstadistica1(filters);
-                //        break;
+                var listado = new List<Estadistica>();
+                switch ((int)CboListado.SelectedValue)
+                {
+                    case 1:
+                        listado = EstadisticaPersistance.GetSellersWithMoreProductsNotSold(filters);
+                        break;
 
-                //    case 2:
-                //        listado = EstadisticaPersistance.GetEstadistica2(filters);
-                //        break;
+                    case 2:
+                        listado = EstadisticaPersistance.GetSellersWithMoreBilling(filters);
+                        break;
 
-                //    case 3:
-                //        listado = EstadisticaPersistance.GetEstadistica3(filters);
-                //        break;
+                    case 3:
+                        listado = EstadisticaPersistance.GetSellersWithBetterQualifications(filters);
+                        break;
 
-                //    case 4:
-                //        listado = EstadisticaPersistance.GetEstadistica4(filters);
-                //        break;
-                //}
+                    case 4:
+                        listado = EstadisticaPersistance.GetClientsWithMoreNotQualifiedPublications(filters);
+                        break;
+                }
 
-                //if (listado == null || listado.Count == 0)
-                //    throw new Exception("No se encontraron estadísticas según los filtros informados.");
+                if (listado == null || listado.Count == 0)
+                    throw new Exception("No se encontraron estadísticas según los filtros informados.");
 
-                //RefreshSources(listado);
+                LoadGrid(listado);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Atención");
+                ClearDataGridView();
             }
+        }
+
+        private void LoadGrid(List<Estadistica> listado)
+        {
+            
+            #region Get the dictionary of statistics
+            var statisticsDictionary = new Dictionary<string, Estadistica>();
+            if (listado == null)
+            {
+                //The datasource must be empty
+                DgvListado.DataSource = null;
+            }
+            else
+            {
+                //The datasource must be the list of visibilities received as parameter
+                statisticsDictionary = listado.ToDictionary(a => a.Usuario, a => a);
+            }
+
+            #endregion
+
+            if (statisticsDictionary != null)
+            {
+
+                switch ((int)CboListado.SelectedValue)
+                {
+                    case 1:
+                        var bind1 = statisticsDictionary.Values.Select(a => new
+                        {
+                            Vendedor = a.Usuario,
+                            Cantidad = a.Valor
+                        });
+                        DgvListado.DataSource = bind1.ToList();
+                        break;
+
+                    case 2:
+                        var bind2 = statisticsDictionary.Values.Select(a => new
+                        {
+                            Vendedor = a.Usuario,
+                            Total = a.Valor
+                        });
+                        DgvListado.DataSource = bind2.ToList();
+                        break;
+                    case 3:
+                        var bind3 = statisticsDictionary.Values.Select(a => new
+                        {
+                            Vendedor = a.Usuario,
+                            Calificacion = a.Valor
+                        });
+                        DgvListado.DataSource = bind3.ToList();
+                        break;
+                    case 4:
+                        var bind4 = statisticsDictionary.Values.Select(a => new
+                        {
+                            Cliente = a.Usuario,
+                            Cantidad = a.Valor
+                        });
+                        DgvListado.DataSource = bind4.ToList();
+                        break;
+                }
+
+                DgvListado.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            DgvListado.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void CboListado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CboListado.SelectedIndex == 0)
+            {
+                lblVisibilidadText.Visible = true;
+                CboVisibilidad.Visible = true;
+                lblMesText.Visible = true;
+                cboMes.Visible = true;
+            }
+            else
+            {
+                lblVisibilidadText.Visible = false;
+                CboVisibilidad.Visible = false;
+                lblMesText.Visible = false;
+                cboMes.Visible = false;
+            }
+        }
+
+        private void LoadMonthsByTrimester()
+        {
+            var dataSourceMes = new List<object>();
+            switch ((int)CboTrimestre.SelectedValue)
+            { 
+                case 1:
+                    dataSourceMes.Add(new { Name = "Enero", Value = "01" });
+                    dataSourceMes.Add(new { Name = "Febrero", Value = "02" });
+                    dataSourceMes.Add(new { Name = "Marzo", Value = "03" });
+                    dataSourceMes.Add(new { Name = "Todos", Value = "00" });
+                break;
+                case 2:
+                    dataSourceMes.Add(new { Name = "Abril", Value = "04" });
+                    dataSourceMes.Add(new { Name = "Mayo", Value = "05" });
+                    dataSourceMes.Add(new { Name = "Junio", Value = "06" });
+                    dataSourceMes.Add(new { Name = "Todos", Value = "00" });
+                break;
+                case 3:
+                    dataSourceMes.Add(new { Name = "Julio", Value = "07" });
+                    dataSourceMes.Add(new { Name = "Agosto", Value = "08" });
+                    dataSourceMes.Add(new { Name = "Septiembre", Value = "09" });
+                    dataSourceMes.Add(new { Name = "Todos", Value = "00" });
+                break;
+                case 4:
+                    dataSourceMes.Add(new { Name = "Octubre", Value = "10" });
+                    dataSourceMes.Add(new { Name = "Noviembre", Value = "11" });
+                    dataSourceMes.Add(new { Name = "Diciembre", Value = "12" });
+                    dataSourceMes.Add(new { Name = "Todos", Value = "00" });
+                break;
+            }
+            cboMes.DataSource = dataSourceMes;
+            cboMes.ValueMember = "Value";
+            cboMes.DisplayMember = "Name";
+        }
+
+        private void CboTrimestre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadMonthsByTrimester();
         }
     }
 }
