@@ -36,13 +36,15 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            #region Display Sources
+            #region Precargar elementos
 
+            //Cargar el combobox FormaPago
             var paymentMethod = FormaPagoPersistance.GetAll();
             CboFormaPago.DisplayMember = "Descripcion";
             CboFormaPago.ValueMember = "ID";
             CboFormaPago.DataSource = paymentMethod;
 
+            //Cargar la lista con las Publicaciones a rendir del usuario
             var publicationsList = PublicacionPersistance.GetPublicacionesARendirByUser(Session.SessionManager.CurrentUser.ID);
             if (publicationsList != null && publicationsList.Count > 0)
             {

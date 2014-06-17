@@ -31,6 +31,7 @@ namespace FrbaCommerce.Abm_Cliente
 
         private void LblLimpiar_Click(object sender, EventArgs e)
         {
+            //Vaciar grilla y limpiar los filtros
             RefreshSources(null);
             CleanFiltersUI();
         }
@@ -54,6 +55,7 @@ namespace FrbaCommerce.Abm_Cliente
         {
             #region Load sources
 
+            //Carga el combobox de TipoDocumento
             CboTipoDocumento.DataSource = TipoDocumentoPersistance.GetAll();
             CboTipoDocumento.ValueMember = "ID";
             CboTipoDocumento.DisplayMember = "Descripcion";
@@ -63,23 +65,24 @@ namespace FrbaCommerce.Abm_Cliente
             ClearDataGridView();
             var clientesDictionary = new Dictionary<int, Cliente>();
 
-            #region Get the dictionary of visibilities
+            #region Cargar el diccionario a mostrar en la grilla
 
             if (clientes == null)
             {
-                //The datasource must be all the visibilities records stored in the database
+                //El datasource se carga con todos los Clientes de la BD
                 CleanFiltersUI();
                 _clientes = ClientePersistance.GetAllClients();
                 clientesDictionary = _clientes.ToDictionary(a => a.ID, a => a);
             }
             else
             {
-                //The datasource must be the list of visibilities received as parameter
+                //El datasource se carga con la lista de Clientes recibida por parámetro
                 clientesDictionary = clientes.ToDictionary(a => a.ID, a => a);
             }
 
             #endregion
 
+            //Muestra en la grilla el contenido de los clientes que se encuentran cargados en el diccionario
             var bind = clientesDictionary.Values.Select(a => new
             {
                 ID = a.ID,
@@ -111,6 +114,7 @@ namespace FrbaCommerce.Abm_Cliente
 
         private void AddButtonsColumns()
         {
+            //Agregar a la grilla las últimas dos columnas con los botones "Modificar" y "Des/habilitar"
             var updateColumn = new DataGridViewButtonColumn
             {
                 Text = "Modificar",
@@ -164,6 +168,7 @@ namespace FrbaCommerce.Abm_Cliente
 
                 #endregion
 
+                //Cargar los filtros ingresados en el objeto de tipo ClienteFilters
                 var filters = new ClienteFilters
                 {
 
@@ -179,6 +184,7 @@ namespace FrbaCommerce.Abm_Cliente
                 if (clientes == null || clientes.Count == 0)
                     throw new Exception("No se encontraron clientes según los filtros informados.");
 
+                //Refrescar la grilla, cargando los Clientes que se obtuvieron como resultado de los filtros
                 RefreshSources(clientes);
             }
             catch (Exception ex)
@@ -203,7 +209,7 @@ namespace FrbaCommerce.Abm_Cliente
 
             if (selectedCliente != null)
             {
-                //User clicked update button
+                //Click en el botón "Modificar"
                 if (e.ColumnIndex == 13)
                 {
                     var insertUpdateCliente = new FrmABMInsertUpdateCliente(selectedCliente);
@@ -214,7 +220,7 @@ namespace FrbaCommerce.Abm_Cliente
                 }
                 else
                 {
-                    //User clicked delete button
+                    //Click en el botón "Des/habilitar"
                     if (selectedCliente.Habilitado == true)
                     {
                         var dialogAnswer = MessageBox.Show(string.Format("¿Está seguro que quiere desactivar el cliente {0} {1}?", selectedCliente.Nombre, selectedCliente.Apellido), "Atención", MessageBoxButtons.YesNo);
