@@ -26,6 +26,7 @@ namespace FrbaCommerce.Abm_Visibilidad
         public FrmABMInsertUpdateVisibilidad(Visibilidad visibility)
         {
             InitializeComponent();
+            //Si no se le pasa ningún rol por parámetro (NULL) se considera que esta trabajando en modo alta
             insertMode = visibility == null;
 
             if (!insertMode)
@@ -93,10 +94,12 @@ namespace FrbaCommerce.Abm_Visibilidad
                 if (insertMode)
                 {
                     var filters = new VisibilidadFilters { Descripcion = TxtDescripcion.Text };
+
+                    //Valido que no exista un rol con la descripcion informada
                     if (VisibilidadPersistance.GetAllByParameters(filters) != null)
                         throw new Exception("Ya existe una visibilidad con la descripcion informada.");
 
-                    #region Insert the new visibility
+                    #region Inserto la nueva visibilidad
 
                     var visibility = new Visibilidad();
                     visibility.Descripcion = TxtDescripcion.Text;
@@ -120,10 +123,11 @@ namespace FrbaCommerce.Abm_Visibilidad
                 }
                 else
                 {
-                    #region Update an existing visibility
+                    #region Modifico una visibilidad existente
 
                     if (OldVisibilityActive && !ChkActivo.Checked)
                     {
+                        //Si cambió el valor de 'Activo' y existen publicaciones con dicha visibilidad, arrojo una excepcion
                         if (PublicacionPersistance.GetAllByVisibility(CurrentVisibility.ID).Count() > 0)
                             throw new Exception("No se puede modificar la visibilidad ya que existen publicaciones con dicho valor.");
                     }
@@ -137,6 +141,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar la visibilidad {0}?", CurrentVisibility.Descripcion), "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
+                        //Modifico exitosamente si la cantidad de registros afectados es 1
                         if (VisibilidadPersistance.Update(CurrentVisibility) == 1)
                         {
                             MessageBox.Show("Se modifico satisfactoriamente la visibilidad", "Atencion");

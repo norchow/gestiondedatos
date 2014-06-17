@@ -29,6 +29,7 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         private void RefreshSources(List<Visibilidad> visibilities)
         {
+            //Borro lo que esta actualmente en la grilla
             ClearDataGridView();
             var visibilitiesDictionary = new Dictionary<int, Visibilidad>();
 
@@ -36,19 +37,22 @@ namespace FrbaCommerce.Abm_Visibilidad
 
             if (visibilities == null)
             {
-                //The datasource must be all the visibilities records stored in the database
+                //El datasource debe ser todos los registros de visibilidades almacenados en la base de datos
                 CleanFiltersUI();
                 _visibilities = VisibilidadPersistance.GetAll();
+                //Convierto todas las visibilidades a un diccionario con entradas de la forma: (ID, Objeto)
                 visibilitiesDictionary = _visibilities.ToDictionary(a => a.ID, a => a);
             }
             else
             {
-                //The datasource must be the list of visibilities received as parameter
+                //El datasource debe ser una lista de visibilidades obtenidas por parametro
+                //Convierto la lista de visibilidades a un diccionario con entradas de la forma: (ID, Objeto)
                 visibilitiesDictionary = visibilities.ToDictionary(a => a.ID, a => a);
             }
 
             #endregion
 
+            //Creo un bind para luego setearselo directamente a la DataGridView
             var bind = visibilitiesDictionary.Values.Select(a => new
             {
                 Codigo = a.ID,
@@ -60,6 +64,8 @@ namespace FrbaCommerce.Abm_Visibilidad
             });
 
             DgvVisibilidad.DataSource = bind.ToList();
+
+            //Agrego los botones a cada fila para poder modificar/borrar cada rol
             AddButtonsColumns();
         }
 
@@ -71,12 +77,14 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         private void AddButtonsColumns()
         {
+            //Creo la columna de modificar
             var updateColumn = new DataGridViewButtonColumn
             {
                 Text = "Modificar",
                 UseColumnTextForButtonValue = true,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };
+            //Creo la columna de borrar
             var deleteColumn = new DataGridViewButtonColumn
             {
                 Text = "Eliminar",
@@ -84,6 +92,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };
 
+            //Agrego las columnas nuevas
             DgvVisibilidad.Columns.Add(updateColumn);
             DgvVisibilidad.Columns.Add(deleteColumn);
         }
@@ -98,6 +107,7 @@ namespace FrbaCommerce.Abm_Visibilidad
             var insertUpdateVisibility = new FrmABMInsertUpdateVisibilidad(null);
             insertUpdateVisibility.ShowDialog();
 
+            //Paso NULL para volver a obtener todos los registros de la base
             if (insertUpdateVisibility.CompleteAction)
                 RefreshSources(null);
         }
@@ -112,18 +122,21 @@ namespace FrbaCommerce.Abm_Visibilidad
 
             if (selectedVisibility != null)
             {
-                //User clicked update button
+                //El usuario tocó el botón de modificar
                 if (e.ColumnIndex == 6)
                 {
                     var insertUpdateVisibility = new FrmABMInsertUpdateVisibilidad(selectedVisibility);
                     insertUpdateVisibility.ShowDialog();
 
+                    //Si modificó satisfactoriamante la visibilidad, actualizo la grilla
                     if (insertUpdateVisibility.CompleteAction)
                         RefreshSources(null);
                 }
                 else
                 {
-                    //User clicked delete button
+                    //El usuario tocó el botón de eliminar
+
+                    //El rol seleccionado ya se encuentra eliminado (baja lógica)
                     if (!selectedVisibility.Activo)
                     {
                         MessageBox.Show("No se puede eliminar la funcionalidad ya que ya se encuentra desactivada", "Atencion");
@@ -136,6 +149,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                         selectedVisibility.Activo = false;
                         VisibilidadPersistance.Update(selectedVisibility);
 
+                        //Vuelvo a cargar la lista de roles
                         RefreshSources(null);
                     }
                 }
@@ -198,6 +212,7 @@ namespace FrbaCommerce.Abm_Visibilidad
 
                 #endregion
 
+                //Armo el objeto que representa a los filtros a partir de los valores de los controles
                 var filters = new VisibilidadFilters 
                 { 
                     Descripcion = (!TypesHelper.IsEmpty(TxtDescripcion.Text)) ? TxtDescripcion.Text : null,
@@ -211,6 +226,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                 if (visibilities == null || visibilities.Count == 0)
                     throw new Exception("No se encontraron visibilidades según los filtros informados.");
 
+                //Cargo la grilla a partir de los registros obtenidos en la busqueda
                 RefreshSources(visibilities);
             }
             catch (Exception ex)

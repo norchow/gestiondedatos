@@ -126,7 +126,6 @@
             this.publicacionesToolStripMenuItem.Name = "publicacionesToolStripMenuItem";
             this.publicacionesToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.publicacionesToolStripMenuItem.Text = "Publicaciones";
-            this.publicacionesToolStripMenuItem.Click += new System.EventHandler(this.juliaToolStripMenuItem_Click);
             // 
             // calificarVendedorToolStripMenuItem
             // 

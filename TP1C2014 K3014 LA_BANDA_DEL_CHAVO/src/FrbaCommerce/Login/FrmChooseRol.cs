@@ -15,6 +15,7 @@ namespace FrbaCommerce.Login
 
         private void FrmChooseRol_Load(object sender, EventArgs e)
         {
+            //Obtengo todos los roles activos del usuario que se acaba de loguear
             CboRoles.DisplayMember = "Descripcion";
             CboRoles.ValueMember = "ID_Rol";
             CboRoles.DataSource = SessionManager.CurrentUser.RolesActivos;
@@ -22,6 +23,7 @@ namespace FrbaCommerce.Login
 
         private void LblEntrar_Click(object sender, EventArgs e)
         {
+            //Obtengo el rol que seleccionó el usuario
             var selectedRole = (Rol)CboRoles.SelectedItem;
 
             if (selectedRole != null)
@@ -31,8 +33,10 @@ namespace FrbaCommerce.Login
                 {
                     Hide();
 
+                    //Seteo el rol en sesión
                     SessionManager.CurrentRol = selectedRole;
 
+                    //Muestro la home
                     var home = new FrmHome();
                     home.ShowDialog();
 

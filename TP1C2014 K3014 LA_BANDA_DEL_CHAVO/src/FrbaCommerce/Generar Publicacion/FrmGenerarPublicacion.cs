@@ -27,6 +27,7 @@ namespace FrbaCommerce.Generar_Publicacion
         public FrmGenerarPublicacion(Publicacion publication)
         {
             InitializeComponent();
+            //Trabaja en modo alta cuando se le pasa NULL como parametro
             insertMode = publication == null;
 
             if (!insertMode)
@@ -84,6 +85,7 @@ namespace FrbaCommerce.Generar_Publicacion
                 TxtStock.Text = CurrentPublication.Stock.ToString();
                 ChkRecibirPreguntas.Checked = CurrentPublication.RecibirPreguntas;
 
+                //Marco como chequeados los rubros que ya posee la publicación
                 for (int j = 0; j < LstRubro.Items.Count; j++)
                 {
                     var checkboxListItem = (Rubro)LstRubro.Items[j];
@@ -96,7 +98,7 @@ namespace FrbaCommerce.Generar_Publicacion
 
                 #endregion
 
-                #region Enable controls depending of publication status
+                #region Habilito los controles dependiendo del estado de la publicacion
 
                 switch (CurrentPublication.EstadoPublicacion.Descripcion)
                 {

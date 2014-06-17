@@ -31,11 +31,14 @@ namespace FrbaCommerce.Editar_Publicacion
         private void MisPublicaciones_Load(object sender, EventArgs e)
         {
             RefreshComboBoxSources();
+
+            //Traigo la lista de todas las publicaciones de usuario logueado
             RefreshSources(null);
         }
 
         private void RefreshComboBoxSources()
         {
+            //Lleno los combobox
             CboTipoPublicacion.DisplayMember = "Descripcion";
             CboTipoPublicacion.ValueMember = "ID";
             CboTipoPublicacion.DataSource = _publicationTypes = TipoPublicacionPersistance.GetAll();
@@ -51,6 +54,7 @@ namespace FrbaCommerce.Editar_Publicacion
 
         private void RefreshSources(List<Publicacion> publications)
         {
+            //Borro lo que tiene la grilla
             ClearDataGridView();
             var publicationsDictionary = new Dictionary<int, Publicacion>();
 
@@ -58,9 +62,12 @@ namespace FrbaCommerce.Editar_Publicacion
 
             if (publications == null)
             {
-                //The datasource must be all the publications records from the user stored in the database
+                //El datasource debe ser todas las publicaciones del usuario almacenadas en la base de datos
                 CleanFiltersUI();
+
+                //Obtengo las publicaciones del usuario
                 _publications = PublicacionPersistance.GetAllByUserId(SessionManager.CurrentUser.ID);
+
                 if (_publications != null)
                     publicationsDictionary = _publications.ToDictionary(a => a.ID, a => a);
                 else
@@ -68,7 +75,8 @@ namespace FrbaCommerce.Editar_Publicacion
             }
             else
             {
-                //The datasource must be the list of visibilities received as parameter
+                //El datasource debe ser una lista de publicaciones recibida por parametro
+                //Armo un diccionario con entradas de la forma (ID, Objeto)
                 publicationsDictionary = publications.ToDictionary(a => a.ID, a => a);
             }
 
@@ -76,6 +84,7 @@ namespace FrbaCommerce.Editar_Publicacion
 
             if (publicationsDictionary != null)
             {
+                //Armo un bind con las entradas del diccionario
                 var bind = publicationsDictionary.Values.Select(a => new
                 {
                     Codigo = a.ID,
@@ -89,6 +98,7 @@ namespace FrbaCommerce.Editar_Publicacion
 
                 DgvPublicacion.DataSource = bind.ToList();
                 DgvPublicacion.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                //Agrego la columna de modificar
                 AddButtonsColumns();
             }
         }
@@ -101,6 +111,7 @@ namespace FrbaCommerce.Editar_Publicacion
 
         private void AddButtonsColumns()
         {
+            //Creo la columna de modificar
             var updateColumn = new DataGridViewButtonColumn
             {
                 Text = "Modificar",
@@ -108,6 +119,7 @@ namespace FrbaCommerce.Editar_Publicacion
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };
 
+            //Agrego la nueva columna
             DgvPublicacion.Columns.Add(updateColumn);
         }
 
@@ -126,17 +138,20 @@ namespace FrbaCommerce.Editar_Publicacion
 
         private void DgvPublicacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Only works when user clicks one of the buttons (column index 8)
+            //Funciona solo cuando el usuario cliquea el boton de modificar (indice de columna 8)
             if (e.ColumnIndex < 7 || e.RowIndex == -1)
                 return;
 
+            //Obtengo la publicacion seleccionada a partir del ID (valor almacenado en la primer columna)
             var selectedPublication = _publications.Find(publication => publication.ID == (int)DgvPublicacion.Rows[e.RowIndex].Cells[0].Value);
 
             if (selectedPublication != null)
             {
+                //Creo un nuevo formulario de "Generar Publicacion", pasandole por parametro la seleccionada, para que trabaje en modo modificacion
                 var editPublication = new FrmGenerarPublicacion(selectedPublication);
                 editPublication.ShowDialog();
 
+                //Si la editó satisfactoriamente, refresco los registros
                 if (editPublication.CompleteAction)
                     RefreshSources(null);
             }
@@ -190,6 +205,7 @@ namespace FrbaCommerce.Editar_Publicacion
 
                 #endregion
 
+                //Armo el objeto que representa a los filtros
                 var filters = new PublicacionFilters
                 {
                     IdUsuario = SessionManager.CurrentUser.ID,
@@ -201,11 +217,13 @@ namespace FrbaCommerce.Editar_Publicacion
                     IdTipoPublicacion = (ChkBusquedaExacta.Checked) ? ((TipoPublicacion)CboTipoPublicacion.SelectedItem).ID : (int?)null
                 };
 
+                //Obtengo las publicaciones que cumplen con la busqueda
                 var publications = (ChkBusquedaExacta.Checked) ? PublicacionPersistance.GetAllByParameters(filters) : PublicacionPersistance.GetAllByParametersLike(filters);
 
                 if (publications == null || publications.Count == 0)
                     throw new Exception("No se encontraron publicaciones según los filtros informados.");
 
+                //Cargo el resultado en la grilla
                 RefreshSources(publications);
             }
             catch (Exception ex)

@@ -8,23 +8,27 @@ namespace Tools
 {
     public static class TypesHelper
     {
+        //Valido si es un dato numerico
         public static bool IsNumeric(string value)
         {
             int i;
             return int.TryParse(value, out i); 
         }
 
+        //Valido si es un dato decimal
         public static bool IsDecimal(string value)
         {
             double i;
             return double.TryParse(value, out i);
         }
 
+        //Valido si el dato es la cadena vacia
         public static bool IsEmpty(string value)
         {
             return string.IsNullOrEmpty(value);
         }
 
+        //Valido si el dato es una fecha valida
         public static bool IsDateTime(string value)
         {
             try
@@ -38,6 +42,7 @@ namespace Tools
             }
         }
 
+        //Valido si el dato es un CUIT/CUIL valido
         public static bool IsCUITValid(string value)
         {
             if (value.Length == 0) return false;
@@ -65,6 +70,7 @@ namespace Tools
 			return Valido;
         }
 
+        //Obtengo el digito verificador del CUIT/CUIL
         private static int FindVerifier(string CUIT)
         {
             int Sumador = 0;

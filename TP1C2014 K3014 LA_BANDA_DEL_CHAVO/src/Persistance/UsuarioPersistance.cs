@@ -11,12 +11,14 @@ namespace Persistance
     {
         public static List<Usuario> GetAll()
         {
+            //Traigo todos los usuarios almacenados en la base de datos
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPGetAllUsuario);
             return sp.ExecuteReader<Usuario>();
         }
 
         public static Usuario GetByUsername(string userName)
         {
+            //Traigo el usuario cuyo nombre de usuario coincida con el del parametro
             var param = new List<SPParameter> { new SPParameter("Username", userName) };
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPGetUserByUsername, param);
 
@@ -77,6 +79,7 @@ namespace Persistance
 
         public static Usuario GetById(int idUser)
         {
+            //Traigo el usuario cuyo id coincida con el del parametro
             var param = new List<SPParameter> { new SPParameter("ID_Usuario", idUser) };
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPGetUserById, param);
 
@@ -135,6 +138,7 @@ namespace Persistance
 
         public static Usuario Login(string userName, string password)
         {
+            //Traigo el usuario cuyo nombre de usuario y contraseña coincidan con los parametros
             var usuario = GetByUsername(userName);
 
             if (usuario == null)
