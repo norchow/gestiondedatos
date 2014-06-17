@@ -47,6 +47,8 @@ namespace FrbaCommerce.Abm_Cliente
             insertMode = transaction != null;
             _abmCliente = abmCliente;
             currentUser = user;
+            //Mantengo la transacción abierta para asegurarme que no queden usuarios de tipo cliente sin el respectivo
+            //registro en la tabla cliente
             this.currentTransaction = transaction;
         }
 
@@ -54,7 +56,7 @@ namespace FrbaCommerce.Abm_Cliente
         {
             this.Text = (insertMode) ? string.Format("{0} - {1}", "FrbaCommerce", "Nuevo cliente") : string.Format("{0} - {1}", "FrbaCommerce", "Modificar cliente");
 
-            #region Load sources
+            #region Cargo los tipos de documento
 
             CboTipoDocumento.DataSource = TipoDocumentoPersistance.GetAll(this.currentTransaction);
             CboTipoDocumento.ValueMember = "ID";
@@ -64,7 +66,7 @@ namespace FrbaCommerce.Abm_Cliente
 
             if (!insertMode)
             {
-                #region Load updating client data
+                #region Cargo los datos del cliente
 
                 TxtNombre.Text = CurrentCliente.Nombre;
                 TxtApellido.Text = CurrentCliente.Apellido;
@@ -96,7 +98,7 @@ namespace FrbaCommerce.Abm_Cliente
         {
             try
             {
-                #region Validations
+                #region Validaciones
 
                 var exceptionMessage = string.Empty;
 
@@ -145,13 +147,14 @@ namespace FrbaCommerce.Abm_Cliente
 
                 if (insertMode)
                 {
+                    //Valido que no se dupliquen los telefonos ni documentos
                     if (ClientePersistance.GetByPhone(TxtTelefono.Text, this.currentTransaction) != null)
                         throw new Exception("Ya existe un cliente con el teléfono ingresado.");
 
                     if (ClientePersistance.GetByDocument((int)CboTipoDocumento.SelectedValue, Int32.Parse(TxtDocumento.Text), this.currentTransaction) != null)
                         throw new Exception("Ya existe un cliente con el tipo y número de documento ingresados.");
 
-                    #region Insert the new client
+                    #region Inserto el nuevo cliente
 
                     var client = new Cliente();
                     client.IdUsuario = SessionManager.CurrentUser.ID;

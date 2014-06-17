@@ -33,10 +33,11 @@ namespace FrbaCommerce.Gestion_de_Preguntas
 
         private void DgvPreguntas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Only works when user clicks one of the buttons (column index 8)
+            //Solo ejecutarla si es la columna de botones
             if (e.ColumnIndex < 4 || e.RowIndex == -1)
                 return;
 
+            //Obtengo la pregunta seleccionada para abrir el detalle y poder responderla
             var selectedQuestion = _questions.Find(question => question.ID_Pregunta == (int)DgvPreguntas.Rows[e.RowIndex].Cells[2].Value);
             var selectedPublication = _questions.Find(question => question.ID_Publicacion == (int)DgvPreguntas.Rows[e.RowIndex].Cells[2].Value);
 
@@ -67,6 +68,7 @@ namespace FrbaCommerce.Gestion_de_Preguntas
             DgvPreguntas.DataSource = null;
             DgvPreguntas.Columns.Clear();
 
+            //Creo un diccionario con las preguntas aún no respondidas traídas de BD
             var questionsDictionary = new Dictionary<int, PublicacionPregunta>();
 
             _questions = PreguntaPersistance.GetUnansweredQuestionsByUserId(SessionManager.CurrentUser.ID);
@@ -75,6 +77,7 @@ namespace FrbaCommerce.Gestion_de_Preguntas
             {
                 questionsDictionary = _questions.ToDictionary(a => a.ID_Pregunta, a => a);
 
+                //Preparo las preguntas para ser mostradas en la grilla
                 var bind = questionsDictionary.Values.Select(a => new
                 {
                     ID_Publicacion = a.ID_Publicacion,

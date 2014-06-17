@@ -46,6 +46,8 @@ namespace FrbaCommerce.Abm_Empresa
             insertMode = transaction != null;
             _abmEmpresa = abmEmpresa;
             currentUser = user;
+            //Mantengo la transacción abierta para asegurarme que no queden usuarios de tipo empresa sin el respectivo
+            //registro en la tabla empresa
             this.currentTransaction = transaction;
         }
 
@@ -132,7 +134,7 @@ namespace FrbaCommerce.Abm_Empresa
                     if (EmpresaPersistance.GetByCUIT(TxtCuit.Text, this.currentTransaction) != null)
                         throw new Exception("Ya existe una empresa con el CUIT ingresado.");
 
-                    #region Insert the new company
+                    #region Inserto la nueva empresa
 
                     var company = new Empresa();
                     company.IdUsuario = currentUser.ID;

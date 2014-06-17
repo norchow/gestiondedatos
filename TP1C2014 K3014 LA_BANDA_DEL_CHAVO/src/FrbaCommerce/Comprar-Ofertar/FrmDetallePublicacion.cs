@@ -23,8 +23,12 @@ namespace FrbaCommerce.Comprar_Ofertar
             InitializeComponent();
 
             CurrentPublication = unaPublicacion;
+            //Traigo todos los objetos relacionados con la publicación
             CurrentPublication.GetObjectsById();
 
+            //Si la publicación no es del usuario logeado y el usuario logeado es un cliente le permito 
+            //ver las opciones de comprar/ofertar/preguntar (Todas los los controles respectivos a estas funciones
+            //tienen visible=false como default
             if (CurrentPublication.UsuarioCreador.ID != SessionManager.CurrentUser.ID && ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID)!=null)
             {
                 if(CurrentPublication.RecibirPreguntas)
@@ -52,6 +56,7 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void lblPreguntar_Click(object sender, EventArgs e)
         {
+            //Abro el formulario de preguntas
             var frmPreguntar = new FrmPreguntar(CurrentPublication);
             frmPreguntar.ShowDialog();
         }
@@ -66,6 +71,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
             if (publications.Count <= 5)
             {
+                //Creo la nueva compra y la inserto
                 Compra newPurchase = new Compra();
                 newPurchase.Cliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID);
                 newPurchase.Publicacion = CurrentPublication;
@@ -73,9 +79,11 @@ namespace FrbaCommerce.Comprar_Ofertar
                 newPurchase.Cantidad = Int32.Parse(txtCantidad.Text);
                 newPurchase = CompraPersistance.Insert(newPurchase, null);
 
+                //Resto el stock de la publicación
                 CurrentPublication.Stock = CurrentPublication.Stock - newPurchase.Cantidad;
                 PublicacionPersistance.Update(CurrentPublication);
 
+                //Le muestro al usuario los datos del vendedor
                 var frmDatosVendedor = new FrmDatosVendedor(CurrentPublication.UsuarioCreador);
                 frmDatosVendedor.ShowDialog();
 
@@ -91,10 +99,13 @@ namespace FrbaCommerce.Comprar_Ofertar
         {
             CurrentPublication.GetObjectsById();
 
+            //Cargo todos los controles con la publicación actual
             lblTipoPublicacion.Text = CurrentPublication.TipoPublicacion.Descripcion;
             lblDescripcion.Text = CurrentPublication.Descripcion;
             if (CurrentPublication.TipoPublicacion.Descripcion == "Subasta")
             {
+                //Traigo el monto correspondiente. Si es compra inmediata el precio elegido, y si es subasta
+                //la última oferta
                 Oferta lastOffer = OfertaPersistance.GetLastOfertaByPublication(CurrentPublication.ID);
                 if (lastOffer != null)
                     lblPrecio.Text = lastOffer.Monto.ToString();
@@ -108,6 +119,7 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             if (CurrentPublication.RecibirPreguntas)
             {
+                //Cargo las preguntas y respuestas
                 var questionAnswerDictionary = new Dictionary<int, PreguntaRespuesta>();
 
                 #region Get the dictionary of questions and answers
@@ -138,8 +150,10 @@ namespace FrbaCommerce.Comprar_Ofertar
             List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
             if (publications.Count <= 5)
             {
+                //Valido que la oferta sea mayor a la última
                 if (Int32.Parse(txtMonto.Text) > Int32.Parse(lblPrecio.Text))
                 {
+                    //Creo la nueva oferta y la inserto
                     Oferta newOffer = new Oferta();
                     newOffer.IdCliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID).ID;
                     newOffer.IdPublicacion = CurrentPublication.ID;

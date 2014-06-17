@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.GroupFiltros = new System.Windows.Forms.GroupBox();
+            this.cboMes = new System.Windows.Forms.ComboBox();
+            this.lblMesText = new System.Windows.Forms.Label();
             this.CboVisibilidad = new System.Windows.Forms.ComboBox();
             this.lblVisibilidadText = new System.Windows.Forms.Label();
             this.CboListado = new System.Windows.Forms.ComboBox();
@@ -41,8 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.DgvListado = new System.Windows.Forms.DataGridView();
             this.LblCerrar = new System.Windows.Forms.Label();
-            this.cboMes = new System.Windows.Forms.ComboBox();
-            this.lblMesText = new System.Windows.Forms.Label();
             this.GroupFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListado)).BeginInit();
             this.SuspendLayout();
@@ -67,6 +67,27 @@
             this.GroupFiltros.TabIndex = 44;
             this.GroupFiltros.TabStop = false;
             this.GroupFiltros.Text = "FILTROS DE ESTADÍSTICAS";
+            this.GroupFiltros.Enter += new System.EventHandler(this.GroupFiltros_Enter);
+            // 
+            // cboMes
+            // 
+            this.cboMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMes.FormattingEnabled = true;
+            this.cboMes.Location = new System.Drawing.Point(580, 57);
+            this.cboMes.Name = "cboMes";
+            this.cboMes.Size = new System.Drawing.Size(144, 21);
+            this.cboMes.TabIndex = 49;
+            this.cboMes.Visible = false;
+            // 
+            // lblMesText
+            // 
+            this.lblMesText.AutoSize = true;
+            this.lblMesText.Location = new System.Drawing.Point(544, 60);
+            this.lblMesText.Name = "lblMesText";
+            this.lblMesText.Size = new System.Drawing.Size(30, 13);
+            this.lblMesText.TabIndex = 48;
+            this.lblMesText.Text = "MES";
+            this.lblMesText.Visible = false;
             // 
             // CboVisibilidad
             // 
@@ -201,26 +222,6 @@
             this.LblCerrar.Text = "CERRAR";
             this.LblCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LblCerrar.Click += new System.EventHandler(this.LblCerrar_Click);
-            // 
-            // cboMes
-            // 
-            this.cboMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboMes.FormattingEnabled = true;
-            this.cboMes.Location = new System.Drawing.Point(580, 57);
-            this.cboMes.Name = "cboMes";
-            this.cboMes.Size = new System.Drawing.Size(144, 21);
-            this.cboMes.TabIndex = 49;
-            this.cboMes.Visible = false;
-            // 
-            // lblMesText
-            // 
-            this.lblMesText.AutoSize = true;
-            this.lblMesText.Location = new System.Drawing.Point(544, 60);
-            this.lblMesText.Name = "lblMesText";
-            this.lblMesText.Size = new System.Drawing.Size(30, 13);
-            this.lblMesText.TabIndex = 48;
-            this.lblMesText.Text = "MES";
-            this.lblMesText.Visible = false;
             // 
             // FrmListadoEstadistico
             // 

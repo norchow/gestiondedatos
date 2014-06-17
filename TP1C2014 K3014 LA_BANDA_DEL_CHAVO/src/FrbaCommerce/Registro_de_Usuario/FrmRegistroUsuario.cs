@@ -38,6 +38,7 @@ namespace FrbaCommerce.Registro_de_Usuario
 
         private void FrmRegistroUsuario_Load(object sender, EventArgs e)
         {
+            //Cargo el combo de roles y le seteo la opción default
             CboRoles.DisplayMember = "Descripcion";
             CboRoles.ValueMember = "ID_Rol";
             CboRoles.DataSource = RolPersistance.GetAllNotAdmin();
@@ -61,7 +62,7 @@ namespace FrbaCommerce.Registro_de_Usuario
         {
             try
             {
-                #region Validations
+                #region Validaciones
                 var exceptionMessage = string.Empty;
 
                 if (string.IsNullOrEmpty(TxtUsuario.Text))
@@ -78,7 +79,7 @@ namespace FrbaCommerce.Registro_de_Usuario
                     throw new Exception(exceptionMessage);
                 #endregion
 
-                #region Insert the new user
+                #region Inserto el nuevo usuario
 
                 var user = new Usuario();
                 user.Username = TxtUsuario.Text;
