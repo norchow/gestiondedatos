@@ -10,12 +10,14 @@ namespace Persistance
     {
         public static List<EstadoPublicacion> GetAll()
         {
+            //Obtengo todos los estados de publicacion almacenadas en la base de datos
             var sp = new StoreProcedure(DataBaseConst.EstadoPublicacion.SPGetAllEstadoPublicacion);
             return sp.ExecuteReader<EstadoPublicacion>();
         }
 
         public static EstadoPublicacion GetById(int idStatusPublication)
         {
+            //Obtengo el estado de publicacion cuyo id es igual al del parametro
             var param = new List<SPParameter> { new SPParameter("ID_Estado_Publicacion", idStatusPublication) };
             var sp = new StoreProcedure(DataBaseConst.EstadoPublicacion.SPGetAllEstadoPublicacionById, param);
 

@@ -33,6 +33,7 @@ namespace Persistance.Entities
         {
             try
             {
+                //Abro la conexion
                 _connection = new SqlConnection(ConfigurationVariables.ConnectionString);
                 _connection.Open();
             }

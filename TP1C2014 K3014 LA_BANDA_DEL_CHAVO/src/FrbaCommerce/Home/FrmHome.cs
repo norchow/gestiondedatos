@@ -21,7 +21,8 @@ using Session;
 using FrbaCommerce.Facturar_Publicaciones;
 using Persistance.Entities;
 using FrbaCommerce.Abm_Cliente;
-using FrbaCommerce.Facturar_Publicaciones;
+using FrbaCommerce.Listado_Estadistico;
+
 namespace FrbaCommerce.Home
 {
     public partial class FrmHome : Form
@@ -55,11 +56,6 @@ namespace FrbaCommerce.Home
             frmAdministrarUsuarios.ShowDialog();
         }
 
-        private void juliaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void generarPublicacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var frmGenerarPublicacion = new FrmGenerarPublicacion(null);
@@ -91,9 +87,10 @@ namespace FrbaCommerce.Home
 
         private void LogOutCurrentUser()
         {
+            //Borro la sesión actual (Usuario y Rol logueados)
             SessionManager.ClearCurrentSession();
-            Hide();
-
+            
+            this.Hide();
             FrmLogin formLogin = new FrmLogin();
             formLogin.ShowDialog();
         }
@@ -109,8 +106,10 @@ namespace FrbaCommerce.Home
             var publicaciones = false;
             var estadistico = false;
 
+            //Obtengo todas las funcionalidades asignadas al rol del usuario logueado
             foreach (var functionality in SessionManager.CurrentRol.Funcionalidades)
             {
+                //Obtengo un objeto 'Funcionalidad' a partir de la descripción del rol (como aparece en la base)
                 switch (Funcionalidad.GetByName(functionality.Descripcion))
                 {
                     case Funcionalidades.ABM_Rol:
@@ -180,12 +179,15 @@ namespace FrbaCommerce.Home
                 }
             }
 
+            //Si no posee ninguna funcionalidad de administración borro el menu item
             if (!administracion)
                 MsHome.Items.Remove(administracionToolStripMenuItem);
 
+            //Si no posee ninguna funcionalidad relacionadas con publicaciones borro el menu item
             if (!publicaciones)
                 MsHome.Items.Remove(publicacionesToolStripMenuItem);
 
+            //Si no posee ninguna funcionalidad de estadistica borro el menu item
             if (!estadistico)
                 MsHome.Items.Remove(estadisticasToolStripMenuItem);
         }
@@ -212,6 +214,12 @@ namespace FrbaCommerce.Home
         {
             var frmABMCliente = new FrmABMCliente();
             frmABMCliente.ShowDialog();
+        }
+
+        private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmListadoEstadistico = new FrmListadoEstadistico();
+            frmListadoEstadistico.ShowDialog();
         }
     }
 }

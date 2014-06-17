@@ -13,6 +13,7 @@ namespace Persistance
     {
         public static Publicacion GetById(int id)
         {
+            //Obtengo la publicacion cuyo ID coincida con el valor recibido por parametro
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Publicacion", id)
@@ -48,7 +49,7 @@ namespace Persistance
                     transaction.Rollback();
                     return 0;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     transaction.Rollback();
                     throw new Exception("Se produjo un error durante la insercion de la publicacion");
@@ -83,6 +84,7 @@ namespace Persistance
 
         public static List<Publicacion> GetAllActive()
         {
+            //Obtengo la publicacion que se encuentren activas
             var param = new List<SPParameter>
                 {
                     new SPParameter("Fecha_hoy", Configuration.ConfigurationVariables.FechaSistema)
@@ -105,6 +107,7 @@ namespace Persistance
 
         public static List<Publicacion> GetAllActiveByParameters(String description, List<Rubro> lstRubros)
         {
+            //Obtengo la publicacion que se encuentren activas y cumplan ciertos criterios (busqueda exacta)
             var param = new List<SPParameter>
                 {
                     new SPParameter("Fecha_hoy", Configuration.ConfigurationVariables.FechaSistema),
@@ -131,6 +134,7 @@ namespace Persistance
 
         public static List<Publicacion> GetAllActiveByParametersLike(String description, List<Rubro> lstRubros)
         {
+            //Obtengo la publicacion que se encuentren activas y cumplan ciertos criterios (busqueda inexacta)
             var param = new List<SPParameter>
                 {
                     new SPParameter("Fecha_hoy", Configuration.ConfigurationVariables.FechaSistema),
@@ -157,6 +161,7 @@ namespace Persistance
 
         public static List<Publicacion> GetAllByUserId(int userId)
         {
+            //Obtengo las publicaciones de determinado usuario
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Usuario", userId)
@@ -235,6 +240,7 @@ namespace Persistance
 
         public static List<Publicacion> GetPublicacionesARendirByUser(int userId)
         {
+            //Obtengo la lista de publicaciones de determinado usuario que no se hayan rendido
             var param = new List<SPParameter>
                 {
                     new SPParameter("Id_User", userId),
@@ -253,6 +259,7 @@ namespace Persistance
 
         public static List<Publicacion> GetPublicacionesMasAntiguasARendirByUser(int userId, int cantidad)
         {
+            //Obtengo la lista de publicaciones más antiguas de determinado usuario que no se hayan rendido
             var param = new List<SPParameter>
                 {
                     new SPParameter("Id_User", userId),
@@ -272,6 +279,7 @@ namespace Persistance
 
         public static List<Publicacion> GetAllByParameters(Filters.PublicacionFilters filters)
         {
+            //Obtengo la lista de publicaciones que cumplan determinadas condiciones (busqueda exacta)
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Usuario", filters.IdUsuario),
@@ -290,6 +298,7 @@ namespace Persistance
 
         public static List<Publicacion> GetAllByParametersLike(Filters.PublicacionFilters filters)
         {
+            //Obtengo la lista de publicaciones que cumplan determinadas condiciones (busqueda inexacta)
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Usuario", filters.IdUsuario),
@@ -303,6 +312,7 @@ namespace Persistance
 
         public static List<PreguntaRespuesta> GetQuestionsAndAnswersById(int IdPublicacion)
         {
+            //Obtengo la lista de preguntas y respuestas de una determinada publicacion
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Publicacion", IdPublicacion)
@@ -315,6 +325,7 @@ namespace Persistance
 
         public static List<Publicacion> GetAllByVisibility(int visibilityId)
         {
+            //Obtengo la lista de publicaciones cuya visibilidad coincida con el valor recibido por parametro
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Visibilidad", visibilityId)

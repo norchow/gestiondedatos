@@ -126,7 +126,6 @@
             this.publicacionesToolStripMenuItem.Name = "publicacionesToolStripMenuItem";
             this.publicacionesToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.publicacionesToolStripMenuItem.Text = "Publicaciones";
-            this.publicacionesToolStripMenuItem.Click += new System.EventHandler(this.juliaToolStripMenuItem_Click);
             // 
             // calificarVendedorToolStripMenuItem
             // 
@@ -199,6 +198,7 @@
             this.listadoEstadisticoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.listadoEstadisticoToolStripMenuItem.Text = "Listado estadistico";
             this.listadoEstadisticoToolStripMenuItem.Visible = false;
+            this.listadoEstadisticoToolStripMenuItem.Click += new System.EventHandler(this.listadoEstadisticoToolStripMenuItem_Click);
             // 
             // logOutToolStripMenuItem
             // 

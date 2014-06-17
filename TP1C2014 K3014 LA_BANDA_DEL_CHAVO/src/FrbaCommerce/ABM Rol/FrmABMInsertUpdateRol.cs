@@ -23,6 +23,8 @@ namespace FrbaCommerce.ABM_Rol
         public FrmABMInsertUpdateRol(Rol role)
         {
             InitializeComponent();
+
+            //Si no se le pasa ningún rol por parámetro (NULL) se considera que esta trabajando en modo alta
             insertMode = role == null;
 
             if (!insertMode)
@@ -59,15 +61,17 @@ namespace FrbaCommerce.ABM_Rol
 
                 if (insertMode)
                 {
+                    //Valido que no exista un rol con la descripcion informada
                     if (RolPersistance.GetByName(TxtRol.Text) != null)
                         throw new Exception("Ya existe un rol con el nombre ingresado.");
 
-                    #region Insert the new role with its features
+                    #region Inserto el rol con sus funcionalidades
 
                     var role = new Rol();
                     role.Activo = ChkActivo.Checked;
                     role.Descripcion = TxtRol.Text;
 
+                    //A partir de los items chequeados, seteo las funcionalidades del objeto a insertar
                     foreach (var checkedItem in LstFuncionalidades.CheckedItems)
                     {
                         var feature = (Funcionalidad)checkedItem;
@@ -77,6 +81,7 @@ namespace FrbaCommerce.ABM_Rol
                     var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar el nuevo rol?", "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
+                        //Impacto en la base
                         RolPersistance.InsertRoleAndFeatures(role);
                         CompleteAction = true;
                         Close();
@@ -86,12 +91,13 @@ namespace FrbaCommerce.ABM_Rol
                 }
                 else
                 {
-                    #region Update an existing role and its features
+                    #region Modifico un rol existente y sus funcionalidades
 
                     CurrentRole.Activo = ChkActivo.Checked;
                     CurrentRole.Descripcion = TxtRol.Text;
                     CurrentRole.Funcionalidades = new List<Funcionalidad>();
 
+                    //A partir de los items chequeados, seteo las funcionalidades del objeto a insertar
                     foreach (var checkedItem in LstFuncionalidades.CheckedItems)
                     {
                         var feature = (Funcionalidad)checkedItem;
@@ -101,6 +107,7 @@ namespace FrbaCommerce.ABM_Rol
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar el rol {0}?", CurrentRole.Descripcion), "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
+                        //Impacto en la base
                         RolPersistance.UpdateRoleAndFeatures(CurrentRole);
                         CompleteAction = true;
                         Close();
@@ -120,6 +127,7 @@ namespace FrbaCommerce.ABM_Rol
         {
             this.Text = (insertMode) ? string.Format("{0} - {1}", "FrbaCommerce", "Nuevo rol") : string.Format("{0} - {1}", "FrbaCommerce", "Modificar rol");
 
+            //Obtengo todas las funcionalidades de la base de datos
             LstFuncionalidades.DataSource = FuncionalidadPersistance.GetAll();
             LstFuncionalidades.ValueMember = "ID";
             LstFuncionalidades.DisplayMember = "Descripcion";
@@ -128,11 +136,14 @@ namespace FrbaCommerce.ABM_Rol
 
             if (!insertMode)
             {
+                //Esta trabajando en modo modificación
                 TxtRol.Text = CurrentRole.Descripcion;
                 ChkActivo.Checked = CurrentRole.Activo;
 
+                //Obtengo la lista de funcionalidades a partir del rol recibido por parametro
                 var featuresRol = FuncionalidadPersistance.GetByRole(CurrentRole);
 
+                //Marco como chequeados unicamente las funcionalidades del rol
                 for (int j = 0; j < LstFuncionalidades.Items.Count; j++)
                 {
                     var checkboxListItem = (Funcionalidad)LstFuncionalidades.Items[j];

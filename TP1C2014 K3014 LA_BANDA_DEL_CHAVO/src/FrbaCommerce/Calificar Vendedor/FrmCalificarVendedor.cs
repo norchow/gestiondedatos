@@ -279,10 +279,8 @@ namespace FrbaCommerce.Calificar_Vendedor
                 var pubNotCalified = (cBExact.Checked) ? CalificacionPersistance.GetAllPubicacionNotCalifiedByParameters(filters, SessionManager.CurrentUser) : CalificacionPersistance.GetAllPubicacionNotCalifiedByParametersLike(filters, SessionManager.CurrentUser);
 
                 if (pubNotCalified == null || pubNotCalified.Count == 0)
-                {
                     throw new Exception("No se encontraron publicaciones no calificadas según los filtros informados.");
-                    ClearFiltersAndTable();
-                }
+
                 RefreshSources(pubNotCalified);
             }
             catch (Exception ex)
@@ -295,18 +293,16 @@ namespace FrbaCommerce.Calificar_Vendedor
         private void lblCalificar_Click(object sender, EventArgs e)
         {
             bool validations = true;
+
             if (calification == 0)
-            {
                 validations = false;
-            }
+
             if (txtDescripcion.Text == "")
-            {
                 validations = false;
-            }
+
             if (publicationSelected == 0)
-            {
                 validations = false;
-            }
+
             if (validations)
             { 
                 Calificacion califObject = new Calificacion();
@@ -328,13 +324,9 @@ namespace FrbaCommerce.Calificar_Vendedor
                         MessageBox.Show("La publicación " + califObject.ID_Publicacion + " fué calificada con " + califObject.stars + " estrellas. Descripción: " + califObject.description, "Éxito");
                     }
                 }
-                
-
             }
             else
-            {
                 MessageBox.Show("Por favor, verifique Calificacion, Descripción y Publicacion seleccionada.", "Atencion");
-            }
         }
 
         private void LblListo_Click(object sender, EventArgs e)

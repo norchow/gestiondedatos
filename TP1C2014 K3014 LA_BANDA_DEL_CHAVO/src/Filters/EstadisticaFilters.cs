@@ -7,11 +7,9 @@ namespace Filters
 {
     public class EstadisticaFilters
     {
-        public string FechaDesde { get; set; }
+        public DateTime FechaDesde { get; set; }
 
-        public string FechaHasta { get; set; }
-
-        public int TipoEstadistica { get; set; }
+        public DateTime FechaHasta { get; set; }
 
         public int? Visibilidad { get; set; }
 

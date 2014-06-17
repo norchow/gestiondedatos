@@ -146,13 +146,10 @@ namespace FrbaCommerce.Historial_Cliente
                 };
 
                 var historyCompras = (cBExact.Checked) ? OfertaPersistance.GetAllOfertasByUsuarioByParameters(SessionManager.CurrentUser, filters) : OfertaPersistance.GetAllOfertasByUsuarioByParametersLike(SessionManager.CurrentUser, filters);
-
-
+                
                 if (historyCompras == null || historyCompras.Count == 0)
-                {
                     throw new Exception("No se encontraron ofertas según los filtros informados.");
-                    ClearFiltersAndTable();
-                }
+
                 RefreshSources(historyCompras);
             }
 

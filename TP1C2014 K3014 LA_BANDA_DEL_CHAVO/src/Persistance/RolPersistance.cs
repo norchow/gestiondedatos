@@ -10,18 +10,21 @@ namespace Persistance
     {
         public static List<Rol> GetAll()
         {
+            //Obtengo la lista de roles almacenadas en la base de datos
             var sp = new StoreProcedure(DataBaseConst.Rol.SPGetAllRol);
             return sp.ExecuteReader<Rol>();
         }
 
         public static List<Rol> GetAllNotAdmin()
         {
+            //Obtengo la lista de roles que no estan asignadas al rol administrador
             var sp = new StoreProcedure(DataBaseConst.Rol.SPGetAllRolNotAdmin);
             return sp.ExecuteReader<Rol>();
         }
 
         public static List<Rol> GetByUser(Usuario user)
         {
+            //Obtengo la lista de roles asignadas a determinado usuario
             var param = new List<SPParameter> { new SPParameter("ID_User", user.ID) };
             var sp = new StoreProcedure(DataBaseConst.Rol.SPGetAllRolByUser, param);
 
@@ -30,6 +33,7 @@ namespace Persistance
 
         public static Rol GetByName(String description)
         {
+            //Obtengo la lista de roles cuyo nombre coincide con el que se recibe por parametro
             var param = new List<SPParameter>
                 {
                     new SPParameter("Descripcion", description)
@@ -47,6 +51,7 @@ namespace Persistance
 
         public static List<Rol> GetByNameLike(String description)
         {
+            //Obtengo la lista de roles cuyo nombre coincide con el que se recibe por parametro (busqueda inexacta)
             var param = new List<SPParameter>
                 {
                     new SPParameter("Descripcion", description)
@@ -87,7 +92,7 @@ namespace Persistance
 
                     transaction.Commit();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     transaction.Rollback();
                     throw new Exception("Se produjo un error durante la insercion del rol");

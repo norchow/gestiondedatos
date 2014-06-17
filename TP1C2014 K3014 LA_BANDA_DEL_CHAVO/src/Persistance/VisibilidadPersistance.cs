@@ -11,18 +11,21 @@ namespace Persistance
     {
         public static List<Visibilidad> GetAll()
         {
+            //Obtengo la lista de visibilidades que se encuentran almacenadas en la base de datos
             var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPGetAllVisibilidad);
             return sp.ExecuteReader<Visibilidad>();
         }
 
         public static List<Visibilidad> GetAllActive()
         {
+            //Obtengo la lista de visibilidades que se encuentren activas
             var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPGetAllVisibilidadActive);
             return sp.ExecuteReader<Visibilidad>();
         }
 
         public static Visibilidad GetById(int id)
         {
+            //Obtengo la visibilidad que cumplen ciertos filtros (busqueda exacta)
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Visibilidad", id)
@@ -40,6 +43,7 @@ namespace Persistance
 
         public static List<Visibilidad> GetAllByParameters(VisibilidadFilters filters)
         {
+            //Obtengo la lista de visibilidades que cumplen ciertos filtros (busqueda exacta)
             var param = new List<SPParameter>
                 {
                     new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
@@ -55,6 +59,7 @@ namespace Persistance
 
         public static List<Visibilidad> GetAllByParametersLike(VisibilidadFilters filters)
         {
+            //Obtengo la lista de visibilidades que cumplen ciertos filtros (busqueda inexacta)
             var param = new List<SPParameter>
                 {
                     new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value)

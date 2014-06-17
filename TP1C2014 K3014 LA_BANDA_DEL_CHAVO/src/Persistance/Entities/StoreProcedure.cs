@@ -42,10 +42,10 @@ namespace Persistance.Entities
 
         private void Initialize(String spName, List<SPParameter> spParameters, SqlTransaction spTransaction)
         {
-            // Set the Name
+            // Seteo el nombre
             Name = String.IsNullOrEmpty(spName) ? String.Empty : spName;
 
-            // Set the Parameters
+            // Seteo los parametros
             if (spParameters == null || spParameters.Count == 0)
                 Parameters = new Dictionary<String, SPParameter>(0);
             else
@@ -60,10 +60,10 @@ namespace Persistance.Entities
                 }
             }
 
-            // Set the Transaction
+            // Seteo la transaccion
             Transaction = spTransaction;
 
-            // Set the Connection
+            // Seteo la conexion
             _dataBaseManager = DataBaseManager.Instance();
         }
 
@@ -100,8 +100,8 @@ namespace Persistance.Entities
         }
 
         /*
-         * ExecuteReader(): Return the SqlDataReader
-         * Remember to close SqlDataReader after.
+         * ExecuteReader(): Retorna el SqlDataReader
+         * Hay que cerrarlo posteriormente.
          */
         public SqlDataReader ExecuteReader(SqlTransaction transaction)
         {
@@ -117,7 +117,7 @@ namespace Persistance.Entities
                 if (transaction != null)
                     cmd.Transaction = transaction;
 
-                // Don't close the SqlDataReader
+                // No se cierra
                 return cmd.ExecuteReader();
             }
             catch (Exception e)
@@ -127,16 +127,16 @@ namespace Persistance.Entities
         }
 
         /*
-         * ExecuteReader<T>(): Return the entities mapped
+         * ExecuteReader<T>(): Retorna los objetos mapeados
          */
         public List<T> ExecuteReader<T>() where T : IMapable, new()
         {
             try
             {
-                // Execute the SP and get the SqlDataReader
+                // Ejecuto la SP y obtengo el SqlDataReader
                 var reader = ExecuteReader(null);
 
-                // Map the Entities
+                // Mapeo los objetos
                 var map = new List<T>();
 
                 while (!reader.IsClosed && reader.Read())
@@ -145,7 +145,7 @@ namespace Persistance.Entities
                     map.Add((T)mapable.Map(reader));
                 }
 
-                // Close the SqlDataReader
+                // Cierro el datareader
                 if (!reader.IsClosed)
                     reader.Close();
 
@@ -158,16 +158,16 @@ namespace Persistance.Entities
         }
 
         /*
-        * ExecuteReader<T>(): Return the entities mapped
+        * ExecuteReader<T>(): Retorna los objetos mapeados
         */
         public List<T> ExecuteReaderTransactioned<T>(SqlTransaction transaction) where T : IMapable, new()
         {
             try
             {
-                // Execute the SP and get the SqlDataReader
+                // Ejecuto la SP y obtengo el SqlDataReader
                 var reader = ExecuteReader(transaction);
 
-                // Map the Entities
+                // Mapeo los objetos
                 var map = new List<T>();
 
                 while (!reader.IsClosed && reader.Read())
@@ -176,37 +176,11 @@ namespace Persistance.Entities
                     map.Add((T)mapable.Map(reader));
                 }
 
-                // Close the SqlDataReader
+                // Cierro el datareader
                 if (!reader.IsClosed)
                     reader.Close();
 
                 return map;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        /*
-         * ExecuteReader(DelegateMap customMap): Return the entities with a custom Map
-         */
-        public delegate IMapable DelegateMap(SqlDataReader reader);
-
-        public Dictionary<String, Object> ExecuteOutput()
-        {
-            var conn = _dataBaseManager.Connection;
-
-            try
-            {
-                var cmd = new SqlCommand(Name, conn) { CommandType = CommandType.StoredProcedure };
-
-                foreach (var parameter in Parameters.Values)
-                    cmd.Parameters.AddWithValue(parameter.Name, parameter.Value);
-
-                cmd.ExecuteNonQuery();
-
-                return Parameters.Values.Where(p => p.IsOutput || p.IsInputOutput).ToDictionary(p => p.Name, p => p.Value);
             }
             catch (Exception e)
             {
@@ -229,44 +203,6 @@ namespace Persistance.Entities
                     cmd.Transaction = transaction;
 
                 return cmd.ExecuteScalar();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            
-        }
-
-        /*
-         * TODO: Query class
-         */
-
-        public void ExecuteSQLQuery(string query)
-        {
-            var conn = _dataBaseManager.Connection;
-
-            try
-            {
-                var cmd = new SqlCommand(query, conn) {CommandType = CommandType.Text};
-
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        public void ExecuteSQLQuery(string query, out SqlDataReader rdr)
-        {
-            rdr = null;
-
-            var conn = _dataBaseManager.Connection;
-
-            try
-            {
-                var cmd = new SqlCommand(query, conn) {CommandType = CommandType.Text, CommandTimeout = 0};
-                rdr = cmd.ExecuteReader();
             }
             catch (Exception e)
             {

@@ -6,6 +6,7 @@ namespace Tools
 {
     public static class SHA256Helper
     {
+        //A partir de una cadena cualquiera, obtengo su encripción con el protocolo SHA256
         public static string Encode(string input)
         {
             SHA256Managed crypt = new SHA256Managed();

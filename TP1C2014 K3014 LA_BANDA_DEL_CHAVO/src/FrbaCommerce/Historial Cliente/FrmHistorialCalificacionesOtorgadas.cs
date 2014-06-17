@@ -130,12 +130,9 @@ namespace FrbaCommerce.Historial_Cliente
 
                     var historyReputacion = (cBExact.Checked) ? CalificacionPersistance.getAllCalifiedByMeToOtherByParameters(SessionManager.CurrentUser, filters) : CalificacionPersistance.getAllCalifiedByMeToOtherByParametersLike(SessionManager.CurrentUser, filters);
 
-
                     if (historyReputacion == null || historyReputacion.Count == 0)
-                    {
                         throw new Exception("No se encontraron calificaciones según los filtros informados.");
-                        ClearFiltersAndTable();
-                    }
+
                     RefreshSources(historyReputacion);
                 }
                 catch (Exception ex)

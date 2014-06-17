@@ -386,7 +386,7 @@ CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithMoreProductsNotSold]
 	,@Visibilidad int
 AS
 BEGIN
-	SELECT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Vendedor, COUNT(P.ID_Publicacion) AS Cantidad 
+	SELECT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Usuario, COUNT(P.ID_Publicacion) AS Valor 
 	FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON P.ID_Usuario=U.ID_Usuario
 	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON P.ID_Usuario=C.ID_Usuario
@@ -407,7 +407,7 @@ CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithMoreBilling]
 	,@Fecha_Hasta datetime
 AS
 BEGIN
-	SELECT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Vendedor, SUM(CO.Compra_Cantidad)*P.Precio AS Total
+	SELECT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Usuario, SUM(CO.Compra_Cantidad)*P.Precio AS Valor
 	FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
 	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON U.ID_Usuario=C.ID_Usuario
 	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Empresa E ON U.ID_Usuario=E.ID_Usuario
@@ -424,7 +424,7 @@ CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetClientsWithMoreNotQualifiedPublication
 	,@Fecha_Hasta datetime
 AS
 BEGIN
-	SELECT TOP 5 C.Nombre+' '+C.Apellido AS Cliente, COUNT(P.ID_Publicacion) AS Cantidad 
+	SELECT TOP 5 C.Nombre+' '+C.Apellido AS Usuario, COUNT(P.ID_Publicacion) AS Valor 
 	FROM LA_BANDA_DEL_CHAVO.TL_Cliente C
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON P.ID_Usuario=C.ID_Usuario
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion = TP.ID_Tipo_Publicacion
@@ -440,7 +440,7 @@ CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithBetterQualifications]
 	,@Fecha_Hasta datetime
 AS
 BEGIN
-	SELECT DISTINCT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Vendedor, AVG(CAL.Cantidad_Estrellas) AS Calificacion
+	SELECT DISTINCT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Usuario, AVG(CAL.Cantidad_Estrellas) AS Valor
 	FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
 	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON U.ID_Usuario=C.ID_Usuario
 	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Empresa E ON U.ID_Usuario=E.ID_Usuario
