@@ -149,12 +149,9 @@ namespace FrbaCommerce.Historial_Cliente
 
                 var historyCompras = (cBExact.Checked) ? CompraPersistance.GetAllComprasByParameters(SessionManager.CurrentUser, filters) : CompraPersistance.GetAllComprasByParametersLike(SessionManager.CurrentUser, filters);
               
-
                 if (historyCompras == null || historyCompras.Count == 0)
-                {
                     throw new Exception("No se encontraron compras según los filtros informados.");
-                    ClearFiltersAndTable();
-                }
+
                 RefreshSources(historyCompras);
             }
             catch (Exception ex)

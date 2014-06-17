@@ -48,7 +48,7 @@ namespace Persistance
                     transaction.Rollback();
                     return 0;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     transaction.Rollback();
                     throw new Exception("Se produjo un error durante la insercion de la publicacion");

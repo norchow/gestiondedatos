@@ -87,7 +87,7 @@ namespace Persistance
 
                     transaction.Commit();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     transaction.Rollback();
                     throw new Exception("Se produjo un error durante la insercion del rol");

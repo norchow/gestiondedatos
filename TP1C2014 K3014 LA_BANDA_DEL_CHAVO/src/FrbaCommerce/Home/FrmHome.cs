@@ -21,7 +21,6 @@ using Session;
 using FrbaCommerce.Facturar_Publicaciones;
 using Persistance.Entities;
 using FrbaCommerce.Abm_Cliente;
-using FrbaCommerce.Facturar_Publicaciones;
 using FrbaCommerce.Listado_Estadistico;
 
 namespace FrbaCommerce.Home
