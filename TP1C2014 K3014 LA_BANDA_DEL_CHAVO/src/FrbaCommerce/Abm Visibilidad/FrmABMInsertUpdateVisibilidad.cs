@@ -21,13 +21,18 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         public bool CompleteAction = false;
 
+        public bool OldVisibilityActive;
+
         public FrmABMInsertUpdateVisibilidad(Visibilidad visibility)
         {
             InitializeComponent();
             insertMode = visibility == null;
 
             if (!insertMode)
+            {
                 CurrentVisibility = visibility;
+                OldVisibilityActive = visibility.Activo;
+            }
         }
 
         public FrmABMInsertUpdateVisibilidad()
@@ -116,6 +121,12 @@ namespace FrbaCommerce.Abm_Visibilidad
                 else
                 {
                     #region Update an existing visibility
+
+                    if (OldVisibilityActive && !ChkActivo.Checked)
+                    {
+                        if (PublicacionPersistance.GetAllByVisibility(CurrentVisibility.ID).Count() > 0)
+                            throw new Exception("No se puede modificar la visibilidad ya que existen publicaciones con dicho valor.");
+                    }
 
                     CurrentVisibility.Descripcion = TxtDescripcion.Text;
                     CurrentVisibility.Duracion = Convert.ToInt32(TxtDuracion.Text);

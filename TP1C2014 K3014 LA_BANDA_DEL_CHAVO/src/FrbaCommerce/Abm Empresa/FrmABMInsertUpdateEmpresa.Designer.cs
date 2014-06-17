@@ -201,7 +201,7 @@
             this.LblCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblCancelar.ForeColor = System.Drawing.Color.White;
-            this.LblCancelar.Location = new System.Drawing.Point(207, 415);
+            this.LblCancelar.Location = new System.Drawing.Point(158, 415);
             this.LblCancelar.Name = "LblCancelar";
             this.LblCancelar.Size = new System.Drawing.Size(138, 32);
             this.LblCancelar.TabIndex = 58;
@@ -215,7 +215,7 @@
             this.LblGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblGrabar.ForeColor = System.Drawing.Color.White;
-            this.LblGrabar.Location = new System.Drawing.Point(52, 415);
+            this.LblGrabar.Location = new System.Drawing.Point(12, 415);
             this.LblGrabar.Name = "LblGrabar";
             this.LblGrabar.Size = new System.Drawing.Size(140, 32);
             this.LblGrabar.TabIndex = 57;
@@ -227,7 +227,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 467);
+            this.ClientSize = new System.Drawing.Size(307, 467);
             this.Controls.Add(this.LblCancelar);
             this.Controls.Add(this.LblGrabar);
             this.Controls.Add(this.DtpFechaCreacion);

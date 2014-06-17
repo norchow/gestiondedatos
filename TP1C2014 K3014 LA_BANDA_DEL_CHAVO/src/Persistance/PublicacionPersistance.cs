@@ -95,7 +95,64 @@ namespace Persistance
             if (publications == null || publications.Count == 0)
                 return null;
 
+            foreach (var pub in publications)
+            {
+                pub.GetObjectsById();
+            }
+
             return publications;
+        }
+
+        public static List<Publicacion> GetAllActiveByParameters(String description, List<Rubro> lstRubros)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_hoy", Configuration.ConfigurationVariables.FechaSistema),
+                    new SPParameter("Descripcion", description)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllActiveByParameters, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return null;
+
+            var result = new List<Publicacion>();
+            foreach (var pub in publications)
+            {
+                pub.GetObjectsById();
+                if (pub.Rubros.Count == lstRubros.Count && pub.Rubros.Select(i => i.ID).Intersect(lstRubros.Select(j => j.ID)).Count() == pub.Rubros.Count)
+                    result.Add(pub);
+            }
+
+            return result;
+        }
+
+        public static List<Publicacion> GetAllActiveByParametersLike(String description, List<Rubro> lstRubros)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_hoy", Configuration.ConfigurationVariables.FechaSistema),
+                    new SPParameter("Descripcion", description)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllActiveByParametersLike, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return null;
+
+            var result = new List<Publicacion>();
+            foreach (var pub in publications)
+            {
+                pub.GetObjectsById();
+                if (lstRubros.Count == 0 || pub.Rubros.Select(i => i.ID).Intersect(lstRubros.Select(j => j.ID)).Count() > 0)
+                    result.Add(pub);
+            }
+
+            return result;
         }
 
         public static List<Publicacion> GetAllByUserId(int userId)
@@ -221,8 +278,9 @@ namespace Persistance
                     new SPParameter("Descripcion", filters.Descripcion ?? (object)DBNull.Value),
                     new SPParameter("Stock", filters.Stock ?? (object)DBNull.Value),
                     new SPParameter("Precio", filters.Precio ?? (object)DBNull.Value),
-                    new SPParameter("FechaInicio", filters.FechaInicio ?? (object)DBNull.Value),
-                    new SPParameter("FechaVencimiento", filters.FechaVencimiento ?? (object)DBNull.Value),
+                    new SPParameter("ID_Estado_Publicacion", filters.IdEstadoPublicacion ?? (object)DBNull.Value),
+                    new SPParameter("ID_Visibilidad", filters.IdVisibilidad ?? (object)DBNull.Value),
+                    new SPParameter("ID_Tipo_Publicacion", filters.IdTipoPublicacion ?? (object)DBNull.Value),
                 };
 
             var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllPublicacionByParameters, param);
@@ -254,6 +312,22 @@ namespace Persistance
 
             return sp.ExecuteReader<PreguntaRespuesta>();
         }
-        
+
+        public static List<Publicacion> GetAllByVisibility(int visibilityId)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Visibilidad", visibilityId)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllByVisibilityId, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return new List<Publicacion>();
+
+            return publications;
+        }
     }
 }

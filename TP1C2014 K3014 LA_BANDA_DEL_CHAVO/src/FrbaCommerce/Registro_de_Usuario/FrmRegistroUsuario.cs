@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using Persistance;
 using Persistance.Entities;
-using Logic;
 using Tools;
 using FrbaCommerce.Abm_Cliente;
 using FrbaCommerce.Abm_Empresa;
@@ -20,9 +19,21 @@ namespace FrbaCommerce.Registro_de_Usuario
     public partial class FrmRegistroUsuario : Form
     {
 
+        private Boolean _abmEmpresa;
+        private Boolean _abmCliente;
+
         public FrmRegistroUsuario()
         {
             InitializeComponent();
+            _abmEmpresa = false;
+            _abmCliente = false;
+        }
+
+        public FrmRegistroUsuario(Boolean abmEmpresa, Boolean abmCliente)
+        {
+            InitializeComponent();
+            _abmEmpresa = abmEmpresa;
+            _abmCliente = abmCliente;
         }
 
         private void FrmRegistroUsuario_Load(object sender, EventArgs e)
@@ -30,6 +41,15 @@ namespace FrbaCommerce.Registro_de_Usuario
             CboRoles.DisplayMember = "Descripcion";
             CboRoles.ValueMember = "ID_Rol";
             CboRoles.DataSource = RolPersistance.GetAllNotAdmin();
+
+            if (_abmEmpresa){
+                CboRoles.SelectedIndex = 1;
+                CboRoles.Enabled = false;
+            }
+            else if (_abmCliente) {
+                CboRoles.SelectedIndex = 0;
+                CboRoles.Enabled = false;
+            }
         }
 
         private void CboRoles_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,21 +89,32 @@ namespace FrbaCommerce.Registro_de_Usuario
                 {
                     using (var transaction = DataBaseManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
                     {
-                        user = UsuarioPersistance.InsertUser(user, transaction);
-                        //CompleteAction = true;
+                        if (_abmEmpresa || _abmCliente)
+                            user = UsuarioPersistance.InsertUserTemporal(user, transaction);
+                        else
+                            user = UsuarioPersistance.InsertUser(user, transaction);
 
-                        SessionManager.CurrentUser = user;
                         Rol selectedRol = (Rol)CboRoles.SelectedItem;
+                        RolPersistance.InsertUserRole(user, selectedRol, transaction);
+
+                        if (!_abmEmpresa && !_abmCliente)
+                        {
+                            //Cargo los datos en sesion
+                            SessionManager.CurrentUser = user;
+                            SessionManager.CurrentRol = selectedRol;
+                            SessionManager.CurrentRol.Funcionalidades = FuncionalidadPersistance.GetByRole(SessionManager.CurrentRol, transaction);
+                        }
+
                         switch (selectedRol.Descripcion)
                         {
                             case "Cliente":
                                 this.Hide();
-                                var frmABMInsertUpdateCliente = new FrmABMInsertUpdateCliente(transaction);
+                                var frmABMInsertUpdateCliente = new FrmABMInsertUpdateCliente(transaction, _abmCliente, user);
                                 frmABMInsertUpdateCliente.ShowDialog();
                                 break;
                             case "Empresa":
                                 this.Hide();
-                                var frmABMInsertUpdateEmpresa = new FrmABMInsertUpdateEmpresa(transaction);
+                                var frmABMInsertUpdateEmpresa = new FrmABMInsertUpdateEmpresa(transaction, _abmEmpresa, user);
                                 frmABMInsertUpdateEmpresa.ShowDialog();
                                 break;
                             default:

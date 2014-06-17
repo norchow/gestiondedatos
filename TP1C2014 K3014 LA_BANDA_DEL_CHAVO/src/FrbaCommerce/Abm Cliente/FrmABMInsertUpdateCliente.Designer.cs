@@ -53,7 +53,7 @@
             // 
             // DtpFechaNacimiento
             // 
-            this.DtpFechaNacimiento.Location = new System.Drawing.Point(16, 372);
+            this.DtpFechaNacimiento.Location = new System.Drawing.Point(16, 375);
             this.DtpFechaNacimiento.Name = "DtpFechaNacimiento";
             this.DtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
             this.DtpFechaNacimiento.TabIndex = 41;
@@ -61,7 +61,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(13, 356);
+            this.label21.Location = new System.Drawing.Point(13, 359);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(130, 13);
             this.label21.TabIndex = 40;
@@ -69,7 +69,7 @@
             // 
             // TxtCuil
             // 
-            this.TxtCuil.Location = new System.Drawing.Point(16, 333);
+            this.TxtCuil.Location = new System.Drawing.Point(16, 328);
             this.TxtCuil.Name = "TxtCuil";
             this.TxtCuil.Size = new System.Drawing.Size(278, 20);
             this.TxtCuil.TabIndex = 39;
@@ -77,7 +77,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 317);
+            this.label12.Location = new System.Drawing.Point(13, 312);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(31, 13);
             this.label12.TabIndex = 38;
@@ -158,6 +158,7 @@
             // TxtDocumento
             // 
             this.TxtDocumento.Location = new System.Drawing.Point(77, 112);
+            this.TxtDocumento.MaxLength = 8;
             this.TxtDocumento.Name = "TxtDocumento";
             this.TxtDocumento.Size = new System.Drawing.Size(216, 20);
             this.TxtDocumento.TabIndex = 26;
@@ -209,9 +210,9 @@
             this.LblCancelar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblCancelar.ForeColor = System.Drawing.Color.White;
-            this.LblCancelar.Location = new System.Drawing.Point(187, 424);
+            this.LblCancelar.Location = new System.Drawing.Point(170, 423);
             this.LblCancelar.Name = "LblCancelar";
-            this.LblCancelar.Size = new System.Drawing.Size(138, 32);
+            this.LblCancelar.Size = new System.Drawing.Size(131, 32);
             this.LblCancelar.TabIndex = 60;
             this.LblCancelar.Text = "CANCELAR";
             this.LblCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -223,9 +224,9 @@
             this.LblGrabar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblGrabar.ForeColor = System.Drawing.Color.White;
-            this.LblGrabar.Location = new System.Drawing.Point(32, 424);
+            this.LblGrabar.Location = new System.Drawing.Point(15, 423);
             this.LblGrabar.Name = "LblGrabar";
-            this.LblGrabar.Size = new System.Drawing.Size(140, 32);
+            this.LblGrabar.Size = new System.Drawing.Size(133, 32);
             this.LblGrabar.TabIndex = 59;
             this.LblGrabar.Text = "GRABAR";
             this.LblGrabar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -235,7 +236,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 487);
+            this.ClientSize = new System.Drawing.Size(316, 487);
             this.Controls.Add(this.LblCancelar);
             this.Controls.Add(this.LblGrabar);
             this.Controls.Add(this.DtpFechaNacimiento);

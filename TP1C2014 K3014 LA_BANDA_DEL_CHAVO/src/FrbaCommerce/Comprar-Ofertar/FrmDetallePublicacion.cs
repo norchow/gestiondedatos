@@ -38,6 +38,8 @@ namespace FrbaCommerce.Comprar_Ofertar
                 else
                 {
                     LblComprar.Visible = true;
+                    lblCantidadText.Visible = true;
+                    txtCantidad.Visible = true;
                 }
             }
 
@@ -61,11 +63,28 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void LblComprar_Click(object sender, EventArgs e)
         {
-            CurrentPublication.Stock--;
-            PublicacionPersistance.Update(CurrentPublication);
-            var frmDatosVendedor = new FrmDatosVendedor(CurrentPublication.UsuarioCreador);
-            frmDatosVendedor.ShowDialog();
-            RefreshSources();
+            List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
+            if (publications.Count <= 5)
+            {
+                Compra newPurchase = new Compra();
+                newPurchase.Cliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID);
+                newPurchase.Publicacion = CurrentPublication;
+                newPurchase.Fecha = ConfigurationVariables.FechaSistema;
+                newPurchase.Cantidad = Int32.Parse(txtCantidad.Text);
+                newPurchase = CompraPersistance.Insert(newPurchase, null);
+
+                CurrentPublication.Stock = CurrentPublication.Stock - newPurchase.Cantidad;
+                PublicacionPersistance.Update(CurrentPublication);
+
+                var frmDatosVendedor = new FrmDatosVendedor(CurrentPublication.UsuarioCreador);
+                frmDatosVendedor.ShowDialog();
+
+                RefreshSources();
+            }
+            else
+            {
+                MessageBox.Show("Tiene demasiadas compras sin calificar, por favor califíquelas para poder realizar una compra");
+            }
         }
 
         private void RefreshSources()
@@ -116,20 +135,28 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void lblOfertar_Click(object sender, EventArgs e)
         {
-            if (Int32.Parse(txtMonto.Text) > Int32.Parse(lblPrecio.Text))
+            List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
+            if (publications.Count <= 5)
             {
-                Oferta newOffer = new Oferta();
-                newOffer.IdCliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID).ID;
-                newOffer.IdPublicacion = CurrentPublication.ID;
-                newOffer.Fecha = ConfigurationVariables.FechaSistema;
-                newOffer.Monto = Int32.Parse(txtMonto.Text);
-                newOffer = OfertaPersistance.Insert(newOffer, null);
-                MessageBox.Show("Se insertó la oferta correctamente");
-                RefreshSources();
+                if (Int32.Parse(txtMonto.Text) > Int32.Parse(lblPrecio.Text))
+                {
+                    Oferta newOffer = new Oferta();
+                    newOffer.IdCliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID).ID;
+                    newOffer.IdPublicacion = CurrentPublication.ID;
+                    newOffer.Fecha = ConfigurationVariables.FechaSistema;
+                    newOffer.Monto = Int32.Parse(txtMonto.Text);
+                    newOffer = OfertaPersistance.Insert(newOffer, null);
+                    MessageBox.Show("Se insertó la oferta correctamente");
+                    RefreshSources();
+                }
+                else
+                {
+                    MessageBox.Show("El monto a ofertar debe ser mayor que la oferta actual");
+                }
             }
             else
             {
-                MessageBox.Show("El monto a ofertar debe ser mayor que la oferta actual");
+                MessageBox.Show("Tiene demasiadas compras sin calificar, por favor califíquelas para poder realizar una compra");
             }
         }
     }

@@ -195,3 +195,92 @@ BEGIN
 	WHERE ID_Usuario = @ID_User
 END
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetTipoDocumentoById]
+	@ID_Tipo_Documento numeric(18,0)
+AS
+BEGIN
+	SELECT * FROM [LA_BANDA_DEL_CHAVO].[TL_Tipo_Documento] 
+	WHERE ID_Tipo_Documento = @ID_Tipo_Documento
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateClient]
+	@ID_Usuario int,
+	@Nombre varchar(255),
+	@Apellido varchar(255),
+	@ID_Tipo_Documento int,
+	@Nro_Documento numeric(18, 0),
+	@Mail varchar(255),
+	@Telefono varchar(255),
+	@Direccion varchar(255),
+	@Codigo_Postal varchar(255),
+	@CUIL varchar(255),
+	@Fecha_Nacimiento datetime
+AS
+BEGIN
+	UPDATE [LA_BANDA_DEL_CHAVO].[TL_Cliente] 
+	SET Nombre = @Nombre, Apellido = @Apellido, ID_Tipo_Documento = @ID_Tipo_Documento,
+    Nro_Documento = @Nro_Documento, Mail = @Mail, Telefono = @Telefono,
+	Direccion = @Direccion, Codigo_Postal = @Codigo_Postal, CUIL = @CUIL, 
+	Fecha_nacimiento = @Fecha_Nacimiento
+	WHERE ID_Usuario = @ID_Usuario
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllClients]
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT C.*, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].TL_Cliente AS C
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Usuario] AS U ON C.ID_Usuario = U.ID_Usuario
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllClientsByParameters]
+	@Nombre nvarchar(255) = NULL,
+	@Apellido nvarchar(255) = NULL,
+	@Tipo_Documento int = NULL,
+	@Nro_Documento numeric(18,0) = NULL,
+	@Email nvarchar(255) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT C.*, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].TL_Cliente AS C
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Usuario] AS U ON C.ID_Usuario = U.ID_Usuario
+
+	WHERE 
+	((LOWER(C.Nombre) = LOWER(@Nombre)) OR @Nombre is NULL)
+	AND ((LOWER(C.Apellido) = LOWER(@Apellido)) OR @Apellido is NULL)
+	AND ((C.ID_Tipo_Documento = @Tipo_Documento) OR @Tipo_Documento is NULL)
+	AND ((C.Nro_Documento = @Nro_Documento) OR @Nro_Documento is NULL)
+	AND ((LOWER(C.Mail) = LOWER(@Email)) OR @Email is NULL)	
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllClientsByParametersLike]
+	@Nombre nvarchar(255) = NULL,
+	@Apellido nvarchar(255) = NULL,
+	@Tipo_Documento int = NULL,
+	@Nro_Documento numeric(18,0) = NULL,
+	@Email nvarchar(255) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT C.*, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].TL_Cliente AS C
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Usuario] AS U ON C.ID_Usuario = U.ID_Usuario
+	
+	WHERE 
+	((LOWER(C.Nombre) LIKE  ('%' + LOWER(@Nombre) + '%')) OR @Nombre is NULL)
+	AND ((LOWER(C.Apellido) LIKE  ('%' + LOWER(@Apellido) + '%')) OR @Apellido is NULL)
+	AND ((C.ID_Tipo_Documento = @Tipo_Documento) OR @Tipo_Documento is NULL)
+	AND ((C.Nro_Documento LIKE  ('%' + CAST(@Nro_Documento AS nvarchar(255)) + '%')) OR @Nro_Documento is NULL)
+	AND ((LOWER(C.Mail)LIKE  ('%' + LOWER(@Email) + '%')) OR @Email is NULL)
+END
+GO

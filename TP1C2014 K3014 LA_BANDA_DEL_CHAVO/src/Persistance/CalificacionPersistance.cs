@@ -96,7 +96,7 @@ namespace Persistance
         }
         
 
-                public static List<HistoryReputacion> getAllCalifiedByMeToOther(Usuario user)
+        public static List<HistoryReputacion> getAllCalifiedByMeToOther(Usuario user)
         {
             var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID) };
             var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetHistoryCalificacionesOtorgadas, param);
@@ -129,9 +129,24 @@ namespace Persistance
             var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetHistoryCalificacionesOtorgadasByParametersLike, param);
             return sp.ExecuteReader<HistoryReputacion>();
         }
-        
 
 
+        public static int getAverageCalificationToMe(Usuario user)
+        {
+            int promedio = 0;
+            List<HistoryReputacion> calificaciones = getAllCalifiedToMe(user);
+            int cantidad = calificaciones.Count;
+            if (calificaciones != null && cantidad > 0)
+            {
+                int suma = 0;
+                foreach (var calif in calificaciones)
+                {
+                    suma += calif.Cantidad_Estrellas;
+                }
+                promedio = (int)Math.Round((decimal)suma / cantidad);
+            }
+            return promedio;
+        }
         
             
             

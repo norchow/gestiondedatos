@@ -24,6 +24,14 @@ namespace Persistance
             return sp.ExecuteReader<Funcionalidad>();
         }
 
+        public static List<Funcionalidad> GetByRole(Rol role, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Rol", role.ID) };
+            var sp = new StoreProcedure(DataBaseConst.Funcionalidad.SPGetAllFuncionalidadByRol, param, transaction);
+
+            return sp.ExecuteReaderTransactioned<Funcionalidad>(transaction);
+        }
+
         public static int InsertByRole(Rol role, SqlTransaction transaction)
         {
             var regsAffected = 0;

@@ -73,6 +73,21 @@ namespace Persistance.Entities
             return new List<SPParameter>();
         }
 
+        public int GetTipoPublicacionId()
+        {
+            return _tipoPublicacion;
+        }
+
+        public int GetVisibilityId()
+        {
+            return _visibilidad;
+        }
+
+        public int GetStatusID()
+        {
+            return _estadoPublicacion;
+        }
+
         public void GetObjectsById()
         {
             UsuarioCreador = UsuarioPersistance.GetById(_usuarioCreador);
@@ -81,6 +96,16 @@ namespace Persistance.Entities
             TipoPublicacion = TipoPublicacionPersistance.GetById(_tipoPublicacion);
             Rubros = RubroPersistance.GetByPublicationId(ID);
             Compras = CompraPersistance.GetByPublicationId(ID);
+        }
+
+        public string GetTextRubros()
+        {
+            string result = "";
+            foreach (var rubro in this.Rubros)
+            {
+                result += rubro.Descripcion + ", ";
+            }
+            return result.Remove(result.Length - 2);
         }
     }
 }

@@ -35,6 +35,8 @@
             this.LblCancelar = new System.Windows.Forms.Label();
             this.LstFuncionalidades = new System.Windows.Forms.CheckedListBox();
             this.ChkActivo = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label3
@@ -109,12 +111,38 @@
             this.ChkActivo.Text = "ACTIVO";
             this.ChkActivo.UseVisualStyleBackColor = true;
             // 
-            // FrmInsertUpdateRol
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.label2.Location = new System.Drawing.Point(116, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(15, 20);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "*";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
+            this.label5.Location = new System.Drawing.Point(242, 100);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(15, 20);
+            this.label5.TabIndex = 30;
+            this.label5.Text = "*";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // FrmABMInsertUpdateRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
             this.ClientSize = new System.Drawing.Size(340, 442);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.ChkActivo);
             this.Controls.Add(this.LstFuncionalidades);
             this.Controls.Add(this.LblCancelar);
@@ -126,7 +154,7 @@
             this.MaximumSize = new System.Drawing.Size(356, 480);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(356, 480);
-            this.Name = "FrmInsertUpdateRol";
+            this.Name = "FrmABMInsertUpdateRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrbaCommerce";
             this.Load += new System.EventHandler(this.FrmInsertUpdateRol_Load);
@@ -144,5 +172,7 @@
         private System.Windows.Forms.Label LblCancelar;
         private System.Windows.Forms.CheckedListBox LstFuncionalidades;
         private System.Windows.Forms.CheckBox ChkActivo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
     }
 }

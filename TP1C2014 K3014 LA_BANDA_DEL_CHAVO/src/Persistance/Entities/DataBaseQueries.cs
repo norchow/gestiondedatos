@@ -21,6 +21,7 @@ namespace Persistance.Entities
             public static String SPInsertFuncionalidadByRol = "LA_BANDA_DEL_CHAVO.InsertFuncionalidadByRol";
             public static String SPUpdateRolById = "LA_BANDA_DEL_CHAVO.UpdateRolById";
             public static String SPDeleteAllFuncionalidadByRol = "LA_BANDA_DEL_CHAVO.DeleteAllFuncionalidadByRol";
+            public static String SPInsertUserRole = "LA_BANDA_DEL_CHAVO.InsertUserRole";
         }
 
         public static class Usuario
@@ -32,11 +33,16 @@ namespace Persistance.Entities
             public static String SPUpdateUser = "LA_BANDA_DEL_CHAVO.UpdateUser";
             public static String SPUpdatePassword = "LA_BANDA_DEL_CHAVO.UpdatePassword";
             public static String SPInhabilitarUser = "LA_BANDA_DEL_CHAVO.InhabilitarUser";
+            public static String SPUpdateUserToDisabledById = "LA_BANDA_DEL_CHAVO.UpdateUserToDisabledById";
+            public static String SPUpdateUserToActivateById = "LA_BANDA_DEL_CHAVO.UpdateUserToActivateById";
+            
+            public static String SPInsertUserTemporal = "LA_BANDA_DEL_CHAVO.InsertUserTemporal";
         }
 
         public static class Visibilidad
         {
             public static String SPGetAllVisibilidad = "LA_BANDA_DEL_CHAVO.GetAllVisibilidad";
+            public static String SPGetAllVisibilidadActive = "LA_BANDA_DEL_CHAVO.GetAllVisibilidadActive";
             public static String SPInsertVisibilidad = "LA_BANDA_DEL_CHAVO.InsertVisibilidad";
             public static String SPUpdateVisibilidad = "LA_BANDA_DEL_CHAVO.UpdateVisibilidad";
             public static String SPGetVisibilidadById = "LA_BANDA_DEL_CHAVO.GetVisibilidadById";
@@ -67,12 +73,15 @@ namespace Persistance.Entities
         public static class Publicacion
         {
             public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetPublicacionById";
+            public static String SPGetAllByVisibilityId = "LA_BANDA_DEL_CHAVO.GetPublicacionByVisibilityId";
             public static String SPInsert = "LA_BANDA_DEL_CHAVO.InsertPublicacion";
             public static String SPUpdate = "LA_BANDA_DEL_CHAVO.UpdatePublicacion";
             public static String SPGetAllByUserId = "LA_BANDA_DEL_CHAVO.GetAllPublicationByUserId";
             public static String SPGetPublicacionesARendirByUser = "LA_BANDA_DEL_CHAVO.GetPublicacionesARendirByUser";
             public static String SPGetPublicacionesMasAntiguasARendirByUser = "LA_BANDA_DEL_CHAVO.GetPublicacionesMasAntiguasARendirByUser";
             public static String SPGetAllActive = "LA_BANDA_DEL_CHAVO.GetAllPublicationActive";
+            public static String SPGetAllActiveByParameters = "LA_BANDA_DEL_CHAVO.GetAllPublicationActiveByParameters";
+            public static String SPGetAllActiveByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllPublicationActiveByParametersLike";
             public static String SPGetAllPublicacionByParameters = "LA_BANDA_DEL_CHAVO.GetAllPublicacionByParameters";
             public static String SPGetAllPublicacionByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllPublicacionByParametersLike";
             public static String SPGetQuestionsAndAnswersById = "LA_BANDA_DEL_CHAVO.GetQuestionsAndAnswersById";
@@ -106,6 +115,7 @@ namespace Persistance.Entities
         public static class TipoDocumento
         {
             public static String SPGetAllTipoDocumento = "LA_BANDA_DEL_CHAVO.GetAllTipoDocumento";
+            public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetTipoDocumentoById";
         }
 
         public static class Cliente
@@ -113,8 +123,12 @@ namespace Persistance.Entities
             public static String SPGetClientByPhone = "LA_BANDA_DEL_CHAVO.GetClientByPhone";
             public static String SPGetClientByDocument = "LA_BANDA_DEL_CHAVO.GetClientByDocument";
             public static String SPInsertClient = "LA_BANDA_DEL_CHAVO.InsertClient";
+            public static String SPUpdateClient = "LA_BANDA_DEL_CHAVO.UpdateClient";
             public static String SPGetClientByUserId = "LA_BANDA_DEL_CHAVO.GetClientByUserId";
             public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetClientById";
+            public static String SPGetAllClients = "LA_BANDA_DEL_CHAVO.GetAllClients";
+            public static String SPGetAllClientsByParameters = "LA_BANDA_DEL_CHAVO.GetAllClientsByParameters";
+            public static String SPGetAllClientsByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllClientsByParametersLike";
         }
 
         public static class Compra
@@ -124,6 +138,7 @@ namespace Persistance.Entities
             public static String SPGetHistoryComprasByUsuarioByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryComprasByUsuarioByParametersLike";
             public static String SPGetAllCompraByPublicationId = "LA_BANDA_DEL_CHAVO.GetAllCompraByPublicacionId";
             public static String SPGetCantidadComprasByPublicationIdGroupByClient = "LA_BANDA_DEL_CHAVO.GetCantidadComprasByPublicationIdGroupByClient";
+            public static String SPInsertPurchase = "LA_BANDA_DEL_CHAVO.InsertPurchase";
         }
 
         public static class Oferta
@@ -140,7 +155,13 @@ namespace Persistance.Entities
             public static String SPGetCompanyByBusinessName = "LA_BANDA_DEL_CHAVO.GetCompanyByBusinessName";
             public static String SPGetCompanyByCUIT = "LA_BANDA_DEL_CHAVO.GetCompanyByCUIT";
             public static String SPInsertCompany = "LA_BANDA_DEL_CHAVO.InsertCompany";
+            public static String SPUpdateCompany = "LA_BANDA_DEL_CHAVO.UpdateBusiness";
+            
             public static String SPGetCompanyByUserId = "LA_BANDA_DEL_CHAVO.GetCompanyByUserId";
+            public static String SPGetAllBusiness = "LA_BANDA_DEL_CHAVO.GetAllBusiness";
+            public static String SPGetAllBusinessByParameters = "LA_BANDA_DEL_CHAVO.GetAllBusinessByParameters";
+            public static String SPGetAllBusinessByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllBusinessByParametersLike";
+            
         }
 
         public static class Pregunta

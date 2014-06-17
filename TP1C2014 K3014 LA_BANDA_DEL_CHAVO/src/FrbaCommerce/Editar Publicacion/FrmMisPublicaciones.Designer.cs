@@ -30,8 +30,10 @@
         {
             this.DgvPublicacion = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.MtbVencimiento = new System.Windows.Forms.MaskedTextBox();
-            this.MtbInicio = new System.Windows.Forms.MaskedTextBox();
+            this.CboEstadoPublicacion = new System.Windows.Forms.ComboBox();
+            this.CboVisibilidad = new System.Windows.Forms.ComboBox();
+            this.CboTipoPublicacion = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,14 +63,16 @@
             this.DgvPublicacion.Name = "DgvPublicacion";
             this.DgvPublicacion.RowHeadersVisible = false;
             this.DgvPublicacion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvPublicacion.Size = new System.Drawing.Size(868, 323);
+            this.DgvPublicacion.Size = new System.Drawing.Size(953, 323);
             this.DgvPublicacion.TabIndex = 33;
             this.DgvPublicacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPublicacion_CellContentClick);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.MtbVencimiento);
-            this.groupBox1.Controls.Add(this.MtbInicio);
+            this.groupBox1.Controls.Add(this.CboEstadoPublicacion);
+            this.groupBox1.Controls.Add(this.CboVisibilidad);
+            this.groupBox1.Controls.Add(this.CboTipoPublicacion);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -82,49 +86,67 @@
             this.groupBox1.Controls.Add(this.LblBuscar);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(868, 87);
+            this.groupBox1.Size = new System.Drawing.Size(953, 87);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "FILTROS DE BUSQUEDA";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // MtbVencimiento
+            // CboEstadoPublicacion
             // 
-            this.MtbVencimiento.Enabled = false;
-            this.MtbVencimiento.Location = new System.Drawing.Point(535, 24);
-            this.MtbVencimiento.Mask = "99/99/9999";
-            this.MtbVencimiento.Name = "MtbVencimiento";
-            this.MtbVencimiento.Size = new System.Drawing.Size(97, 20);
-            this.MtbVencimiento.TabIndex = 48;
-            this.MtbVencimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.CboEstadoPublicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboEstadoPublicacion.Enabled = false;
+            this.CboEstadoPublicacion.FormattingEnabled = true;
+            this.CboEstadoPublicacion.Location = new System.Drawing.Point(601, 23);
+            this.CboEstadoPublicacion.Name = "CboEstadoPublicacion";
+            this.CboEstadoPublicacion.Size = new System.Drawing.Size(117, 21);
+            this.CboEstadoPublicacion.TabIndex = 52;
             // 
-            // MtbInicio
+            // CboVisibilidad
             // 
-            this.MtbInicio.Enabled = false;
-            this.MtbInicio.Location = new System.Drawing.Point(326, 50);
-            this.MtbInicio.Mask = "99/99/9999";
-            this.MtbInicio.Name = "MtbInicio";
-            this.MtbInicio.Size = new System.Drawing.Size(118, 20);
-            this.MtbInicio.TabIndex = 47;
-            this.MtbInicio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.CboVisibilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboVisibilidad.Enabled = false;
+            this.CboVisibilidad.FormattingEnabled = true;
+            this.CboVisibilidad.Location = new System.Drawing.Point(315, 50);
+            this.CboVisibilidad.Name = "CboVisibilidad";
+            this.CboVisibilidad.Size = new System.Drawing.Size(136, 21);
+            this.CboVisibilidad.TabIndex = 51;
+            // 
+            // CboTipoPublicacion
+            // 
+            this.CboTipoPublicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboTipoPublicacion.Enabled = false;
+            this.CboTipoPublicacion.FormattingEnabled = true;
+            this.CboTipoPublicacion.Location = new System.Drawing.Point(582, 50);
+            this.CboTipoPublicacion.Name = "CboTipoPublicacion";
+            this.CboTipoPublicacion.Size = new System.Drawing.Size(136, 21);
+            this.CboTipoPublicacion.TabIndex = 50;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(470, 53);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 13);
+            this.label6.TabIndex = 49;
+            this.label6.Text = "TIPO PUBLICACION";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(462, 27);
+            this.label5.Location = new System.Drawing.Point(470, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 13);
+            this.label5.Size = new System.Drawing.Size(125, 13);
             this.label5.TabIndex = 46;
-            this.label5.Text = "FECHA VTO";
+            this.label5.Text = "ESTADO PUBLICACION";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(240, 53);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 13);
+            this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 45;
-            this.label4.Text = "FECHA INICIO";
+            this.label4.Text = "VISIBILIDAD";
             // 
             // label3
             // 
@@ -138,9 +160,9 @@
             // TxtPrecio
             // 
             this.TxtPrecio.Enabled = false;
-            this.TxtPrecio.Location = new System.Drawing.Point(326, 24);
+            this.TxtPrecio.Location = new System.Drawing.Point(293, 24);
             this.TxtPrecio.Name = "TxtPrecio";
-            this.TxtPrecio.Size = new System.Drawing.Size(118, 20);
+            this.TxtPrecio.Size = new System.Drawing.Size(158, 20);
             this.TxtPrecio.TabIndex = 42;
             // 
             // label2
@@ -172,7 +194,7 @@
             // ChkBusquedaExacta
             // 
             this.ChkBusquedaExacta.AutoSize = true;
-            this.ChkBusquedaExacta.Location = new System.Drawing.Point(661, 21);
+            this.ChkBusquedaExacta.Location = new System.Drawing.Point(744, 21);
             this.ChkBusquedaExacta.Name = "ChkBusquedaExacta";
             this.ChkBusquedaExacta.Size = new System.Drawing.Size(131, 17);
             this.ChkBusquedaExacta.TabIndex = 39;
@@ -193,7 +215,7 @@
             this.LblLimpiar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblLimpiar.ForeColor = System.Drawing.Color.White;
-            this.LblLimpiar.Location = new System.Drawing.Point(765, 40);
+            this.LblLimpiar.Location = new System.Drawing.Point(848, 40);
             this.LblLimpiar.Name = "LblLimpiar";
             this.LblLimpiar.Size = new System.Drawing.Size(88, 32);
             this.LblLimpiar.TabIndex = 38;
@@ -207,7 +229,7 @@
             this.LblBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LblBuscar.ForeColor = System.Drawing.Color.White;
-            this.LblBuscar.Location = new System.Drawing.Point(661, 40);
+            this.LblBuscar.Location = new System.Drawing.Point(744, 40);
             this.LblBuscar.Name = "LblBuscar";
             this.LblBuscar.Size = new System.Drawing.Size(88, 32);
             this.LblBuscar.TabIndex = 37;
@@ -234,7 +256,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.ClientSize = new System.Drawing.Size(896, 501);
+            this.ClientSize = new System.Drawing.Size(978, 501);
             this.Controls.Add(this.LblListo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DgvPublicacion);
@@ -264,7 +286,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TxtPrecio;
-        private System.Windows.Forms.MaskedTextBox MtbVencimiento;
-        private System.Windows.Forms.MaskedTextBox MtbInicio;
+        private System.Windows.Forms.ComboBox CboTipoPublicacion;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox CboEstadoPublicacion;
+        private System.Windows.Forms.ComboBox CboVisibilidad;
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using Persistance.Entities;
 using System.Data.SqlClient;
 using System.Data;
+using Filters;
 
 namespace Persistance
 {
@@ -25,6 +26,39 @@ namespace Persistance
                 return null;
 
             return clients[0];
+        }
+
+        public static List<Cliente> GetAllClients()
+        {
+            var sp = new StoreProcedure(DataBaseConst.Cliente.SPGetAllClients);
+
+            return sp.ExecuteReader<Cliente>();
+        }
+
+        public static List<Cliente> GetAllClientsByParameters(ClienteFilters filters)
+        {
+            var param = new List<SPParameter> { new SPParameter("Nombre", filters.Nombre ?? (object)DBNull.Value),
+                                                new SPParameter("Apellido", filters.Apellido ?? (object)DBNull.Value),
+                                                new SPParameter("Tipo_Documento", filters.TipoDocumento ?? (object)DBNull.Value),
+                                                new SPParameter("Nro_Documento", filters.NroDocumento ?? (object)DBNull.Value),
+                                                new SPParameter("Email", filters.Email ?? (object)DBNull.Value)};
+
+            var sp = new StoreProcedure(DataBaseConst.Cliente.SPGetAllClientsByParameters, param);
+
+            return sp.ExecuteReader<Cliente>();
+        }
+
+        public static List<Cliente> GetAllClientsByParametersLike(ClienteFilters filters)
+        {
+            var param = new List<SPParameter> { new SPParameter("Nombre", filters.Nombre ?? (object)DBNull.Value),
+                                                new SPParameter("Apellido", filters.Apellido ?? (object)DBNull.Value),
+                                                new SPParameter("Tipo_Documento", filters.TipoDocumento ?? (object)DBNull.Value),
+                                                new SPParameter("Nro_Documento", filters.NroDocumento ?? (object)DBNull.Value),
+                                                new SPParameter("Email", filters.Email ?? (object)DBNull.Value)};
+
+            var sp = new StoreProcedure(DataBaseConst.Cliente.SPGetAllClientsByParametersLike, param);
+
+            return sp.ExecuteReader<Cliente>();
         }
 
         public static Cliente GetByPhone(string phone)
@@ -118,6 +152,30 @@ namespace Persistance
                         : new StoreProcedure(DataBaseConst.Cliente.SPInsertClient, param);
 
             client.ID = (int)sp.ExecuteScalar(transaction);
+
+            return client;
+        }
+
+        public static Cliente UpdateClient(Cliente client)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Usuario", client.IdUsuario),
+                    new SPParameter("Nombre", client.Nombre),
+                    new SPParameter("Apellido", client.Apellido),
+                    new SPParameter("ID_Tipo_Documento", client.TipoDocumento), 
+                    new SPParameter("Nro_Documento", client.NroDocumento),
+                    new SPParameter("Mail", client.Mail),
+                    new SPParameter("Telefono", client.Telefono),
+                    new SPParameter("Direccion", client.Direccion),
+                    new SPParameter("Codigo_Postal", client.CodigoPostal),
+                    new SPParameter("Fecha_Nacimiento", client.FechaNacimiento),
+                    new SPParameter("CUIL", client.CUIL)                   
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Cliente.SPUpdateClient, param);
+
+            client.ID = (int)sp.ExecuteNonQuery(null);
 
             return client;
         }

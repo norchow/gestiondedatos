@@ -15,8 +15,11 @@ using FrbaCommerce.Editar_Publicacion;
 using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Historial_Cliente;
 using FrbaCommerce.Gestion_de_Preguntas;
-using Session;
+using FrbaCommerce.Abm_Empresa;
 using FrbaCommerce.Login;
+using Session;
+using FrbaCommerce.Facturar_Publicaciones;
+using Persistance.Entities;
 
 namespace FrbaCommerce.Home
 {
@@ -68,12 +71,6 @@ namespace FrbaCommerce.Home
             frmMisPublicaciones.ShowDialog();
         }
 
-        private void listadoDePublicacionesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var frmListadoPublicaciones = new FrmListadoPublicaciones();
-            frmListadoPublicaciones.ShowDialog();
-        }
-
         private void historialClienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var frmHistorialCliemte = new FrmHistorialCliente();
@@ -98,6 +95,116 @@ namespace FrbaCommerce.Home
 
             FrmLogin formLogin = new FrmLogin();
             formLogin.ShowDialog();
+        }
+
+        private void FrmHome_Load(object sender, EventArgs e)
+        {
+            SetMenuVisibilityByCurrentRole();
+        }
+
+        private void SetMenuVisibilityByCurrentRole()
+        {
+            var administracion = false;
+            var publicaciones = false;
+            var estadistico = false;
+
+            foreach (var functionality in SessionManager.CurrentRol.Funcionalidades)
+            {
+                switch (Funcionalidad.GetByName(functionality.Descripcion))
+                {
+                    case Funcionalidades.ABM_Rol:
+                        administracionDeRolesToolStripMenuItem.Visible = true;
+                        administracion = true;
+                        break;
+
+                    case Funcionalidades.ABM_Cliente:
+                        administracionDeClientesToolStripMenuItem.Visible = true;
+                        administracion = true;
+                        break;
+
+                    case Funcionalidades.ABM_Empresa:
+                        administracionDeEmpresasToolStripMenuItem.Visible = true;
+                        administracion = true;
+                        break;
+
+                    case Funcionalidades.ABM_Usuario:
+                        administracionDeUsuariosToolStripMenuItem.Visible = true;
+                        administracion = true;
+                        break;
+
+                    case Funcionalidades.ABM_Visibilidad:
+                        administracionDeVisibilidadesToolStripMenuItem.Visible = true;
+                        administracion = true;
+                        break;
+
+                    case Funcionalidades.Generar_Publicacion:
+                        generarPublicacionesToolStripMenuItem.Visible = true;
+                        publicaciones = true;
+                        break;
+
+                    case Funcionalidades.Editar_Publicacion:
+                        editarMisPublicacionesToolStripMenuItem.Visible = true;
+                        publicaciones = true;
+                        break;
+
+                    case Funcionalidades.Gestion_Preguntas:
+                        responderPreguntasToolStripMenuItem.Visible = true;
+                        publicaciones = true;
+                        break;
+
+                    case Funcionalidades.Comprar_Ofertar:
+                        comprarOfertarToolStripMenuItem.Visible = true;
+                        publicaciones = true;
+                        break;
+
+                    case Funcionalidades.Historial_Cliente:
+                        historialClienteToolStripMenuItem.Visible = true;
+                        estadistico = true;
+                        break;
+
+                    case Funcionalidades.Calificar_Vendedor:
+                        calificarVendedorToolStripMenuItem.Visible = true;
+                        publicaciones = true;
+                        break;
+
+                    case Funcionalidades.Facturar_Publicaciones:
+                        facturarPublicacionesToolStripMenuItem.Visible = true;
+                        publicaciones = true;
+                        break;
+
+                    case Funcionalidades.Listado_Estadistico:
+                        listadoEstadisticoToolStripMenuItem.Visible = true;
+                        estadistico = true;
+                        break;
+                }
+            }
+
+            if (!administracion)
+                MsHome.Items.Remove(administracionToolStripMenuItem);
+
+            if (!publicaciones)
+                MsHome.Items.Remove(publicacionesToolStripMenuItem);
+
+            if (!estadistico)
+                MsHome.Items.Remove(estadisticasToolStripMenuItem);
+        }
+
+        private void comprarOfertarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmListadoPublicaciones = new FrmListadoPublicaciones();
+            frmListadoPublicaciones.ShowDialog();
+        }
+
+        private void facturarPublicacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmFacturarPublicaciones = new FrmFacturarPublicaciones();
+            frmFacturarPublicaciones.ShowDialog();
+        }
+
+        private void administracionDeEmpresasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmABMEmpresa = new FrmABMEmpresa();
+            frmABMEmpresa.ShowDialog();
         }
     }
 }

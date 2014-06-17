@@ -15,8 +15,10 @@ namespace Filters
 
         public int? Stock { get; set; }
 
-        public DateTime? FechaInicio { get; set; }
+        public int? IdEstadoPublicacion { get; set; }
 
-        public DateTime? FechaVencimiento { get; set; }
+        public int? IdVisibilidad { get; set; }
+
+        public int? IdTipoPublicacion { get; set; }
     }
 }

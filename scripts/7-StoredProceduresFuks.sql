@@ -462,4 +462,140 @@ END
 
 GO
 
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertUserTemporal]
+	@Username nvarchar(255),
+	@Password nvarchar(64)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Usuario] (Username, Password, Pass_Temporal)
+	OUTPUT inserted.ID_Usuario
+	VALUES (@Username, @Password, 1)
+END
+
+
+GO
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllBusinessByParameters]
+	@Razon_Social nvarchar(255) = NULL,
+	@Cuit nvarchar(255) = NULL,
+	@Email nvarchar(255) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+SELECT E.*, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].TL_Empresa AS E
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Usuario] AS U ON E.ID_Usuario = U.ID_Usuario
+
+	WHERE 
+	((LOWER(E.Razon_Social) = LOWER(@Razon_Social)) OR @Razon_Social is NULL)
+	AND ((LOWER(E.CUIT) = LOWER(@Cuit)) OR @Cuit is NULL)
+	AND ((LOWER(E.Mail) = LOWER(@Email)) OR @Email is NULL)
+	
+END
+
+
+
+
+GO
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllBusiness]
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT E.*, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].TL_Empresa AS E
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Usuario] AS U ON E.ID_Usuario = U.ID_Usuario
+END
+
+
+GO
+
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllBusinessByParametersLike]
+	@Razon_Social nvarchar(255) = NULL,
+	@Cuit nvarchar(255) = NULL,
+	@Email nvarchar(255) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT E.*, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].TL_Empresa AS E
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Usuario] AS U ON E.ID_Usuario = U.ID_Usuario
+WHERE 
+	((LOWER(E.Razon_Social) LIKE  ('%' + LOWER(@Razon_Social) + '%')) OR @Razon_Social is NULL)
+	AND ((LOWER(E.CUIT) LIKE  ('%' + LOWER(@Cuit) + '%')) OR @Cuit is NULL)
+	AND ((LOWER(E.Mail)LIKE  ('%' + LOWER(@Email) + '%')) OR @Email is NULL)
+	
+END
+
+
+
+GO
+
+
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateUserToDisabledById]
+	@ID_User int
+AS
+BEGIN
+	UPDATE [LA_BANDA_DEL_CHAVO].[TL_Usuario]
+	SET Habilitado = 0
+	WHERE ID_Usuario = @ID_User
+END
+
+
+GO
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateUserToActivateById]
+	@ID_User int
+AS
+BEGIN
+	UPDATE [LA_BANDA_DEL_CHAVO].[TL_Usuario]
+	SET Habilitado = 1
+	WHERE ID_Usuario = @ID_User
+END
+
+
+
+GO
+
+
+
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateBusiness]
+	@ID_User int,
+	@Razon_Social varchar(255),
+	@Mail varchar(255),
+	@Telefono varchar(255),
+	@Direccion varchar(255),
+	@Codigo_Postal varchar(255),
+	@Ciuidad varchar(255),
+	@CUIT varchar(255),
+	@Nombre_Contacto varchar(255),
+	@Fecha_Creacion datetime
+AS
+BEGIN
+	UPDATE [LA_BANDA_DEL_CHAVO].[TL_Empresa] 
+	SET Razon_Social = @Razon_Social, Mail = @Mail, Telefono = @Telefono,
+	Direccion = @Direccion, Codigo_Postal = @Codigo_Postal, Ciudad = @Ciuidad,
+	CUIT = @CUIT, Nombre_Contacto = @Nombre_Contacto, Fecha_Creacion = @Fecha_Creacion
+	WHERE ID_Usuario = @ID_User
+END
+
+
+GO
 

@@ -48,11 +48,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abm Cliente\FrmABMCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\FrmABMCliente.Designer.cs">
+      <DependentUpon>FrmABMCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Cliente\FrmABMInsertUpdateCliente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Cliente\FrmABMInsertUpdateCliente.Designer.cs">
       <DependentUpon>FrmABMInsertUpdateCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Empresa\FrmABMEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Empresa\FrmABMEmpresa.Designer.cs">
+      <DependentUpon>FrmABMEmpresa.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Empresa\FrmABMInsertUpdateEmpresa.cs">
       <SubType>Form</SubType>
@@ -212,8 +224,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Abm Cliente\FrmABMCliente.resx">
+      <DependentUpon>FrmABMCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\FrmABMInsertUpdateCliente.resx">
       <DependentUpon>FrmABMInsertUpdateCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Empresa\FrmABMEmpresa.resx">
+      <DependentUpon>FrmABMEmpresa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa\FrmABMInsertUpdateEmpresa.resx">
       <DependentUpon>FrmABMInsertUpdateEmpresa.cs</DependentUpon>
@@ -334,10 +352,6 @@
     <ProjectReference Include="..\Filters\Filters.csproj">
       <Project>{025BAFDE-45A0-4AF8-BCC8-13AC348ED00F}</Project>
       <Name>Filters</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
-      <Project>{044B38F2-95F6-4048-9ECA-151AFED10B1F}</Project>
-      <Name>Logic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Persistance\Persistance.csproj">
       <Project>{5148E74D-C5CE-467D-A86D-451F7B0CF263}</Project>

@@ -2,6 +2,8 @@
 using Persistance.Entities;
 using System.Data.SqlClient;
 using System.Data;
+using System;
+using Tools;
 
 namespace Persistance
 {
@@ -51,6 +53,28 @@ namespace Persistance
             sp.ExecuteNonQuery(null);
         }
 
+        public static void UpdateToDisabledById(int userID)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", userID)
+                };
+            var sp = new StoreProcedure(DataBaseConst.Usuario.SPUpdateUserToDisabledById, param);
+
+            sp.ExecuteNonQuery(null);
+        }
+
+        public static void UpdateToActivateById(int userID)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_User", userID)
+                };
+            var sp = new StoreProcedure(DataBaseConst.Usuario.SPUpdateUserToActivateById, param);
+
+            sp.ExecuteNonQuery(null);
+        }
+
         public static Usuario GetById(int idUser)
         {
             var param = new List<SPParameter> { new SPParameter("ID_Usuario", idUser) };
@@ -81,6 +105,23 @@ namespace Persistance
             return user;
         }
 
+        public static Usuario InsertUserTemporal(Usuario user, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Username", user.Username), 
+                    new SPParameter("Password", user.Password)
+                };
+
+            var sp = (transaction != null)
+                        ? new StoreProcedure(DataBaseConst.Usuario.SPInsertUserTemporal, param, transaction)
+                        : new StoreProcedure(DataBaseConst.Usuario.SPInsertUserTemporal, param);
+
+            user.ID = (int)sp.ExecuteScalar(transaction);
+
+            return user;
+        }
+
         public static void InhabilitarUser(Usuario user)
         {
             var param = new List<SPParameter>
@@ -90,6 +131,34 @@ namespace Persistance
             var sp = new StoreProcedure(DataBaseConst.Usuario.SPInhabilitarUser, param);
 
             sp.ExecuteNonQuery(null);
+        }
+
+        public static Usuario Login(string userName, string password)
+        {
+            var usuario = GetByUsername(userName);
+
+            if (usuario == null)
+                throw new Exception("El nombre de usuario ingresado no existe.");
+
+            if (!usuario.Activo)
+                throw new Exception("El usuario ingresado no se encuentra habilitado para operar el sistema.");
+
+            if (usuario.Password != SHA256Helper.Encode(password))
+            {
+                usuario.LoginFails += 1;
+                usuario.Activo = usuario.LoginFails < 3;
+                UsuarioPersistance.Update(usuario);
+
+                throw new Exception("La contraseña ingresada no es valida.");
+            }
+
+            if (usuario.RolesActivos.Count == 0)
+                throw new Exception("No cuenta con un rol habilitado, por lo que no puede ingresar al sistema.");
+
+            usuario.LoginFails = 0;
+            UsuarioPersistance.Update(usuario);
+
+            return usuario;
         }
     }
 }
