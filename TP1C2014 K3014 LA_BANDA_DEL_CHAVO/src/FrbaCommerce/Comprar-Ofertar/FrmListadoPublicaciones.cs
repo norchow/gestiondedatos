@@ -36,20 +36,20 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             if (publications == null)
             {
-                //The datasource must be all the publications records from the user stored in the database
+                //El datasource debe contener a todos los registros de publicaciones activas
                 _publications = PublicacionPersistance.GetAllActive();
                 if(_publications!=null)
                     publicationsDictionary = _publications.ToDictionary(a => a.ID, a => a);
             }
             else
             {
-                //The datasource must be the list of visibilities received as parameter
+                //El datasource debe ser la lista de publicaciones recibida por parámetro
                 publicationsDictionary = _publications.ToDictionary(a => a.ID, a => a);
             }
 
             #endregion
 
-            #region Load publications in the datagrid
+            #region Cargar publicaciones en la grilla
             var bind = publicationsDictionary.Values.Select(a => new
             {
                 ID = a.ID,
@@ -74,7 +74,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             AddButtonsColumns();
             #endregion
 
-            if (bindlist.Count < 10) //no es necesario paginar
+            if (bindlist.Count < 10) //si tiene menos de 10 registros no debe paginar
             {
                 lblFirst.Visible = false;
                 lblPrevious.Visible = false;
@@ -82,6 +82,7 @@ namespace FrbaCommerce.Comprar_Ofertar
                 lblLast.Visible = false;
             }
 
+            //Cargo los rubros
             var rubros = RubroPersistance.GetAll();
             LstRubro.DataSource = rubros;
             LstRubro.DisplayMember = "Descripcion";
@@ -113,7 +114,7 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void DgvPublicacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Only works when user clicks one of the buttons (column index 8)
+            //Solo ejecutarla si es la columna de botones 
             if (e.ColumnIndex < 11 || e.RowIndex == -1)
                 return;
 
@@ -121,6 +122,7 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             if (selectedPublication != null)
             {
+                //Abro el formulario de detalle de la publicación
                 var editPublication = new FrmDetallePublicacion(selectedPublication);
                 editPublication.ShowDialog();
 
@@ -131,6 +133,7 @@ namespace FrbaCommerce.Comprar_Ofertar
         private void LblLimpiar_Click(object sender, EventArgs e)
         {
             TxtDescripcion.Text = string.Empty;
+            //Borro todos los rubros checkeados
             foreach (var checkedIndex in LstRubro.CheckedIndices)
                 LstRubro.SetItemCheckState((int)checkedIndex, CheckState.Unchecked);
         }
@@ -138,6 +141,7 @@ namespace FrbaCommerce.Comprar_Ofertar
         private void LblBuscar_Click(object sender, EventArgs e)
         {
             _offset = 0;
+            //Obtengo los rubros por los que voy a filtrar
             var lstRubros = new List<Rubro>();
             foreach (var checkedItem in LstRubro.CheckedItems)
             {
@@ -157,6 +161,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             }
         }
 
+        //Paginacion
         private void lblFirst_Click(object sender, EventArgs e)
         {
             _offset = 0;
@@ -165,6 +170,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             lblNext.Visible = true;
         }
 
+        //Paginacion
         private void lblLast_Click(object sender, EventArgs e)
         {
             _offset = _publications.Count - (_publications.Count % 10);
@@ -173,6 +179,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             lblNext.Visible = false;
         }
 
+        //Paginacion
         private void lblNext_Click(object sender, EventArgs e)
         {
             _offset += 10;
@@ -182,6 +189,7 @@ namespace FrbaCommerce.Comprar_Ofertar
                 lblNext.Visible = false;
         }
 
+        //Paginacion
         private void lblPrevious_Click(object sender, EventArgs e)
         {
             _offset -= 10;

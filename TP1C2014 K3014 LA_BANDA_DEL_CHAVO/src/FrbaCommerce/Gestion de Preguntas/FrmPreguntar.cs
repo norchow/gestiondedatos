@@ -43,6 +43,7 @@ namespace FrbaCommerce.Gestion_de_Preguntas
                 var dialogAnswer = MessageBox.Show("Esta seguro que quiere insertar la nueva pregunta?", "Atencion", MessageBoxButtons.YesNo);
                 if (dialogAnswer == DialogResult.Yes)
                 {
+                    //Inserto la pregunta
                     Pregunta preguntaNueva = new Pregunta();
                     preguntaNueva.IdPublicacion = CurrentPublication.ID;
                     preguntaNueva.Texto = txtPregunta.Text;

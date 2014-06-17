@@ -51,6 +51,7 @@ namespace FrbaCommerce.Listado_Estadistico
         {
             #region Load sources
 
+            //Cargo el combo de años
             var dataSourceAño = new List<object>();
             for (var i = 1980; i <= Convert.ToInt32(Configuration.ConfigurationVariables.FechaSistema.Year); i++)
                 dataSourceAño.Add(new { Name = i.ToString(), Value = i });
@@ -58,6 +59,7 @@ namespace FrbaCommerce.Listado_Estadistico
             CboAño.ValueMember = "Value";
             CboAño.DisplayMember = "Name";
 
+            //Cargo el combo de trimestres
             var dataSourceTrimestre = new List<object>();
             dataSourceTrimestre.Add(new { Name = "Enero - Marzo", Value = 1 });
             dataSourceTrimestre.Add(new { Name = "Abril - Junio", Value = 2 });
@@ -67,6 +69,7 @@ namespace FrbaCommerce.Listado_Estadistico
             CboTrimestre.DisplayMember = "Name";
             CboTrimestre.DataSource = dataSourceTrimestre;
 
+            //Cargo el combo con los posibles listados a pedir
             var dataSourceListado = new List<object>();
             dataSourceListado.Add(new { Name = "[Vendedores] Mayor cant. de productos no vendidos", Value = 1 });
             dataSourceListado.Add(new { Name = "[Vendedores] Mayor facturación", Value = 2 });
@@ -76,6 +79,7 @@ namespace FrbaCommerce.Listado_Estadistico
             CboListado.ValueMember = "Value";
             CboListado.DisplayMember = "Name";
 
+            //Cargo las visibilidades para los filtros de la primera estadística
             var dataSourceVisibilidad = VisibilidadPersistance.GetAll();
             var visibilidadTodos = new Visibilidad();
             visibilidadTodos.ID = 0;
@@ -99,7 +103,7 @@ namespace FrbaCommerce.Listado_Estadistico
         {
             try
             {
-                #region Validations
+                #region Validaciones
 
                 var filtersSetted = false;
                 var exceptionMessage = string.Empty;
@@ -127,6 +131,8 @@ namespace FrbaCommerce.Listado_Estadistico
                 var monthDesde = "";
                 var dayHasta = "";
                 var monthHasta = "";
+
+                //Si es la primera estadística, puede que esté filtrada por mes, si está en 00, filtro por trimestre
                 if ((string)cboMes.SelectedValue == "00" || (int)CboListado.SelectedValue != 1)
                 {
                     switch ((int)CboTrimestre.SelectedValue)
@@ -152,6 +158,7 @@ namespace FrbaCommerce.Listado_Estadistico
                 var fechaDesde = DateTime.Parse("01/" + monthDesde + "/" + CboAño.SelectedValue.ToString());
                 var fechaHasta = DateTime.Parse(dayHasta + "/" + monthHasta + "/" + CboAño.SelectedValue.ToString());
 
+                //Creo los filtros con los que se ejecuta la consulta.
                 var filters = new EstadisticaFilters
                 {
                     FechaDesde = fechaDesde,
@@ -194,16 +201,16 @@ namespace FrbaCommerce.Listado_Estadistico
         private void LoadGrid(List<Estadistica> listado)
         {
             
-            #region Get the dictionary of statistics
+            #region Generar el diccionario con las estadísticas
             var statisticsDictionary = new Dictionary<string, Estadistica>();
             if (listado == null)
             {
-                //The datasource must be empty
+                //El datasource debe estar vacío
                 DgvListado.DataSource = null;
             }
             else
             {
-                //The datasource must be the list of visibilities received as parameter
+                //El datasource debe ser la lista de los usuarios y sus metricas que recibió por parametro
                 statisticsDictionary = listado.ToDictionary(a => a.Usuario, a => a);
             }
 
@@ -211,7 +218,7 @@ namespace FrbaCommerce.Listado_Estadistico
 
             if (statisticsDictionary != null)
             {
-
+                //Parseo el diccionario y muestro en la grilla según el listado pedido
                 switch ((int)CboListado.SelectedValue)
                 {
                     case 1:
@@ -257,6 +264,7 @@ namespace FrbaCommerce.Listado_Estadistico
 
         private void CboListado_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Muestro/oculto los filtros según el listado seleccionado (solo los muestro si es el primero)
             if (CboListado.SelectedIndex == 0)
             {
                 lblVisibilidadText.Visible = true;
@@ -311,6 +319,11 @@ namespace FrbaCommerce.Listado_Estadistico
         private void CboTrimestre_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadMonthsByTrimester();
+        }
+
+        private void GroupFiltros_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
