@@ -74,6 +74,14 @@ namespace FrbaCommerce.Comprar_Ofertar
             AddButtonsColumns();
             #endregion
 
+            if (bindlist.Count < 10) //no es necesario paginar
+            {
+                lblFirst.Visible = false;
+                lblPrevious.Visible = false;
+                lblNext.Visible = false;
+                lblLast.Visible = false;
+            }
+
             var rubros = RubroPersistance.GetAll();
             LstRubro.DataSource = rubros;
             LstRubro.DisplayMember = "Descripcion";
