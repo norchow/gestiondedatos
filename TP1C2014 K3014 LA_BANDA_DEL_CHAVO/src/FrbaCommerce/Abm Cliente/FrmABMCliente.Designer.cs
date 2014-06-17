@@ -30,6 +30,11 @@
         {
             this.LblListo = new System.Windows.Forms.Label();
             this.GroupFiltros = new System.Windows.Forms.GroupBox();
+            this.CboTipoDocumento = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TxtDocumento = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TxtApellido = new System.Windows.Forms.TextBox();
             this.ChkBusquedaExacta = new System.Windows.Forms.CheckBox();
             this.LblLimpiar = new System.Windows.Forms.Label();
             this.LblBuscar = new System.Windows.Forms.Label();
@@ -40,11 +45,6 @@
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.LblNuevo = new System.Windows.Forms.Label();
             this.DgvClientes = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TxtApellido = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.TxtDocumento = new System.Windows.Forms.TextBox();
-            this.CboTipoDocumento = new System.Windows.Forms.ComboBox();
             this.GroupFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -84,6 +84,47 @@
             this.GroupFiltros.TabIndex = 40;
             this.GroupFiltros.TabStop = false;
             this.GroupFiltros.Text = "FILTROS DE BUSQUEDA";
+            // 
+            // CboTipoDocumento
+            // 
+            this.CboTipoDocumento.FormattingEnabled = true;
+            this.CboTipoDocumento.Location = new System.Drawing.Point(339, 23);
+            this.CboTipoDocumento.Name = "CboTipoDocumento";
+            this.CboTipoDocumento.Size = new System.Drawing.Size(133, 21);
+            this.CboTipoDocumento.TabIndex = 41;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(271, 59);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.TabIndex = 40;
+            this.label5.Text = "NRO. DOC.";
+            // 
+            // TxtDocumento
+            // 
+            this.TxtDocumento.Location = new System.Drawing.Point(339, 56);
+            this.TxtDocumento.MaxLength = 8;
+            this.TxtDocumento.Name = "TxtDocumento";
+            this.TxtDocumento.Size = new System.Drawing.Size(133, 20);
+            this.TxtDocumento.TabIndex = 39;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "APELLIDO";
+            // 
+            // TxtApellido
+            // 
+            this.TxtApellido.Location = new System.Drawing.Point(75, 56);
+            this.TxtApellido.Name = "TxtApellido";
+            this.TxtApellido.Size = new System.Drawing.Size(167, 20);
+            this.TxtApellido.TabIndex = 37;
             // 
             // ChkBusquedaExacta
             // 
@@ -195,47 +236,6 @@
             this.DgvClientes.TabIndex = 39;
             this.DgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvClientes_CellContentClick);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
-            this.label3.TabIndex = 38;
-            this.label3.Text = "APELLIDO";
-            // 
-            // TxtApellido
-            // 
-            this.TxtApellido.Location = new System.Drawing.Point(75, 56);
-            this.TxtApellido.Name = "TxtApellido";
-            this.TxtApellido.Size = new System.Drawing.Size(167, 20);
-            this.TxtApellido.TabIndex = 37;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(271, 59);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 13);
-            this.label5.TabIndex = 40;
-            this.label5.Text = "NRO. DOC.";
-            // 
-            // TxtDocumento
-            // 
-            this.TxtDocumento.Location = new System.Drawing.Point(339, 56);
-            this.TxtDocumento.MaxLength = 8;
-            this.TxtDocumento.Name = "TxtDocumento";
-            this.TxtDocumento.Size = new System.Drawing.Size(133, 20);
-            this.TxtDocumento.TabIndex = 39;
-            // 
-            // CboTipoDocumento
-            // 
-            this.CboTipoDocumento.FormattingEnabled = true;
-            this.CboTipoDocumento.Location = new System.Drawing.Point(339, 23);
-            this.CboTipoDocumento.Name = "CboTipoDocumento";
-            this.CboTipoDocumento.Size = new System.Drawing.Size(133, 21);
-            this.CboTipoDocumento.TabIndex = 41;
-            // 
             // FrmABMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,7 +246,7 @@
             this.Controls.Add(this.LblNuevo);
             this.Controls.Add(this.DgvClientes);
             this.Name = "FrmABMCliente";
-            this.Text = "ADMINISTRACIÓN DE CLIENTES";
+            this.Text = "FrbaCommerce - Administración de Clientes";
             this.Load += new System.EventHandler(this.FrmABMCliente_Load);
             this.GroupFiltros.ResumeLayout(false);
             this.GroupFiltros.PerformLayout();
