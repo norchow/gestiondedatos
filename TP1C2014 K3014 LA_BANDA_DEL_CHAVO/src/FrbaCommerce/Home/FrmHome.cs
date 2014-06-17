@@ -20,7 +20,8 @@ using FrbaCommerce.Login;
 using Session;
 using FrbaCommerce.Facturar_Publicaciones;
 using Persistance.Entities;
-
+using FrbaCommerce.Abm_Cliente;
+using FrbaCommerce.Facturar_Publicaciones;
 namespace FrbaCommerce.Home
 {
     public partial class FrmHome : Form
@@ -205,6 +206,12 @@ namespace FrbaCommerce.Home
         {
             var frmABMEmpresa = new FrmABMEmpresa();
             frmABMEmpresa.ShowDialog();
+        }
+
+        private void administracionDeClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmABMCliente = new FrmABMCliente();
+            frmABMCliente.ShowDialog();
         }
     }
 }
