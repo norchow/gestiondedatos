@@ -104,6 +104,7 @@
             this.administracionDeClientesToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.administracionDeClientesToolStripMenuItem.Text = "Administracion de clientes";
             this.administracionDeClientesToolStripMenuItem.Visible = false;
+            this.administracionDeClientesToolStripMenuItem.Click += new System.EventHandler(this.administracionDeClientesToolStripMenuItem_Click);
             // 
             // administracionDeEmpresasToolStripMenuItem
             // 

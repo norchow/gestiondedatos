@@ -69,7 +69,7 @@ namespace Persistance
         }
         
 
-                public static List<HistoryReputacion> getAllCalifiedToMeByParameters(Usuario user, HistoryReputacionFilters filters)
+        public static List<HistoryReputacion> getAllCalifiedToMeByParameters(Usuario user, HistoryReputacionFilters filters)
         {
             var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID),
                     new SPParameter("Codigo_Calificacion", filters.Codigo ?? (object)DBNull.Value),
@@ -104,7 +104,7 @@ namespace Persistance
         }
 
 
-                public static List<HistoryReputacion> getAllCalifiedByMeToOtherByParameters(Usuario user, HistoryReputacionFilters filters)
+        public static List<HistoryReputacion> getAllCalifiedByMeToOtherByParameters(Usuario user, HistoryReputacionFilters filters)
         {
             var param = new List<SPParameter> { new SPParameter("idUsuario", user.ID),
                     new SPParameter("Codigo_Calificacion", filters.Codigo ?? (object)DBNull.Value),
@@ -147,10 +147,26 @@ namespace Persistance
             }
             return promedio;
         }
-        
-            
-            
 
+        public static object GetByUserId(Usuario usuario)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Usuario", usuario.ID)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Calificacion.SPGetCalificationByUserId, param);
+
+            Double calification = 0.0;
+            var reader = sp.ExecuteReader(null);
+            while (reader.Read())
+                calification = Convert.ToDouble(reader[0]);
+
+            if (!reader.IsClosed)
+                reader.Close();
+
+            return calification;
+        }
     }
 
 

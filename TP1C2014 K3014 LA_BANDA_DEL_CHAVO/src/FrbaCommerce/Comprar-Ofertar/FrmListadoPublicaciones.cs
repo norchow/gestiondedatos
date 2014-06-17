@@ -62,7 +62,7 @@ namespace FrbaCommerce.Comprar_Ofertar
                 Tipo = a.TipoPublicacion.Descripcion,
                 Visibilidad = a.Visibilidad.Descripcion,
                 Rubros = a.GetTextRubros(),
-                CalificacionVendedor = CalificacionPersistance.getAverageCalificationToMe(a.UsuarioCreador)
+                CalificacionVendedor = CalificacionPersistance.GetByUserId(a.UsuarioCreador)
             });
 
             var bindlist = bind.ToList();
@@ -73,6 +73,14 @@ namespace FrbaCommerce.Comprar_Ofertar
             DgvPublicacion.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             AddButtonsColumns();
             #endregion
+
+            if (bindlist.Count < 10) //no es necesario paginar
+            {
+                lblFirst.Visible = false;
+                lblPrevious.Visible = false;
+                lblNext.Visible = false;
+                lblLast.Visible = false;
+            }
 
             var rubros = RubroPersistance.GetAll();
             LstRubro.DataSource = rubros;

@@ -96,15 +96,11 @@ namespace Persistance.Entities
             public static String SPGetHistoryCalificacionesRecibidas = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidas";
             public static String SPGetHistoryCalificacionesRecibidasByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidasByParameters";
             public static String SPGetHistoryCalificacionesRecibidasByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesRecibidasByParametersLike";
-
-
+            public static String SPGetCalificationByUserId = "LA_BANDA_DEL_CHAVO.GetCalificacionByUserId";
             public static String SPGetHistoryCalificacionesOtorgadas = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesOtorgadas";
             public static String SPGetHistoryCalificacionesOtorgadasByParameters = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesOtorgadasByParameters";
             public static String SPGetHistoryCalificacionesOtorgadasByParametersLike = "LA_BANDA_DEL_CHAVO.GetHistoryCalificacionesOtorgadasByParametersLike";
-           
-           
         }
-
 
         public static class FormaPago
         {
@@ -161,7 +157,6 @@ namespace Persistance.Entities
             public static String SPGetAllBusiness = "LA_BANDA_DEL_CHAVO.GetAllBusiness";
             public static String SPGetAllBusinessByParameters = "LA_BANDA_DEL_CHAVO.GetAllBusinessByParameters";
             public static String SPGetAllBusinessByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllBusinessByParametersLike";
-            
         }
 
         public static class Pregunta
