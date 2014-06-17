@@ -62,7 +62,7 @@ namespace FrbaCommerce.Comprar_Ofertar
                 Tipo = a.TipoPublicacion.Descripcion,
                 Visibilidad = a.Visibilidad.Descripcion,
                 Rubros = a.GetTextRubros(),
-                CalificacionVendedor = CalificacionPersistance.getAverageCalificationToMe(a.UsuarioCreador)
+                CalificacionVendedor = CalificacionPersistance.GetByUserId(a.UsuarioCreador)
             });
 
             var bindlist = bind.ToList();

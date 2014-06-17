@@ -224,3 +224,10 @@ INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Rubro_Publicacion] (ID_Rubro, ID_Publicacio
 	WHERE [Publicacion_Cod] IS NOT NULL)
 COMMIT
 
+BEGIN TRANSACTION 
+UPDATE [LA_BANDA_DEL_CHAVO].[TL_Usuario]
+SET [Reputacion] = (SELECT AVG(Cantidad_Estrellas)
+					FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] C
+					INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion] P ON P.ID_Publicacion = C.ID_Publicacion
+					WHERE P.ID_Usuario = [LA_BANDA_DEL_CHAVO].[TL_Usuario].ID_Usuario)
+COMMIT

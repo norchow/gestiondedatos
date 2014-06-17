@@ -8,7 +8,8 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario](
 	[Intentos_Fallidos] int DEFAULT 0,
 	[Pass_Temporal] bit DEFAULT 0,
 	[Activo] bit DEFAULT 1,
-	[Habilitado] bit DEFAULT 1
+	[Habilitado] bit DEFAULT 1,
+	[Reputacion] numeric(18,2) DEFAULT 0
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Rol](
