@@ -15,6 +15,12 @@ namespace Persistance
             return sp.ExecuteReader<Visibilidad>();
         }
 
+        public static List<Visibilidad> GetAllActive()
+        {
+            var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPGetAllVisibilidadActive);
+            return sp.ExecuteReader<Visibilidad>();
+        }
+
         public static Visibilidad GetById(int id)
         {
             var param = new List<SPParameter>

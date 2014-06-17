@@ -42,7 +42,7 @@ namespace FrbaCommerce.Editar_Publicacion
 
             CboVisibilidad.DisplayMember = "Descripcion";
             CboVisibilidad.ValueMember = "ID";
-            CboVisibilidad.DataSource = _visibilities = VisibilidadPersistance.GetAll();
+            CboVisibilidad.DataSource = _visibilities = VisibilidadPersistance.GetAllActive();
 
             CboEstadoPublicacion.DisplayMember = "Descripcion";
             CboEstadoPublicacion.ValueMember = "ID";
@@ -218,11 +218,6 @@ namespace FrbaCommerce.Editar_Publicacion
         {
             RefreshSources(null);
             CleanFiltersUI();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

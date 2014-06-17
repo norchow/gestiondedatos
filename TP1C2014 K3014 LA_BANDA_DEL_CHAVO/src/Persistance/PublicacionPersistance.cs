@@ -312,6 +312,22 @@ namespace Persistance
 
             return sp.ExecuteReader<PreguntaRespuesta>();
         }
-        
+
+        public static List<Publicacion> GetAllByVisibility(int visibilityId)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Visibilidad", visibilityId)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllByVisibilityId, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return new List<Publicacion>();
+
+            return publications;
+        }
     }
 }

@@ -42,6 +42,7 @@ namespace Persistance.Entities
         public static class Visibilidad
         {
             public static String SPGetAllVisibilidad = "LA_BANDA_DEL_CHAVO.GetAllVisibilidad";
+            public static String SPGetAllVisibilidadActive = "LA_BANDA_DEL_CHAVO.GetAllVisibilidadActive";
             public static String SPInsertVisibilidad = "LA_BANDA_DEL_CHAVO.InsertVisibilidad";
             public static String SPUpdateVisibilidad = "LA_BANDA_DEL_CHAVO.UpdateVisibilidad";
             public static String SPGetVisibilidadById = "LA_BANDA_DEL_CHAVO.GetVisibilidadById";
@@ -72,6 +73,7 @@ namespace Persistance.Entities
         public static class Publicacion
         {
             public static String SPGetById = "LA_BANDA_DEL_CHAVO.GetPublicacionById";
+            public static String SPGetAllByVisibilityId = "LA_BANDA_DEL_CHAVO.GetPublicacionByVisibilityId";
             public static String SPInsert = "LA_BANDA_DEL_CHAVO.InsertPublicacion";
             public static String SPUpdate = "LA_BANDA_DEL_CHAVO.UpdatePublicacion";
             public static String SPGetAllByUserId = "LA_BANDA_DEL_CHAVO.GetAllPublicationByUserId";
