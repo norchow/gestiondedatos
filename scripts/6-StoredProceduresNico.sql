@@ -372,3 +372,59 @@ BEGIN
 	ORDER BY V.Precio_Publicar DESC
 END
 GO
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithMoreProductsNotSold]
+	@Fecha_Desde datetime
+	,@Fecha_Hasta datetime
+	,@Visibilidad int
+AS
+BEGIN
+	SELECT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Vendedor, COUNT(P.ID_Publicacion) AS Cantidad 
+	FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON P.ID_Usuario=U.ID_Usuario
+	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON P.ID_Usuario=C.ID_Usuario
+	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Empresa E ON P.ID_Usuario=E.ID_Usuario
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion = TP.ID_Tipo_Publicacion
+	WHERE P.Fecha_Inicio BETWEEN @Fecha_Desde AND @Fecha_Hasta
+	AND (@Visibilidad IS NULL OR P.ID_Visibilidad = @Visibilidad)
+	AND ((TP.Descripcion = 'Compra Inmediata' AND P.ID_Publicacion NOT IN (SELECT C.ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Compra C))
+	OR (TP.Descripcion = 'Subasta' AND P.ID_Publicacion NOT IN (SELECT O.ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Oferta O)))
+	GROUP BY U.ID_Usuario, E.ID_Usuario, E.Razon_Social, C.Nombre, C.Apellido
+	ORDER BY COUNT(P.ID_Publicacion) DESC
+END
+GO
+
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithMoreBilling]
+	@Fecha_Desde datetime
+	,@Fecha_Hasta datetime
+AS
+BEGIN
+	SELECT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Vendedor, SUM(CO.Compra_Cantidad)*P.Precio AS Total
+	FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
+	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON U.ID_Usuario=C.ID_Usuario
+	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Empresa E ON U.ID_Usuario=E.ID_Usuario
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON U.ID_Usuario=P.ID_Usuario
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Compra CO ON CO.ID_Publicacion=P.ID_Publicacion
+	WHERE CO.Compra_Fecha BETWEEN @Fecha_Desde AND @Fecha_Hasta
+	GROUP BY U.ID_Usuario, E.ID_Usuario, E.Razon_Social, C.Nombre, C.Apellido, P.Precio
+	ORDER BY SUM(CO.Compra_Cantidad)*P.Precio DESC
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetClientsWithMoreNotQualifiedPublications]
+	@Fecha_Desde datetime
+	,@Fecha_Hasta datetime
+AS
+BEGIN
+	SELECT TOP 5 C.Nombre+' '+C.Apellido AS Cliente, COUNT(P.ID_Publicacion) AS Cantidad 
+	FROM LA_BANDA_DEL_CHAVO.TL_Cliente C
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON P.ID_Usuario=C.ID_Usuario
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion = TP.ID_Tipo_Publicacion
+	WHERE P.Fecha_Inicio BETWEEN @Fecha_Desde AND @Fecha_Hasta	
+	AND P.ID_Publicacion NOT IN (SELECT CAL.ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL)
+	GROUP BY C.Nombre, C.Apellido
+	ORDER BY COUNT(P.ID_Publicacion) DESC
+END
+GO
