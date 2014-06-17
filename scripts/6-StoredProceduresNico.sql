@@ -28,8 +28,9 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT *
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente]
+	SELECT *, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] C
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON C.ID_Usuario=U.ID_Usuario
 	WHERE [Telefono] = @Telefono
 END
 GO
@@ -41,8 +42,9 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT *
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente]
+	SELECT *, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] C
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON C.ID_Usuario=U.ID_Usuario
 	WHERE [ID_Tipo_Documento] = @Tipo_documento
 	AND [Nro_Documento] = @Nro_documento
 END
@@ -108,8 +110,9 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT *
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa]
+	SELECT *, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa] E
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON E.ID_Usuario=U.ID_Usuario
 	WHERE [Razon_Social] = @Razon_Social
 END
 GO
@@ -120,8 +123,9 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT *
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa]
+	SELECT *, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa] E
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON E.ID_Usuario=U.ID_Usuario
 	WHERE [CUIT] = @CUIT
 END
 GO
@@ -251,9 +255,10 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT *
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente]
-	WHERE ID_Usuario = @ID_Usuario
+	SELECT *, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] C
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON C.ID_Usuario=U.ID_Usuario
+	WHERE C.ID_Usuario = @ID_Usuario
 END
 GO
 
@@ -263,9 +268,10 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT *
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa]
-	WHERE ID_Usuario = @ID_Usuario
+	SELECT *, U.Habilitado
+	FROM [LA_BANDA_DEL_CHAVO].[TL_Empresa] E
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON E.ID_Usuario=U.ID_Usuario
+	WHERE E.ID_Usuario = @ID_Usuario
 END
 GO
 
@@ -422,9 +428,26 @@ BEGIN
 	FROM LA_BANDA_DEL_CHAVO.TL_Cliente C
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON P.ID_Usuario=C.ID_Usuario
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion = TP.ID_Tipo_Publicacion
-	WHERE P.Fecha_Inicio BETWEEN @Fecha_Desde AND @Fecha_Hasta	
-	AND P.ID_Publicacion NOT IN (SELECT CAL.ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL)
+	WHERE P.Fecha_Inicio BETWEEN @Fecha_Desde AND @Fecha_Hasta
+	AND P.ID_Publicacion NOT IN (SELECT CAL.ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL WHERE CAL.ID_Comprador=C.ID_Cliente)
 	GROUP BY C.Nombre, C.Apellido
 	ORDER BY COUNT(P.ID_Publicacion) DESC
+END
+GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithBetterQualifications]
+	@Fecha_Desde datetime
+	,@Fecha_Hasta datetime
+AS
+BEGIN
+	SELECT DISTINCT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Vendedor, AVG(CAL.Cantidad_Estrellas) AS Calificacion
+	FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
+	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON U.ID_Usuario=C.ID_Usuario
+	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Empresa E ON U.ID_Usuario=E.ID_Usuario
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON U.ID_Usuario=P.ID_Usuario
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Calificacion CAL ON CAL.ID_Publicacion=P.ID_Publicacion
+	WHERE P.Fecha_Inicio BETWEEN @Fecha_Desde AND @Fecha_Hasta
+	GROUP BY U.ID_Usuario, E.ID_Usuario, E.Razon_Social, C.Nombre, C.Apellido, P.Precio
+	ORDER BY AVG(CAL.Cantidad_Estrellas) DESC
 END
 GO
