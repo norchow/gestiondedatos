@@ -10,6 +10,7 @@ using FrbaCommerce.Home;
 using Persistance;
 using Persistance.Entities;
 using FrbaCommerce.Login;
+using Session;
 
 namespace FrbaCommerce.Registro_de_Usuario
 {
@@ -17,9 +18,12 @@ namespace FrbaCommerce.Registro_de_Usuario
     {
         public Usuario currentUser { get; set; }
 
-        public FrmAdministrarUsuarios()
+        public bool ModifyOwnPassword { get; set; }
+
+        public FrmAdministrarUsuarios(bool modifyOwnPassword)
         {
             InitializeComponent();
+            ModifyOwnPassword = modifyOwnPassword;
         }
 
         private void lblVolver_Click(object sender, EventArgs e)
@@ -32,6 +36,10 @@ namespace FrbaCommerce.Registro_de_Usuario
             cboUsuarios.DataSource = UsuarioPersistance.GetAll();
             cboUsuarios.ValueMember = "ID";
             cboUsuarios.DisplayMember = "Username";
+
+            cboUsuarios.Enabled = chkActivo.Enabled = (!ModifyOwnPassword);
+            if (ModifyOwnPassword)
+                cboUsuarios.Text = SessionManager.CurrentUser.Username;
         }
 
         private void cboUsuarios_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,7 +57,7 @@ namespace FrbaCommerce.Registro_de_Usuario
         private void lblCambiarPassword_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var frmResetPassword = new FrmResetPassword(this.currentUser);
+            var frmResetPassword = (ModifyOwnPassword) ? new FrmResetPassword(SessionManager.CurrentUser) : new FrmResetPassword(this.currentUser);
             frmResetPassword.ShowDialog();
         }
     }

@@ -46,6 +46,7 @@
             this.historialClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoEstadisticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cambiarMiContrasenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +56,7 @@
             this.administracionToolStripMenuItem,
             this.publicacionesToolStripMenuItem,
             this.estadisticasToolStripMenuItem,
+            this.cambiarMiContrasenaToolStripMenuItem,
             this.logOutToolStripMenuItem});
             this.MsHome.Location = new System.Drawing.Point(0, 0);
             this.MsHome.Name = "MsHome";
@@ -207,6 +209,13 @@
             this.logOutToolStripMenuItem.Text = "Log out";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
+            // cambiarMiContrasenaToolStripMenuItem
+            // 
+            this.cambiarMiContrasenaToolStripMenuItem.Name = "cambiarMiContrasenaToolStripMenuItem";
+            this.cambiarMiContrasenaToolStripMenuItem.Size = new System.Drawing.Size(142, 20);
+            this.cambiarMiContrasenaToolStripMenuItem.Text = "Cambiar mi contraseña";
+            this.cambiarMiContrasenaToolStripMenuItem.Click += new System.EventHandler(this.cambiarMiContrasenaToolStripMenuItem_Click);
+            // 
             // FrmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,6 +253,7 @@
         private System.Windows.Forms.ToolStripMenuItem facturarPublicacionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administracionDeClientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administracionDeEmpresasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cambiarMiContrasenaToolStripMenuItem;
 
 
     }

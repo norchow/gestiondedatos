@@ -52,7 +52,7 @@ namespace FrbaCommerce.Home
 
         private void administracionDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frmAdministrarUsuarios = new FrmAdministrarUsuarios();
+            var frmAdministrarUsuarios = new FrmAdministrarUsuarios(false);
             frmAdministrarUsuarios.ShowDialog();
         }
 
@@ -220,6 +220,12 @@ namespace FrbaCommerce.Home
         {
             var frmListadoEstadistico = new FrmListadoEstadistico();
             frmListadoEstadistico.ShowDialog();
+        }
+
+        private void cambiarMiContrasenaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frmAdministrarUsuarios = new FrmAdministrarUsuarios(true);
+            frmAdministrarUsuarios.ShowDialog();
         }
     }
 }
