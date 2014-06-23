@@ -96,7 +96,7 @@ namespace FrbaCommerce.Abm_Visibilidad
                     var filters = new VisibilidadFilters { Descripcion = TxtDescripcion.Text };
 
                     //Valido que no exista un rol con la descripcion informada
-                    if (VisibilidadPersistance.GetAllByParameters(filters) != null)
+                    if (VisibilidadPersistance.GetAllByParameters(filters).Count > 0)
                         throw new Exception("Ya existe una visibilidad con la descripcion informada.");
 
                     #region Inserto la nueva visibilidad
