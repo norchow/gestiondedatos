@@ -193,6 +193,13 @@ namespace FrbaCommerce.Generar_Publicacion
                 {
                     #region Insert the new publication
 
+                    if (CboVisibilidad.Text == "Gratis" && CboEstadoPublicacion.Text == "Publicada")
+                    {
+                        var freePublicationsActive = PublicacionPersistance.GetAllActiveAndFreeByUser(SessionManager.CurrentUser.ID);
+                        if (freePublicationsActive > 2)
+                            throw new Exception("No se puede generar la publicación, ya que cuenta con tres publicaciones activas con visibilidad 'Gratis'.");
+                    }
+
                     var publication = new Publicacion();
 
                     LoadObjectFromUIControls(publication);
@@ -217,6 +224,17 @@ namespace FrbaCommerce.Generar_Publicacion
                     #region Validations
 
                     var messageExceptions = string.Empty;
+
+                    //Realizo la validación solo cuando cambió o el estado o el tipo de publicación
+                    if (CurrentPublication.EstadoPublicacion.Descripcion != CboEstadoPublicacion.Text || CurrentPublication.Visibilidad.Descripcion != CboVisibilidad.Text)
+                    {
+                        if (CboVisibilidad.Text == "Gratis" && CboEstadoPublicacion.Text == "Publicada")
+                        {
+                            var freePublicationsActive = PublicacionPersistance.GetAllActiveAndFreeByUser(SessionManager.CurrentUser.ID);
+                            if (freePublicationsActive > 2)
+                                throw new Exception("No se puede generar la publicación, ya que cuenta con tres publicaciones activas con visibilidad 'Gratis'.");
+                        }
+                    }
 
                     if (CurrentPublication.EstadoPublicacion.Descripcion == "Publicada" && CboEstadoPublicacion.Text == "Borrador")
                         messageExceptions += "No se puede cambiar el estado de una publicacion 'Publicada' a 'Borrador'.";

@@ -131,6 +131,7 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithMoreBilling];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetClientsWithMoreNotQualifiedPublications];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithBetterQualifications];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetCalificacionByUserId];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetAllActiveAndFreeByUserId];
 
 DROP TRIGGER [LA_BANDA_DEL_CHAVO].[TL_Rol_After_Update];
 DROP TRIGGER [LA_BANDA_DEL_CHAVO].[TL_Calificacion_After_Insert];
