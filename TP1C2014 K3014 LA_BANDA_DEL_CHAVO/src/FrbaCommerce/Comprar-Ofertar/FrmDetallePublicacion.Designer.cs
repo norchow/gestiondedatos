@@ -46,6 +46,8 @@
             this.lblMontoText = new System.Windows.Forms.Label();
             this.lblCantidadText = new System.Windows.Forms.Label();
             this.txtCantidad = new System.Windows.Forms.TextBox();
+            this.lblErrorComprarOfertar = new System.Windows.Forms.Label();
+            this.lblErrorPreguntar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPreguntasRespuestas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,6 +136,7 @@
             this.LblComprar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
             this.LblComprar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LblComprar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblComprar.Enabled = false;
             this.LblComprar.ForeColor = System.Drawing.Color.White;
             this.LblComprar.Location = new System.Drawing.Point(472, 174);
             this.LblComprar.Name = "LblComprar";
@@ -141,7 +144,6 @@
             this.LblComprar.TabIndex = 40;
             this.LblComprar.Text = "COMPRAR";
             this.LblComprar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LblComprar.Visible = false;
             this.LblComprar.Click += new System.EventHandler(this.LblComprar_Click);
             // 
             // LblVolver
@@ -163,6 +165,7 @@
             this.lblPreguntar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
             this.lblPreguntar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPreguntar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblPreguntar.Enabled = false;
             this.lblPreguntar.ForeColor = System.Drawing.Color.White;
             this.lblPreguntar.Location = new System.Drawing.Point(13, 468);
             this.lblPreguntar.Name = "lblPreguntar";
@@ -170,7 +173,6 @@
             this.lblPreguntar.TabIndex = 42;
             this.lblPreguntar.Text = "PREGUNTAR";
             this.lblPreguntar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblPreguntar.Visible = false;
             this.lblPreguntar.Click += new System.EventHandler(this.lblPreguntar_Click);
             // 
             // lblPreguntasText
@@ -187,6 +189,7 @@
             this.lblOfertar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
             this.lblOfertar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblOfertar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblOfertar.Enabled = false;
             this.lblOfertar.ForeColor = System.Drawing.Color.White;
             this.lblOfertar.Location = new System.Drawing.Point(378, 174);
             this.lblOfertar.Name = "lblOfertar";
@@ -194,50 +197,73 @@
             this.lblOfertar.TabIndex = 44;
             this.lblOfertar.Text = "OFERTAR";
             this.lblOfertar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblOfertar.Visible = false;
             this.lblOfertar.Click += new System.EventHandler(this.lblOfertar_Click);
             // 
             // txtMonto
             // 
+            this.txtMonto.Enabled = false;
             this.txtMonto.Location = new System.Drawing.Point(378, 133);
             this.txtMonto.Name = "txtMonto";
             this.txtMonto.Size = new System.Drawing.Size(70, 20);
             this.txtMonto.TabIndex = 45;
-            this.txtMonto.Visible = false;
             // 
             // lblMontoText
             // 
             this.lblMontoText.AutoSize = true;
+            this.lblMontoText.Enabled = false;
             this.lblMontoText.Location = new System.Drawing.Point(375, 102);
             this.lblMontoText.Name = "lblMontoText";
             this.lblMontoText.Size = new System.Drawing.Size(47, 13);
             this.lblMontoText.TabIndex = 46;
             this.lblMontoText.Text = "MONTO";
-            this.lblMontoText.Visible = false;
             // 
             // lblCantidadText
             // 
             this.lblCantidadText.AutoSize = true;
+            this.lblCantidadText.Enabled = false;
             this.lblCantidadText.Location = new System.Drawing.Point(469, 102);
             this.lblCantidadText.Name = "lblCantidadText";
             this.lblCantidadText.Size = new System.Drawing.Size(62, 13);
             this.lblCantidadText.TabIndex = 48;
             this.lblCantidadText.Text = "CANTIDAD";
-            this.lblCantidadText.Visible = false;
             // 
             // txtCantidad
             // 
+            this.txtCantidad.Enabled = false;
             this.txtCantidad.Location = new System.Drawing.Point(472, 133);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(70, 20);
             this.txtCantidad.TabIndex = 47;
-            this.txtCantidad.Visible = false;
+            // 
+            // lblErrorComprarOfertar
+            // 
+            this.lblErrorComprarOfertar.AutoSize = true;
+            this.lblErrorComprarOfertar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorComprarOfertar.Location = new System.Drawing.Point(322, 226);
+            this.lblErrorComprarOfertar.Name = "lblErrorComprarOfertar";
+            this.lblErrorComprarOfertar.Size = new System.Drawing.Size(304, 13);
+            this.lblErrorComprarOfertar.TabIndex = 49;
+            this.lblErrorComprarOfertar.Text = "No se puede comprar/ofertar una publicación propia";
+            this.lblErrorComprarOfertar.Visible = false;
+            // 
+            // lblErrorPreguntar
+            // 
+            this.lblErrorPreguntar.AutoSize = true;
+            this.lblErrorPreguntar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorPreguntar.Location = new System.Drawing.Point(107, 470);
+            this.lblErrorPreguntar.Name = "lblErrorPreguntar";
+            this.lblErrorPreguntar.Size = new System.Drawing.Size(259, 26);
+            this.lblErrorPreguntar.TabIndex = 50;
+            this.lblErrorPreguntar.Text = "Esta publicación no admite preguntas o bien\r\nes una publicación suya";
+            this.lblErrorPreguntar.Visible = false;
             // 
             // FrmDetallePublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(638, 518);
+            this.Controls.Add(this.lblErrorPreguntar);
+            this.Controls.Add(this.lblErrorComprarOfertar);
             this.Controls.Add(this.lblCantidadText);
             this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.lblMontoText);
@@ -285,5 +311,7 @@
         private System.Windows.Forms.Label lblMontoText;
         private System.Windows.Forms.Label lblCantidadText;
         private System.Windows.Forms.TextBox txtCantidad;
+        private System.Windows.Forms.Label lblErrorComprarOfertar;
+        private System.Windows.Forms.Label lblErrorPreguntar;
     }
 }

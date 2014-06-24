@@ -28,25 +28,46 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             //Si la publicación no es del usuario logeado y el usuario logeado es un cliente le permito 
             //ver las opciones de comprar/ofertar/preguntar (Todas los los controles respectivos a estas funciones
-            //tienen visible=false como default
-            if (CurrentPublication.UsuarioCreador.ID != SessionManager.CurrentUser.ID && ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID)!=null)
+            //tienen enabled=false como default
+            if (CurrentPublication.UsuarioCreador.ID != SessionManager.CurrentUser.ID && ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID) != null)
             {
-                if(CurrentPublication.RecibirPreguntas)
-                    lblPreguntar.Visible = true;
+                if (CurrentPublication.RecibirPreguntas)
+                    lblPreguntar.Enabled = true;
+                else
+                    lblErrorPreguntar.Visible = true;
+
                 if (CurrentPublication.TipoPublicacion.Descripcion == "Subasta")
                 {
-                    lblOfertar.Visible = true;
-                    txtMonto.Visible = true;
-                    lblMontoText.Visible = true;
+                    lblOfertar.Enabled = true;
+                    txtMonto.Enabled = true;
+                    lblMontoText.Enabled = true;
                 }
                 else
                 {
-                    LblComprar.Visible = true;
-                    lblCantidadText.Visible = true;
-                    txtCantidad.Visible = true;
+                    LblComprar.Enabled = true;
+                    lblCantidadText.Enabled = true;
+                    txtCantidad.Enabled = true;
                 }
             }
+            else
+            {
+                lblErrorComprarOfertar.Visible = true;
+                lblErrorPreguntar.Visible = true;
+            }
 
+            //Oculto los controles que no corresponden
+            if (CurrentPublication.TipoPublicacion.Descripcion == "Subasta")
+            {
+                LblComprar.Visible = false;
+                lblCantidadText.Visible = false;
+                txtCantidad.Visible = false;
+            }
+            else
+            {
+                lblOfertar.Visible = false;
+                txtMonto.Visible = false;
+                lblMontoText.Visible = false;
+            }
         }
 
         private void FrmDetallePublicacion_Load(object sender, EventArgs e)
@@ -71,23 +92,31 @@ namespace FrbaCommerce.Comprar_Ofertar
             List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
             if (publications.Count <= 5)
             {
-                //Creo la nueva compra y la inserto
-                Compra newPurchase = new Compra();
-                newPurchase.Cliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID);
-                newPurchase.Publicacion = CurrentPublication;
-                newPurchase.Fecha = ConfigurationVariables.FechaSistema;
-                newPurchase.Cantidad = Int32.Parse(txtCantidad.Text);
-                newPurchase = CompraPersistance.Insert(newPurchase, null);
+                //Valido que ingrese una cantidad válida (mayor a 0 y menor que el stock)
+                if (txtCantidad.Text != "" && Int32.Parse(txtCantidad.Text) > 0 && Int32.Parse(txtCantidad.Text) < Int32.Parse(lblStock.Text))
+                {
+                    //Creo la nueva compra y la inserto
+                    Compra newPurchase = new Compra();
+                    newPurchase.Cliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID);
+                    newPurchase.Publicacion = CurrentPublication;
+                    newPurchase.Fecha = ConfigurationVariables.FechaSistema;
+                    newPurchase.Cantidad = Int32.Parse(txtCantidad.Text);
+                    newPurchase = CompraPersistance.Insert(newPurchase, null);
 
-                //Resto el stock de la publicación
-                CurrentPublication.Stock = CurrentPublication.Stock - newPurchase.Cantidad;
-                PublicacionPersistance.Update(CurrentPublication);
+                    //Resto el stock de la publicación
+                    CurrentPublication.Stock = CurrentPublication.Stock - newPurchase.Cantidad;
+                    PublicacionPersistance.Update(CurrentPublication);
 
-                //Le muestro al usuario los datos del vendedor
-                var frmDatosVendedor = new FrmDatosVendedor(CurrentPublication.UsuarioCreador);
-                frmDatosVendedor.ShowDialog();
+                    //Le muestro al usuario los datos del vendedor
+                    var frmDatosVendedor = new FrmDatosVendedor(CurrentPublication.UsuarioCreador);
+                    frmDatosVendedor.ShowDialog();
 
-                RefreshSources();
+                    RefreshSources();
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese una cantidad válida (mayor a 0 y menor que el stock actual)");
+                }
             }
             else
             {
@@ -151,7 +180,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             if (publications.Count <= 5)
             {
                 //Valido que la oferta sea mayor a la última
-                if (Int32.Parse(txtMonto.Text) > Int32.Parse(lblPrecio.Text))
+                if (txtMonto.Text != "" && Int32.Parse(txtMonto.Text) > Int32.Parse(lblPrecio.Text))
                 {
                     //Creo la nueva oferta y la inserto
                     Oferta newOffer = new Oferta();
