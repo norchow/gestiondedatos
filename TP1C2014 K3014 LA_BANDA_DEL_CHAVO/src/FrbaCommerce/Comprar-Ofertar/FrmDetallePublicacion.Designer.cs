@@ -204,14 +204,14 @@
             this.txtMonto.Enabled = false;
             this.txtMonto.Location = new System.Drawing.Point(378, 133);
             this.txtMonto.Name = "txtMonto";
-            this.txtMonto.Size = new System.Drawing.Size(70, 20);
+            this.txtMonto.Size = new System.Drawing.Size(88, 20);
             this.txtMonto.TabIndex = 45;
             // 
             // lblMontoText
             // 
             this.lblMontoText.AutoSize = true;
             this.lblMontoText.Enabled = false;
-            this.lblMontoText.Location = new System.Drawing.Point(375, 102);
+            this.lblMontoText.Location = new System.Drawing.Point(375, 117);
             this.lblMontoText.Name = "lblMontoText";
             this.lblMontoText.Size = new System.Drawing.Size(47, 13);
             this.lblMontoText.TabIndex = 46;
@@ -221,7 +221,7 @@
             // 
             this.lblCantidadText.AutoSize = true;
             this.lblCantidadText.Enabled = false;
-            this.lblCantidadText.Location = new System.Drawing.Point(469, 102);
+            this.lblCantidadText.Location = new System.Drawing.Point(469, 117);
             this.lblCantidadText.Name = "lblCantidadText";
             this.lblCantidadText.Size = new System.Drawing.Size(62, 13);
             this.lblCantidadText.TabIndex = 48;
@@ -232,7 +232,7 @@
             this.txtCantidad.Enabled = false;
             this.txtCantidad.Location = new System.Drawing.Point(472, 133);
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(70, 20);
+            this.txtCantidad.Size = new System.Drawing.Size(88, 20);
             this.txtCantidad.TabIndex = 47;
             // 
             // lblErrorComprarOfertar
