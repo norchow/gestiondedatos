@@ -200,7 +200,7 @@ COMMIT
 
 BEGIN TRANSACTION 
 INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Item_Factura] (ID_Factura, ID_Publicacion,	Monto, Cantidad) (
-	SELECT DISTINCT (SELECT ID_Factura FROM LA_BANDA_DEL_CHAVO.TL_Factura WHERE Numero=[Factura_Nro]),
+	SELECT (SELECT ID_Factura FROM LA_BANDA_DEL_CHAVO.TL_Factura WHERE Numero=[Factura_Nro]),
 	(SELECT ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Publicacion WHERE ID_Publicacion=[Publicacion_Cod]),
 	[Item_Factura_Monto],
     [Item_Factura_Cantidad]
