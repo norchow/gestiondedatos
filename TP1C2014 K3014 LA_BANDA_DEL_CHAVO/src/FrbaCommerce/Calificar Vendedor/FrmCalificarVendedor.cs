@@ -313,7 +313,7 @@ namespace FrbaCommerce.Calificar_Vendedor
                 if (califObject.ID_Publicacion != 0)
                 {
                     int califId = CalificacionPersistance.InsertCalification(califObject);
-                    if (califId == 1)
+                    if (califId != 0)
                     {
                         ClearFiltersAndTable();
                         publicationSelected = 0;
