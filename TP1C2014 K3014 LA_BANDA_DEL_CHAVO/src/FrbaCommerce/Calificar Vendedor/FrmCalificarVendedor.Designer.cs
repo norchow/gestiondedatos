@@ -84,6 +84,7 @@
             this.dgvPublicaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPublicaciones.Size = new System.Drawing.Size(368, 159);
             this.dgvPublicaciones.TabIndex = 1;
+            this.dgvPublicaciones.SelectionChanged += new System.EventHandler(this.dgvPublicaciones_SelectionChanged);
             this.dgvPublicaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPublicaciones_CellContentClick);
             // 
             // pbStar2
