@@ -4,3 +4,4 @@
 
 .Revisar algoritmo de facturar (copiarse de los pibes)
 
+.Corregir listado estadístico de productos no vendidos, tomar el stock en vez de cantidad de publicaciones
