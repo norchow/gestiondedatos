@@ -32,33 +32,6 @@ AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
 	AND ((C.ID_Publicacion LIKE ('%' + @CodigoPublicacion + '%')) OR @CodigoPublicacion is NULL)
 	AND ((LOWER(P.Descripcion) LIKE ('%' + @Descripcion + '%')) OR @Descripcion is NULL)
 	AND ((P.Precio LIKE ('%' + @Precio + '%')) OR @Precio is NULL)
-				
-UNION
-
-SELECT O.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
-FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
-INNER JOIN LA_BANDA_DEL_CHAVO.TL_Oferta O ON O.ID_Publicacion  = P.ID_Publicacion
-INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON O.ID_Usuario = U.ID_Usuario
-WHERE U.ID_Usuario=@idUsuario 
-AND O.Monto = (	SELECT MAX(Monto)
-							FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
-							WHERE ID_Publicacion=O.ID_Publicacion ) 
-AND P.Fecha_Vencimiento < @Fecha_hoy
-AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
-				WHERE CAL.ID_Comprador = @idUsuario
-				AND CAL.ID_Publicacion = O.ID_Publicacion)
-	AND ((O.ID_Publicacion LIKE ('%' + @CodigoPublicacion + '%')) OR @CodigoPublicacion is NULL)
-	AND ((LOWER(P.Descripcion) LIKE ('%' + @Descripcion + '%')) OR @Descripcion is NULL)
-	AND ((P.Precio LIKE ('%' + @Precio + '%')) OR @Precio is NULL)
-
-
-
-
-
-
-
-
-
 END
 
 GO
@@ -83,26 +56,6 @@ AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
 	AND ((C.ID_Publicacion = @CodigoPublicacion) OR @CodigoPublicacion is NULL)
 	AND ((LOWER(P.Descripcion) = LOWER(@Descripcion)) OR @Descripcion is NULL)
 	AND ((P.Precio = @Precio) OR @Precio is NULL)
-					
-UNION
-
-SELECT O.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
-FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
-INNER JOIN LA_BANDA_DEL_CHAVO.TL_Oferta O ON O.ID_Publicacion  = P.ID_Publicacion
-INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON O.ID_Usuario = U.ID_Usuario
-WHERE U.ID_Usuario=@idUsuario 
-AND O.Monto = (	SELECT MAX(Monto)
-							FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
-							WHERE ID_Publicacion=O.ID_Publicacion ) 
-AND P.Fecha_Vencimiento < @Fecha_hoy
-AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
-				WHERE CAL.ID_Comprador = @idUsuario
-				AND CAL.ID_Publicacion = O.ID_Publicacion)
-	AND ((O.ID_Publicacion = @CodigoPublicacion) OR @CodigoPublicacion is NULL)
-	AND ((LOWER(P.Descripcion) = LOWER(@Descripcion)) OR @Descripcion is NULL)
-	AND ((P.Precio = @Precio) OR @Precio is NULL)
-	
-
 END
 
 GO

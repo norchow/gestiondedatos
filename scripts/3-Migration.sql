@@ -179,6 +179,15 @@ BEGIN TRANSACTION
 COMMIT
 
 BEGIN TRANSACTION
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Compra] (ID_Publicacion, ID_Usuario, Compra_Fecha, Compra_Cantidad) (
+		SELECT ID_Publicacion, Id_Usuario, Fecha, 1 FROM LA_BANDA_DEL_CHAVO.TL_Oferta O
+		WHERE Monto = (SELECT MAX(MONTO) 
+						FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
+						GROUP BY ID_Publicacion 
+						HAVING ID_Publicacion=O.ID_Publicacion))
+COMMIT
+
+BEGIN TRANSACTION
 INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago] (Descripcion) (
 	SELECT DISTINCT [Forma_Pago_Desc]
 	FROM [gd_esquema].[Maestra]
