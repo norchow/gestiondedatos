@@ -118,7 +118,7 @@ namespace Persistance
 
             var publications = sp.ExecuteReader<Publicacion>();
 
-            if (publications == null || publications.Count == 0)
+            if (publications == null)
                 return null;
 
             var result = new List<Publicacion>();
@@ -339,6 +339,26 @@ namespace Persistance
                 return new List<Publicacion>();
 
             return publications;
+        }
+
+        public static int GetAllActiveAndFreeByUser(int userId)
+        {
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("ID_Usuario", userId)
+                };
+
+            var quantity = 0;
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetAllActiveAndFreeByUserId, param);
+
+            var reader = sp.ExecuteReader(null);
+            while (reader.Read())
+                quantity = Convert.ToInt32(reader[0]);
+
+            if (!reader.IsClosed)
+                reader.Close();
+
+            return quantity;
         }
     }
 }

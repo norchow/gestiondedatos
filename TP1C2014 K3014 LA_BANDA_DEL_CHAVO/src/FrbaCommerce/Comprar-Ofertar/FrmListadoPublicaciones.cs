@@ -136,6 +136,8 @@ namespace FrbaCommerce.Comprar_Ofertar
             //Borro todos los rubros checkeados
             foreach (var checkedIndex in LstRubro.CheckedIndices)
                 LstRubro.SetItemCheckState((int)checkedIndex, CheckState.Unchecked);
+
+            RefreshSources(null);
         }
 
         private void LblBuscar_Click(object sender, EventArgs e)

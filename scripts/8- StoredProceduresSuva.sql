@@ -106,7 +106,7 @@ BEGIN
 	SELECT COUNT(C.Compra_Cantidad) AS Cantidad 
 	FROM [LA_BANDA_DEL_CHAVO].TL_Compra C
 	WHERE C.ID_Publicacion = @ID_Publicacion
-	GROUP BY C.ID_Cliente
+	GROUP BY C.ID_Usuario
 END
 GO
 

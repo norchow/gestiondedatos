@@ -195,16 +195,19 @@ END
 GO
 
 CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertQuestion]
-	@ID_Publicacion int 
+	@ID_Publicacion int
+	,@ID_Usuario int
     ,@Texto nvarchar(255)
 AS
 BEGIN
 	SET NOCOUNT ON;
 
 	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Pregunta] ([ID_Publicacion]
+	  ,[ID_Usuario]
       ,[Texto])
 	OUTPUT inserted.ID_Pregunta
 	VALUES (@ID_Publicacion
+	  ,@ID_Usuario
       ,@Texto)
 END
 GO
@@ -290,7 +293,7 @@ GO
 
 CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertOffer]
 	@ID_Publicacion int 
-	,@ID_Cliente int 
+	,@ID_Usuario int 
 	,@Monto int
     ,@Fecha datetime
 AS
@@ -298,12 +301,12 @@ BEGIN
 	SET NOCOUNT ON;
 
 	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Oferta] ([ID_Publicacion]
-	  ,[ID_Cliente]
+	  ,[ID_Usuario]
       ,[Monto]
       ,[Fecha])
 	OUTPUT inserted.ID_Oferta
 	VALUES (@ID_Publicacion
-	  ,@ID_Cliente
+	  ,@ID_Usuario
       ,@Monto
       ,@Fecha)
 END
@@ -311,7 +314,7 @@ GO
 
 CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertPurchase]
 	@ID_Publicacion int 
-	,@ID_Cliente int 
+	,@ID_Usuario int 
     ,@Compra_Fecha datetime
     ,@Compra_Cantidad int
 AS
@@ -319,12 +322,12 @@ BEGIN
 	SET NOCOUNT ON;
 
 	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Compra] ([ID_Publicacion]
-	  ,[ID_Cliente]
+	  ,[ID_Usuario]
       ,[Compra_Fecha]
       ,[Compra_Cantidad])
 	OUTPUT inserted.ID_Compra
 	VALUES (@ID_Publicacion
-	  ,@ID_Cliente
+	  ,@ID_Usuario
       ,@Compra_Fecha
       ,@Compra_Cantidad)
 END
@@ -429,7 +432,7 @@ BEGIN
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON P.ID_Usuario=C.ID_Usuario
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion = TP.ID_Tipo_Publicacion
 	WHERE P.Fecha_Inicio BETWEEN @Fecha_Desde AND @Fecha_Hasta
-	AND P.ID_Publicacion NOT IN (SELECT CAL.ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL WHERE CAL.ID_Comprador=C.ID_Cliente)
+	AND P.ID_Publicacion NOT IN (SELECT CAL.ID_Publicacion FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL WHERE CAL.ID_Comprador=C.ID_Usuario)
 	GROUP BY C.Nombre, C.Apellido
 	ORDER BY COUNT(P.ID_Publicacion) DESC
 END

@@ -68,9 +68,7 @@ namespace FrbaCommerce.Facturar_Publicaciones
             else
             {
                 MessageBox.Show("En este momento no tiene niguna publicación para facturar", "Atención!");
-                this.Hide();
-                var frmHome = new FrmHome();
-                frmHome.ShowDialog();
+                Close();
             }
 
             #endregion

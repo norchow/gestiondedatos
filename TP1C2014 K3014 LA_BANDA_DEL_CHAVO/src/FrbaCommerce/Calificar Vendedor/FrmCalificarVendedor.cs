@@ -313,7 +313,7 @@ namespace FrbaCommerce.Calificar_Vendedor
                 if (califObject.ID_Publicacion != 0)
                 {
                     int califId = CalificacionPersistance.InsertCalification(califObject);
-                    if (califId == 1)
+                    if (califId != 0)
                     {
                         ClearFiltersAndTable();
                         publicationSelected = 0;
@@ -336,7 +336,13 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         private void dgvPublicaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var publicationSelectedObject = _publicationsNotCalified.Find(publication => publication.ID == (int)dgvPublicaciones.Rows[e.RowIndex].Cells[0].Value);
+            //var publicationSelectedObject = _publicationsNotCalified.Find(publication => publication.ID == (int)dgvPublicaciones.Rows[e.RowIndex].Cells[0].Value);
+            //publicationSelected = publicationSelectedObject.ID;
+        }
+
+        private void dgvPublicaciones_SelectionChanged(object sender, EventArgs e)
+        {
+            var publicationSelectedObject = _publicationsNotCalified.Find(publication => publication.ID == (int)dgvPublicaciones.Rows[dgvPublicaciones.CurrentCell.RowIndex].Cells[0].Value);
             publicationSelected = publicationSelectedObject.ID;
         }
     }

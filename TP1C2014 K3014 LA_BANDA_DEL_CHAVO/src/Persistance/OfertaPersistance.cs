@@ -49,11 +49,15 @@ namespace Persistance
 
         public static Oferta GetLastOfertaByPublication(int idPublicacion)
         {
+            return GetLastOfertaByPublication(idPublicacion, null);
+        }
+
+        public static Oferta GetLastOfertaByPublication(int idPublicacion, SqlTransaction transaction)
+        {
             var param = new List<SPParameter> { new SPParameter("idPublicacion", idPublicacion)};
-            var sp = new StoreProcedure(DataBaseConst.Oferta.SPGetLastOfertaByPublication, param);
+            var sp = new StoreProcedure(DataBaseConst.Oferta.SPGetLastOfertaByPublication, param, transaction);
 
-
-            var offers = sp.ExecuteReader<Oferta>();
+            var offers = (transaction == null) ? sp.ExecuteReader<Oferta>() : sp.ExecuteReaderTransactioned<Oferta>(transaction);
             if (offers == null || offers.Count == 0)
                 return null;
 
@@ -65,7 +69,7 @@ namespace Persistance
             var param = new List<SPParameter>
                 {
                     new SPParameter("ID_Publicacion", offer.IdPublicacion),
-                    new SPParameter("ID_Cliente", offer.IdCliente),
+                    new SPParameter("ID_Usuario", offer.IdUsuario),
                     new SPParameter("Monto", offer.Monto),
                     new SPParameter("Fecha", offer.Fecha)
                 };

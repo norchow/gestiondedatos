@@ -11,6 +11,7 @@ using Tools;
 using Persistance.Entities;
 using Configuration;
 using Session;
+using System.Data.SqlClient;
 
 namespace FrbaCommerce.Generar_Publicacion
 {
@@ -107,13 +108,8 @@ namespace FrbaCommerce.Generar_Publicacion
 
                         DisableUIControls();
                         TxtDescripcion.Enabled = true;
-                        if (CurrentPublication.TipoPublicacion.Descripcion == "Subasta")
-                            CboEstadoPublicacion.Enabled = false;
-                        else
-                        {
-                            TxtStock.Enabled = true;
-                            CboEstadoPublicacion.Enabled = true;
-                        }
+                        CboEstadoPublicacion.Enabled = true;
+                        TxtStock.Enabled = (CurrentPublication.TipoPublicacion.Descripcion != "Subasta");
 
                         break;
 
@@ -193,6 +189,13 @@ namespace FrbaCommerce.Generar_Publicacion
                 {
                     #region Insert the new publication
 
+                    if (CboVisibilidad.Text == "Gratis" && CboEstadoPublicacion.Text == "Publicada")
+                    {
+                        var freePublicationsActive = PublicacionPersistance.GetAllActiveAndFreeByUser(SessionManager.CurrentUser.ID);
+                        if (freePublicationsActive > 2)
+                            throw new Exception("No se puede generar la publicación, ya que cuenta con tres publicaciones activas con visibilidad 'Gratis'.");
+                    }
+
                     var publication = new Publicacion();
 
                     LoadObjectFromUIControls(publication);
@@ -218,6 +221,17 @@ namespace FrbaCommerce.Generar_Publicacion
 
                     var messageExceptions = string.Empty;
 
+                    //Realizo la validación solo cuando cambió o el estado o el tipo de publicación
+                    if (CurrentPublication.EstadoPublicacion.Descripcion != CboEstadoPublicacion.Text || CurrentPublication.Visibilidad.Descripcion != CboVisibilidad.Text)
+                    {
+                        if (CboVisibilidad.Text == "Gratis" && CboEstadoPublicacion.Text == "Publicada")
+                        {
+                            var freePublicationsActive = PublicacionPersistance.GetAllActiveAndFreeByUser(SessionManager.CurrentUser.ID);
+                            if (freePublicationsActive > 2)
+                                throw new Exception("No se puede generar la publicación, ya que cuenta con tres publicaciones activas con visibilidad 'Gratis'.");
+                        }
+                    }
+
                     if (CurrentPublication.EstadoPublicacion.Descripcion == "Publicada" && CboEstadoPublicacion.Text == "Borrador")
                         messageExceptions += "No se puede cambiar el estado de una publicacion 'Publicada' a 'Borrador'.";
 
@@ -235,7 +249,37 @@ namespace FrbaCommerce.Generar_Publicacion
                     var dialogAnswer = MessageBox.Show(string.Format("Esta seguro que quiere modificar la publicacion {0}?", oldDescription), "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
-                        if (PublicacionPersistance.Update(CurrentPublication) == 1)
+                        if (CboTipoPublicacion.Text == "Subasta" && CboEstadoPublicacion.Text == "Finalizada")
+                        {
+                            using (var transaction = DataBaseManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+                            {
+                                if (PublicacionPersistance.Update(CurrentPublication, transaction) == 1)
+                                {
+                                    var lastOffer = OfertaPersistance.GetLastOfertaByPublication(CurrentPublication.ID, transaction);
+
+                                    //No tiene ofertas, no genero ningun registro en la tabla de compras
+                                    if (lastOffer == null)
+                                    {
+                                        CommitTransaction(transaction);
+                                        return;
+                                    }
+                                    
+                                    var purchase = CompraPersistance.Insert(lastOffer.ConvertToPurchase(), transaction);
+
+                                    //Commiteo la transaccion solo si pudo insertar la compra en la base de datos
+                                    if (purchase.ID != 0)
+                                    {
+                                        CommitTransaction(transaction);
+                                        return;
+                                    }
+                                    else
+                                        transaction.Rollback();
+                                }
+                                else
+                                    transaction.Rollback();
+                            }
+                        }
+                        else if (PublicacionPersistance.Update(CurrentPublication) == 1)
                         {
                             MessageBox.Show("Se modifico satisfactoriamente la publicacion", "Atencion");
                             CompleteAction = true;
@@ -250,6 +294,14 @@ namespace FrbaCommerce.Generar_Publicacion
             {
                 MessageBox.Show(ex.Message, "Atencion");
             }
+        }
+
+        private void CommitTransaction(SqlTransaction transaction)
+        {
+            transaction.Commit();
+            MessageBox.Show("Se modifico satisfactoriamente la publicacion", "Atencion");
+            CompleteAction = true;
+            Close();
         }
 
         private void LoadObjectFromUIControls(Publicacion publication)
