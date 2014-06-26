@@ -1,3 +1,6 @@
-.Generar el archivo de script inicial
-.Generar el zip123
-.Agregar el numero del grupo tanto a la carpeta del proyecto como al Readme.txt
+.Probar el impacto de la migración de las ofertas ganadas a compras en Facturar.
+
+.Corregir el alta de Empresa y Cliente (cuando entra un admin y hace un alta, no debería pedir los datos de usuario sino que los debería generar automáticamente)
+
+.Revisar algoritmo de facturar (copiarse de los pibes)
+
