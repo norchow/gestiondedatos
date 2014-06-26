@@ -83,8 +83,8 @@ namespace Persistance
         {
             var param = new List<SPParameter>
                 {
-                    new SPParameter("ID_Publicacion", purchase.Publicacion.ID),
-                    new SPParameter("ID_Usuario", purchase.Usuario.ID),
+                    new SPParameter("ID_Publicacion", (purchase.Publicacion != null) ? purchase.Publicacion.ID : purchase.IdPublicacion),
+                    new SPParameter("ID_Usuario", (purchase.Usuario != null) ? purchase.Usuario.ID : purchase.IdUsuario),
                     new SPParameter("Compra_Fecha", purchase.Fecha),
                     new SPParameter("Compra_Cantidad", purchase.Cantidad)
                 };

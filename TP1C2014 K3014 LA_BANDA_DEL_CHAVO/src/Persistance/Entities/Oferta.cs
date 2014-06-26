@@ -25,13 +25,22 @@ namespace Persistance.Entities
                 Monto = Double.Parse(reader["Monto"].ToString()),
                 Fecha = DateTime.Parse(reader["Fecha"].ToString())
             };
-
-
         }
 
         public List<SPParameter> UnMap(IMapable entity)
         {
             return new List<SPParameter>();
+        }
+
+        public Compra ConvertToPurchase()
+        {
+            return new Compra
+            {
+                Cantidad = 1,
+                Fecha = Fecha,
+                IdPublicacion = IdPublicacion,
+                IdUsuario = IdUsuario
+            };
         }
     }
 }
