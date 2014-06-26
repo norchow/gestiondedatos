@@ -13,7 +13,7 @@ namespace Persistance.Entities
 
         public Publicacion Publicacion { get; set; }
 
-        public Cliente Cliente { get; set; }
+        public Usuario Usuario { get; set; }
 
         public DateTime Fecha { get; set; }
 
@@ -21,7 +21,7 @@ namespace Persistance.Entities
 
         private int _idPublicacion;
 
-        private int _idCliente;
+        private int _idUsuario;
 
         //Implement of IMapable
         public IMapable Map(SqlDataReader reader)
@@ -30,7 +30,7 @@ namespace Persistance.Entities
             {
                 ID = Int32.Parse(reader["ID_Compra"].ToString()),
                 _idPublicacion = Convert.ToInt32(reader["ID_Publicacion"].ToString()),
-                _idCliente = Convert.ToInt32(reader["ID_Cliente"].ToString()),
+                _idUsuario = Convert.ToInt32(reader["ID_Usuario"].ToString()),
                 Fecha = DateTime.Parse(reader["Compra_Fecha"].ToString()),
                 Cantidad = int.Parse(reader["Compra_Cantidad"].ToString())               
             };
@@ -44,7 +44,7 @@ namespace Persistance.Entities
         public void GetObjectsById()
         {
             Publicacion = PublicacionPersistance.GetById(_idPublicacion);
-            Cliente = ClientePersistance.GetById(_idCliente);
+            Usuario = UsuarioPersistance.GetById(_idUsuario);
         }
     }
 }

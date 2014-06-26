@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Persistance;
 using Persistance.Entities;
+using Session;
 
 namespace FrbaCommerce.Gestion_de_Preguntas
 {
@@ -46,6 +47,7 @@ namespace FrbaCommerce.Gestion_de_Preguntas
                     //Inserto la pregunta
                     Pregunta preguntaNueva = new Pregunta();
                     preguntaNueva.IdPublicacion = CurrentPublication.ID;
+                    preguntaNueva.IdUsuario = SessionManager.CurrentUser.ID;
                     preguntaNueva.Texto = txtPregunta.Text;
                     PreguntaPersistance.InsertQuestion(preguntaNueva, null);
 

@@ -97,7 +97,7 @@ namespace FrbaCommerce.Comprar_Ofertar
                 {
                     //Creo la nueva compra y la inserto
                     Compra newPurchase = new Compra();
-                    newPurchase.Cliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID);
+                    newPurchase.Usuario = SessionManager.CurrentUser;
                     newPurchase.Publicacion = CurrentPublication;
                     newPurchase.Fecha = ConfigurationVariables.FechaSistema;
                     newPurchase.Cantidad = Int32.Parse(txtCantidad.Text);
@@ -184,7 +184,7 @@ namespace FrbaCommerce.Comprar_Ofertar
                 {
                     //Creo la nueva oferta y la inserto
                     Oferta newOffer = new Oferta();
-                    newOffer.IdCliente = ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID).ID;
+                    newOffer.IdUsuario = SessionManager.CurrentUser.ID;
                     newOffer.IdPublicacion = CurrentPublication.ID;
                     newOffer.Fecha = ConfigurationVariables.FechaSistema;
                     newOffer.Monto = Int32.Parse(txtMonto.Text);

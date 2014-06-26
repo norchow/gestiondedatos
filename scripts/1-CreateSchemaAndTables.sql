@@ -123,7 +123,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Rol](
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta](
 	[ID_Oferta] int IDENTITY (1,1),
-	[ID_Cliente] int NOT NULL,
+	[ID_Usuario] int NOT NULL,
 	[ID_Publicacion] numeric(18,0) NOT NULL,
 	[Monto] numeric(18,2) NOT NULL,
 	[Fecha] datetime NOT NULL
@@ -132,6 +132,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Oferta](
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Pregunta](
 	[ID_Pregunta] int IDENTITY (1,1),
 	[ID_Publicacion] numeric(18,0) NOT NULL,
+	[ID_Usuario] int NOT NULL,
 	[Texto] nvarchar(255)
 );
 
@@ -213,7 +214,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Publicacion](
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Compra](
 	[ID_Compra] int IDENTITY (1,1),
 	[ID_Publicacion] numeric(18,0) NOT NULL,
-	[ID_Cliente] int NOT NULL,
+	[ID_Usuario] int NOT NULL,
 	[Compra_Fecha] datetime NOT NULL,
 	[Compra_Cantidad] numeric(18, 0) NOT NULL
 );

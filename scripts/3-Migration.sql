@@ -141,8 +141,7 @@ BEGIN TRANSACTION
 	INSERT INTO LA_BANDA_DEL_CHAVO.TL_Calificacion (Codigo_Calificacion, ID_Publicacion, ID_Comprador, Cantidad_Estrellas, Descripcion) (
 		SELECT [Calificacion_Codigo],
 			   [Publicacion_Cod],
-			   (SELECT C.ID_Cliente FROM LA_BANDA_DEL_CHAVO.TL_Usuario U 
-				INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON U.ID_Usuario=C.ID_Usuario
+			   (SELECT u.ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Usuario U 
 				WHERE CONVERT(nvarchar(255), Cli_Dni) = U.Username),
 		       CAST(ROUND([Calificacion_Cant_Estrellas]/2,0) AS INT),
 		       [Calificacion_Descripcion]
@@ -156,9 +155,9 @@ BEGIN TRANSACTION
 COMMIT
 
 BEGIN TRANSACTION 
-	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Oferta] (ID_Cliente, ID_Publicacion, Monto, Fecha) (
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Oferta] (ID_Usuario, ID_Publicacion, Monto, Fecha) (
 		SELECT 
-			(SELECT ID_Cliente FROM LA_BANDA_DEL_CHAVO.TL_Cliente C WHERE Cli_Dni = C.Nro_Documento),
+			(SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Cliente C WHERE Cli_Dni = C.Nro_Documento),
 			[Publicacion_Cod],
 			[Oferta_Monto],
 			[Oferta_Fecha]
@@ -168,10 +167,10 @@ BEGIN TRANSACTION
 COMMIT
 
 BEGIN TRANSACTION 
-	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Compra] (ID_Publicacion, ID_Cliente, Compra_Fecha, Compra_Cantidad) (
+	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Compra] (ID_Publicacion, ID_Usuario, Compra_Fecha, Compra_Cantidad) (
 		SELECT DISTINCT
 			[Publicacion_Cod],
-			(SELECT ID_Cliente FROM LA_BANDA_DEL_CHAVO.TL_Cliente C WHERE Cli_Dni = C.Nro_Documento),
+			(SELECT ID_Usuario FROM LA_BANDA_DEL_CHAVO.TL_Cliente C WHERE Cli_Dni = C.Nro_Documento),
 			[Compra_Fecha],
 			[Compra_Cantidad]
 		FROM gd_esquema.Maestra

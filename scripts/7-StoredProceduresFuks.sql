@@ -24,12 +24,11 @@ BEGIN
 SELECT C.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
 FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
 INNER JOIN LA_BANDA_DEL_CHAVO.TL_Compra C ON C.ID_Publicacion  = P.ID_Publicacion
-INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente CLI ON C.ID_Cliente = CLI.ID_Cliente
-WHERE CLI.ID_Usuario=@idUsuario
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario u ON C.ID_Usuario = U.ID_Usuario
+WHERE U.ID_Usuario=@idUsuario
 AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
-				WHERE CAL.ID_Comprador=(SELECT C.ID_Cliente
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
-	WHERE C.ID_Usuario = @idUsuario) AND CAL.ID_Publicacion = C.ID_Publicacion)
+				WHERE CAL.ID_Comprador = @idUsuario
+				AND CAL.ID_Publicacion = C.ID_Publicacion)
 	AND ((C.ID_Publicacion LIKE ('%' + @CodigoPublicacion + '%')) OR @CodigoPublicacion is NULL)
 	AND ((LOWER(P.Descripcion) LIKE ('%' + @Descripcion + '%')) OR @Descripcion is NULL)
 	AND ((P.Precio LIKE ('%' + @Precio + '%')) OR @Precio is NULL)
@@ -39,16 +38,15 @@ UNION
 SELECT O.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
 FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
 INNER JOIN LA_BANDA_DEL_CHAVO.TL_Oferta O ON O.ID_Publicacion  = P.ID_Publicacion
-INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente CLI ON O.ID_Cliente = CLI.ID_Cliente
-WHERE CLI.ID_Usuario=@idUsuario 
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON O.ID_Usuario = U.ID_Usuario
+WHERE U.ID_Usuario=@idUsuario 
 AND O.Monto = (	SELECT MAX(Monto)
 							FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
 							WHERE ID_Publicacion=O.ID_Publicacion ) 
 AND P.Fecha_Vencimiento < @Fecha_hoy
 AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
-				WHERE CAL.ID_Comprador=(SELECT C.ID_Cliente
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
-	WHERE C.ID_Usuario = @idUsuario) AND CAL.ID_Publicacion = O.ID_Publicacion)
+				WHERE CAL.ID_Comprador = @idUsuario
+				AND CAL.ID_Publicacion = O.ID_Publicacion)
 	AND ((O.ID_Publicacion LIKE ('%' + @CodigoPublicacion + '%')) OR @CodigoPublicacion is NULL)
 	AND ((LOWER(P.Descripcion) LIKE ('%' + @Descripcion + '%')) OR @Descripcion is NULL)
 	AND ((P.Precio LIKE ('%' + @Precio + '%')) OR @Precio is NULL)
@@ -77,12 +75,11 @@ BEGIN
 SELECT C.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
 FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
 INNER JOIN LA_BANDA_DEL_CHAVO.TL_Compra C ON C.ID_Publicacion  = P.ID_Publicacion
-INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente CLI ON C.ID_Cliente = CLI.ID_Cliente
-WHERE CLI.ID_Usuario=@idUsuario
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON C.ID_Usuario = U.ID_Usuario
+WHERE U.ID_Usuario=@idUsuario
 AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
-				WHERE CAL.ID_Comprador=(SELECT C.ID_Cliente
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
-	WHERE C.ID_Usuario = @idUsuario) AND CAL.ID_Publicacion = C.ID_Publicacion)
+				WHERE CAL.ID_Comprador = @idUsuario
+				AND CAL.ID_Publicacion = C.ID_Publicacion)
 	AND ((C.ID_Publicacion = @CodigoPublicacion) OR @CodigoPublicacion is NULL)
 	AND ((LOWER(P.Descripcion) = LOWER(@Descripcion)) OR @Descripcion is NULL)
 	AND ((P.Precio = @Precio) OR @Precio is NULL)
@@ -92,16 +89,15 @@ UNION
 SELECT O.ID_Publicacion, P.Descripcion,  '$' + CAST(P.Precio AS varchar(10)) AS Precio
 FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
 INNER JOIN LA_BANDA_DEL_CHAVO.TL_Oferta O ON O.ID_Publicacion  = P.ID_Publicacion
-INNER JOIN LA_BANDA_DEL_CHAVO.TL_Cliente CLI ON O.ID_Cliente = CLI.ID_Cliente
-WHERE CLI.ID_Usuario=@idUsuario 
+INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON O.ID_Usuario = U.ID_Usuario
+WHERE U.ID_Usuario=@idUsuario 
 AND O.Monto = (	SELECT MAX(Monto)
 							FROM LA_BANDA_DEL_CHAVO.TL_Oferta 
 							WHERE ID_Publicacion=O.ID_Publicacion ) 
 AND P.Fecha_Vencimiento < @Fecha_hoy
 AND NOT EXISTS (SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Calificacion CAL
-				WHERE CAL.ID_Comprador=(SELECT C.ID_Cliente
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
-	WHERE C.ID_Usuario = @idUsuario) AND CAL.ID_Publicacion = O.ID_Publicacion)
+				WHERE CAL.ID_Comprador = @idUsuario
+				AND CAL.ID_Publicacion = O.ID_Publicacion)
 	AND ((O.ID_Publicacion = @CodigoPublicacion) OR @CodigoPublicacion is NULL)
 	AND ((LOWER(P.Descripcion) = LOWER(@Descripcion)) OR @Descripcion is NULL)
 	AND ((P.Precio = @Precio) OR @Precio is NULL)
@@ -123,8 +119,7 @@ BEGIN
 	SELECT C.ID_Compra, P.Descripcion, C.Compra_Fecha, P.Precio, C.Compra_Cantidad
 	FROM [LA_BANDA_DEL_CHAVO].[TL_Compra] AS C
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion] AS P ON P.ID_Publicacion = C.ID_Publicacion
-	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Cliente = C.ID_Cliente
-	WHERE CLI.ID_Usuario = @idUsuario
+	WHERE C.ID_Usuario = @idUsuario
 	ORDER BY C.Compra_Fecha DESC
 END
 GO
@@ -143,8 +138,7 @@ BEGIN
 	SELECT C.ID_Compra, P.Descripcion, C.Compra_Fecha, P.Precio, C.Compra_Cantidad
 	FROM [LA_BANDA_DEL_CHAVO].[TL_Compra] AS C
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion] AS P ON P.ID_Publicacion = C.ID_Publicacion
-	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Cliente = C.ID_Cliente
-	WHERE CLI.ID_Usuario = @idUsuario
+	WHERE C.ID_Usuario = @idUsuario
 	AND ((C.ID_Compra = @ID_Compra) OR @ID_Compra is NULL)
 	AND ((LOWER(P.Descripcion) = LOWER(@Descripcion)) OR @Descripcion is NULL)
 	AND ((P.Precio  = @Precio) OR @Precio is NULL)
@@ -175,8 +169,7 @@ BEGIN
 	SELECT C.ID_Compra, P.Descripcion, C.Compra_Fecha, P.Precio, C.Compra_Cantidad
 	FROM [LA_BANDA_DEL_CHAVO].[TL_Compra] AS C
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion] AS P ON P.ID_Publicacion = C.ID_Publicacion
-	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Cliente = C.ID_Cliente
-	WHERE CLI.ID_Usuario = @idUsuario
+	WHERE C.ID_Usuario = @idUsuario
 	AND ((C.ID_Compra LIKE ('%' + @ID_Compra + '%')) OR @ID_Compra is NULL)
 	AND ((LOWER(P.Descripcion) LIKE ('%' + LOWER(@Descripcion) + '%')) OR @Descripcion is NULL)
 	AND ((P.Precio  LIKE ('%' + @Precio + '%')) OR @Precio is NULL)
@@ -201,7 +194,7 @@ BEGIN
 	SELECT C.Codigo_Calificacion, P.Descripcion, C.Cantidad_Estrellas, CLI.Apellido + ', ' + CLI.Nombre AS Nombre
 	FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] AS C
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
-	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Cliente = C.ID_Comprador
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = C.ID_Comprador
 	WHERE P.ID_Usuario = @idUsuario
 END
 
@@ -223,7 +216,7 @@ BEGIN
 	SELECT C.Codigo_Calificacion, P.Descripcion, C.Cantidad_Estrellas, CLI.Apellido + ', ' + CLI.Nombre AS Nombre
 	FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] AS C
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
-	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Cliente = C.ID_Comprador
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = C.ID_Comprador
 	WHERE P.ID_Usuario = @idUsuario
 	AND ((C.Codigo_Calificacion = @Codigo_Calificacion) OR @Codigo_Calificacion is NULL)
 	AND ((P.Descripcion = @Descripcion) OR @Descripcion is NULL)
@@ -252,7 +245,7 @@ BEGIN
 	SELECT C.Codigo_Calificacion, P.Descripcion, C.Cantidad_Estrellas, CLI.Apellido + ', ' + CLI.Nombre AS Nombre
 	FROM [LA_BANDA_DEL_CHAVO].[TL_Calificacion] AS C
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
-	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Cliente = C.ID_Comprador
+	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = C.ID_Comprador
 	WHERE P.ID_Usuario = @idUsuario
 	AND ((C.Codigo_Calificacion LIKE ('%' + @Codigo_Calificacion + '%')) OR @Codigo_Calificacion is NULL)
 	AND ((P.Descripcion LIKE ('%' + @Descripcion + '%')) OR @Descripcion is NULL)
@@ -283,9 +276,7 @@ BEGIN
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
 	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = P.ID_Usuario
 	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Empresa] AS E ON E.ID_Empresa = P.ID_Usuario
-	WHERE C.ID_Comprador = (SELECT C.ID_Cliente
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
-	WHERE C.ID_Usuario = @idUsuario)
+	WHERE C.ID_Comprador = @idUsuario
 END
 
 
@@ -312,9 +303,7 @@ BEGIN
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
 	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = P.ID_Usuario
 	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Empresa] AS E ON E.ID_Empresa = P.ID_Usuario
-	WHERE C.ID_Comprador = (SELECT C.ID_Cliente
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
-	WHERE C.ID_Usuario = @idUsuario)
+	WHERE C.ID_Comprador = @idUsuario
 	AND ((C.Codigo_Calificacion = @Codigo_Calificacion) OR @Codigo_Calificacion is NULL)
 	AND ((P.Descripcion = @Descripcion) OR @Descripcion is NULL)
 	AND ((C.Cantidad_Estrellas = @Cantidad_Estrellas) OR @Cantidad_Estrellas is NULL)
@@ -348,9 +337,7 @@ BEGIN
 	INNER JOIN [LA_BANDA_DEL_CHAVO].[TL_Publicacion]  AS P  ON C.ID_Publicacion = P.ID_Publicacion
 	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS CLI ON CLI.ID_Usuario = P.ID_Usuario
 	LEFT JOIN [LA_BANDA_DEL_CHAVO].[TL_Empresa] AS E ON E.ID_Empresa = P.ID_Usuario
-	WHERE C.ID_Comprador = (SELECT C.ID_Cliente
-	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] AS C
-	WHERE C.ID_Usuario = @idUsuario)
+	WHERE C.ID_Comprador = @idUsuario
 	AND ((C.Codigo_Calificacion LIKE ('%' + @Codigo_Calificacion  + '%')) OR @Codigo_Calificacion is NULL)
 	AND ((P.Descripcion LIKE ('%' + @Descripcion  + '%')) OR @Descripcion is NULL)
 	AND ((C.Cantidad_Estrellas LIKE ('%' + @Cantidad_Estrellas  + '%')) OR @Cantidad_Estrellas is NULL)
@@ -377,8 +364,7 @@ FROM LA_BANDA_DEL_CHAVO.TL_Oferta
 WHERE ID_Publicacion=O.ID_Publicacion ) AND P.Fecha_Vencimiento < @Fecha_hoy THEN 'Si' ELSE 'No' END) AS Ganada
 FROM [LA_BANDA_DEL_CHAVO].[TL_Oferta] AS O
 INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Publicacion AS P ON O.ID_Publicacion = P.ID_Publicacion 
-INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Cliente AS CLI ON CLI.ID_Cliente = O.ID_Cliente 
-WHERE CLI.ID_Usuario = @idUsuario
+WHERE O.ID_Usuario = @idUsuario
 
 END
 
@@ -406,8 +392,7 @@ FROM LA_BANDA_DEL_CHAVO.TL_Oferta
 WHERE ID_Publicacion=O.ID_Publicacion ) AND P.Fecha_Vencimiento < @Fecha_hoy THEN 'Si' ELSE 'No' END) AS Ganada
 FROM [LA_BANDA_DEL_CHAVO].[TL_Oferta] AS O
 INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Publicacion AS P ON O.ID_Publicacion = P.ID_Publicacion 
-INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Cliente AS CLI ON CLI.ID_Cliente = O.ID_Cliente 
-WHERE CLI.ID_Usuario = @idUsuario
+WHERE O.ID_Usuario = @idUsuario
 	AND ((O.ID_Oferta  = @ID_Oferta) OR @ID_Oferta is NULL)
 	AND ((O.Monto = @Monto) OR @Monto is NULL)
 	AND ((O.Fecha = @Fecha) OR @Fecha is NULL)
@@ -443,8 +428,7 @@ FROM LA_BANDA_DEL_CHAVO.TL_Oferta
 WHERE ID_Publicacion=O.ID_Publicacion ) AND P.Fecha_Vencimiento < @Fecha_hoy THEN 'Si' ELSE 'No' END) AS Ganada
 FROM [LA_BANDA_DEL_CHAVO].[TL_Oferta] AS O
 INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Publicacion AS P ON O.ID_Publicacion = P.ID_Publicacion 
-INNER JOIN [LA_BANDA_DEL_CHAVO].TL_Cliente AS CLI ON CLI.ID_Cliente = O.ID_Cliente 
-WHERE CLI.ID_Usuario = @idUsuario
+WHERE O.ID_Usuario = @idUsuario
 	AND ((O.ID_Oferta  LIKE ('%'+ @ID_Oferta + '%') ) OR @ID_Oferta is NULL)
 	AND ((O.Monto LIKE ('%'+ @Monto + '%')  ) OR @Monto is NULL)
 	AND ((O.Fecha LIKE ('%'+ @Fecha + '%')) OR @Fecha is NULL)
