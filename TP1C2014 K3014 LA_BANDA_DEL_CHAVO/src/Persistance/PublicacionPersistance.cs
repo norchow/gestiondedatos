@@ -118,7 +118,7 @@ namespace Persistance
 
             var publications = sp.ExecuteReader<Publicacion>();
 
-            if (publications == null || publications.Count == 0)
+            if (publications == null)
                 return null;
 
             var result = new List<Publicacion>();
