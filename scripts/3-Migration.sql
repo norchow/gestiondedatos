@@ -194,6 +194,13 @@ INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago] (Descripcion) (
 	WHERE [Forma_Pago_Desc] IS NOT NULL)
 COMMIT
 
+BEGIN TRANSACTION
+
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago] (Descripcion) VALUES ('Tarjeta de Crédito');
+INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago] (Descripcion) VALUES ('Tarjeta de Débito');
+
+COMMIT
+
 BEGIN TRANSACTION 
 INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Factura] (Numero, Fecha, Total, ID_Forma_Pago, ID_Usuario) (
 	SELECT DISTINCT [Factura_Nro],

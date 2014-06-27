@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Persistance.Entities;
+using System.Data.SqlClient;
 
 namespace Persistance
 {
@@ -16,10 +17,15 @@ namespace Persistance
 
         public static FormaPago GetById(int idPaymentMethod)
         {
-            var param = new List<SPParameter> { new SPParameter("ID_Forma_Pago", idPaymentMethod) };
-            var sp = new StoreProcedure(DataBaseConst.FormaPago.SPGetAllFormaPagoById, param);
+            return GetById(idPaymentMethod, null);
+        }
 
-            var statusPublication = sp.ExecuteReader<FormaPago>();
+        public static FormaPago GetById(int idPaymentMethod, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter> { new SPParameter("ID_Forma_Pago", idPaymentMethod) };
+            var sp = new StoreProcedure(DataBaseConst.FormaPago.SPGetAllFormaPagoById, param, transaction);
+
+            var statusPublication = sp.ExecuteReaderTransactioned<FormaPago>(transaction);
 
             if (statusPublication == null || statusPublication.Count == 0)
                 return null;
