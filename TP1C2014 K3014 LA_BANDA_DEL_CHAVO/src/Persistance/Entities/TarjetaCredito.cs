@@ -22,12 +22,5 @@ namespace Persistance.Entities
         public int DniTitular { get; set; }
 
         public Factura Factura { get; set; }
-
-        private int _idFactura;
-
-        public void GetObjectsById()
-        {
-            Factura = FacturaPersistance.GetById(_idFactura);
-        }
     }
 }

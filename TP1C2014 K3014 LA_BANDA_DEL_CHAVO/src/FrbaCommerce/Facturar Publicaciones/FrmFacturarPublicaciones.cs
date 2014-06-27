@@ -25,6 +25,8 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
         public List<Publicacion> PublicationsList { get; set; }
 
+        public bool UserInactive = false;
+
         public FrmFacturarPublicaciones()
         {
             InitializeComponent();
@@ -58,8 +60,10 @@ namespace FrbaCommerce.Facturar_Publicaciones
                 }
                 else
                 {
-                    var user = SessionManager.CurrentUser ;
-                    UsuarioPersistance.InhabilitarUser(user);
+                    MessageBox.Show("Posee 10 o más publicaciones por facturar y por lo tanto se procederá a inhabilitarlo");
+                    UsuarioPersistance.InhabilitarUser(SessionManager.CurrentUser);
+                    UserInactive = true;
+                    Close();
                 }
             }
             else

@@ -26,10 +26,7 @@ BEGIN
 	SELECT P.* 
 	FROM [LA_BANDA_DEL_CHAVO].TL_Publicacion P
 		LEFT JOIN [LA_BANDA_DEL_CHAVO].TL_Usuario U ON U.ID_Usuario = P.ID_Usuario
-	WHERE (P.Fecha_Vencimiento <= @Fecha_Actual 
-		   OR P.Stock <= (SELECT SUM(C.Compra_Cantidad) FROM [LA_BANDA_DEL_CHAVO].TL_Compra C
-					      WHERE C.ID_Publicacion = P.ID_Publicacion
-					      GROUP BY C.ID_Publicacion))
+	WHERE (P.Fecha_Vencimiento <= @Fecha_Actual OR P.Stock = 0)
 		   AND P.ID_Publicacion NOT IN (SELECT ITF.ID_Publicacion FROM [LA_BANDA_DEL_CHAVO].TL_Item_Factura ITF)
 		   AND P.ID_Usuario = @Id_User
 END

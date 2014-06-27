@@ -210,7 +210,7 @@ namespace Persistance
                         return 0;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     transaction.Rollback();
                     throw new Exception("Se produjo un error durante la modificacion de la publicacion");

@@ -202,6 +202,9 @@ namespace FrbaCommerce.Home
         {
             var frmFacturarPublicaciones = new FrmFacturarPublicaciones();
             frmFacturarPublicaciones.ShowDialog();
+
+            if (frmFacturarPublicaciones.UserInactive)
+                LogOutCurrentUser();
         }
 
         private void administracionDeEmpresasToolStripMenuItem_Click(object sender, EventArgs e)
