@@ -195,8 +195,12 @@ namespace FrbaCommerce.Abm_Cliente
 
         private void LblNuevo_Click(object sender, EventArgs e)
         {
-            var frmRegistroUsuario = new FrmRegistroUsuario(false, true);
-            frmRegistroUsuario.Show();
+            this.Hide();
+            using (var transaction = DataBaseManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+            {
+                var frmABMInsertUpdateCliente = new FrmABMInsertUpdateCliente(transaction);
+                frmABMInsertUpdateCliente.ShowDialog();
+            }
         }
 
         private void DgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)

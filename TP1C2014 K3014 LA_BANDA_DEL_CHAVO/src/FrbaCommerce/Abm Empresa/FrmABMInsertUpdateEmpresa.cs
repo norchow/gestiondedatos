@@ -11,22 +11,27 @@ using Persistance;
 using Session;
 using Persistance.Entities;
 using FrbaCommerce.Home;
+using Tools;
 
 namespace FrbaCommerce.Abm_Empresa
 {
     public partial class FrmABMInsertUpdateEmpresa : Form
     {
         public bool insertMode { get; set; }
+        public bool insertDefaultUser = false;
         public SqlTransaction currentTransaction { get; set; }
         private bool _abmEmpresa;
         private Empresa CurrentEmpresa { get; set; }
         public bool CompleteAction = false;
         private Usuario currentUser;
 
-        public FrmABMInsertUpdateEmpresa()
+        public FrmABMInsertUpdateEmpresa(SqlTransaction transaction)
         {
             InitializeComponent();
-            _abmEmpresa = false;
+            _abmEmpresa = true;
+            insertMode = transaction != null;
+            insertDefaultUser = true;
+            this.currentTransaction = transaction;
         }
 
         public FrmABMInsertUpdateEmpresa(Empresa empresa)
@@ -137,7 +142,7 @@ namespace FrbaCommerce.Abm_Empresa
                     #region Inserto la nueva empresa
 
                     var company = new Empresa();
-                    company.IdUsuario = currentUser.ID;
+                    company.IdUsuario = SessionManager.CurrentUser.ID;
                     company.RazonSocial = TxtRazonSocial.Text;
                     company.Mail = TxtMail.Text;
                     company.Telefono = TxtTelefono.Text;
@@ -152,7 +157,24 @@ namespace FrbaCommerce.Abm_Empresa
                     if (dialogAnswer == DialogResult.Yes)
                     {
                         EmpresaPersistance.InsertCompany(company, this.currentTransaction);
-                        this.currentTransaction.Commit();
+
+                        //Si es el administrador el que hace el Alta, se genera un usuario con password temporal
+                        if (insertDefaultUser)
+                        {
+                            var user = new Usuario();
+                            user.Username = company.CUIT;
+                            user.Password = SHA256Helper.Encode("temporal");
+                            var userIngresado = UsuarioPersistance.InsertUserTemporal(user, this.currentTransaction);
+                            this.currentTransaction.Commit();
+
+                            company.IdUsuario = userIngresado.ID;
+                            EmpresaPersistance.UpdateCompany(company);
+
+                            var rol = RolPersistance.GetByName("Empresa");
+                            RolPersistance.InsertUserRole(userIngresado, rol, null);
+                        }
+
+                        MessageBox.Show("La Empresa ha sido ingresada con éxito.", "Atención!");
                         this.Hide();
                         if (!_abmEmpresa)
                         {

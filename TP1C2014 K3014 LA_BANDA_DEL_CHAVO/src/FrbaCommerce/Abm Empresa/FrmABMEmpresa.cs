@@ -172,8 +172,12 @@ namespace FrbaCommerce.Abm_Empresa
 
         private void LblNuevo_Click(object sender, EventArgs e)
         {
-            var frmRegistroUsuario = new FrmRegistroUsuario(true, false);
-            frmRegistroUsuario.Show();
+            this.Hide();
+            using (var transaction = DataBaseManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+            {
+                var frmABMInsertUpdateEmpresa = new FrmABMInsertUpdateEmpresa(transaction);
+                frmABMInsertUpdateEmpresa.ShowDialog();
+            }
         }
 
         private void DgvEmpresas_CellContentClick(object sender, DataGridViewCellEventArgs e)

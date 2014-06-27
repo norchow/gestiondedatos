@@ -18,16 +18,20 @@ namespace FrbaCommerce.Abm_Cliente
     public partial class FrmABMInsertUpdateCliente : Form
     {
         public bool insertMode { get; set; }
+        public bool insertDefaultUser = false;
         public SqlTransaction currentTransaction { get; set; }
         private bool _abmCliente;
         private Cliente CurrentCliente { get; set; }
         public bool CompleteAction = false;
         private Usuario currentUser;
 
-        public FrmABMInsertUpdateCliente()
+        public FrmABMInsertUpdateCliente(SqlTransaction transaction)
         {
             InitializeComponent();
-            _abmCliente = false;
+            _abmCliente = true;
+            insertMode = transaction != null;
+            insertDefaultUser = true;
+            this.currentTransaction = transaction;
         }
 
         public FrmABMInsertUpdateCliente(Cliente cliente)
@@ -173,7 +177,24 @@ namespace FrbaCommerce.Abm_Cliente
                     if (dialogAnswer == DialogResult.Yes)
                     {
                         ClientePersistance.InsertClient(client, this.currentTransaction);
-                        this.currentTransaction.Commit();
+
+                        //Si es el administrador el que hace el Alta, se genera un usuario con password temporal
+                        if (insertDefaultUser)
+                        {
+                            var user = new Usuario();
+                            user.Username = client.NroDocumento.ToString();
+                            user.Password = SHA256Helper.Encode("temporal");
+                            var userIngresado = UsuarioPersistance.InsertUserTemporal(user, this.currentTransaction);
+                            this.currentTransaction.Commit();
+
+                            client.IdUsuario = userIngresado.ID;
+                            ClientePersistance.UpdateClient(client);
+
+                            var rol = RolPersistance.GetByName("Cliente");
+                            RolPersistance.InsertUserRole(userIngresado, rol, null);
+                        }
+
+                        MessageBox.Show("El Cliente ha sido ingresado con éxito." , "Atención!");
                         this.Hide();
                         if (!_abmCliente)
                         {
