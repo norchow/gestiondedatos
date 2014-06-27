@@ -389,7 +389,7 @@ CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetSellersWithMoreProductsNotSold]
 	,@Visibilidad int
 AS
 BEGIN
-	SELECT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Usuario, COUNT(P.ID_Publicacion) AS Valor 
+	SELECT TOP 5 (CASE WHEN  E.ID_Usuario IS NULL THEN C.Nombre+' '+C.Apellido ELSE E.Razon_Social END) AS Usuario, SUM(P.Stock) AS Valor 
 	FROM LA_BANDA_DEL_CHAVO.TL_Usuario U
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Publicacion P ON P.ID_Usuario=U.ID_Usuario
 	LEFT JOIN LA_BANDA_DEL_CHAVO.TL_Cliente C ON P.ID_Usuario=C.ID_Usuario

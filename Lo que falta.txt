@@ -1,7 +1,3 @@
-.Corregir listado estadístico de productos no vendidos, tomar el stock en vez de cantidad de publicaciones
-
 .Hacer el cron de cerrar subastas finalizadas al entrar en el listado de publicaciones
 
 .Agregar todo lo de compras y subastas al estrategia.docx
-
-.Rever los textos del comprar para que sean claros si es que entra con un admin.
