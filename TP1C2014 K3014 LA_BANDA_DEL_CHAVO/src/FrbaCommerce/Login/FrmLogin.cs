@@ -88,6 +88,7 @@ namespace FrbaCommerce.Login
 
         private void LblNuevo_Click(object sender, EventArgs e)
         {
+            Hide();
             var frmRegistroUsuario = new FrmRegistroUsuario();
             frmRegistroUsuario.ShowDialog();
         }

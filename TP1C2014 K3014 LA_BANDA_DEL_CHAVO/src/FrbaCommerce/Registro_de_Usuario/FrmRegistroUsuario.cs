@@ -13,6 +13,7 @@ using FrbaCommerce.Abm_Cliente;
 using FrbaCommerce.Abm_Empresa;
 using FrbaCommerce.Home;
 using Session;
+using FrbaCommerce.Login;
 
 namespace FrbaCommerce.Registro_de_Usuario
 {
@@ -141,7 +142,13 @@ namespace FrbaCommerce.Registro_de_Usuario
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                Close();
+                Hide();
+                //Si vino del registrarme, lo mando de nuevo al login
+                if(!_abmCliente && !_abmEmpresa)
+                {
+                    var frmLogin = new FrmLogin();
+                    frmLogin.ShowDialog();
+                }
             }
         }
     }

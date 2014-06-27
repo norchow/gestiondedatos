@@ -12,6 +12,7 @@ using Persistance.Entities;
 using Session;
 using FrbaCommerce.Home;
 using Tools;
+using FrbaCommerce.Login;
 
 namespace FrbaCommerce.Abm_Cliente
 {
@@ -94,7 +95,13 @@ namespace FrbaCommerce.Abm_Cliente
             var dialogAnswer = MessageBox.Show("Esta seguro que quiere cancelar la operacion?", "Atencion", MessageBoxButtons.YesNo);
             if (DialogResult.Yes == dialogAnswer)
             {
-                Close();
+                Hide();
+                //Si vino del registrarme, lo mando de nuevo al login
+                if (!_abmCliente)
+                {
+                    var frmLogin = new FrmLogin();
+                    frmLogin.ShowDialog();
+                }
             }
         }
 
@@ -176,8 +183,6 @@ namespace FrbaCommerce.Abm_Cliente
                     var dialogAnswer = MessageBox.Show("¿Está seguro que quiere insertar el nuevo cliente?", "Atencion", MessageBoxButtons.YesNo);
                     if (dialogAnswer == DialogResult.Yes)
                     {
-                        ClientePersistance.InsertClient(client, this.currentTransaction);
-
                         //Si es el administrador el que hace el Alta, se genera un usuario con password temporal
                         if (insertDefaultUser)
                         {
@@ -185,13 +190,18 @@ namespace FrbaCommerce.Abm_Cliente
                             user.Username = client.NroDocumento.ToString();
                             user.Password = SHA256Helper.Encode("temporal");
                             var userIngresado = UsuarioPersistance.InsertUserTemporal(user, this.currentTransaction);
-                            this.currentTransaction.Commit();
 
                             client.IdUsuario = userIngresado.ID;
-                            ClientePersistance.UpdateClient(client);
+                            ClientePersistance.InsertClient(client, this.currentTransaction);
+                            this.currentTransaction.Commit();
 
                             var rol = RolPersistance.GetByName("Cliente");
                             RolPersistance.InsertUserRole(userIngresado, rol, null);
+                        }
+                        else
+                        {
+                            ClientePersistance.InsertClient(client, this.currentTransaction);
+                            this.currentTransaction.Commit();
                         }
 
                         MessageBox.Show("El Cliente ha sido ingresado con éxito." , "Atención!");
