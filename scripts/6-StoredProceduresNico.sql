@@ -258,7 +258,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 	
-	SELECT *, U.Habilitado
+	SELECT C.*, U.Habilitado
 	FROM [LA_BANDA_DEL_CHAVO].[TL_Cliente] C
 	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Usuario U ON C.ID_Usuario=U.ID_Usuario
 	WHERE C.ID_Usuario = @ID_Usuario

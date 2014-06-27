@@ -89,38 +89,40 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void LblComprar_Click(object sender, EventArgs e)
         {
-            List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
-            if (publications.Count <= 5)
+            try
             {
+                if (SessionManager.CurrentRol.Descripcion == "Administrador General")
+                    throw new Exception("Siendo un administrador no puede comprar ni ofertar");
+
+                List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
+                if (publications.Count > 5)
+                    throw new Exception("Tiene demasiadas compras sin calificar, por favor califíquelas para poder realizar una compra");
+
                 //Valido que ingrese una cantidad válida (mayor a 0 y menor que el stock)
-                if (txtCantidad.Text != "" && Int32.Parse(txtCantidad.Text) > 0 && Int32.Parse(txtCantidad.Text) < Int32.Parse(lblStock.Text))
-                {
-                    //Creo la nueva compra y la inserto
-                    Compra newPurchase = new Compra();
-                    newPurchase.Usuario = SessionManager.CurrentUser;
-                    newPurchase.Publicacion = CurrentPublication;
-                    newPurchase.Fecha = ConfigurationVariables.FechaSistema;
-                    newPurchase.Cantidad = Int32.Parse(txtCantidad.Text);
-                    newPurchase = CompraPersistance.Insert(newPurchase, null);
+                if (txtCantidad.Text == "" || Int32.Parse(txtCantidad.Text) < 0 || Int32.Parse(txtCantidad.Text) > Int32.Parse(lblStock.Text))
+                    throw new Exception("Ingrese una cantidad válida (mayor a 0 y menor que el stock actual)");
 
-                    //Resto el stock de la publicación
-                    CurrentPublication.Stock = CurrentPublication.Stock - newPurchase.Cantidad;
-                    PublicacionPersistance.Update(CurrentPublication);
+                //Creo la nueva compra y la inserto
+                Compra newPurchase = new Compra();
+                newPurchase.Usuario = SessionManager.CurrentUser;
+                newPurchase.Publicacion = CurrentPublication;
+                newPurchase.Fecha = ConfigurationVariables.FechaSistema;
+                newPurchase.Cantidad = Int32.Parse(txtCantidad.Text);
+                newPurchase = CompraPersistance.Insert(newPurchase, null);
 
-                    //Le muestro al usuario los datos del vendedor
-                    var frmDatosVendedor = new FrmDatosVendedor(CurrentPublication.UsuarioCreador);
-                    frmDatosVendedor.ShowDialog();
+                //Resto el stock de la publicación
+                CurrentPublication.Stock = CurrentPublication.Stock - newPurchase.Cantidad;
+                PublicacionPersistance.Update(CurrentPublication);
 
-                    RefreshSources();
-                }
-                else
-                {
-                    MessageBox.Show("Ingrese una cantidad válida (mayor a 0 y menor que el stock actual)");
-                }
+                //Le muestro al usuario los datos del vendedor
+                var frmDatosVendedor = new FrmDatosVendedor(CurrentPublication.UsuarioCreador);
+                frmDatosVendedor.ShowDialog();
+
+                RefreshSources();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Tiene demasiadas compras sin calificar, por favor califíquelas para poder realizar una compra");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -176,30 +178,32 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void lblOfertar_Click(object sender, EventArgs e)
         {
-            List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
-            if (publications.Count <= 5)
+            try
             {
+                if (SessionManager.CurrentRol.Descripcion == "Administrador General")
+                    throw new Exception("Siendo un administrador no puede comprar ni ofertar");
+
+                List<PublicacionNotCalified> publications = CalificacionPersistance.GetAllPubicacionNotCalified(SessionManager.CurrentUser);
+                if (publications.Count > 5)
+                    throw new Exception("Tiene demasiadas compras sin calificar, por favor califíquelas para poder realizar una compra");
+
                 //Valido que la oferta sea mayor a la última
-                if (txtMonto.Text != "" && Int32.Parse(txtMonto.Text) > Int32.Parse(lblPrecio.Text))
-                {
-                    //Creo la nueva oferta y la inserto
-                    Oferta newOffer = new Oferta();
-                    newOffer.IdUsuario = SessionManager.CurrentUser.ID;
-                    newOffer.IdPublicacion = CurrentPublication.ID;
-                    newOffer.Fecha = ConfigurationVariables.FechaSistema;
-                    newOffer.Monto = Int32.Parse(txtMonto.Text);
-                    newOffer = OfertaPersistance.Insert(newOffer, null);
-                    MessageBox.Show("Se insertó la oferta correctamente");
-                    RefreshSources();
-                }
-                else
-                {
-                    MessageBox.Show("El monto a ofertar debe ser mayor que la oferta actual");
-                }
+                if (txtMonto.Text == "" || Int32.Parse(txtMonto.Text) <= Int32.Parse(lblPrecio.Text))
+                    throw new Exception("El monto a ofertar debe ser mayor que la oferta actual");
+
+                //Creo la nueva oferta y la inserto
+                Oferta newOffer = new Oferta();
+                newOffer.IdUsuario = SessionManager.CurrentUser.ID;
+                newOffer.IdPublicacion = CurrentPublication.ID;
+                newOffer.Fecha = ConfigurationVariables.FechaSistema;
+                newOffer.Monto = Int32.Parse(txtMonto.Text);
+                newOffer = OfertaPersistance.Insert(newOffer, null);
+                MessageBox.Show("Se insertó la oferta correctamente");
+                RefreshSources();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Tiene demasiadas compras sin calificar, por favor califíquelas para poder realizar una compra");
+                MessageBox.Show(ex.Message);
             }
         }
     }
