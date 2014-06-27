@@ -6,6 +6,7 @@ using Persistance.Entities;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using Configuration;
 
 namespace Persistance
 {
@@ -209,7 +210,7 @@ namespace Persistance
                         return 0;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
                     throw new Exception("Se produjo un error durante la modificacion de la publicacion");
@@ -359,6 +360,29 @@ namespace Persistance
                 reader.Close();
 
             return quantity;
+        }
+
+        public static List<Publicacion> GetFinishedAuctions()
+        {
+            //Obtengo la lista de publicaciones que ya hayan vencido para pasarlas a compras
+            var param = new List<SPParameter>
+                {
+                    new SPParameter("Fecha_Hoy", ConfigurationVariables.FechaSistema)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Publicacion.SPGetFinishedAuctions, param);
+
+            var publications = sp.ExecuteReader<Publicacion>();
+
+            if (publications == null || publications.Count == 0)
+                return new List<Publicacion>();
+
+            foreach (var pub in publications)
+            {
+                pub.GetObjectsById();
+            }
+
+            return publications;
         }
     }
 }

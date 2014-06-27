@@ -454,3 +454,16 @@ BEGIN
 	ORDER BY AVG(CAL.Cantidad_Estrellas) DESC
 END
 GO
+
+CREATE PROCEDURE [LA_BANDA_DEL_CHAVO].[GetFinishedAuctions]
+	@Fecha_Hoy datetime
+AS
+BEGIN
+	SELECT * FROM LA_BANDA_DEL_CHAVO.TL_Publicacion P
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Tipo_Publicacion TP ON P.ID_Tipo_Publicacion=TP.ID_Tipo_Publicacion 
+	INNER JOIN LA_BANDA_DEL_CHAVO.TL_Estado_Publicacion EP ON P.ID_Estado_Publicacion=EP.ID_Estado_Publicacion
+	WHERE TP.Descripcion = 'Subasta'
+	AND P.Fecha_Vencimiento < @Fecha_Hoy
+	AND EP.Descripcion = 'Publicada'
+END
+GO

@@ -25,6 +25,31 @@ namespace FrbaCommerce.Comprar_Ofertar
         private void FrmListadoPublicaciones_Load(object sender, EventArgs e)
         {
             RefreshSources(null);
+
+            UpdateFinishedAuctions();
+        }
+
+        private void UpdateFinishedAuctions()
+        {
+            List<Publicacion> list = PublicacionPersistance.GetFinishedAuctions();
+            foreach(Publicacion publication in list)
+            {
+                Oferta lastOffer = OfertaPersistance.GetLastOfertaByPublication(publication.ID);
+                //Si tuvo al menos una oferta, genero la nueva compra correspondiente a esta subasta
+                if (lastOffer != null)
+                {
+                    var purchase = new Compra();
+                    purchase.IdPublicacion = publication.ID;
+                    purchase.IdUsuario = lastOffer.IdUsuario;
+                    purchase.Fecha = lastOffer.Fecha;
+                    purchase.Cantidad = 1;
+                    CompraPersistance.Insert(purchase, null);
+                }
+
+                //Finalizo la publicacion
+                publication.EstadoPublicacion = EstadoPublicacionPersistance.GetById(4); //finalizada
+                PublicacionPersistance.Update(publication);
+            }
         }
 
         private void RefreshSources(List<Publicacion> publications)

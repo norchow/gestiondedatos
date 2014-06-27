@@ -86,6 +86,7 @@ namespace Persistance.Entities
             public static String SPGetAllPublicacionByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllPublicacionByParametersLike";
             public static String SPGetQuestionsAndAnswersById = "LA_BANDA_DEL_CHAVO.GetQuestionsAndAnswersById";
             public static String SPGetAllActiveAndFreeByUserId = "LA_BANDA_DEL_CHAVO.GetAllActiveAndFreeByUserId";
+            public static String SPGetFinishedAuctions = "LA_BANDA_DEL_CHAVO.GetFinishedAuctions";
         }
 
         public static class Calificacion
