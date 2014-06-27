@@ -172,6 +172,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Estado_Publicacion](
 	[ID_Estado_Publicacion] int IDENTITY (1,1),
 	[Descripcion] nvarchar (255) NOT NULL,
 );
+
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Factura] (
 	[ID_Factura] int IDENTITY (1,1),
 	[Numero] numeric(18, 0) UNIQUE NOT NULL,
@@ -244,9 +245,9 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago](
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Tarjeta_Credito](
 	[ID_Tarjeta_Credito] int IDENTITY (1,1),
 	[Tarjeta] nvarchar(50) NOT NULL,
-	[Nro_Tarjeta] nvarchar(50) NOT NULL,
-	[Vencimiento] datetime NOT NULL,
-	[Cod_Seguridad] smallint NOT NULL,
+	[Nro_Tarjeta] numeric(16,0) NOT NULL,
+	[Vencimiento] numeric(4,0) NOT NULL,
+	[Cod_Seguridad] numeric(3,0) NOT NULL,
 	[Titular] nvarchar(255) NOT NULL,
 	[Dni_Titular] numeric(18,0) NOT NULL,
 	[ID_Factura] int NOT NULL

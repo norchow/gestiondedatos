@@ -72,6 +72,7 @@
     <Compile Include="Entities\Rubro.cs" />
     <Compile Include="Entities\SPParameter.cs" />
     <Compile Include="Entities\StoreProcedure.cs" />
+    <Compile Include="Entities\TarjetaCredito.cs" />
     <Compile Include="Entities\TipoDocumento.cs" />
     <Compile Include="Entities\TipoPublicacion.cs" />
     <Compile Include="Entities\Usuario.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="RespuestaPersistance.cs" />
     <Compile Include="RolPersistance.cs" />
     <Compile Include="RubroPersistance.cs" />
+    <Compile Include="TarjetaCreditoPersistance.cs" />
     <Compile Include="TipoDocumentoPersistance.cs" />
     <Compile Include="TipoPublicacionPersistance.cs" />
     <Compile Include="UsuarioPersistance.cs" />

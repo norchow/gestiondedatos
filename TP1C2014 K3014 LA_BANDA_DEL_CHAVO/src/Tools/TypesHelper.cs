@@ -12,7 +12,7 @@ namespace Tools
         public static bool IsNumeric(string value)
         {
             int i;
-            return int.TryParse(value, out i); 
+            return int.TryParse(value.Trim(), out i); 
         }
 
         //Valido si es un dato decimal

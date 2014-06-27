@@ -46,6 +46,35 @@ namespace Persistance.Entities
             Publicacion = PublicacionPersistance.GetById(IdPublicacion);
             Usuario = UsuarioPersistance.GetById(IdUsuario);
         }
+
+        public bool IsAuction()
+        {
+            if (Publicacion == null)
+                GetObjectsById();
+
+            return Publicacion != null && Publicacion.TipoPublicacion.Descripcion == "Subasta";
+        }
+
+        public ItemFactura ConvertToItemFactura()
+        {
+            if (IsAuction())
+            {
+                var ofertaGanadora = OfertaPersistance.GetLastOfertaByPublication(Publicacion.ID);
+                return new ItemFactura
+                {
+                    Publicacion = Publicacion,
+                    Cantidad = 1,
+                    Monto = (ofertaGanadora.Monto * Publicacion.Visibilidad.PorcentajeVenta)
+                };
+            }
+            else
+                return new ItemFactura
+                {
+                    Cantidad = Cantidad,
+                    Publicacion = Publicacion,
+                    Monto = (Publicacion.Precio * Publicacion.Visibilidad.PorcentajeVenta) * Cantidad
+                };
+        }
     }
 }
 

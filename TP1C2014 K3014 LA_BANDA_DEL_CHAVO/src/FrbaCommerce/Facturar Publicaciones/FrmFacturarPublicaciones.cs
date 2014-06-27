@@ -12,26 +12,22 @@ using Persistance.Entities;
 using Session;
 using FrbaCommerce.Home;
 using System.Configuration;
+using Tools;
+using Configuration;
 
 namespace FrbaCommerce.Facturar_Publicaciones
 {
     public partial class FrmFacturarPublicaciones : Form
     {
         public bool CompleteAction = false;
-        public bool insertMode { get; set; }
-        public SqlTransaction currentTransaction { get; set; }
+
+        public bool PagaConTarjeta = false;
+
+        public List<Publicacion> PublicationsList { get; set; }
 
         public FrmFacturarPublicaciones()
         {
             InitializeComponent();
-        }
-
-        public FrmFacturarPublicaciones(SqlTransaction transaction)
-        {
-            InitializeComponent();
-            insertMode = transaction != null;
-
-            this.currentTransaction = transaction;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -45,18 +41,19 @@ namespace FrbaCommerce.Facturar_Publicaciones
             CboFormaPago.DataSource = paymentMethod;
 
             //Cargar la lista con las Publicaciones a rendir del usuario
-            var publicationsList = PublicacionPersistance.GetPublicacionesARendirByUser(Session.SessionManager.CurrentUser.ID);
-            if (publicationsList != null && publicationsList.Count > 0)
+            PublicationsList = PublicacionPersistance.GetPublicacionesARendirByUser(Session.SessionManager.CurrentUser.ID);
+            if (PublicationsList != null && PublicationsList.Count > 0)
             {
-                if (publicationsList.Count < 10)
+                if (PublicationsList.Count < 10)
                 {
                     var listaItems = new List<string>();
-                    foreach (Publicacion item in publicationsList)
+                    foreach (Publicacion item in PublicationsList)
                     {
                         listaItems.Add("Descripción: " + item.Descripcion + " - " +
                                        "Fecha Venc: " + item.FechaVencimiento.ToShortDateString() + " - " +
                                        "Precio: " + String.Format("{0:$0.00}", item.Precio));
                     }
+
                     LstPublicaciones.DataSource = listaItems;
                 }
                 else
@@ -83,75 +80,171 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
         private void LblFacturar_Click(object sender, EventArgs e)
         {
-            int cant;
-            bool isNum = int.TryParse(TxtCantidad.Text.Trim(), out cant);
-            if (TxtCantidad.Text == "" || !isNum)
+            #region Validaciones
+
+            var exceptionMessage = string.Empty;
+
+            if (TypesHelper.IsEmpty(TxtCantidad.Text) || !TypesHelper.IsNumeric(TxtCantidad.Text))
+                exceptionMessage = "Ingrese una cantidad correcta de publicaciones a facturar";
+
+            if (PagaConTarjeta)
             {
-                MessageBox.Show("Ingrese una cantidad correcta de publicaciones a facturar", "Error!");
-                TxtCantidad.Clear();
-            }
-            else
-            {
-                #region Facturar Publicación
+                #region Validaciones datos tarjeta
 
-                if (cant > LstPublicaciones.Items.Count)
-                    cant = LstPublicaciones.Items.Count;
+                if (TypesHelper.IsEmpty(TxtCodSeguridad.Text))
+                    exceptionMessage += Environment.NewLine + "El codigo de seguridad de la tarjeta es obligatorio";
 
-                var listaPublicacionesAFacturar = PublicacionPersistance.GetPublicacionesMasAntiguasARendirByUser(Session.SessionManager.CurrentUser.ID, cant);
-                foreach (var publicacion in listaPublicacionesAFacturar)
-                {
-                    publicacion.GetObjectsById();
+                if (!TypesHelper.IsNumeric(TxtCodSeguridad.Text))
+                    exceptionMessage += Environment.NewLine + "El codigo de seguridad de la tarjeta debe ser numerico";
 
-                    //Armado de Items de la Factura con respecto a las comisiones por la visibilidad de la Publicación
-                    var listItemsFactura = new List<ItemFactura>();
-                    var itemsFactura = CompraPersistance.GetCantidadComprasByPublicationIdGroupByClient(publicacion.ID, this.currentTransaction);
-                    for (var a = 0; a <= itemsFactura.Count - 1; a++)
-                    {
-                        var item = new ItemFactura(); 
-                        item.Publicacion = publicacion;
-                        item.Monto = publicacion.Precio * publicacion.Visibilidad.PorcentajeVenta * itemsFactura[a];
-                        item.Cantidad = itemsFactura[a];
-                        listItemsFactura.Add(item);
-                    }
+                if (TypesHelper.IsEmpty(TxtDni.Text))
+                    exceptionMessage += Environment.NewLine + "El numero de documento del titular de la tarjeta es obligatorio";
 
-                    //Armado del Item de la Factura de la publicación en si misma
-                    var itemPorPublicar = new ItemFactura();
-                    itemPorPublicar.Publicacion = publicacion;
-                    itemPorPublicar.Monto = publicacion.Visibilidad.PrecioPublicar;
-                    itemPorPublicar.Cantidad = 1;
-                    listItemsFactura.Add(itemPorPublicar);
+                if (!TypesHelper.IsNumeric(TxtDni.Text))
+                    exceptionMessage += Environment.NewLine + "El numero de documento del titular de la tarjeta debe ser numerico";
 
-                    //Armado de la Factura
-                    var factura = new Factura();
-                    factura.Numero = FacturaPersistance.GetUltimoNumeroFactura() + 1;
-                    factura.Fecha = Configuration.ConfigurationVariables.FechaSistema;
-                    factura.Total = listItemsFactura.Sum(x => x.Monto * x.Cantidad);
-                    factura.FormaPago = FormaPagoPersistance.GetById((int)CboFormaPago.SelectedValue);
-                    factura.Usuario = SessionManager.CurrentUser;
+                if (TypesHelper.IsEmpty(TxtNroTarjeta.Text))
+                    exceptionMessage += Environment.NewLine + "El numero de la tarjeta es obligatorio";
 
-                    var dialogAnswer = MessageBox.Show("¿Está seguro que quiere facturar " + cant + " publicacion/es?", "Atención", MessageBoxButtons.YesNo);
-                    if (dialogAnswer == DialogResult.Yes)
-                    {
-                        //Creación de la Factura
-                        FacturaPersistance.InsertFactura(factura, this.currentTransaction);
+                if (!TypesHelper.IsNumeric(TxtNroTarjeta.Text))
+                    exceptionMessage += Environment.NewLine + "El numero de la tarjeta debe ser numerico";
 
-                        //Creación de los Items de la Factura
-                        foreach (var item in listItemsFactura)
-                        {
-                            item.Factura = FacturaPersistance.GetFacturaByNumero(factura.Numero);
-                            ItemFacturaPersistance.InsertItemFactura(item, this.currentTransaction);
-                        }
+                if (TypesHelper.IsEmpty(TxtTarjeta.Text))
+                    exceptionMessage += Environment.NewLine + "La descripcion de la tarjeta es obligatorio";
 
-                        MessageBox.Show("Se facturaron satisfactoriamente las publicaciones", "Atencion");
-                        CompleteAction = true;
-                        this.Hide();
-                        var frmHome = new FrmHome();
-                        frmHome.ShowDialog();
-                    }
-                }
+                if (TypesHelper.IsEmpty(TxtTitular.Text))
+                    exceptionMessage += Environment.NewLine + "El nombre del titular de la tarjeta es obligatorio";
+
+                if (TypesHelper.IsEmpty(TxtVencimiento.Text))
+                    exceptionMessage += Environment.NewLine + "La fecha de vencimiento de la tarjeta es obligatorio";
+
+                if (!TypesHelper.IsNumeric(TxtVencimiento.Text))
+                    exceptionMessage += Environment.NewLine + "La fecha de vencimiento de la tarjeta debe ser numerico";
 
                 #endregion
             }
+
+            if (!TypesHelper.IsEmpty(exceptionMessage))
+            {
+                MessageBox.Show(exceptionMessage, "Atencion");
+                return;
+            }
+
+            #endregion
+
+            #region Obtengo las publicaciones que voy a rendir
+
+            var cant = Convert.ToInt32(TxtCantidad.Text.Trim());
+            if (cant > LstPublicaciones.Items.Count)
+                cant = LstPublicaciones.Items.Count;
+
+            var listaPublicacionesAFacturar = PublicationsList.GetRange(0, cant);
+            var itemsFactura = new List<ItemFactura>();
+
+            #endregion
+
+            #region Obtengo todos los items de la factura
+
+            foreach (var publicacionFacturar in listaPublicacionesAFacturar)
+            {
+                var comprasPorPublicacion = CompraPersistance.GetByPublicationId(publicacionFacturar.ID);
+                if (comprasPorPublicacion != null)
+                {
+                    //Pueden ser tanto compras inmediatas o subastas, esta hecho de forma polimorfica
+                    foreach (var compra in comprasPorPublicacion)
+                        itemsFactura.Add(compra.ConvertToItemFactura());
+                }
+
+                //Agrego el item factura de la publicacion en si misma (aunque no tenga compras)
+                itemsFactura.Add(publicacionFacturar.ConvertToItemFactura());
+            }
+
+            #endregion
+
+            using (var transaction = DataBaseManager.Instance().Connection.BeginTransaction(IsolationLevel.Serializable))
+            {
+                try
+                {
+                    var dialogAnswer = MessageBox.Show("¿Está seguro que quiere facturar " + cant + " publicacion/es?", "Atención", MessageBoxButtons.YesNo);
+                    if (dialogAnswer == DialogResult.Yes)
+                    {
+                        #region Armo y guardo la factura en si misma
+
+                        var factura = new Factura
+                        {
+                            Fecha = ConfigurationVariables.FechaSistema,
+                            Numero = FacturaPersistance.GetUltimoNumeroFactura(transaction) + 1,
+                            FormaPago = FormaPagoPersistance.GetById((int)CboFormaPago.SelectedValue, transaction),
+                            Usuario = (Usuario)SessionManager.CurrentUser,
+                            Total = itemsFactura.Sum(item => item.Monto)
+                        };
+
+                        //Guardo la factura en la base de datos (y me retorna la factura insertada con el ID correspondiente)
+                        factura = FacturaPersistance.InsertFactura(factura, transaction);
+
+                        #endregion
+
+                        if (factura.ID != 0)
+                        {
+                            #region Guardo los items en la base
+
+                            //Creación de los Items de la Factura
+                            itemsFactura.ForEach(item => item.Factura = factura);
+                            var insertoCorrectamente = ItemFacturaPersistance.InsertItemsFactura(itemsFactura, transaction);
+
+                            #endregion
+
+                            if (!insertoCorrectamente)
+                                throw new Exception("Se produjo un error durante la insercion de los items de la factura");
+
+                            if (PagaConTarjeta)
+                            {
+                                #region Guardo la informacion de la tarjeta de credito
+
+                                var tarjeta = new TarjetaCredito
+                                {
+                                    Tarjeta = TxtTarjeta.Text,
+                                    NumeroTarjeta = Convert.ToInt32(TxtNroTarjeta.Text),
+                                    Vencimiento = Convert.ToInt32(TxtVencimiento.Text),
+                                    CodigoSeguridad = Convert.ToInt32(TxtCodSeguridad.Text),
+                                    Titular = TxtTitular.Text,
+                                    DniTitular = Convert.ToInt32(TxtDni.Text),
+                                    Factura = factura
+                                };
+
+                                #endregion
+
+                                tarjeta = TarjetaCreditoPersistance.Insert(tarjeta, transaction);
+
+                                if (tarjeta.ID == 0)
+                                    throw new Exception("Se produjo un error durante la insercion de la informacion de la tarjeta");
+                            }
+
+                            transaction.Commit();
+
+                            MessageBox.Show("Se facturaron satisfactoriamente las publicaciones", "Atencion");
+                            CompleteAction = true;
+
+                            Close();
+                        }
+                        else
+                            transaction.Rollback();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+
+                    TxtCantidad.Clear();
+                    MessageBox.Show(ex.Message, "Atencion");
+                }
+            }
+
+        }
+
+        private void CboFormaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DatosTarjeta.Visible = PagaConTarjeta = (CboFormaPago.SelectedIndex != 0);
         }
     }
 }

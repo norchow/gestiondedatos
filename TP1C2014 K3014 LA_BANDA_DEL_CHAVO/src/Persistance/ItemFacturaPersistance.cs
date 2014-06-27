@@ -24,6 +24,19 @@ namespace Persistance
             return itemsFactura;
         }
 
+        public static bool InsertItemsFactura(List<ItemFactura> itemsFactura, SqlTransaction transaction)
+        {
+            bool error = false;
+
+            foreach (var item in itemsFactura)
+            { 
+                var newItem = InsertItemFactura(item, transaction);
+                error = newItem.ID == 0;
+            }
+
+            return !error;
+        }
+
         public static ItemFactura InsertItemFactura(ItemFactura itemFactura, SqlTransaction transaction)
         {
             var param = new List<SPParameter>

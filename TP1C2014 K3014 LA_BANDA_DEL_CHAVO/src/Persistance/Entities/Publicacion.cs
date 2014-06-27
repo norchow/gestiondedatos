@@ -107,5 +107,18 @@ namespace Persistance.Entities
             }
             return result.Remove(result.Length - 2);
         }
+
+        public ItemFactura ConvertToItemFactura()
+        {
+            if (Visibilidad == null)
+                Visibilidad = VisibilidadPersistance.GetById(_visibilidad);
+
+            return new ItemFactura
+            {
+                Publicacion = this,
+                Monto = Visibilidad.PrecioPublicar,
+                Cantidad = 1
+            };
+        }
     }
 }

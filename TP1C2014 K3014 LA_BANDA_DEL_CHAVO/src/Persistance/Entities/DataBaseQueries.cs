@@ -153,7 +153,6 @@ namespace Persistance.Entities
             public static String SPGetCompanyByCUIT = "LA_BANDA_DEL_CHAVO.GetCompanyByCUIT";
             public static String SPInsertCompany = "LA_BANDA_DEL_CHAVO.InsertCompany";
             public static String SPUpdateCompany = "LA_BANDA_DEL_CHAVO.UpdateBusiness";
-            
             public static String SPGetCompanyByUserId = "LA_BANDA_DEL_CHAVO.GetCompanyByUserId";
             public static String SPGetAllBusiness = "LA_BANDA_DEL_CHAVO.GetAllBusiness";
             public static String SPGetAllBusinessByParameters = "LA_BANDA_DEL_CHAVO.GetAllBusinessByParameters";
@@ -191,6 +190,11 @@ namespace Persistance.Entities
             public static String SPGetSellersWithMoreBilling = "LA_BANDA_DEL_CHAVO.GetSellersWithMoreBilling";
             public static String SPGetClientsWithMoreNotQualifiedPublications = "LA_BANDA_DEL_CHAVO.GetClientsWithMoreNotQualifiedPublications";
             public static String SPGetSellersWithBetterQualifications = "LA_BANDA_DEL_CHAVO.GetSellersWithBetterQualifications";
+        }
+
+        public static class TarjetaCredito
+        {
+            public static String SPInsertCreditCard = "LA_BANDA_DEL_CHAVO.InsertCreditCard";
         }
     }
 }

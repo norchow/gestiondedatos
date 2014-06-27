@@ -31,9 +31,14 @@ namespace Persistance
 
         public static int GetUltimoNumeroFactura()
         {
+            return GetUltimoNumeroFactura(null);
+        }
+
+        public static int GetUltimoNumeroFactura(SqlTransaction transaction)
+        {
             var sp = new StoreProcedure(DataBaseConst.Factura.SPGetUltimoNumeroFactura);
 
-            var numeroFactura = Convert.ToInt32(sp.ExecuteScalar(null));
+            var numeroFactura = Convert.ToInt32(sp.ExecuteScalar(transaction));
 
             return numeroFactura;
         }
