@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Persistance.Entities;
 using Filters;
+using System.Data.SqlClient;
 
 namespace Persistance
 {
@@ -101,6 +102,89 @@ namespace Persistance
             var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPUpdateVisibilidad, param);
 
             return sp.ExecuteNonQuery(null);
+        }
+
+        public static Dictionary<int, int> GetAllByUser(Usuario usuario, SqlTransaction transaction)
+        {
+            var dictionary = new Dictionary<int, int>();
+            var param = new List<SPParameter>
+                { 
+                    new SPParameter("ID_Usuario", usuario.ID)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPGetVisibilidadPurchasesByUser, param, transaction);
+            var reader = sp.ExecuteReader(transaction);
+
+            while (reader.Read())
+                dictionary.Add(Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]));
+
+            if (!reader.IsClosed)
+                reader.Close();
+
+            return dictionary;
+        }
+
+        public static bool InsertVisibilidadesRendidasPorUsuario(Dictionary<int, int> visibilidadesPorUsuario, int idUsuario, SqlTransaction transaction)
+        {
+            var regsAfectados = 0;
+            foreach (var visibilidadUsuario in visibilidadesPorUsuario)
+	        {
+                if (ExisteVisibilidadRendidaPorUsuario(visibilidadUsuario, idUsuario, transaction))
+                    regsAfectados += UpdateVisibilidadRendidaPorUsuario(visibilidadUsuario, idUsuario, transaction);
+                else
+                    regsAfectados += InsertVisibilidadRendidaPorUsuario(visibilidadUsuario, idUsuario, transaction);
+	        }
+            
+            return regsAfectados == visibilidadesPorUsuario.Count;
+        }
+
+        private static bool ExisteVisibilidadRendidaPorUsuario(KeyValuePair<int, int> visibilidadUsuario, int idUsuario, SqlTransaction transaction)
+        {
+            var existe = false;
+            var param = new List<SPParameter>
+                { 
+                    new SPParameter("ID_Usuario", idUsuario),
+                    new SPParameter("ID_Visibilidad", visibilidadUsuario.Key)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPGetVisibilidadPurchasesByUserAndID, param, transaction);
+            var reader = sp.ExecuteReader(transaction);
+
+            while (reader.Read())
+                existe = true;
+
+            if (!reader.IsClosed)
+                reader.Close();
+
+            return existe;
+        }
+
+        private static int InsertVisibilidadRendidaPorUsuario(KeyValuePair<int, int> visibilidadUsuario, int idUsuario, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                { 
+                    new SPParameter("ID_Usuario", idUsuario),
+                    new SPParameter("ID_Visibilidad", visibilidadUsuario.Key),
+                    new SPParameter("Cantidad_Compras", visibilidadUsuario.Value)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPInsertVisibilidadPurchases, param, transaction);
+
+            return sp.ExecuteNonQuery(transaction);
+        }
+
+        private static int UpdateVisibilidadRendidaPorUsuario(KeyValuePair<int, int> visibilidadUsuario, int idUsuario, SqlTransaction transaction)
+        {
+            var param = new List<SPParameter>
+                { 
+                    new SPParameter("ID_Usuario", idUsuario),
+                    new SPParameter("ID_Visibilidad", visibilidadUsuario.Key),
+                    new SPParameter("Cantidad_Compras", visibilidadUsuario.Value)
+                };
+
+            var sp = new StoreProcedure(DataBaseConst.Visibilidad.SPUpdateVisibilidadPurchases, param, transaction);
+
+            return sp.ExecuteNonQuery(transaction);
         }
     }
 }

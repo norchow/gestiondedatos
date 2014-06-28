@@ -128,7 +128,7 @@ COMMIT
 
 BEGIN TRANSACTION
 	INSERT INTO [LA_BANDA_DEL_CHAVO].[TL_Usuario_Visibilidad] (ID_Usuario, ID_Visibilidad, Cantidad_compras) (
-		SELECT ID_Usuario, ID_Visibilidad, COUNT(*)
+		SELECT ID_Usuario, ID_Visibilidad, COUNT(*) % 10
 		FROM LA_BANDA_DEL_CHAVO.TL_Publicacion
 		GROUP BY ID_Usuario, ID_Visibilidad
 		)ORDER BY 1

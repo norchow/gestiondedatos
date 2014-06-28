@@ -234,7 +234,7 @@ CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Usuario_Visibilidad] (
 	[ID_Usuario_Visibilidad] int IDENTITY (1,1),
 	[ID_Usuario] int NOT NULL,
 	[ID_Visibilidad] numeric(18,0) NOT NULL,
-	[Cantidad_compras] int NOT NULL,
+	[Cantidad_Compras] int NOT NULL,
 );
 
 CREATE TABLE [LA_BANDA_DEL_CHAVO].[TL_Forma_Pago](

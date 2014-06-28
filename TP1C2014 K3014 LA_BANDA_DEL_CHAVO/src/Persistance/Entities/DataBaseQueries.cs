@@ -48,6 +48,11 @@ namespace Persistance.Entities
             public static String SPGetVisibilidadById = "LA_BANDA_DEL_CHAVO.GetVisibilidadById";
             public static String SPGetAllVisibilidadByParameters = "LA_BANDA_DEL_CHAVO.GetAllVisibilidadByParameters";
             public static String SPGetAllVisibilidadByParametersLike = "LA_BANDA_DEL_CHAVO.GetAllVisibilidadByParametersLike";
+            public static String SPGetVisibilidadPurchasesByUser = "LA_BANDA_DEL_CHAVO.GetVisibilityPurchasesByUser";
+            public static String SPGetVisibilidadPurchasesByUserAndID = "LA_BANDA_DEL_CHAVO.GetVisibilityPurchasesByUserAndID";
+            public static String SPInsertVisibilidadPurchases = "LA_BANDA_DEL_CHAVO.InsertVisibilityPurchases";
+            public static String SPUpdateVisibilidadPurchases = "LA_BANDA_DEL_CHAVO.UpdateVisibilityPurchases";
+
         }
 
         public static class TipoPublicacion

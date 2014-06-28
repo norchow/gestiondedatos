@@ -19,6 +19,8 @@ namespace Persistance.Entities
 
         public int Cantidad { get; set; }
 
+        public bool ContadorBonificacion { get; set; }
+
         private int _idFactura;
 
         private int _idPublicacion;

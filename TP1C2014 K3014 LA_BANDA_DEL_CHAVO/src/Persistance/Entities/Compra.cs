@@ -64,7 +64,8 @@ namespace Persistance.Entities
                 {
                     Publicacion = Publicacion,
                     Cantidad = 1,
-                    Monto = (ofertaGanadora.Monto * Publicacion.Visibilidad.PorcentajeVenta)
+                    Monto = (ofertaGanadora.Monto * Publicacion.Visibilidad.PorcentajeVenta),
+                    ContadorBonificacion = true
                 };
             }
             else
@@ -72,7 +73,8 @@ namespace Persistance.Entities
                 {
                     Cantidad = Cantidad,
                     Publicacion = Publicacion,
-                    Monto = (Publicacion.Precio * Publicacion.Visibilidad.PorcentajeVenta) * Cantidad
+                    Monto = (Publicacion.Precio * Publicacion.Visibilidad.PorcentajeVenta) * Cantidad,
+                    ContadorBonificacion = true
                 };
         }
     }

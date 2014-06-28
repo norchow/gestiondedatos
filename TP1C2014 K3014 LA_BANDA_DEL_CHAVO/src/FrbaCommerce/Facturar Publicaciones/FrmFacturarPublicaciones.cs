@@ -190,21 +190,54 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
                         if (factura.ID != 0)
                         {
+                            Dictionary<int, int> visibilidadesPorUsuario = VisibilidadPersistance.GetAllByUser(SessionManager.CurrentUser, transaction);
+
                             #region Guardo los items en la base
 
                             //Creación de los Items de la Factura
-                            itemsFactura.ForEach(item => item.Factura = factura);
-                            var insertoCorrectamente = ItemFacturaPersistance.InsertItemsFactura(itemsFactura, transaction);
+                            foreach (var item in itemsFactura)
+                            { 
+                                item.Factura = factura;
 
-                            #endregion
+                                #region Logica de bonificacion de items
+
+                                /* Realizo la modificacion del contador solo si el item generado surgio a partir
+                                de una compra y no es el item de la publicacion en si misma. */
+                                if (item.ContadorBonificacion)
+                                {
+                                    var idVisibilidad = item.Publicacion.Visibilidad.ID;
+
+                                    if (visibilidadesPorUsuario.ContainsKey(idVisibilidad))
+                                        visibilidadesPorUsuario[idVisibilidad]++;
+                                    else
+                                        visibilidadesPorUsuario.Add(idVisibilidad, 1);
+
+                                    if (visibilidadesPorUsuario[idVisibilidad] == 10)
+                                        item.Monto = visibilidadesPorUsuario[idVisibilidad] = 0;
+                                }
+
+                                #endregion
+                            }
+                            
+                            var insertoCorrectamente = ItemFacturaPersistance.InsertItemsFactura(itemsFactura, transaction);
 
                             if (!insertoCorrectamente)
                                 throw new Exception("Se produjo un error durante la insercion de los items de la factura");
 
+                            #endregion
+
+                            #region Guardo la informacion de las visibilidades
+
+                            insertoCorrectamente = VisibilidadPersistance.InsertVisibilidadesRendidasPorUsuario(visibilidadesPorUsuario, SessionManager.CurrentUser.ID, transaction);
+                            if (!insertoCorrectamente)
+                                throw new Exception("Se produjo un error durante la insercion de la informacion de las visibilidades rendidas por usuario");
+
+                            #endregion
+
+                            #region Guardo la informacion de la tarjeta de credito
+
                             if (PagaConTarjeta)
                             {
-                                #region Guardo la informacion de la tarjeta de credito
-
                                 var tarjeta = new TarjetaCredito
                                 {
                                     Tarjeta = TxtTarjeta.Text,
@@ -216,13 +249,13 @@ namespace FrbaCommerce.Facturar_Publicaciones
                                     Factura = factura
                                 };
 
-                                #endregion
-
                                 tarjeta = TarjetaCreditoPersistance.Insert(tarjeta, transaction);
 
                                 if (tarjeta.ID == 0)
                                     throw new Exception("Se produjo un error durante la insercion de la informacion de la tarjeta");
                             }
+
+                            #endregion
 
                             transaction.Commit();
 

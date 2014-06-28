@@ -117,7 +117,8 @@ namespace Persistance.Entities
             {
                 Publicacion = this,
                 Monto = Visibilidad.PrecioPublicar,
-                Cantidad = 1
+                Cantidad = 1,
+                ContadorBonificacion = false
             };
         }
     }
