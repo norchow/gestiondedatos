@@ -119,7 +119,6 @@ namespace FrbaCommerce.ABM_Rol
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Atención");
-                Close();
             }
         }
 
