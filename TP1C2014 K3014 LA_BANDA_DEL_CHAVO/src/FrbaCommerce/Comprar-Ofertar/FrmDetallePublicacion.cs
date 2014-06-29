@@ -112,6 +112,8 @@ namespace FrbaCommerce.Comprar_Ofertar
 
                 //Resto el stock de la publicación
                 CurrentPublication.Stock = CurrentPublication.Stock - newPurchase.Cantidad;
+                if (CurrentPublication.Stock == 0)
+                    CurrentPublication.EstadoPublicacion = EstadoPublicacionPersistance.GetById(4); //finalizada
                 PublicacionPersistance.Update(CurrentPublication);
 
                 //Le muestro al usuario los datos del vendedor
