@@ -29,7 +29,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             //Si la publicación no es del usuario logeado y el usuario logeado es un cliente le permito 
             //ver las opciones de comprar/ofertar/preguntar (Todas los los controles respectivos a estas funciones
             //tienen enabled=false como default
-            if (CurrentPublication.UsuarioCreador.ID != SessionManager.CurrentUser.ID && ClientePersistance.GetByUserId(SessionManager.CurrentUser.ID) != null)
+            if (CurrentPublication.UsuarioCreador.ID != SessionManager.CurrentUser.ID)
             {
                 if (CurrentPublication.RecibirPreguntas)
                     lblPreguntar.Enabled = true;
@@ -77,9 +77,19 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void lblPreguntar_Click(object sender, EventArgs e)
         {
-            //Abro el formulario de preguntas
-            var frmPreguntar = new FrmPreguntar(CurrentPublication);
-            frmPreguntar.ShowDialog();
+            try
+            {
+                if (SessionManager.CurrentRol.Descripcion == "Administrador General")
+                    throw new Exception("Siendo un administrador no puede hacer preguntas");
+
+                //Abro el formulario de preguntas
+                var frmPreguntar = new FrmPreguntar(CurrentPublication);
+                frmPreguntar.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void LblVolver_Click(object sender, EventArgs e)
