@@ -137,6 +137,7 @@ DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetVisibilityPurchasesByUser];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetVisibilityPurchasesByUserAndID];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[InsertVisibilityPurchases];
 DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[UpdateVisibilityPurchases];
+DROP PROCEDURE [LA_BANDA_DEL_CHAVO].[GetFinishedAuctions];
 
 DROP TRIGGER [LA_BANDA_DEL_CHAVO].[TL_Rol_After_Update];
 DROP TRIGGER [LA_BANDA_DEL_CHAVO].[TL_Calificacion_After_Insert];
